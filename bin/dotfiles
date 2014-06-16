@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+DOTFILES_DIRECTORY="${HOME}/.dotfiles"
+DOTFILES_GIT_REMOTE="git@github.com:areese/dotfiles.git"
+
+# If missing, download and extract the dotfiles repository
+if [[ ! -d ${DOTFILES_DIRECTORY} ]]; then
+  printf "$(tput setaf 7)Downloading dotfiles...\033[m\n"
+  git clone ${DOTFILES_GIT_REMOTE} ${DOTFILES_DIRECTORY}
+fi
+
+cd ${DOTFILES_DIRECTORY}
+
+# Test for known flags
+for opt in $@
+do
+    case $opt in
+        --no-sync) no_sync=true ;;
+        -*|--*) e_warning "Warning: invalid option $opt" ;;
+    esac
+done
+
+# Before relying on Homebrew, check that packages can be compiled
+if ! type_exists 'gcc'; then
+    e_error "The XCode Command Line Tools must be installed first."
+    printf "  Download them from: https://developer.apple.com/downloads\n"
+    printf "  Then run: bash ~/.dotfiles/bin/dotfiles\n"
+    exit 1
+fi
+
+# Check for Homebrew
+if ! type_exists 'brew'; then
+    e_header "Installing Homebrew..."
+    ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+fi
+
+# Check for git
+if ! type_exists 'git'; then
+    e_header "Updating Homebrew..."
+    brew update
+    e_header "Installing Git..."
+    brew install git
+fi
+
+# Conditionally sync with the remote repository
+if [[ $no_sync ]]; then
+    printf "Skipped dotfiles sync.\n"
+else
+    e_header "Syncing dotfiles..."
+    # Pull down the latest changes
+    git pull --rebase origin master
+    # Update submodules
+    git submodule update --recursive --init --quiet
+fi
+
+link() {
+    # Force create/replace the symlink.
+    ln -fs "${DOTFILES_DIRECTORY}/${1}" "${HOME}/${2}"
+}
+
+mirrorfiles() {
+    # Copy `.gitconfig`.
+    # Any global git commands in `~/.bash_profile.local` will be written to
+    # `.gitconfig`. This prevents them being committed to the repository.
+    rsync -avz --quiet ${DOTFILES_DIRECTORY}/git/gitconfig  ${HOME}/.gitconfig
+
+    # Force remove the vim directory if it's already there.
+    if [ -e "${HOME}/.vim" ]; then
+        rm -rf "${HOME}/.vim"
+    fi
+
+    # Create the necessary symbolic links between the `.dotfiles` and `HOME`
+    # directory. The `bash_profile` sources other files directly from the
+    # `.dotfiles` repository.
+    link "ack/ackrc"          ".ackrc"
+    link "git/gitignore"      ".gitignore"
+    link "ruby/gemrc"         ".gemrc"
+    link "ruby/irbrc"         ".irbrc"
+    link "ruby/powconfig"     ".powconfig"
+    link "ruby/pryrc"         ".pryrc"
+    link "ruby/rdebugrc"      ".rdebugrc"
+    link "ruby/rspec"         ".rspec"
+    link "shell/bash_profile" ".bash_profile"
+    link "shell/bashrc"       ".bashrc"
+    link "shell/inputrc"      ".inputrc"
+    link "shell/zlogin"       ".zlogin"
+    link "shell/zlogout"      ".zlogout"
+    link "shell/zprofile"     ".zprofile"
+    link "shell/zshenv"       ".zshenv"
+    link "shell/zshrc"        ".zshrc"
+    link "slate/slate"        ".slate"
+    link "tmux/tmux.conf"     ".tmux.conf"
+    link "tmux/tmuxinator"    ".tmuxinator"
+    link "vim"                ".vim"
+    link "vim/gvimrc"         ".gvimrc"
+    link "vim/vimrc"          ".vimrc"
+
+    e_success "Dotfiles update complete!"
+}
+
+# Ask before potentially overwriting files
+seek_confirmation "Warning: This step may overwrite your existing dotfiles."
+
+if is_confirmed; then
+    mirrorfiles
+else
+    printf "Aborting...\n"
+    exit 1
+fi

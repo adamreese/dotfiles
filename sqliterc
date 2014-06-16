@@ -1,0 +1,10 @@
+.bail ON
+.echo OFF
+.headers ON
+.mode column
+.nullvalue 'NULL'
+.separator '|'
+.stats OFF
+.timer OFF
+.show
+.width 15

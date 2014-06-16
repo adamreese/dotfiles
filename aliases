@@ -1,0 +1,62 @@
+#!/bin/bash
+
+alias sz='source ~/.zshrc'
+alias c='clear'
+
+# Allow aliases to be with sudo
+alias sudo="sudo "
+alias apt-get="sudo apt-get"
+
+alias ls="ls -pG"
+alias ll="ls -lph"
+alias l.="ls -d .[^.]*"
+alias ll.="ll -d .[^.]*"
+
+alias grep="grep -i"
+
+# Navigation
+alias cdg="cd ~/p/go/src/github.com/adamreese/"
+
+alias gs='git status -s'
+alias gaa='git add --all'
+alias gap='git add -p'
+
+alias br='be rspec'
+alias beg='guard'
+alias brff='br --fail-fast'
+
+# Open file in existing MacVim window
+alias gvim="open -a MacVim"
+alias mvim="open -a MacVim"
+alias v="mvim"
+
+# Database services
+alias pg-start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias pg-stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en1"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Enhanced WHOIS lookups
+alias whois="whois -h whois-servers.net"
+
+# URL encode/decode
+alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
+alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
+
+# View logs
+alias tfl='tail -Fn30 log/*.log'
+
+# Split comma or colin separated data onto separate lines
+alias -g S="| tr ',:' '\n'"
+
+# force
+alias ffl="force field list"
+alias fsl="force sobject list"
+alias fq="force query"

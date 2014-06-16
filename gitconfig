@@ -1,0 +1,44 @@
+[alias]
+  a = add
+  ap = add -p
+  br = branch
+  ci = commit -v
+  co = checkout
+  cp = cherry-pick
+  ct = checkout -t
+  d = diff
+  dc = diff --cached
+  fa = fetch --all
+  l = log --decorate --oneline --graph
+  ll = log
+  pl = pull --rebase
+  ra = rebase --abort
+  rc = rebase --continue
+  recent = "for-each-ref --format='%(committerdate:relative) %(refname:short)' --sort=-committerdate refs/heads/ --count 25"
+  ri = rebase -i
+  ro = !git fetch origin && git reset --hard origin/master
+  aar = !git add --all && git reset --hard
+  s = status -s
+  sh = !git-sh
+  st = status
+  v = show
+  human = name-rev --name-only --refs=refs/heads/*
+[credential]
+  helper = osxkeychain
+[user]
+	name = Adam Reese
+	email = areese@engineyard.com
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+[push]
+  default = current
+[branch]
+  autosetuprebase = always
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

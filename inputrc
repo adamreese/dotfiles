@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# inputrc
+
+# Use case-insensitive TAB autocompletion
+set completion-ignore-case on
+
+# Auto list tab completions (use instead of TAB-cycling)
+set show-all-if-ambiguous on
+
+# Symbolic links to directories have a slash appended
+set mark-symlinked-directories on
+
+# Make TAB cycle through possible completions
+# "\t": menu-complete
+# Make SHIFT-TAB reverse cycle through possible completions
+# "\e[Z": "\e-1\C-i"
+
+# Use the string that has already been typed as the prefix for searching
+# through commands (i.e. more intelligent Up/Down-arrow behavior)
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
