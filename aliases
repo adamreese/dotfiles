@@ -51,8 +51,3 @@ alias tfl='tail -Fn30 log/*.log'
 
 # Split comma or colin separated data onto separate lines
 alias -g S="| tr ',:' '\n'"
-
-# force
-alias ffl="force field list"
-alias fsl="force sobject list"
-alias fq="force query"
