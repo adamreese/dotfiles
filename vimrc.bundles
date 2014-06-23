@@ -54,8 +54,9 @@ Bundle 'chriskempson/base16-vim'
 Bundle 'cschlueter/vim-wombat'
 
 " Syntax plugins
-Bundle 'fatih/vim-go'
-let g:go_bin_path = expand("$HOME/.vim/vim-go/")
+" Bundle 'fatih/vim-go'
+" let g:go_bin_path = expand("$HOME/.vim/vim-go/")
+Bundle 'jnwhiteh/vim-golang'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'

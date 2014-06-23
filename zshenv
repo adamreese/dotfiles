@@ -20,11 +20,12 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
+
 # Paths
 
 typeset -gU cdpath fpath mailpath path
 
-export GOPATH=~/Developer/src/go
+export GOPATH=$HOME/Developer/src/go
 
 # Set the the list of directories that cd searches.
 # cdpath=(
@@ -83,3 +84,11 @@ fi
 
 export HISTFILESIZE=9999
 export HISTSIZE=9999
+
+if [ -d $(brew --prefix)/Celler/go ]; then
+  export GOROOT=`brew --cellar`/go/HEAD
+  export GOBIN=/usr/local/bin
+  export GOARCH=amd64
+  export GOOS=darwin
+fi
+

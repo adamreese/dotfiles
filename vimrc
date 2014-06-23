@@ -119,6 +119,10 @@ set list listchars=tab:>-,trail:*
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
+autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
+autocmd FileType go   set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
+
+
 " ================ Windows ======================
 set splitbelow
 set splitright
@@ -144,9 +148,11 @@ nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
 " ================ Folds ============================
+set foldlevelstart=1
 set foldmethod=syntax   "fold based on syntax
 set foldnestmax=6       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
+let xml_syntax_folding=1
 
 " ================ Completion =======================
 set wildmode=list:longest
@@ -306,6 +312,9 @@ nmap <leader>tws :call StripTrailingWhitespace()<cr>
 
 " Sorting
 map <leader>srt :sort<cr>
+
+" Tagbar
+map <leader>tt :TagbarToggle<cr>
 
 " remove trailing whitespace automatically
 autocmd BufWritePre * :%s/\s\+$//e
