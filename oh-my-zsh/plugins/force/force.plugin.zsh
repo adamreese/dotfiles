@@ -2,18 +2,31 @@
 # force
 alias ffl="force field list"
 alias fsl="force sobject list"
+alias fol="force sobject list"
 alias fq="force query"
 
+#
+# force login wrapper
+#
 fl() {
-
   local password=`security -q find-generic-password -gl force 2>&1 | grep password | cut -d'"' -f2`
   local username='areese@engineyard.com'
+  local instance='na5.salesforce.com'
 
-  if (( $# == 0 )); then
-    force login -u "${username}" -p "${password}"
-  else
-    force login -u "${username}.${1}" -p "${password}" -i test
-  fi
+  case $1 in
+    "dev"|"development" )
+      username='areese@engineyard.com.developer'
+      instance='test'
+      ;;
+    "acc"|"acceptance" )
+      username='areese@engineyard.com.acceptance'
+      instance='test'
+      ;;
+    "partner" )
+      username='areese@engineyard.com.partner'
+      instance='test'
+      ;;
+  esac
 
-  echo "Loggen in as $( force active )"
+  force login -u "${username}" -p "${password}" -i "${instance}" && echo "Logged in as $( force active )"
 }
