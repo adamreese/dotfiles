@@ -25,6 +25,7 @@ alias gap='git add -p'
 
 alias br='be rspec'
 alias beg='guard'
+alias begt='split_tab guard'
 alias brff='br --fail-fast'
 
 # Open file in existing MacVim window
@@ -53,3 +54,9 @@ alias tfl='tail -Fn30 log/*.log'
 
 # Split comma or colin separated data onto separate lines
 alias -g S="| tr ',:' '\n'"
+
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g L="| less"
+
