@@ -119,8 +119,10 @@ set list listchars=tab:>-,trail:*
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
-autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
-autocmd FileType go   set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
+autocmd FileType *         set nolist|set tabstop=4|set shiftwidth=4|set noexpandtab
+autocmd FileType ruby      set            tabstop=2|set shiftwidth=2|set expandtab   |set autoindent
+autocmd FileType go        set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
+autocmd FileType perl      set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
 
 
 " ================ Windows ======================
