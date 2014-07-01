@@ -4,12 +4,13 @@
 \set QUIET 1
 \pset null '[NULL]'
 
--- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
-\set PROMPT1 '%/%R%[%033[0m%]%# '
-\set PROMPT2 '%R > '
-
 -- Show how long each query takes to execute
 \timing
+
+-- colorize Prompt
+\set PROMPT1 '%[%033[37;1m%]%/%[%033[0m%]% # '
+\set PROMPT2 '%R > '
+
 
 -- Use best available output format
 \x auto
