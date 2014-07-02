@@ -25,7 +25,7 @@ fi
 
 typeset -gU cdpath fpath mailpath path
 
-export GOPATH=$HOME/Developer/src/go
+export GOPATH=$HOME/p/go
 
 # Set the the list of directories that cd searches.
 # cdpath=(
