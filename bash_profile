@@ -23,7 +23,7 @@ if [[ -d "/usr/local/share/chruby" ]] ; then
 fi
 
 ## Perl
-if [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] ; then
+if [[ -s "$HOME/.perl5/perlbrew/etc/bashrc" ]] ; then
   export PERLBREW_ROOT=$HOME/.perl5/perlbrew
   source "$HOME/.perl5/perlbrew/etc/bashrc"
 fi
