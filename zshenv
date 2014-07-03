@@ -35,7 +35,6 @@ export GOPATH=$HOME/p/go
 # Set the list of directories that Zsh searches for programs.
 path=(
   ~/.dotfiles/bin
-  ~/Developer/bin
   $GOPATH/bin
   ~/bin
   /usr/local/{bin,sbin}
