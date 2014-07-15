@@ -1,30 +1,31 @@
 #compdef force
-#autoload
 
-# force zsh completion, based on adb completion
+_force_all_sobjects() {
+	sobjects=(`force sobjects list`)
+}
 
 local -a _1st_arguments
 _1st_arguments=(
-'login:Log in to force.com'
-'logout:Log out from force.com'
-'logins:List force.com logins used'
-'active:Show or set the active force.com account'
-'whoami:Show information about the active account'
-'sobject:Manage standard & custom objects'
-'field:Manage sobject fields'
-'record:Create, modify, or view records'
-'bulk:Load csv file use Bulk API'
-'fetch:Export specified artifact(s) to a local directory'
-'export:Export metadata to a local directory'
-'import:Import metadata from a local directory'
-'query:Execute a SOQL statement'
-'apex:Execute anonymous Apex code'
-'oauth:Manage ConnectedApp credentials'
-'version:Display current version'
-'update:Update to the latest version'
-'help:Show this help'
-'push:Deploy single artifact from a local directory'
-'password:See password status or reset password'
+	'login:Log in to force.com'
+	'logout:Log out from force.com'
+	'logins:List force.com logins used'
+	'active:Show or set the active force.com account'
+	'whoami:Show information about the active account'
+	'sobject:Manage standard & custom objects'
+	'field:Manage sobject fields'
+	'record:Create, modify, or view records'
+	'bulk:Load csv file use Bulk API'
+	'fetch:Export specified artifact(s) to a local directory'
+	'export:Export metadata to a local directory'
+	'import:Import metadata from a local directory'
+	'query:Execute a SOQL statement'
+	'apex:Execute anonymous Apex code'
+	'oauth:Manage ConnectedApp credentials'
+	'version:Display current version'
+	'update:Update to the latest version'
+	'help:Show this help'
+	'push:Deploy single artifact from a local directory'
+	'password:See password status or reset password'
 )
 
 local -a _field_arguments
@@ -63,6 +64,7 @@ _bulk_arguments=(
 )
 
 local expl
+local -a sobjects
 
 _arguments '*:: :->subcmds' && return 0
 
@@ -73,14 +75,23 @@ fi
 
 
 case "$words[1]" in
-  bulk)
-    _describe -t commands "force bulk subcommand" _bulk_arguments ;;
-  field)
-    _describe -t commands "force field subcommand" _field_arguments ;;
-  record)
-    _describe -t commands "force record subcommand" _record_arguments ;;
-  sobject)
-    _describe -t commands "force sobject subcommand" _sobject_arguments ;;
-  help)
-    _describe -t commands "force help subcommand" _1st_arguments ;;
+	bulk)
+		_describe -t commands "force bulk subcommand" _bulk_arguments ;;
+	field)
+		if [[ -n "$words[2]" ]]; then
+			case "$words[2]" in
+				create|delete|list|import)
+					_force_all_sobjects
+					_wanted sobjects expl 'all sobjects' compadd -a sobjects ;;
+			esac
+		else
+			_describe -t commands "force field subcommand" _field_arguments
+		fi
+		;;
+	record)
+		_describe -t commands "force record subcommand" _record_arguments ;;
+	sobject)
+		_describe -t commands "force sobject subcommand" _sobject_arguments ;;
+	help)
+		_describe -t commands "force help subcommand" _1st_arguments ;;
 esac
