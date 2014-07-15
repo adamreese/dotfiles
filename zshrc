@@ -49,7 +49,7 @@ ZSH_CUSTOM=$HOME/.dotfiles/oh-my-zsh
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(p golang chruby brew brew-cask bundler colored-man cpanm gem git osx powder rails force vagrant history-substring-search )
+plugins=(git p rails golang chruby brew brew-cask colored-man osx powder rake force docker history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
