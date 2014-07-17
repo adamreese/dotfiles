@@ -27,7 +27,7 @@
   helper = osxkeychain
 [user]
 	name = Adam Reese
-	email = areese@engineyard.com
+	email = adam@reese.io
 [color]
   diff = auto
   status = auto
