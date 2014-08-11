@@ -50,32 +50,6 @@ if [[ -d "/usr/local/etc/bash_completion.d" ]] ; then
   source /usr/local/etc/bash_completion.d/*.bash
 fi
 
-# Git credentials
-# Not under version control to prevent people from
-# accidentally committing with your details
-GIT_AUTHOR_NAME="adamreese"
-GIT_AUTHOR_EMAIL="areese@engineyard.com"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-
-load_dotfiles() {
-    declare -a files=(
-        $HOME/.dotfiles/shell/aliases         # Aliases
-        $HOME/.dotfiles/shell/bash_options    # Options
-        $HOME/.dotfiles/shell/bash_exports    # Exports
-        $HOME/.dotfiles/shell/functions/*     # Functions
-        $HOME/.dotfiles/shell/bash_prompt     # Custom bash prompt
-        $(brew --prefix)/etc/bash_completion  # Bash completion (installed via Homebrew)
-    )
-
-    # if these files are readable, source them
-    for index in ${!files[*]}
-    do
-        if [[ -r ${files[$index]} ]]; then
-            source ${files[$index]}
-        fi
-    done
-}
-
-load_dotfiles
-unset load_dotfiles
+source $HOME/.aliases                 # Aliases
+source $HOME/.dotfiles/bash_prompt    # Custom bash prompt
+$(brew --prefix)/etc/bash_completion  # Bash completion (installed via Homebrew)

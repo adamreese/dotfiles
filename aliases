@@ -16,24 +16,31 @@ alias grep="grep -i"
 
 alias path='echo -e ${PATH//:/\\n}'
 
-# Navigation
+# navigation
 alias cdd="cd ~/.dotfiles/"
 alias cdg="cd ~/p/go/src/github.com/adamreese/"
 
-alias gs='git status -s'
+# git
 alias gaa='git add --all'
 alias gap='git add -p'
+alias gfa='git fetch --all'
 alias gpl='git pull'
+alias gs='git status -s'
 
 # bundle
 alias be='bundle exec'
 alias bi='bundle install'
+alias bu='bundle update'
+
+# rails
+alias bake='bundle exec rake'
+
 # bundle rspec
-alias br='be rspec'
-alias brff='br --fail-fast'
+alias br='bundle exec rspec'
+alias brff='bundle exec rspec --fail-fast'
+
 # bundle guard
-alias beg='be guard'
-alias begt='split_tab be guard'
+alias beg='bundle exec guard'
 
 # Open file in existing MacVim window
 alias gvim="open -a MacVim"
