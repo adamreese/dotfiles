@@ -13,4 +13,4 @@ if defined?(PryNav)
   Pry.commands.alias_command 'n', 'next'
 end
 
-Pry.config.history.file = "~/.rb_history"
+Pry.config.history.file = File.expand_path("~/.rb_history")
