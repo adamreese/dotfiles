@@ -120,7 +120,7 @@ set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
 autocmd FileType *         set nolist|set tabstop=4|set shiftwidth=4|set noexpandtab
-autocmd FileType ruby      set            tabstop=2|set shiftwidth=2|set expandtab   |set autoindent
+autocmd FileType ruby,haml set            tabstop=2|set shiftwidth=2|set expandtab   |set autoindent
 autocmd FileType go        set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
 autocmd FileType perl      set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
 
@@ -152,7 +152,7 @@ nnoremap <C-Right> :tabnext<CR>
 " ================ Folds ============================
 set foldlevelstart=1
 set foldmethod=syntax   "fold based on syntax
-set foldnestmax=6       "deepest fold is 3 levels
+set foldnestmax=9       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 let xml_syntax_folding=1
 
