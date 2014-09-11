@@ -59,10 +59,6 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
 
-# URL encode/decode
-alias urlencode='ruby -r cgi -e "puts CGI.escape(ARGV[0])"'
-alias urldecode='ruby -r cgi -e "puts CGI.unescape(ARGV[0])"'
-
 # View logs
 alias tfl='tail -Fn30 log/*.log'
 
@@ -74,3 +70,5 @@ alias -g T='| tail'
 alias -g G='| grep'
 alias -g L="| less"
 
+alias rethinkdb.start='launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
+alias rethinkdb.stop='launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
