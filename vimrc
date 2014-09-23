@@ -22,7 +22,11 @@ set visualbell                  "No sounds
 vnoremap < <gv
 vnoremap > >gv
 
-syntax on                       "Turn on syntax highlighting
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
 
 let mapleader=","
 
@@ -33,6 +37,7 @@ nmap <leader>evb :tabedit ~/.vimrc.bundles<CR>
 " Source the vimrc file after saving it
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
+  autocmd bufwritepost .vimrc.bundles source $MYVIMRC
 endif
 
 
@@ -52,17 +57,7 @@ set t_Co=256
 syntax enable
 set background=dark
 
-" colorscheme codeschool
-" colorscheme github
-  colorscheme hybrid
-" colorscheme molokai
-" colorscheme railscasts
-" colorscheme smyck
-" colorscheme solarized
-" colorscheme xoria256
-" colorscheme xorium
-" colorscheme lucius
-" colorscheme wombat256
+colorscheme hybrid
 
 highlight clear LineNr     " Current line number row will have same background color in relative mode
 highlight clear SignColumn " SignColumn should match background
