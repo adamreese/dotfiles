@@ -198,20 +198,6 @@ endif
 
 " ================ Plugin Settings ======================
 
-" Ctags
-set tags=./tags,tags,./TAGS,TAGS
-
-" Make tags placed in .git/tags file available in all levels of a repository
-let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-if gitroot != ''
-  let &tags = &tags . ',' . gitroot . '/.git/tags'
-endif
-
-" AutoCloseTag
-" Make it so AutoCloseTag works for xml and xhtml files as well
-au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
-nmap <Leader>ac <Plug>ToggleAutoCloseMappings
-
 " CtrlP is fun
 let g:ctrlp_match_window_reversed = 0
 map <leader>cf :ClearCtrlPCache<CR>

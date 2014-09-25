@@ -1,14 +1,19 @@
+[init]
+  templatedir = ~/.git_template
 [alias]
   a = add
+  aar = !git add --all && git reset --hard
   ap = add -p
   br = branch
   ci = commit -v
   co = checkout
   cp = cherry-pick
   ct = checkout -t
+  ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
   d = diff
   dc = diff --cached
   fa = fetch --all
+  human = name-rev --name-only --refs=refs/heads/*
   l = log --decorate --oneline --graph
   ll = log
   pl = pull --rebase
@@ -17,12 +22,10 @@
   recent = "for-each-ref --format='%(committerdate:relative) %(refname:short)' --sort=-committerdate refs/heads/ --count 25"
   ri = rebase -i
   ro = !git fetch origin && git reset --hard origin/master
-  aar = !git add --all && git reset --hard
   s = status -s
   sh = !git-sh
   st = status
   v = show
-  human = name-rev --name-only --refs=refs/heads/*
 [credential]
   helper = osxkeychain
 [user]
