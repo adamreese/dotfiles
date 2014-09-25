@@ -2,6 +2,9 @@
 # Defines environment variables.
 #
 
+export OS=`uname -s`
+export ARCH=`uname -m`
+
 # Browser
 
 if [[ "$OSTYPE" == darwin* ]]; then
