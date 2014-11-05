@@ -29,12 +29,13 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 
-if executable('ack')
-  Plugin 'mileszs/ack.vim'
-endif
-
 if executable('ag')
   Plugin 'rking/ag.vim'
+  let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+  let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+  let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+elseif executable('ack')
+  Plugin 'mileszs/ack.vim'
 endif
 
 " Status bar plugins
@@ -47,7 +48,7 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'chriskempson/base16-vim'
 
 " Syntax plugins
-Plugin 'jnwhiteh/vim-golang'
+Plugin 'fatih/vim-go'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'tpope/vim-markdown'
@@ -59,14 +60,6 @@ Plugin 'scrooloose/syntastic'
 
 " Source Control plugins
 Plugin 'tpope/vim-fugitive'
-
-Plugin 'Shougo/neocomplete.vim'
-let g:acp_enableAtStartup = 0 " Disable AutoComplPop
-let g:neocomplete#enable_at_startup = 1 " Use neocomplete
-let g:neocomplete#enable_smart_case = 1 " Use smartcase
-let g:neocomplete#enable_auto_delimiter = 1
-let g:neocomplete#max_list = 15
-let g:neocomplete#force_overwrite_completefunc = 1
 
 Plugin 'neowit/vim-force.com'
 let g:apex_backup_folder = expand("/tmp/salesforce/backup")

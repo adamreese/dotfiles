@@ -114,10 +114,12 @@ set list listchars=tab:>-,trail:*
 set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
-autocmd FileType *         set nolist|set tabstop=4|set shiftwidth=4|set noexpandtab
-autocmd FileType ruby,haml set            tabstop=2|set shiftwidth=2|set expandtab   |set autoindent
-autocmd FileType go        set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
-autocmd FileType perl      set nolist|set tabstop=8|set shiftwidth=8|set noexpandtab
+autocmd FileType *     set tabstop=4|set shiftwidth=4|set noexpandtab|set nolist
+autocmd FileType ruby  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
+autocmd FileType haml  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
+autocmd FileType yaml  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
+autocmd FileType go    set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
+autocmd FileType perl  set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
 
 
 " ================ Windows ======================
@@ -165,13 +167,9 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
-
 " grep
-map <leader>a :Ack<space>
-map <leader>a* :Ack<space><cword><CR>
-set grepprg=ack
-set grepformat=%f:%l:%m
-
+map <leader>a :Ag<space>
+map <leader>a* :Ag<space><cword><CR>
 
 " ================ Scrolling ========================
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
@@ -225,14 +223,10 @@ let g:NERDTreeBookmarksFile='$HOME/.vim/NERDTreeBookmarks'
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeDirArrows=1
 
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-"automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
-"show the error list automatically
-let g:syntastic_auto_loc_list=1
-"don't care about warnings
-let g:syntastic_quiet_messages = {'level': 'warnings'}
+let g:syntastic_enable_signs=1                          "mark syntax errors with :signs
+let g:syntastic_auto_jump=0                             "automatically jump to the error when saving the file
+let g:syntastic_auto_loc_list=1                         "show the error list automatically
+let g:syntastic_quiet_messages = {'level': 'warnings'}  "don't care about warnings
 
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
@@ -252,17 +246,6 @@ map <leader>A :Align [A-Z].*<CR>:'<,'>s/\s*$//<CR><C-l>
 map <leader>= ggVG=<CR>
 map <leader>ct :set et <bar> retab<CR>
 
-
-" =============== autocomplete ====================
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " ================ shortcuts ======================
 
