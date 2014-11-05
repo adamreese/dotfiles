@@ -31,6 +31,7 @@ alias gs='git status -s'
 # bundle
 alias be='bundle exec'
 alias bi='bundle install'
+alias bil='bundle install --local'
 alias bu='bundle update'
 
 # rails
@@ -73,3 +74,9 @@ alias -g L="| less"
 
 alias rethinkdb.start='launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
 alias rethinkdb.stop='launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
+
+alias postgres.start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+alias postgres.restart='postgres.stop && sleep 1 && postgres.start'
+
+alias update='brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; gem update --system; gem update'
