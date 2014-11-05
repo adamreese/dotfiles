@@ -30,7 +30,7 @@ fl() {
 		esac
 	fi
 
-	force login -u "${username}" -p "${password}" -i "${instance}" && echo "Logged in as $( force active )"
+	force login -u "${username}" -p "${password}" -i "${instance}"
 }
 
 force_sso_id() {
@@ -41,5 +41,5 @@ force_sso_id() {
 
 
 adoption() {
-	force query "SELECT COUNT(Id) total, ${1} FROM ${2} ORDER BY COUNT(Id) DESC"
+	force query "SELECT COUNT(Id) total, ${1} FROM ${2} GROUP BY ${1} ORDER BY COUNT(Id) DESC"
 }
