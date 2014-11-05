@@ -1,17 +1,15 @@
 require 'irb/completion'
-
-IRB.conf[:AUTO_INDENT]  = true
-IRB.conf[:USE_READLINE] = true
+require 'irb/ext/save-history'
+require 'pp'
 
 # Save History between irb sessions
-require 'irb/ext/save-history'
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.rb_history"
+IRB.conf[:USE_READLINE] = true
 
 # awesome print
 begin
   require 'awesome_print'
-  AwesomePrint.irb!
 rescue LoadError => err
   warn "Couldn't load awesome_print: #{err}"
 end
