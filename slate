@@ -105,7 +105,11 @@ bind esc:cmd hint
 bind c:alt focus 'Google Chrome'
 bind d:alt focus 'Finder'
 bind t:alt focus 'iTerm'
+bind i:alt focus 'iTerm'
 bind v:alt focus 'MacVim'
+bind m:alt focus 'MacVim'
+bind z:alt focus 'zoom.us'
+bind s:alt focus 'Slack'
 
 # Window Grid
 # bind g:alt grid padding:5 0:6,3 1:6,3
