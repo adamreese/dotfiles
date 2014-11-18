@@ -3,14 +3,14 @@
 set showtabline=1 " Display the tab bar if there is more than one tab
 set gcr=n:blinkon0 " Turn off the blinking cursor in normal mode
 
-" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h12
 set guifont=Inconsolata\ for\ Powerline:h14.00
+set autoread
 
 if has("gui_macvim")
   " Hide the MacVim toolbar
   set go-=T
 
-  " Disable scrollbars (real hackers don't use scrollbars for navigation!)
+  " Disable scrollbars
   set guioptions-=r
   set guioptions-=R
   set guioptions-=l
