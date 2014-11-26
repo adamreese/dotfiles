@@ -10,8 +10,6 @@ alias apt-get="sudo apt-get"
 
 alias ls="ls -pG"
 alias ll="ls -lph"
-alias l.="ls -d .[^.]*"
-alias ll.="ll -d .[^.]*"
 
 alias grep="grep -i"
 
@@ -30,19 +28,12 @@ alias gs='git status -s'
 
 # bundle
 alias be='bundle exec'
+alias beg='bundle exec guard'
 alias bi='bundle install'
 alias bil='bundle install --local'
-alias bu='bundle update'
-
-# rails
-alias bake='bundle exec rake'
-
-# bundle rspec
 alias br='bundle exec rspec'
 alias brff='bundle exec rspec --fail-fast'
-
-# bundle guard
-alias beg='bundle exec guard'
+alias bu='bundle update'
 
 # Open file in existing MacVim window
 alias gvim="open -a MacVim"
@@ -80,3 +71,5 @@ alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 alias postgres.restart='postgres.stop && sleep 1 && postgres.start'
 
 alias update='brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; gem update --system; gem update'
+
+alias sam='ssh areese@sam'
