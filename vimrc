@@ -245,6 +245,12 @@ map <leader>A :Align [A-Z].*<CR>:'<,'>s/\s*$//<CR><C-l>
 map <leader>= ggVG=<CR>
 map <leader>ct :set et <bar> retab<CR>
 
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 
 " ================ shortcuts ======================
 

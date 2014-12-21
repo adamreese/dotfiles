@@ -12,15 +12,16 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Various editing plugins
+Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-user'
+Plugin 'majutsushi/tagbar'
+Plugin 'slack/vim-align'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'slack/vim-align'
 Plugin 'vim-scripts/ctags.vim'
-Plugin 'majutsushi/tagbar'
 
 " Comment plugins
 Plugin 'scrooloose/nerdcommenter'
