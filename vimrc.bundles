@@ -27,7 +27,7 @@ Plugin 'vim-scripts/ctags.vim'
 Plugin 'scrooloose/nerdcommenter'
 
 " File managers/explorers
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 
 if executable('ag')
