@@ -187,8 +187,8 @@ endif
 
 if has('statusline')
   set laststatus=2
-  set statusline=%<%f\                     " Filename
-  set statusline+=%w%h%m%r                 " Options
+  set statusline=%<%f\                       " Filename
+  set statusline+=%w%h%m%r                   " Options
   set statusline+=\ %=[%{&ff}/%Y]            " Filetype
   set statusline+=\ %{fugitive#statusline()} " Git Hotness
 endif
@@ -199,19 +199,16 @@ endif
 let g:ctrlp_match_window_reversed = 0
 map <leader>cf :ClearCtrlPCache<CR>
 map <leader>gb :CtrlPBuffer<CR>
-map <leader>gc :CtrlP app/controllers<CR>
+
 map <leader>gg :topleft 100 :split Gemfile<CR>
-map <leader>gl :CtrlP lib<CR>
+map <leader>gc :CtrlP app/controllers<CR>
 map <leader>gm :CtrlP app/models<CR>
-map <leader>gs :CtrlP spec<CR>
 map <leader>gv :CtrlP app/views<CR>
+map <leader>gl :CtrlP lib<CR>
+map <leader>gs :CtrlP spec<CR>
 
 " NerdTree
 map <leader>e :NERDTreeFind<CR>
-map <leader>n :NERDTreeToggle<CR>
-map <leader>ntm :NERDTreeMirror<CR>
-map <leader>ntc :NERDTreeClose<CR>
-map <silent> <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
 let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '^\.bundle']
 let g:NERDSpaceDelims = 1
@@ -225,25 +222,12 @@ let g:NERDTreeDirArrows=1
 let g:syntastic_enable_signs=1                          "mark syntax errors with :signs
 let g:syntastic_auto_jump=0                             "automatically jump to the error when saving the file
 let g:syntastic_auto_loc_list=1                         "show the error list automatically
-let g:syntastic_quiet_messages = {'level': 'warnings'}  "don't care about warnings
-
-" let g:airline_powerline_fonts=1
-" let g:airline_left_sep=''
-" let g:airline_left_alt_sep=''
-" let g:airline_right_sep=''
-" let g:airline_right_alt_sep=''
-
-let g:signify_disable_by_default=1
-
 
 " Align bindings
 map <leader>ah :Align =><CR>
 nnoremap <leader>a= :Align =<CR>
 map <leader>a# :Align #<CR>
 map <leader>a{ :Align {<CR>
-map <leader>A :Align [A-Z].*<CR>:'<,'>s/\s*$//<CR><C-l>
-map <leader>= ggVG=<CR>
-map <leader>ct :set et <bar> retab<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -251,6 +235,8 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Format buffer
+map <leader>= ggVG=<CR>
 
 " ================ shortcuts ======================
 
@@ -276,9 +262,6 @@ map <leader>s? z=
 " Delete empty lines
 nmap <leader>del :g/^$/d<cr>
 
-" Trim trailing white space
-nmap <leader>tws :call StripTrailingWhitespace()<cr>
-
 " Sorting
 map <leader>srt :sort<cr>
 
@@ -289,19 +272,7 @@ map <leader>tt :TagbarToggle<cr>
 autocmd BufWritePre * :%s/\s\+$//e
 
 " ================ functions ======================
-function! StripTrailingWhitespace()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " do the business:
-  %s/\s\+$//e
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
 
-" Load matchit.vim, but only if the user hasn't installed a newer version.
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif

@@ -39,9 +39,6 @@ elseif executable('ack')
   Plugin 'mileszs/ack.vim'
 endif
 
-" Status bar plugins
-" Plugin 'adamreese/vim-airline'
-
 " Colorschemes
 Plugin 'altercation/vim-colors-solarized'
 " Plugin 'areese/vim-hybrid'
