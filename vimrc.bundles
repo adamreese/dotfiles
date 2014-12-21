@@ -39,7 +39,7 @@ elseif executable('ack')
 endif
 
 " Status bar plugins
-Plugin 'adamreese/vim-airline'
+" Plugin 'adamreese/vim-airline'
 
 " Colorschemes
 Plugin 'altercation/vim-colors-solarized'
@@ -60,13 +60,6 @@ Plugin 'scrooloose/syntastic'
 
 " Source Control plugins
 Plugin 'tpope/vim-fugitive'
-
-Plugin 'neowit/vim-force.com'
-let g:apex_backup_folder = expand("/tmp/salesforce/backup")
-let g:apex_temp_folder = expand("/tmp/salesforce/tmp")
-let g:apex_properties_folder = expand("$HOME/p/salesforce/properties")
-let g:apex_tooling_force_dot_com_path = expand("$HOME/p/salesforce/bin/tooling")
-let g:apex_workspace_path = expand("$HOME/p/salesforce/workspace")
 
 call vundle#end()
 filetype plugin indent on

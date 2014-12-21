@@ -189,10 +189,8 @@ if has('statusline')
   set laststatus=2
   set statusline=%<%f\                     " Filename
   set statusline+=%w%h%m%r                 " Options
-  set statusline+=%{fugitive#statusline()} " Git Hotness
-  set statusline+=\ [%{&ff}/%Y]            " Filetype
-  set statusline+=\ [%{getcwd()}]          " Current dir
-  set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+  set statusline+=\ %=[%{&ff}/%Y]            " Filetype
+  set statusline+=\ %{fugitive#statusline()} " Git Hotness
 endif
 
 " ================ Plugin Settings ======================
@@ -229,11 +227,11 @@ let g:syntastic_auto_jump=0                             "automatically jump to t
 let g:syntastic_auto_loc_list=1                         "show the error list automatically
 let g:syntastic_quiet_messages = {'level': 'warnings'}  "don't care about warnings
 
-let g:airline_powerline_fonts=1
-let g:airline_left_sep=''
-let g:airline_left_alt_sep=''
-let g:airline_right_sep=''
-let g:airline_right_alt_sep=''
+" let g:airline_powerline_fonts=1
+" let g:airline_left_sep=''
+" let g:airline_left_alt_sep=''
+" let g:airline_right_sep=''
+" let g:airline_right_alt_sep=''
 
 let g:signify_disable_by_default=1
 
@@ -249,8 +247,6 @@ map <leader>ct :set et <bar> retab<CR>
 
 
 " ================ shortcuts ======================
-
-map <leader>p :sp ~/p/
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>

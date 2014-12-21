@@ -3,6 +3,7 @@
 config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
+
 # HYPER KEY
 # -------------------------------------------------------------------
 # The "hyper" key is a shortcut for CTRL + ALT + CMD
@@ -103,7 +104,6 @@ bind esc:cmd hint
 
 # App switching
 bind c:alt focus 'Google Chrome'
-bind d:alt focus 'Finder'
 bind t:alt focus 'iTerm'
 bind i:alt focus 'iTerm'
 bind v:alt focus 'MacVim'
