@@ -12,6 +12,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Various editing plugins
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-user'
 Plugin 'majutsushi/tagbar'
