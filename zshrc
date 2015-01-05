@@ -76,7 +76,7 @@ export PERLBREW_ROOT=$HOME/.perl5/perlbrew
 export PROJECTS=$HOME/p
 
 source ~/.aliases
-source ~/.secret
+[ -f ~/.secret ] && source ~/.secret
 
 # Group matches and describe.
 zstyle ':completion:*:*:*:*:*' menu select

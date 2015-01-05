@@ -196,7 +196,6 @@ endif
 " ================ Plugin Settings ======================
 
 " CtrlP is fun
-let g:ctrlp_match_window_reversed = 0
 map <leader>cf :ClearCtrlPCache<CR>
 map <leader>gb :CtrlPBuffer<CR>
 
@@ -221,7 +220,6 @@ let g:NERDTreeDirArrows=1
 
 let g:syntastic_enable_signs=1                          "mark syntax errors with :signs
 let g:syntastic_auto_jump=0                             "automatically jump to the error when saving the file
-let g:syntastic_auto_loc_list=1                         "show the error list automatically
 
 " Align bindings
 map <leader>ah :Align =><CR>
