@@ -111,14 +111,14 @@ filetype indent on
 " Display tabs and trailing spaces visually
 set list listchars=tab:>-,trail:*
 
-set nowrap       "Don't wrap lines
+" set nowrap       "Don't wrap lines
 set linebreak    "Wrap lines at convenient points
 
 autocmd FileType *     set tabstop=4|set shiftwidth=4|set noexpandtab|set nolist
 autocmd FileType ruby  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
 autocmd FileType haml  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
 autocmd FileType yaml  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
-autocmd FileType go    set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
+autocmd FileType go    set tabstop=4|set shiftwidth=4|set   expandtab|set autoindent
 autocmd FileType perl  set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
 
 
@@ -156,17 +156,8 @@ let xml_syntax_folding=1
 " ================ Completion =======================
 set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*.scss
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif,*.svg
+set complete-=i             "do not scan included files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git,*/bundle/*
 
 " grep
 map <leader>a :Ag<space>
@@ -207,19 +198,8 @@ map <leader>gl :CtrlP lib<CR>
 map <leader>gs :CtrlP spec<CR>
 
 " NerdTree
-map <leader>e :NERDTreeFind<CR>
-
-let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '^\.bundle']
-let g:NERDSpaceDelims = 1
-let g:NERDTreeShowHidden=1
-let g:NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=1
-let g:NERDTreeBookmarksFile='$HOME/.vim/NERDTreeBookmarks'
 let g:NERDTreeMinimalUI=1
-let g:NERDTreeDirArrows=1
-
-let g:syntastic_enable_signs=1                          "mark syntax errors with :signs
-let g:syntastic_auto_jump=0                             "automatically jump to the error when saving the file
+map <leader>e :NERDTreeFind<CR>
 
 " Align bindings
 map <leader>ah :Align =><CR>
