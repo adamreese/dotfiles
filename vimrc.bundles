@@ -5,69 +5,65 @@ if &compatible
 end
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 
 " Various editing plugins
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'kana/vim-textobj-user'
-Plugin 'majutsushi/tagbar'
-Plugin 'slack/vim-align'
-Plugin 'tpope/vim-abolish'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/ctags.vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'junegunn/vim-easy-align'
+Plug 'kana/vim-textobj-user'
+Plug 'majutsushi/tagbar'
+Plug 'slack/vim-align'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/ctags.vim'
 
 " Comment plugins
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " File managers/explorers
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
 
 if executable('ag')
-  Plugin 'rking/ag.vim'
-  " let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-  " let s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
-  " let g:ctrlp_user_command = 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+  Plug 'rking/ag.vim'
 
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 elseif executable('ack')
-  Plugin 'mileszs/ack.vim'
+  Plug 'mileszs/ack.vim'
 endif
 
 " Colorschemes
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 " Plugin 'areese/vim-hybrid'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'chriskempson/base16-vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'chriskempson/base16-vim'
 
 " Syntax plugins
-Plugin 'fatih/vim-go'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'fatih/vim-go'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 
 " Syntax check on buffer save
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " Source Control plugins
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+Plug 'idanarye/vim-merginal'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on

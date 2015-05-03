@@ -70,12 +70,13 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-for f in ~/.dotfiles/functions; do source $f ; done
+for f in ~/.dotfiles/functions/*; do source $f ; done
 
 export PERLBREW_ROOT=$HOME/.perl5/perlbrew
+export WORKON_HOME=$HOME/.virtualenvs
 export PROJECTS=$HOME/p
 
-source ~/.aliases
+[ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.secret ] && source ~/.secret
 
 # Group matches and describe.
@@ -103,3 +104,7 @@ export LESS_TERMCAP_se=$(printf "\e[0m")
 export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
 export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
+
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1

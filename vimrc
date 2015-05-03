@@ -13,7 +13,7 @@ set number                      "Line numbers are good
 set shell=/bin/bash
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-set so=7                        "Set 7 lines to the cursor - when moving vertically using j/k
+set scrolloff=7                 "Set 7 lines to the cursor - when moving vertically using j/k
 set ttimeout
 set ttimeoutlen=100
 set visualbell                  "No sounds
@@ -39,6 +39,15 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
   autocmd bufwritepost .vimrc.bundles source $MYVIMRC
 endif
+
+" Save files when vim loses focus
+au FocusLost * silent! wa
+
+" disable ex mode
+:map Q <Nop>
+
+" disable ri check
+:map K <Nop>
 
 
 " =============== Vundle Initialization ===============
@@ -215,6 +224,14 @@ nmap ga <Plug>(EasyAlign)
 
 " Format buffer
 map <leader>= ggVG=<CR>
+
+" vim rspec mappings
+let g:rspec_runner = "os_x_iterm"
+let g:rspec_command = "br {spec}"
+map <Bslash>t :call RunCurrentSpecFile()<CR>
+map <Bslash>s :call RunNearestSpec()<CR>
+map <Bslash>l :call RunLastSpec()<CR>
+map <Bslash>a :call RunAllSpecs()<CR>
 
 " ================ shortcuts ======================
 
