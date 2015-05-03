@@ -5,19 +5,19 @@ alias c='clear'
 alias e='exit'
 
 # Allow aliases to be with sudo
-alias sudo="sudo "
-alias apt-get="sudo apt-get"
+alias sudo='sudo '
+alias apt-get='sudo apt-get'
 
-alias ls="ls -pG"
-alias ll="ls -lph"
+alias ls='ls -pG'
+alias ll='ls -lph'
 
-alias grep="grep -i"
+alias grep='grep -i'
 
 alias path='echo -e ${PATH//:/\\n}'
 
 # navigation
-alias cdd="cd ~/.dotfiles/"
-alias cdg="cd ~/p/go/src/github.com/adamreese/"
+alias cdd='cd ~/.dotfiles/'
+alias cdg='cd ~/p/go/src/github.com/adamreese/'
 
 # git
 alias gaa='git add --all'
@@ -25,10 +25,12 @@ alias gap='git add -p'
 alias gfa='git fetch --all'
 alias gpl='git pull'
 alias gs='git status -s'
+alias gh='hub browse'
+alias pr='hub pull-request'
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en1"
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias localip='ipconfig getifaddr en1'
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
 # Enhanced WHOIS lookups
@@ -60,11 +62,13 @@ if [ $(uname -s) = "Darwin" ] ; then
 	alias br='be rspec'
 	alias brff='be rspec --fail-fast'
 
-	alias v="mvim"
+	#alias ctags='`brew --prefix`/bin/ctags'
+
+	alias v='mvim'
 
 	# Show/hide hidden files in Finder
-	alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-	alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+	alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+	alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
 	alias rethinkdb.start='launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
 	alias rethinkdb.stop='launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
