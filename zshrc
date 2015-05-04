@@ -70,7 +70,7 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-for f in ~/.dotfiles/functions/*; do source $f ; done
+for f in ~/.zsh/functions/*; do source $f ; done
 
 export PERLBREW_ROOT=$HOME/.perl5/perlbrew
 export WORKON_HOME=$HOME/.virtualenvs
