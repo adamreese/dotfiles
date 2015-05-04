@@ -1,0 +1,133 @@
+#compdef ginkgo
+#autoload
+
+__watch() {
+	_arguments \
+		'-compilers=[The number of concurrent compilations to run (0 will autodetect)]' \
+		'-cover=[Run tests with coverage analysis, will generate coverage profiles with the package name in the current directory]' \
+		'-depth=[Ginkgo will watch dependencies down to this depth in the dependency tree]' \
+		'-dryRun=[If set, ginkgo will walk the test hierarchy without actually running anything.  Best paired with -v.]' \
+		'-failFast=[If set, ginkgo will stop running a test suite after a failure occurs.]' \
+		'-failOnPending=[If set, ginkgo will mark the test suite as failed if any specs are pending.]' \
+		'-focus=[If set, ginkgo will only run specs that match this regular expression.]' \
+		'-noColor=[If set, suppress color output in default reporter.]' \
+		'-nodes=[The number of parallel test nodes to run]' \
+		'-noisyPendings=[If set, default reporter will shout about pending tests.]' \
+		'-notify=[Send desktop notifications when a test run completes]' \
+		'-p=[Run in parallel with auto-detected number of nodes]' \
+		'-progress=[If set, ginkgo will emit progress information as each spec runs to the GinkgoWriter.]' \
+		'-r=[Find and run test suites under the current directory recursively]' \
+		'-race=[Run tests with race detection enabled]' \
+		'-randomizeAllSpecs=[If set, ginkgo will randomize all specs together.  By default, ginkgo only randomizes the top level Describe/Context groups.]' \
+		'-seed=[The seed used to randomize the spec suite.]' \
+		'-skip=[If set, ginkgo will only run specs that do not match this regular expression.]' \
+		'-skipMeasurements=[If set, ginkgo will skip any measurement specs.]' \
+		'-skipPackage=[A comma-separated list of package names to be skipped.  If any part of the packages path matches, that package is ignored.]' \
+		'-slowSpecThreshold=[(in seconds) Specs that take longer to run than this threshold are flagged as slow by the default reporter (default: 5 seconds).]' \
+		'-stream=[stream parallel test output in real time: less coherent, but useful for debugging]' \
+		'-succinct=[If set, default reporter prints out a very succinct report]' \
+		'-tags=[A list of build tags to consider satisfied during the build]' \
+		'-trace=[If set, default reporter prints out the full stack trace when a failure occurs]' \
+		'-v=[If set, default reporter print out all specs as they begin.]'
+	_arguments '*:packages:_directories'
+}
+
+__bootstrap() {
+	_arguments \
+		'-agouti=[If set, bootstrap will generate a bootstrap file for writing Agouti tests]' \
+		'-nodot=[If set, bootstrap will generate a bootstrap file that does not . import ginkgo and gomega]'
+}
+
+__generate() {
+	_arguments \
+		'-agouti=[If set, generate will generate a test file for writing Agouti tests]' \
+		'-nodot=[If set, generate will generate a test file that does not . import ginkgo and gomega]'
+}
+
+__nodot() {
+    # no arguments
+}
+
+__convert() {
+	_arguments '*:packages:_directories'
+}
+
+__unfocus() {
+    # no arguments
+}
+
+__version() {
+    # no arguments
+}
+
+__help() {
+}
+
+local -a _1st_arguments
+_1st_arguments=(
+	'watch':'Watches the tests in the passed in <PACKAGES> and runs them when changes occur'
+	'bootstrap':'Bootstrap a test suite for the current package'
+	'generate':'Generate a test file named filename_test.go'
+	'nodot':'Update the nodot declarations in your test suite'
+	'convert':'Convert the package at the passed in path from an XUnit-style test to a Ginkgo-style test'
+	'unfocus':'Recursively unfocuses any focused tests under the current directory'
+	'version':'Print Ginkgos version'
+	'help':'Print usage information'
+)
+
+_arguments \
+	'-compilers=0[The number of concurrent compilations to run (0 will autodetect)]' \
+	'-cover=false[Run tests with coverage analysis, will generate coverage profiles with the package name in the current directory]' \
+	'-dryRun=false[If set, ginkgo will walk the test hierarchy without actually running anything.  Best paired with -v.]' \
+	'-failFast=false[If set, ginkgo will stop running a test suite after a failure occurs.]' \
+	'-failOnPendingfalse=[If set, ginkgo will mark the test suite as failed if any specs are pending.]' \
+	'-focus=""[If set, ginkgo will only run specs that match this regular expression.]' \
+	'-keepGoing=false[When true, failures from earlier test suites do not prevent later test suites from running]' \
+	'-noColor=false[If set, suppress color output in default reporter.]' \
+	'-nodes=1[The number of parallel test nodes to run]' \
+	'-noisyPendings=true[If set, default reporter will shout about pending tests.]' \
+	'-notify=false[Send desktop notifications when a test run completes]' \
+	'-p=false[Run in parallel with auto-detected number of nodes]' \
+	'-progress=false[If set, ginkgo will emit progress information as each spec runs to the GinkgoWriter.]' \
+	'-r=false[Find and run test suites under the current directory recursively]' \
+	'-race=false[Run tests with race detection enabled]' \
+	'-randomizeAllSpecs=false[If set, ginkgo will randomize all specs together.  By default, ginkgo only randomizes the top level Describe/Context groups.]' \
+	'-randomizeSuites=false[When true, Ginkgo will randomize the order in which test suites run]' \
+	'-seed=1428800166[The seed used to randomize the spec suite.]' \
+	'-skip=""[If set, ginkgo will only run specs that do not match this regular expression.]' \
+	'-skipMeasurements=false[If set, ginkgo will skip any measurement specs.]' \
+	'-skipPackage=""[A comma-separated list of package names to be skipped.  If any part of the packages path matches, that package is ignored.]' \
+	'-slowSpecThreshold=5[(in seconds) Specs that take longer to run than this threshold are flagged as slow by the default reporter (default: 5 seconds).]' \
+	'-stream=false[stream parallel test output in real time: less coherent, but useful for debugging]' \
+	'-succinct=false[If set, default reporter prints out a very succinct report]' \
+	'-tags=""[A list of build tags to consider satisfied during the build]' \
+	'-trace=false[If set, default reporter prints out the full stack trace when a failure occurs]' \
+	'-untilItFails=false[When true, Ginkgo will keep rerunning tests until a failure occurs]' \
+	'-v=false[If set, default reporter print out all specs as they begin.]' \
+	'*:: :->commands'
+
+if (( CURRENT == 1 )); then
+	_describe -t commands "ginkgo command" _1st_arguments
+	return
+fi
+
+
+local -a _command_args
+case "$words[1]" in
+	watch)
+		__watch ;;
+    bootstrap)
+       __bootstrap ;;
+   generate)
+	   __generate ;;
+   nodot)
+	   __nodot ;;
+   convert)
+	   __convert ;;
+   unfocus)
+	   __unfocus ;;
+   version)
+	   __version ;;
+   help)
+	   __help ;;
+esac

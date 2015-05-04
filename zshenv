@@ -30,6 +30,8 @@ typeset -gU cdpath fpath mailpath path
 
 export GOPATH=$HOME/p/go
 
+fpath=(~/.zsh/completion $fpath)
+
 # Set the the list of directories that cd searches.
 # cdpath=(
 #   $cdpath
