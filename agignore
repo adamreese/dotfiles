@@ -1,8 +1,8 @@
-/log/
-/logs/
-/images/
-/tmp/
-/vendor/
+log
+logs
+images
+tmp
+vendor
 *.sql
 *.tags*
 *.gemtags*

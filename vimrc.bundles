@@ -19,7 +19,6 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-haml'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/ctags.vim'
 
 " Comment plugins
 Plug 'scrooloose/nerdcommenter'
@@ -27,22 +26,7 @@ Plug 'scrooloose/nerdcommenter'
 " File managers/explorers
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-
-if executable('ag')
-  Plug 'rking/ag.vim'
-
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-elseif executable('ack')
-  Plug 'mileszs/ack.vim'
-endif
+Plug 'rking/ag.vim'
 
 " Colorschemes
 Plug 'altercation/vim-colors-solarized'
@@ -63,7 +47,8 @@ Plug 'scrooloose/syntastic'
 
 " Source Control plugins
 Plug 'tpope/vim-fugitive'
-Plug 'idanarye/vim-merginal'
+
+Plug 'adamreese/vim-airline'
 
 call plug#end()
 filetype plugin indent on

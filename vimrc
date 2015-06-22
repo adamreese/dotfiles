@@ -70,7 +70,7 @@ colorscheme hybrid
 
 highlight clear LineNr     " Current line number row will have same background color in relative mode
 highlight clear SignColumn " SignColumn should match background
-set cursorline             " Highlight current line
+set nocursorline           " Highlight current line !!! disabled, runs slow
 set hlsearch               " Highlight search results
 set ignorecase             " Ignore case when searching
 set incsearch              " Makes search act like search in modern browsers
@@ -157,7 +157,7 @@ nnoremap <C-Right> :tabnext<CR>
 
 " ================ Folds ============================
 set foldlevelstart=1
-set foldmethod=syntax   "fold based on syntax
+set foldmethod=manual   "fold based on syntax
 set foldnestmax=9       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 let xml_syntax_folding=1
@@ -166,7 +166,7 @@ let xml_syntax_folding=1
 set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set complete-=i             "do not scan included files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git,*/bundle/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
 
 " grep
 map <leader>a :Ag<space>
@@ -205,6 +205,15 @@ map <leader>gm :CtrlP app/models<CR>
 map <leader>gv :CtrlP app/views<CR>
 map <leader>gl :CtrlP lib<CR>
 map <leader>gs :CtrlP spec<CR>
+
+set grepprg=ag\ --nogroup\ --nocolor " Use Ag over Grep
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
 
 " NerdTree
 let g:NERDTreeMinimalUI=1
@@ -299,3 +308,11 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" airline
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_left_sep=''
+let g:airline_left_alt_sep=''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep=''

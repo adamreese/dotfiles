@@ -78,6 +78,10 @@ if [ $(uname -s) = "Darwin" ] ; then
 	alias postgres.restart='postgres.stop && sleep 1 && postgres.start'
 
 	alias update='brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; gem update --system; gem update'
+
+	alias bubu='brew update && brew upgrade --all && brew cleanup'
 fi
+
+alias comp='docker-compose'
 
 alias sam='ssh areese@sam'
