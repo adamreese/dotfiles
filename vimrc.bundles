@@ -7,48 +7,31 @@ end
 filetype off
 call plug#begin('~/.vim/plugged')
 
-" Various editing plugins
-Plug 'Lokaltog/vim-easymotion'
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/vim-go'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'majutsushi/tagbar'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
 Plug 'slack/vim-align'
 Plug 'thoughtbot/vim-rspec'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-
-" Comment plugins
-Plug 'scrooloose/nerdcommenter'
-
-" File managers/explorers
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'rking/ag.vim'
-
-" Colorschemes
-Plug 'altercation/vim-colors-solarized'
-" Plugin 'areese/vim-hybrid'
-Plug 'w0ng/vim-hybrid'
-Plug 'chriskempson/base16-vim'
-
-" Syntax plugins
-Plug 'fatih/vim-go'
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
-
-" Syntax check on buffer save
-Plug 'scrooloose/syntastic'
-
-" Source Control plugins
-Plug 'tpope/vim-fugitive'
-
-Plug 'adamreese/vim-airline'
+Plug 'w0ng/vim-hybrid'
 
 call plug#end()
 filetype plugin indent on

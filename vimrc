@@ -172,6 +172,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
 map <leader>a :Ag<space>
 map <leader>a* :Ag<space><cword><CR>
 
+set grepprg=ag\ --nogroup\ --nocolor\ --skip-vcs-ignores
+if &grepformat !~# '%c'
+  set grepformat^=%f:%l:%c:%m
+endif
+
 " ================ Scrolling ========================
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
@@ -206,10 +211,8 @@ map <leader>gv :CtrlP app/views<CR>
 map <leader>gl :CtrlP lib<CR>
 map <leader>gs :CtrlP spec<CR>
 
-set grepprg=ag\ --nogroup\ --nocolor " Use Ag over Grep
-
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --skip-vcs-ignores'
 let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
 " ag is fast enough that CtrlP doesn't need to cache
