@@ -26,6 +26,8 @@
   s = status -s
   sh = !git-sh
   v = show
+  next-release = !git log `git describe --tags --abbrev=0`..HEAD --oneline
+  nr = !git next-release
 [credential]
   helper = osxkeychain
 [user]
