@@ -26,7 +26,7 @@
   s = status -s
   sh = !git-sh
   v = show
-  next-release = !git log `git describe --tags --abbrev=0`..HEAD --oneline
+  next-release = !git log `git describe --tags --abbrev=0`..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
   nr = !git next-release
 [credential]
   helper = osxkeychain
