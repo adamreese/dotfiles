@@ -68,27 +68,11 @@ bind h:${hyper}     focus left
 bind k:${hyper}       focus up
 bind j:${hyper}     focus down
 
-# Resize Bindings
-bind right:alt       resize +10% +0
-bind left:alt        resize -10% +0
-bind up:alt          resize +0   -10%
-bind down:alt        resize +0   +10%
-bind right:ctrl;alt  resize -10% +0 bottom-right
-bind left:ctrl;alt   resize +10% +0 bottom-right
-bind up:ctrl;alt     resize +0   +10% bottom-right
-bind down:ctrl;alt   resize +0   -10% bottom-right
-
 # Push Bindings
 bind right:ctrl;cmd  push right bar-resize:screenSizeX/2
 bind left:ctrl;cmd   push left  bar-resize:screenSizeX/2
 bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
 bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
-
-# Nudge Bindings
-bind right:shift;alt nudge +10% +0
-bind left:shift;alt  nudge -10% +0
-bind up:shift;alt    nudge +0   -10%
-bind down:shift;alt  nudge +0   +10%
 
 # Throw Bindings
 bind 1:ctrl;alt         throw 0 resize
@@ -98,18 +82,6 @@ bind right:ctrl;alt;cmd throw right resize
 bind left:ctrl;alt;cmd  throw left  resize
 bind up:ctrl;alt;cmd    throw up    resize
 bind down:ctrl;alt;cmd  throw down  resize
-
-# Window Hints
-bind esc:cmd hint
-
-# App switching
-bind c:alt focus 'Google Chrome'
-bind t:alt focus 'iTerm'
-bind i:alt focus 'iTerm'
-bind v:alt focus 'MacVim'
-bind m:alt focus 'MacVim'
-bind z:alt focus 'zoom.us'
-bind s:alt focus 'Slack'
 
 # Window Grid
 # bind g:alt grid padding:5 0:6,3 1:6,3
