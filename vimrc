@@ -171,10 +171,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
 " grep
 map <leader>a :Ag<space>
 map <leader>a* :Ag<space><cword><CR>
+let g:ag_prg="ag --vimgrep --smart-case --nogroup --nocolor --skip-vcs-ignores"
 
-set grepprg=ag\ --nogroup\ --nocolor\ --skip-vcs-ignores
+set grepprg=ag\ --nogroup\ --nocolor
 if &grepformat !~# '%c'
-  set grepformat^=%f:%l:%c:%m
+	set grepformat^=%f:%l:%c:%m
 endif
 
 " ================ Scrolling ========================
@@ -213,7 +214,7 @@ map <leader>gs :CtrlP spec<CR>
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --skip-vcs-ignores'
-let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+"let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0

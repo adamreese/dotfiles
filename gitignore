@@ -1,28 +1,17 @@
-# OS or Editor files
-._*
-.DS\_Store
-Thumbs.db
-
-# ctags
-tags
-
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes
-
-# Always-ignore extensions
-*~
-*.diff
-*.err
-*.log
-*.orig
-*.pyc
-*.rej
-*.sass-cache
-*.sw?
-*.vi
+.DS_Store
+*.sw[nop]
 .bundle
-.hold
+.env
+db/*.sqlite3
+log/*.log
+rerun.txt
+tags
+!tags/
+tmp/**/*
+!tmp/cache/.keep
 
 .powenv
 .powder
+
+Procfile-development
+.env-development

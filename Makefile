@@ -12,6 +12,7 @@ shell:
 	ln -fs $(DOTFILES)/ackrc ${HOME}/.ackrc
 	ln -fs $(DOTFILES)/ctags ${HOME}/.ctags
 	ln -fs ${DOTFILES}/aliases ${HOME}/.aliases
+	ln -fs ${DOTFILES}/agignore ${HOME}/.agignore
 	ln -fs ${DOTFILES}/zsh ${HOME}/.zsh
 tmux:
 	ln -fs $(DOTFILES)/tmux.conf ${HOME}/.tmux.conf
