@@ -5,21 +5,20 @@ shell:
 	ln -fs $(DOTFILES)/bashenv ${HOME}/.bashenv
 	ln -fs $(DOTFILES)/bashrc ${HOME}/.bashrc
 	ln -fs $(DOTFILES)/profile ${HOME}/.bash_profile
-	ln -fs $(DOTFILES)/profile ${HOME}/.zprofile
 	ln -fs $(DOTFILES)/zshrc ${HOME}/.zshrc
-	ln -fs $(DOTFILES)/zlogout ${HOME}/.zlogout
 	ln -fs $(DOTFILES)/zshenv ${HOME}/.zshenv
 	ln -fs $(DOTFILES)/ackrc ${HOME}/.ackrc
 	ln -fs $(DOTFILES)/ctags ${HOME}/.ctags
 	ln -fs ${DOTFILES}/aliases ${HOME}/.aliases
 	ln -fs ${DOTFILES}/agignore ${HOME}/.agignore
-	ln -fs ${DOTFILES}/zsh ${HOME}/.zsh
+	ln -fns ${DOTFILES}/zsh ${HOME}/.zsh
 tmux:
 	ln -fs $(DOTFILES)/tmux.conf ${HOME}/.tmux.conf
 _vim:
 	ln -fns $(DOTFILES)/vim ${HOME}/.vim
 	ln -fs $(DOTFILES)/vimrc ${HOME}/.vimrc
 	ln -fs $(DOTFILES)/gvimrc ${HOME}/.gvimrc
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 _ruby:
 	ln -fs $(DOTFILES)/irbrc ${HOME}/.irbrc
 	ln -fs $(DOTFILES)/pryrc ${HOME}/.pryrc
