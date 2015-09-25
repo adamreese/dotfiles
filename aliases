@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-alias sz='source ~/.zshrc'
+# Shortcuts
 alias c='clear'
 alias e='exit'
 
@@ -11,6 +11,7 @@ alias apt-get='sudo apt-get'
 alias ls='ls -pG'
 alias ll='ls -lph'
 
+# Perform case insensitive matching
 alias grep='grep -i'
 
 alias path='echo -e ${PATH//:/\\n}'
@@ -25,6 +26,8 @@ alias gap='git add -p'
 alias gfa='git fetch --all'
 alias gpl='git pull'
 alias gs='git status -s'
+
+# github
 alias gh='hub browse'
 alias pr='hub pull-request'
 
@@ -77,11 +80,8 @@ if [ $(uname -s) = "Darwin" ] ; then
 	alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
 	alias postgres.restart='postgres.stop && sleep 1 && postgres.start'
 
-	alias update='brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; gem update --system; gem update'
-
+	# Update and cleanup brew
 	alias bubu='brew update && brew upgrade --all && brew cleanup'
 fi
-
-alias comp='docker-compose'
 
 alias sam='ssh areese@sam'
