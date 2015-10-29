@@ -29,6 +29,7 @@ fi
 typeset -gU cdpath fpath mailpath path
 
 export GOPATH=$HOME/p/go
+export GO15VENDOREXPERIMENT=1
 
 fpath=(~/.zsh/completion $fpath)
 

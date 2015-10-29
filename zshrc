@@ -49,7 +49,7 @@ ZSH_CUSTOM=$HOME/.dotfiles/oh-my-zsh
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rails golang chruby brew colored-man osx rake docker history-substring-search)
+plugins=(git rails golang chruby brew colored-man osx rake docker vagrant history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -70,14 +70,19 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+function source_rc() {
+	[ -f $1 ] && source $1
+}
+
 for f in ~/.zsh/functions/*; do source $f ; done
 
 export PERLBREW_ROOT=$HOME/.perl5/perlbrew
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECTS=$HOME/p
 
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.secret ] && source ~/.secret
+source_rc ~/.aliases
+source_rc ~/.secret
+source_rc ~/.travis/travis.sh
 
 # Group matches and describe.
 zstyle ':completion:*:*:*:*:*' menu select
@@ -93,10 +98,6 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 
-# added by travis gem
-[ -f /Users/adamreese/.travis/travis.sh ] && source /Users/adamreese/.travis/travis.sh
-
-
 export LESS_TERMCAP_mb=$(printf "\e[1;31m")
 export LESS_TERMCAP_md=$(printf "\e[1;31m")
 export LESS_TERMCAP_me=$(printf "\e[0m")
@@ -104,7 +105,3 @@ export LESS_TERMCAP_se=$(printf "\e[0m")
 export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
 export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
-
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1

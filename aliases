@@ -18,7 +18,7 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # navigation
 alias cdd='cd ~/.dotfiles/'
-alias cdg='cd ~/p/go/src/github.com/adamreese/'
+alias cdg='cd ~/p/go/src/github.com/'
 
 # git
 alias gaa='git add --all'
