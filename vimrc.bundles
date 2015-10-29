@@ -7,10 +7,12 @@ end
 filetype off
 call plug#begin('~/.vim/plugged')
 
+Plug 'Shougo/neocomplete.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go'
+Plug 'garyburd/go-explorer', { 'do': 'go get -u github.com/garyburd/go-explorer/src/getool' }
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-textobj-user'
 Plug 'majutsushi/tagbar'
@@ -25,7 +27,6 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'

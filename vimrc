@@ -49,16 +49,14 @@ au FocusLost * silent! wa
 " disable ri check
 :map K <Nop>
 
-
-" =============== Vundle Initialization ===============
+" =============== vim-plug Initialization ===============
 " This loads all the plugins specified in ~/.vimrc.bundles
-" Use Vundle plugin to manage all other plugins
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-"Filetype plugin indent on is required by vundle
+"Filetype plugin indent
 filetype plugin indent on
 
 " ================ UI ==============
@@ -70,7 +68,7 @@ colorscheme hybrid
 
 highlight clear LineNr     " Current line number row will have same background color in relative mode
 highlight clear SignColumn " SignColumn should match background
-set nocursorline           " Highlight current line !!! disabled, runs slow
+set cursorline             " Highlight current line
 set hlsearch               " Highlight search results
 set ignorecase             " Ignore case when searching
 set incsearch              " Makes search act like search in modern browsers
@@ -81,6 +79,7 @@ set showmatch              " Show matching brackets when text indicator is over 
 set showmode               " Display the current mode
 set smartcase              " When searching try to be smart about cases
 set tabpagemax=15          " Only show 15 tabs
+set linebreak              "Wrap lines at convenient points
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
@@ -120,16 +119,46 @@ filetype indent on
 " Display tabs and trailing spaces visually
 set list listchars=tab:>-,trail:*
 
-" set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
+" ============== File Type settings ==================
 
-autocmd FileType *     set tabstop=4|set shiftwidth=4|set noexpandtab|set nolist
-autocmd FileType ruby  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
-autocmd FileType haml  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
-autocmd FileType yaml  set tabstop=2|set shiftwidth=2|set   expandtab|set autoindent
-autocmd FileType go    set tabstop=4|set shiftwidth=4|set   expandtab|set autoindent
-autocmd FileType perl  set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
+if has("autocmd")
+augroup filetype_ruby
+  autocmd!
+  autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
+augroup END
 
+augroup filetype_haml
+  autocmd!
+  autocmd FileType haml set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
+augroup END
+
+augroup filetype_yaml
+  autocmd!
+  autocmd FileType yaml set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
+augroup END
+
+augroup filetype_perl
+  autocmd!
+  autocmd FileType perl set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
+augroup END
+
+augroup filetype_go
+  autocmd!
+
+  autocmd FileType go set tabstop=4|set shiftwidth=4|set expandtab|set autoindent|set nolist
+
+  autocmd FileType go nmap <Leader>dc  <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>ce  <Plug>(go-callees)
+  autocmd FileType go nmap <Leader>cl  <Plug>(go-callers)
+  autocmd FileType go nmap <Leader>cs  <Plug>(go-callstack)
+  autocmd FileType go nmap <Leader>d   <Plug>(go-describe)
+  autocmd FileType go nmap <Leader>in  <Plug>(go-info)
+  autocmd FileType go nmap <Leader>ii  <Plug>(go-implements)
+  autocmd FileType go nmap <Leader>r   <Plug>(go-referrers)
+  autocmd FileType go nmap <Leader>f   :GoImports<CR>
+
+augroup END
+endif
 
 " ================ Windows ======================
 set splitbelow
@@ -175,7 +204,7 @@ let g:ag_prg="ag --vimgrep --smart-case --nogroup --nocolor --skip-vcs-ignores"
 
 set grepprg=ag\ --nogroup\ --nocolor
 if &grepformat !~# '%c'
-	set grepformat^=%f:%l:%c:%m
+  set grepformat^=%f:%l:%c:%m
 endif
 
 " ================ Scrolling ========================
@@ -199,54 +228,10 @@ if has('statusline')
   set statusline+=\ %{fugitive#statusline()} " Git Hotness
 endif
 
-" ================ Plugin Settings ======================
-
-" CtrlP is fun
-map <leader>cf :ClearCtrlPCache<CR>
-map <leader>gb :CtrlPBuffer<CR>
-
-map <leader>gg :topleft 100 :split Gemfile<CR>
-map <leader>gc :CtrlP app/controllers<CR>
-map <leader>gm :CtrlP app/models<CR>
-map <leader>gv :CtrlP app/views<CR>
-map <leader>gl :CtrlP lib<CR>
-map <leader>gs :CtrlP spec<CR>
-
-" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --skip-vcs-ignores'
-"let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-
-" ag is fast enough that CtrlP doesn't need to cache
-let g:ctrlp_use_caching = 0
-
-" NerdTree
-let g:NERDTreeMinimalUI=1
-map <leader>e :NERDTreeFind<CR>
-
-" Align bindings
-map <leader>ah :Align =><CR>
-nnoremap <leader>a= :Align =<CR>
-map <leader>a# :Align #<CR>
-map <leader>a{ :Align {<CR>
-
-" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" ================ shortcuts ======================
 
 " Format buffer
 map <leader>= ggVG=<CR>
-
-" vim rspec mappings
-let g:rspec_runner = "os_x_iterm"
-let g:rspec_command = "br {spec}"
-map <Bslash>t :call RunCurrentSpecFile()<CR>
-map <Bslash>s :call RunNearestSpec()<CR>
-map <Bslash>l :call RunLastSpec()<CR>
-map <Bslash>a :call RunAllSpecs()<CR>
-
-" ================ shortcuts ======================
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -273,17 +258,60 @@ nmap <leader>del :g/^$/d<cr>
 " Sorting
 map <leader>srt :sort<cr>
 
-" Tagbar
-map <leader>tt :TagbarToggle<cr>
-
 " remove trailing whitespace automatically
 autocmd BufWritePre * :%s/\s\+$//e
+
+map <leader>r19 :s/\v:([0-9a-z_]+)\s+\=\>\s+/\1: /g<CR>
+map <leader>r18 :s/\v([0-9a-z_"']+):\s+(.*)/:\1 => \2/g<CR>
+
+" Find merge conflict markers
+map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
 " ================ functions ======================
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+
+" ================ Plugin Settings ======================
+
+" vim-align
+map <leader>ah :Align =><CR>
+nnoremap <leader>a= :Align =<CR>
+map <leader>a# :Align #<CR>
+map <leader>a{ :Align {<CR>
+
+" CtrlP
+map <leader>cf :ClearCtrlPCache<CR>
+map <leader>gb :CtrlPBuffer<CR>
+map <leader>gc :CtrlP app/controllers<CR>
+map <leader>gm :CtrlP app/models<CR>
+map <leader>gv :CtrlP app/views<CR>
+map <leader>gl :CtrlP lib<CR>
+map <leader>gs :CtrlP spec<CR>
+
+" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --skip-vcs-ignores'
+"let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+
+" ag is fast enough that CtrlP doesn't need to cache
+let g:ctrlp_use_caching = 0
+
+" nerdtree
+let g:NERDTreeMinimalUI=1
+map <leader>e :NERDTreeFind<CR>
+
+" EasyAlign
+vmap <Enter> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" vim-go
+let g:go_fmt_fail_silently = 0
+let g:go_fmt_command = 'goimports'
+let g:go_autodetect_gopath = 1
+
+" tagbar
+map <leader>tt :TagbarToggle<cr>
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -313,6 +341,14 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+" vim-rspec
+let g:rspec_runner = "os_x_iterm2"
+let g:rspec_command = "br {spec}"
+map <Bslash>t :call RunCurrentSpecFile()<CR>
+map <Bslash>s :call RunNearestSpec()<CR>
+map <Bslash>l :call RunLastSpec()<CR>
+map <Bslash>a :call RunAllSpecs()<CR>
+
 " airline
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 0
@@ -320,3 +356,12 @@ let g:airline_left_sep=''
 let g:airline_left_alt_sep=''
 let g:airline_right_sep=''
 let g:airline_right_alt_sep=''
+
+" neocomplete
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_auto_delimiter = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#max_list = 10
+set completeopt-=preview
