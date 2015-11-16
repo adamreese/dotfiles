@@ -41,13 +41,19 @@ if has("autocmd")
 endif
 
 " Save files when vim loses focus
-au FocusLost * silent! wa
+autocmd FocusLost * silent! wall
 
 " disable ex mode
 :map Q <Nop>
 
 " disable ri check
 :map K <Nop>
+
+" grep
+set grepprg=ag\ --nogroup\ --nocolor
+if &grepformat !~# '%c'
+  set grepformat^=%f:%l:%c:%m
+endif
 
 " =============== vim-plug Initialization ===============
 " This loads all the plugins specified in ~/.vimrc.bundles
@@ -65,6 +71,10 @@ syntax enable
 set background=dark
 
 colorscheme hybrid
+
+highlight Pmenu     guibg=#c5c8c6 guifg=#1d1f21
+highlight PmenuSel  guibg=#bcbcbc guifg=#000000
+highlight PmenuSbar guibg=#333333
 
 highlight clear LineNr     " Current line number row will have same background color in relative mode
 highlight clear SignColumn " SignColumn should match background
@@ -148,6 +158,7 @@ augroup filetype_go
   autocmd FileType go set tabstop=4|set shiftwidth=4|set expandtab|set autoindent|set nolist
 
   autocmd FileType go nmap <Leader>dc  <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>s   <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>ce  <Plug>(go-callees)
   autocmd FileType go nmap <Leader>cl  <Plug>(go-callers)
   autocmd FileType go nmap <Leader>cs  <Plug>(go-callstack)
@@ -196,16 +207,6 @@ set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set complete-=i             "do not scan included files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
-
-" grep
-map <leader>a :Ag<space>
-map <leader>a* :Ag<space><cword><CR>
-let g:ag_prg="ag --vimgrep --smart-case --nogroup --nocolor --skip-vcs-ignores"
-
-set grepprg=ag\ --nogroup\ --nocolor
-if &grepformat !~# '%c'
-  set grepformat^=%f:%l:%c:%m
-endif
 
 " ================ Scrolling ========================
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
@@ -275,6 +276,11 @@ endif
 
 " ================ Plugin Settings ======================
 
+" ag
+map <leader>a :Ag<space>
+map <leader>a* :Ag<space><cword><CR>
+"let g:ag_prg="ag --vimgrep --smart-case --nogroup --nocolor --skip-vcs-ignores"
+
 " vim-align
 map <leader>ah :Align =><CR>
 nnoremap <leader>a= :Align =<CR>
@@ -291,8 +297,7 @@ map <leader>gl :CtrlP lib<CR>
 map <leader>gs :CtrlP spec<CR>
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --skip-vcs-ignores'
-"let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
@@ -306,9 +311,10 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " vim-go
-let g:go_fmt_fail_silently = 0
-let g:go_fmt_command = 'goimports'
 let g:go_autodetect_gopath = 1
+"let g:go_fmt_command = 'goimports'
+let g:go_fmt_fail_silently = 0
+let g:go_snippet_engine = "neosnippet"
 
 " tagbar
 map <leader>tt :TagbarToggle<cr>
@@ -358,10 +364,50 @@ let g:airline_right_sep=''
 let g:airline_right_alt_sep=''
 
 " neocomplete
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_auto_delimiter = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#max_list = 10
+let g:acp_enableAtStartup = 0                           " Disable AutoComplPop
+let g:neocomplete#enable_at_startup = 1                 " Use neocomplete
+let g:neocomplete#enable_smart_case = 0                 " Use smartcase
+"let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length
+"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+
+"let g:neocomplete#enable_auto_delimiter = 1
+"let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#max_list = 15
 set completeopt-=preview
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+  let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+" Neosnippet
+" Plugin key-mappings.
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)

@@ -32,6 +32,11 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'w0ng/vim-hybrid'
+Plug 'jlanzarotta/bufexplorer'
+
+Plug 'Shougo/neocomplete'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 
 call plug#end()
 filetype plugin indent on
