@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+export KUBERNETES_PROVIDER=vagrant
+
+alias k=kubectl
