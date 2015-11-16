@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+deisctl() {
+  local subcommand="$1"
+  local env_name="$2"
+
+  if [[ "${subcommand}" = "env" ]]; then
+    if [[ ! -z "${env_name}" ]]; then
+      deisctl::env "${env_name}"
+    fi
+    deisctl::printenv
+  else
+    deisctl $*
+  fi
+}
+
+deisctl::env() {
+  deisctl::clearenv
+
+  DEIS_ENV="$1"
+
+  DEIS_ROOT=${GOPATH}/src/github.com/deis/deis
+  DEISCTL_UNITS="${DEIS_ROOT}/deisctl/units"
+
+  case "${DEIS_ENV}" in
+    local)
+      DEIS_PROFILE=${DEIS_ENV}
+      DEISCTL_TUNNEL="172.17.8.100"
+      FLEETCTL_TUNNEL="$DEISCTL_TUNNEL"
+      FLEETCTL_STRICT_HOST_KEY_CHECKING=false
+      DEV_REGISTRY=`docker-machine ip $(docker-machine active 2>/dev/null) 2>/dev/null `:5000
+      DEIS_NUM_INSTANCES=3
+      DEIS_TEST_DOMAIN=local3.deisapp.com
+      DEIS_TEST_AUTH_KEY="id_rsa"
+      DEIS_TEST_SSH_KEY="$HOME/.ssh/id_rsa"
+      ;;
+
+    aws)
+      DEIS_PROFILE=${DEIS_ENV}
+      DEISCTL_TUNNEL=54.215.246.126
+      FLEETCTL_TUNNEL="$DEISCTL_TUNNEL"
+      FLEETCTL_STRICT_HOST_KEY_CHECKING=false
+      DEIS_NUM_INSTANCES=3
+      ;;
+  esac
+}
+
+deisctl::printenv(){
+  echo "DEIS_PROFILE=$DEIS_PROFILE"
+  echo "DEISCTL_TUNNEL=$DEISCTL_TUNNEL"
+  echo "DEISCTL_UNITS=$DEISCTL_UNITS"
+  echo "FLEETCTL_TUNNEL=$FLEETCTL_TUNNEL"
+  echo "FLEETCTL_STRICT_HOST_KEY_CHECKING=$FLEETCTL_STRICT_HOST_KEY_CHECKING"
+  echo "DEV_REGISTRY=$DEV_REGISTRY"
+  echo "DEIS_NUM_INSTANCES=$DEIS_NUM_INSTANCES"
+  echo "DEIS_TEST_DOMAIN=$DEIS_TEST_DOMAIN"
+  echo "DEIS_TEST_AUTH_KEY=$DEIS_TEST_AUTH_KEY"
+  echo "DEIS_TEST_SSH_KEY=$DEIS_TEST_SSH_KEY"
+}
+
+deisctl::clearenv() {
+  DEIS_ENV=""
+  DEISCTL_TUNNEL=""
+  DEISCTL_UNITS=""
+  DEIS_NUM_INSTANCES=""
+  DEIS_PROFILE=""
+  DEIS_ROOT=""
+  DEIS_TEST_AUTH_KEY=""
+  DEIS_TEST_DOMAIN=""
+  DEIS_TEST_SSH_KEY=""
+  DEV_REGISTRY=""
+  FLEETCTL_STRICT_HOST_KEY_CHECKING=""
+  FLEETCTL_TUNNEL=""
+}
