@@ -39,7 +39,6 @@ fi
 
 ## brewer path
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-source $(brew --prefix)/etc/bash_completion # Bash completion (installed via Homebrew)
 
 if [[ -d "$HOME/Developer/lib/node_modules" ]] ; then
   NODE_PATH="$HOME/Developer/lib/node_modules"
@@ -50,6 +49,9 @@ if [[ -d "/usr/local/etc/bash_completion.d" ]] ; then
   source /usr/local/etc/bash_completion.d/*.bash
 fi
 
+if [[ -f $(brew --prefix)/etc/bash_completion ]] ; then
+  . $(brew --prefix)/etc/bash_completion  # Bash completion (installed via Homebrew)
+fi
+
 source $HOME/.aliases                 # Aliases
 source $HOME/.dotfiles/bash_prompt    # Custom bash prompt
-$(brew --prefix)/etc/bash_completion  # Bash completion (installed via Homebrew)
