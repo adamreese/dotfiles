@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# remove merged branchs
+git_clean_branches(){
+  git checkout master && git branch --merged | grep -v master | xargs git branch -d
+}

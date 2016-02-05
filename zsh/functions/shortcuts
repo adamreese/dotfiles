@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# shortcut to PROJECTS folder
+p() {
+  cd $PROJECTS/$1;
+}
+
+# shortcut to EDITOR
+function v() {
+if [ $# -eq 0 ]; then
+  $EDITOR .
+else
+  $EDITOR "$@"
+fi
+}
