@@ -38,10 +38,10 @@ nmap <leader>evb :tabedit ~/.vimrc.bundles<CR>
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
   autocmd bufwritepost .vimrc.bundles source $MYVIMRC
-endif
 
-" Save files when vim loses focus
-autocmd FocusLost * silent! wall
+  " Save files when vim loses focus
+  autocmd FocusLost * silent! wall
+endif
 
 " disable ex mode
 :map Q <Nop>
@@ -128,48 +128,6 @@ filetype indent on
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:>-,trail:*
-
-" ============== File Type settings ==================
-
-if has("autocmd")
-augroup filetype_ruby
-  autocmd!
-  autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
-augroup END
-
-augroup filetype_haml
-  autocmd!
-  autocmd FileType haml set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
-augroup END
-
-augroup filetype_yaml
-  autocmd!
-  autocmd FileType yaml set tabstop=2|set shiftwidth=2|set expandtab|set autoindent
-augroup END
-
-augroup filetype_perl
-  autocmd!
-  autocmd FileType perl set tabstop=8|set shiftwidth=8|set noexpandtab|set nolist
-augroup END
-
-augroup filetype_go
-  autocmd!
-
-  autocmd FileType go set tabstop=4|set shiftwidth=4|set expandtab|set autoindent|set nolist
-
-  autocmd FileType go nmap <Leader>dc  <Plug>(go-doc)
-  autocmd FileType go nmap <Leader>s   <Plug>(go-def-split)
-  autocmd FileType go nmap <Leader>ce  <Plug>(go-callees)
-  autocmd FileType go nmap <Leader>cl  <Plug>(go-callers)
-  autocmd FileType go nmap <Leader>cs  <Plug>(go-callstack)
-  autocmd FileType go nmap <Leader>d   <Plug>(go-describe)
-  autocmd FileType go nmap <Leader>in  <Plug>(go-info)
-  autocmd FileType go nmap <Leader>ii  <Plug>(go-implements)
-  autocmd FileType go nmap <Leader>r   <Plug>(go-referrers)
-  autocmd FileType go nmap <Leader>f   :GoImports<CR>
-
-augroup END
-endif
 
 " ================ Windows ======================
 set splitbelow
@@ -310,50 +268,8 @@ map <leader>e :NERDTreeFind<CR>
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" vim-go
-let g:go_autodetect_gopath = 1
-"let g:go_fmt_command = 'goimports'
-let g:go_fmt_fail_silently = 0
-let g:go_snippet_engine = "neosnippet"
-
 " tagbar
 map <leader>tt :TagbarToggle<cr>
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-" vim-rspec
-let g:rspec_runner = "os_x_iterm2"
-let g:rspec_command = "br {spec}"
-map <Bslash>t :call RunCurrentSpecFile()<CR>
-map <Bslash>s :call RunNearestSpec()<CR>
-map <Bslash>l :call RunLastSpec()<CR>
-map <Bslash>a :call RunAllSpecs()<CR>
 
 " airline
 let g:airline#extensions#branch#enabled = 1
