@@ -1,5 +1,54 @@
 #!/usr/bin/env bash
 
-export KUBERNETES_PROVIDER=vagrant
-
 alias k=kubectl
+
+ks() {
+  local cmd="$1"
+
+  _ks_cmd(){
+    "/Applications/Kube-Solo.app/Contents/Resources/${1}.command"
+  }
+
+  case "$cmd" in
+    up|halt|reload|ssh)
+      _ks_cmd "$cmd"
+      ;;
+    provision)
+      if [[ -d ~/kube-solo ]]; then
+        rm -rf ~/kube-solo
+      fi
+      _ks_cmd first-init
+      ;;
+    *)
+      echo "Usage: ks {up|halt|reload|ssh}"
+  esac
+}
+
+chkube() {
+  KUBES=~/.kubes
+
+  case "$1" in
+    clear)
+      unset KUBECONFIG
+      unset KUBERNETES_PROVIDER
+      ;;
+    info)
+      echo "KUBECONFIG=${KUBECONFIG}"
+      ;;
+    list)
+      ls ${KUBES}
+      ;;
+    *)
+      if [[ -d ${KUBES}/$1 && -e ${KUBES}/${1}/env ]]; then
+        source ${KUBES}/${1}/env
+      else
+        echo "Usage: chkube {list|clear|name}"
+        if [[ -z ${KUBECONFIG} ]]; then
+          echo "KUBECONFIG not set"
+        fi
+      fi
+  esac
+}
+
+# default to kube-solo
+chkube kube-solo
