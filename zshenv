@@ -42,7 +42,6 @@ fpath=(~/.zsh/completion $fpath)
 path=(
   ~/.dotfiles/bin
   $GOPATH/bin
-  ~/bin
   /usr/local/{bin,sbin}
   ~/.perl5/perlbrew/bin
   $path
