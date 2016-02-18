@@ -41,6 +41,6 @@ ZSH_THEME_GIT_PROMPT_SHA_AFTER="%{$WHITE%}]"
 PROMPT='
 [%{$GREEN%}%~%u%{$RESET_COLOR%}] $(git_prompt_info)$(git_prompt_ahead)
 %{$WHITE%}%% %{$RESET_COLOR%}'
-RPROMPT='$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%} $(ruby_prompt_info)'
+#RPROMPT='$(git_prompt_short_sha)$(git_prompt_status)%{$RESET_COLOR%} $(ruby_prompt_info)'
 
 export LSCOLORS="exfxcxdxbxegedabagacad"
