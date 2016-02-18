@@ -1,7 +1,10 @@
+" =======================================================================
 " ~/.vimrc
+" =======================================================================
 set nocompatible
 
-" ================ General Config ====================
+" General Config
+" -----------------------------------------------------------------------
 set autoread                    "Reload files changed outside vim
 set backspace=indent,eol,start  "Allow backspace in insert mode
 set encoding=utf-8
@@ -55,7 +58,8 @@ if &grepformat !~# '%c'
   set grepformat^=%f:%l:%c:%m
 endif
 
-" =============== vim-plug Initialization ===============
+" vim-plug Initialization
+" -----------------------------------------------------------------------
 " This loads all the plugins specified in ~/.vimrc.bundles
 
 if filereadable(expand("~/.vimrc.bundles"))
@@ -65,7 +69,8 @@ endif
 "Filetype plugin indent
 filetype plugin indent on
 
-" ================ UI ==============
+" UI
+" -----------------------------------------------------------------------
 set t_Co=256
 syntax enable
 set background=dark
@@ -100,12 +105,14 @@ if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
-" ================ Turn Off Swap Files ==============
+" Turn Off Swap Files
+" -----------------------------------------------------------------------
 set noswapfile
 set nobackup
 set nowb
 
-" ================ Persistent Undo ==================
+" Persistent Undo
+" -----------------------------------------------------------------------
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
@@ -114,7 +121,8 @@ if has('persistent_undo')
   set undofile
 endif
 
-" ================ Indentation ======================
+" Indentation
+" -----------------------------------------------------------------------
 set autoindent
 set smartindent
 set smarttab
@@ -129,7 +137,8 @@ filetype indent on
 " Display tabs and trailing spaces visually
 set list listchars=tab:>-,trail:*
 
-" ================ Windows ======================
+" Windows
+" -----------------------------------------------------------------------
 set splitbelow
 set splitright
 
@@ -153,25 +162,29 @@ nmap <leader>wq :w!<cr>:bdelete<cr>
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
-" ================ Folds ============================
+" Folds
+" -----------------------------------------------------------------------
 set foldlevelstart=1
 set foldmethod=manual   "fold based on syntax
 set foldnestmax=9       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 let xml_syntax_folding=1
 
-" ================ Completion =======================
+" Completion
+" -----------------------------------------------------------------------
 set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set complete-=i             "do not scan included files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
 
-" ================ Scrolling ========================
+" Scrolling
+" -----------------------------------------------------------------------
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
-" ================ Status Line ======================
+" Status Line
+" -----------------------------------------------------------------------
 if has('cmdline_info')
   set ruler                   " Show the ruler
   set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
@@ -187,7 +200,8 @@ if has('statusline')
   set statusline+=\ %{fugitive#statusline()} " Git Hotness
 endif
 
-" ================ shortcuts ======================
+" Shortcuts
+" -----------------------------------------------------------------------
 
 " Format buffer
 map <leader>= ggVG=<CR>
@@ -226,13 +240,15 @@ map <leader>r18 :s/\v([0-9a-z_"']+):\s+(.*)/:\1 => \2/g<CR>
 " Find merge conflict markers
 map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
-" ================ functions ======================
+" Functions
+" -----------------------------------------------------------------------
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
 
-" ================ Plugin Settings ======================
+" Plugin Settings
+" -----------------------------------------------------------------------
 
 " ag
 map <leader>a :Ag<space>
