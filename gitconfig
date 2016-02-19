@@ -1,4 +1,4 @@
-# vim: set syn=gitconfig
+# vim: set filetype=gitconfig
 [init]
   templatedir = ~/.git_template
 [alias]
@@ -16,7 +16,7 @@
   cv = commit -v
   d = diff
   dc = diff --cached
-  fa = fetch --all
+  fa = fetch --all --tags --prune
   l = log --decorate --oneline --graph
   ll = log
   pl = pull --rebase
@@ -30,7 +30,7 @@
   # Delete branches that have been merged into master
   delete-merged = "!git checkout master && git branch --merged | grep -v master | xargs git branch -d"
 
-  next-release = !git log `git describe --tags --abbrev=0`..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
+  next-release = "!git log `git describe --tags --abbrev=0`..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
   nr = !git next-release
   plum = pull upstream master
 [credential]

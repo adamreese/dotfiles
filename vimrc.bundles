@@ -1,7 +1,7 @@
 " vim: syntax=vim :
 
 if &compatible
-	set nocompatible
+  set nocompatible
 end
 
 filetype off
