@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+dm() {
+  local cmd="$1"
+  local machine="${2:-default}"
+
+  case "$cmd" in
+    use)
+      _docker_machine_use "$machine"
+      ;;
+    init)
+      _docker_machine_init "$machine"
+      ;;
+    *)
+    docker-machine "$@"
+  esac
+}
+
+_docker_machine_use() {
+  local machine="$1"
+
+  if ! _docker_machine_running "$machine"; then
+    docker-machine start "$machine"
+  fi
+
+  eval "$(docker-machine env "$machine")"
+}
+
+_docker_machine_running() {
+  local machine="$1"
+
+  if [[ "$(docker-machine status "$machine")" != "Running" ]]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+_docker_machine_init() {
+  local name="$1"
+
+  local driver=xhyve
+  local disk_size=10000
+  local cpus=2
+  local mem=20000
+
+  if ! command -v docker-machine-driver-xhyve >/dev/null 2>&1; then
+    driver=virtualbox
+  fi
+
+  docker-machine create "$name" \
+    --driver "$driver" \
+    --engine-insecure-registry 10.0.0.0/8 \
+    --engine-insecure-registry 172.16.0.0/12 \
+    --engine-insecure-registry 192.168.0.0/16 \
+    --engine-insecure-registry 100.64.0.0/10 \
+    --xhyve-disk-size "$disk_size" \
+    --xhyve-cpu-count "$cpus" \
+    --xhyve-memory-size "$mem"
+
+}
+
+# Source default docker-machine if it is running
+eval "$(docker-machine env default 2> /dev/null)"
