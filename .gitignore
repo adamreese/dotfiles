@@ -17,3 +17,4 @@ vim/swaps/*
 vim/undo/*
 vim/autoload/*
 vim/plugged/*
+vim/view/*

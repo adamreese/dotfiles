@@ -35,7 +35,7 @@ let mapleader=","
 
 " Edit the vimrc file
 nmap <leader>ev :tabedit $MYVIMRC<CR>
-nmap <leader>evb :tabedit ~/.vimrc.bundles<CR>
+nmap <leader>evb :tabedit $MYVIMRC.bundles<CR>
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -52,6 +52,9 @@ endif
 " disable ri check
 :map K <Nop>
 
+" disable q window
+map q: :q
+
 " grep
 set grepprg=ag\ --nogroup\ --nocolor
 if &grepformat !~# '%c'
@@ -60,10 +63,10 @@ endif
 
 " vim-plug Initialization
 " -----------------------------------------------------------------------
-" This loads all the plugins specified in ~/.vimrc.bundles
+" This loads all the plugins specified in ~/.vim/vimrc.bundles
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
+if filereadable(expand("~/.vim/vimrc.bundles"))
+  source ~/.vim/vimrc.bundles
 endif
 
 "Filetype plugin indent
@@ -83,27 +86,27 @@ highlight PmenuSbar guibg=#333333
 
 highlight clear LineNr     " Current line number row will have same background color in relative mode
 highlight clear SignColumn " SignColumn should match background
-set cursorline             " Highlight current line
+set nocursorcolumn         " Do not highlight column
+set nocursorline           " Do not highlight line
 set hlsearch               " Highlight search results
 set ignorecase             " Ignore case when searching
 set incsearch              " Makes search act like search in modern browsers
-set lazyredraw             " Don't redraw while executing macros (good performance config)
 set magic                  " For regular expressions turn magic on
 set mat=2                  " How many tenths of a second to blink when matching brackets
 set showmatch              " Show matching brackets when text indicator is over them
-set showmode               " Display the current mode
 set smartcase              " When searching try to be smart about cases
 set tabpagemax=15          " Only show 15 tabs
-set linebreak              "Wrap lines at convenient points
+set linebreak              " Wrap lines at convenient points
+set noshowmode             " We show the mode with airline or lightline
+
+set lazyredraw             " Don't redraw while executing macros (good performance config)
+syntax sync minlines=256   " Start highlighting from 256 lines backwards
+set synmaxcol=300          " Do not highlith very long lines
+set re=1                   " Use explicit old regexpengine, seems to be more faster
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
-
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
-endif
 
 " Turn Off Swap Files
 " -----------------------------------------------------------------------
@@ -147,6 +150,15 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Same when moving up and down
+noremap <C-d> <C-d>zz
+noremap <C-u> <C-u>zz
+
 " Easy buffer navigation
 noremap <leader>bp :bprevious<cr>
 noremap <leader>bn :bnext<cr>
@@ -172,10 +184,12 @@ let xml_syntax_folding=1
 
 " Completion
 " -----------------------------------------------------------------------
+set wildmenu                " enable ctrl-n and ctrl-p to scroll thru matches
 set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set complete-=i             "do not scan included files
+set complete-=i             " do not scan included files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
+set completeopt=menu,menuone
+set pumheight=10             " completion window max size
 
 " Scrolling
 " -----------------------------------------------------------------------
@@ -212,6 +226,8 @@ map <silent> <leader><cr> :noh<cr>
 " Faster saving
 map <silent> <leader>w :w<cr>
 map <silent> <leader>wa :wa<cr>
+
+map <silent> <leader>q :q<cr>
 
 map <silent> <leader>bn :bnext<cr>
 map <silent> <leader>bd :bdelete<cr>
@@ -264,6 +280,7 @@ map <leader>a{ :Align {<CR>
 " CtrlP
 map <leader>cf :ClearCtrlPCache<CR>
 map <leader>gb :CtrlPBuffer<CR>
+map <leader>gt :CtrlPBufTag<CR>
 map <leader>gc :CtrlP app/controllers<CR>
 map <leader>gm :CtrlP app/models<CR>
 map <leader>gv :CtrlP app/views<CR>
@@ -275,6 +292,8 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
+
+let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 
 " nerdtree
 let g:NERDTreeMinimalUI=1
@@ -299,20 +318,21 @@ let g:airline_right_alt_sep=''
 let g:acp_enableAtStartup = 0                           " Disable AutoComplPop
 let g:neocomplete#enable_at_startup = 1                 " Use neocomplete
 let g:neocomplete#enable_smart_case = 0                 " Use smartcase
-"let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length
-"let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-
-"let g:neocomplete#enable_auto_delimiter = 1
-"let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplete#max_list = 15
-set completeopt-=preview
 
 " Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"if !exists('g:neocomplete#keyword_patterns')
+  "let g:neocomplete#keyword_patterns = {}
+"endif
+"let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+"if !exists('g:neocomplete#sources')
+  "let g:neocomplete#sources = {}
+"endif
+"let g:neocomplete#sources._ = ['buffer', 'member', 'tag', 'file', 'dictionary']
+"let g:neocomplete#sources.go = ['omni']
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -322,9 +342,6 @@ function! s:my_cr_function()
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS

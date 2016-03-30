@@ -1,10 +1,15 @@
 " .gvimrc
 
-set showtabline=1 " Display the tab bar if there is more than one tab
-set gcr=n:blinkon0 " Turn off the blinking cursor in normal mode
+" Display the tab bar if there is more than one tab
+set showtabline=1
+
+" Turn off the blinking cursor in normal mode
+set gcr=n:blinkon0
+
+" Automatically read changed files
+set autoread
 
 set guifont=Inconsolata-dz:h12
-set autoread
 
 if has("gui_macvim")
   " Hide the MacVim toolbar
