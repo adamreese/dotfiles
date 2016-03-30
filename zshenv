@@ -76,23 +76,4 @@ if [[ -s "$HOME/.perl5/perlbrew/etc/bashrc" ]] ; then
   source "$HOME/.perl5/perlbrew/etc/bashrc"
 fi
 
-# Ruby tweaks
-if [[ -z $(ruby -W0 -e "print RUBY_VERSION" | grep 2\.) ]]; then
-  export RUBY_FREE_MIN=500000
-  export RUBY_HEAP_MIN_SLOTS=40000
-else
-  export RUBY_GC_MALLOC_LIMIT=1000000000
-  export RUBY_GC_HEAP_FREE_SLOTS=1000000000
-  export RUBY_GC_HEAP_FREE_SLOTS=500000
-fi
-
-export HISTFILESIZE=9999
-export HISTSIZE=9999
-
-if [ -d $(brew --prefix)/Celler/go ]; then
-  export GOROOT=`brew --cellar`/go/HEAD
-  export GOBIN=/usr/local/bin
-  export GOARCH=amd64
-  export GOOS=darwin
-fi
-
+skip_global_compinit=1
