@@ -1,54 +1,19 @@
 #!/usr/bin/env bash
 
-alias k=kubectl
+export KUBECONFIG=${HOME}/.kube/config:${HOME}/kube-solo/kube/kubeconfig
 
-ks() {
+k() {
   local cmd="$1"
-
-  _ks_cmd(){
-    "/Applications/Kube-Solo.app/Contents/Resources/${1}.command"
-  }
+  local context="$2"
 
   case "$cmd" in
-    up|halt|reload|ssh)
-      _ks_cmd "$cmd"
-      ;;
-    provision)
-      if [[ -d ~/kube-solo ]]; then
-        rm -rf ~/kube-solo
-      fi
-      _ks_cmd first-init
+    use)
+      kubectl config use-context "$context"
       ;;
     *)
-      echo "Usage: ks {up|halt|reload|ssh}"
+      kubectl "$@"
+      ;;
   esac
 }
 
-chkube() {
-  KUBES=~/.kubes
-
-  case "$1" in
-    clear)
-      unset KUBECONFIG
-      unset KUBERNETES_PROVIDER
-      ;;
-    info)
-      echo "KUBECONFIG=${KUBECONFIG}"
-      ;;
-    list)
-      ls ${KUBES}
-      ;;
-    *)
-      if [[ -d ${KUBES}/$1 && -e ${KUBES}/${1}/env ]]; then
-        source ${KUBES}/${1}/env
-      else
-        echo "Usage: chkube {list|clear|name}"
-        if [[ -z ${KUBECONFIG} ]]; then
-          echo "KUBECONFIG not set"
-        fi
-      fi
-  esac
-}
-
-# default to kube-solo
-chkube kube-solo
+source "${GOPATH}/src/k8s.io/kubernetes/contrib/completions/zsh/kubectl"
