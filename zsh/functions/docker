@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# Shortcut for docker-machine
+# Commands:
+#   dm use [MACHINE]   Start machine and source environment
+# -----------------------------------------------------------------------------
 dm() {
   local cmd="$1"
   local machine="${2:-default}"

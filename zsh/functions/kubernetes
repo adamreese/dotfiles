@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+export KUBE_ROOT=${GOPATH}/src/k8s.io/kubernetes
 export KUBECONFIG=${HOME}/.kube/config:${HOME}/kube-solo/kube/kubeconfig
 
+# Shortcut for kubectl
+# Commands:
+#   k use CONTEXT   Change context in kubeconfig
+# -----------------------------------------------------------------------------
 k() {
   local cmd="$1"
   local context="$2"
@@ -16,4 +21,14 @@ k() {
   esac
 }
 
-source "${GOPATH}/src/k8s.io/kubernetes/contrib/completions/zsh/kubectl"
+# Man path
+# -----------------------------------------------------------------------------
+if [[ ! "$MANPATH" == *${KUBE_ROOT}/docs/man* && -d "${KUBE_ROOT}/docs/man" ]]; then
+  export MANPATH="$MANPATH:${KUBE_ROOT}/docs/man"
+fi
+
+# Auto-complete
+# -----------------------------------------------------------------------------
+if [[ -f "${KUBE_ROOT}/contrib/completions/zsh/kubectl" ]]; then
+  source "${KUBE_ROOT}/contrib/completions/zsh/kubectl"
+fi
