@@ -28,7 +28,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
+DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
@@ -76,7 +76,6 @@ function source_rc() {
 
 for f in ~/.zsh/functions/*; do source $f ; done
 
-export PERLBREW_ROOT=$HOME/.perl5/perlbrew
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECTS=$HOME/p
 
@@ -98,3 +97,11 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 
+export GOPATH=${HOME}/p/go
+
+path=(
+  ${HOME}/.dotfiles/bin
+  ${GOPATH}/bin
+  /usr/local/{bin,sbin}
+  $path
+)

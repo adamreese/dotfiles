@@ -28,9 +28,6 @@ fi
 
 typeset -gU cdpath fpath mailpath path
 
-export GOPATH=$HOME/p/go
-export GO15VENDOREXPERIMENT=1
-
 fpath=(~/.zsh/completion $fpath)
 
 # Set the the list of directories that cd searches.
@@ -39,13 +36,9 @@ fpath=(~/.zsh/completion $fpath)
 # )
 
 # Set the list of directories that Zsh searches for programs.
-path=(
-  ~/.dotfiles/bin
-  $GOPATH/bin
-  /usr/local/{bin,sbin}
-  ~/.perl5/perlbrew/bin
-  $path
-)
+# path=(
+#   $path
+# )
 
 # Less
 
@@ -69,11 +62,6 @@ fi
 TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
-fi
-
-## Perl
-if [[ -s "$HOME/.perl5/perlbrew/etc/bashrc" ]] ; then
-  source "$HOME/.perl5/perlbrew/etc/bashrc"
 fi
 
 skip_global_compinit=1
