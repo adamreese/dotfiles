@@ -72,14 +72,6 @@ set expandtab             " Use spaces instead of tabs
 " Display tabs and trailing spaces visually
 set list listchars=tab:>-,trail:*
 
-" Folds
-" -----------------------------------------------------------------------
-set foldlevelstart=1
-set foldmethod=manual   "fold based on syntax
-set foldnestmax=9       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
-let xml_syntax_folding=1
-
 " Completion
 " -----------------------------------------------------------------------
 set wildmenu                " enable ctrl-n and ctrl-p to scroll thru matches
@@ -132,11 +124,6 @@ set background=dark
 
 colorscheme hybrid
 
-highlight Pmenu     guibg=#c5c8c6 guifg=#1d1f21
-highlight PmenuSel  guibg=#bcbcbc guifg=#000000
-highlight PmenuSbar guibg=#333333
-
-highlight clear LineNr     " Current line number row will have same background color in relative mode
 highlight clear SignColumn " SignColumn should match background
 
 " Persistent Undo

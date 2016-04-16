@@ -6,14 +6,14 @@ set showtabline=1
 " Turn off the blinking cursor in normal mode
 set gcr=n:blinkon0
 
-" Automatically read changed files
-set autoread
+" Stop beeping at me
+set noerrorbells visualbell t_vb=
 
 set guifont=Inconsolata-dz:h12
 
 if has("gui_macvim")
   " Hide the MacVim toolbar
-  set go-=T
+  set guioptions-=T
 
   " Disable scrollbars
   set guioptions-=r
@@ -24,10 +24,6 @@ if has("gui_macvim")
 
   " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
-
-  " Command-Shift-F for Ack
-  macmenu Window.Toggle\ Full\ Screen\ Mode key=<nop>
-  map <D-F> :Ack<space>
 
   " Command-/ to toggle comments
   map <D-/> <plug>NERDCommenterToggle<CR>
