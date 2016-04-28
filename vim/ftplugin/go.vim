@@ -5,15 +5,14 @@ setlocal autoindent
 setlocal nolist
 
 " vim-go
-let g:go_autodetect_gopath = 1
-"let g:go_fmt_command = 'goimports'
-let g:go_fmt_fail_silently = 0
+let g:go_fmt_fail_silently = 1
 let g:go_snippet_engine = "neosnippet"
 let g:go_highlight_error = 1
 
 nmap <buffer> <silent> gd <Plug>(go-def)
 nmap <buffer> <silent> gs <Plug>(go-def-split)
 nmap <buffer> <silent> gk <Plug>(go-doc)
+nmap <buffer> <silent> gV <Plug>(go-vet)
 
 "nmap <buffer> <Leader>dc  <Plug>(go-doc)
 "nmap <buffer> <Leader>s   <Plug>(go-def-split)
@@ -56,5 +55,8 @@ let g:tagbar_type_go = {
       \ 'ctagsargs' : '-sort -silent'
       \ }
 
-"let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
-"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'deadcode', 'unconvert']
+
+let g:syntastic_go_checkers = ['go', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+

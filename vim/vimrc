@@ -2,13 +2,16 @@
 " ~/.vimrc
 " =======================================================================
 
-" vim-plug Initialization
+" Plugin Initialization {{{
 " -----------------------------------------------------------------------
 " This loads all the plugins specified in ~/.vim/vimrc.bundles
 if filereadable(expand("~/.vim/vimrc.bundles"))
   source ~/.vim/vimrc.bundles
 endif
+" }}}
 
+" General Config {{{
+" -----------------------------------------------------------------------
 if !has('nvim')
   set nocompatible
   filetype off
@@ -27,8 +30,6 @@ if !has('nvim')
   set hlsearch                    " Highlight search results
 endif
 
-" General Config
-" -----------------------------------------------------------------------
 set fileformats+=mac
 set gcr=a:blinkon0         " Disable cursor blink
 set hidden                 " Better buffer management
@@ -56,8 +57,9 @@ set noswapfile             " Don't use swapfile
 set nobackup               " Don't create annoying backup files
 set nowb
 set lazyredraw             " Don't redraw while executing macros (good performance config)
+set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
 
-" Indentation
+" Indentation {{{
 " -----------------------------------------------------------------------
 set smartindent
 set smarttab
@@ -65,24 +67,23 @@ set shiftwidth=2          " 2 spaces per tab
 set softtabstop=2
 set tabstop=2
 set expandtab             " Use spaces instead of tabs
+" }}}
 
-" Display tabs and trailing spaces visually
-set list listchars=tab:>-,trail:*
-
-" Completion
+" Completion {{{
 " -----------------------------------------------------------------------
 set wildmenu                " enable ctrl-n and ctrl-p to scroll thru matches
 set wildmode=list:longest
 set complete-=i             " do not scan included files
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
 set completeopt=longest,menuone
-set pumheight=10             " completion window max size
+" }}}
 
-" Scrolling
+" Scrolling {{{
 " -----------------------------------------------------------------------
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
+" }}}
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
@@ -103,27 +104,21 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-" Source the vimrc file after saving it
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-  autocmd bufwritepost .vimrc.bundles source $MYVIMRC
+" }}}
 
-  " Save files when vim loses focus
-  autocmd FocusLost * silent! wall
-endif
-
-
-" UI
+" UI {{{
 " -----------------------------------------------------------------------
 set t_Co=256
 syntax enable
 set background=dark
 
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
 
 highlight clear SignColumn " SignColumn should match background
+" }}}
 
-" Persistent Undo
+" Persistent Undo {{{
 " -----------------------------------------------------------------------
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
@@ -132,8 +127,9 @@ if has('persistent_undo')
   set undodir=~/.vim/backups
   set undofile
 endif
+" }}}
 
-" Mappings
+" Mappings {{{
 " -----------------------------------------------------------------------
 let mapleader=","
 
@@ -225,18 +221,28 @@ map <leader>r18 :s/\v([0-9a-z_"']+):\s+(.*)/:\1 => \2/g<CR>
 
 " Find merge conflict markers
 map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
+" }}}
 
-" Functions
+" Functions {{{
 " -----------------------------------------------------------------------
-
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+" }}}
 
-" Plugin Settings
+" Auto save {{{
+" -----------------------------------------------------------------------
+if has("autocmd")
+  " Save files when vim loses focus
+  autocmd FocusLost * silent! wall
+endif
+" }}}
+
+" Plugin Settings {{{
 " -----------------------------------------------------------------------
 
-" ag
+" ag {{{
+" -----------------------------------------------------------------------
 set grepprg=ag\ --nogroup\ --nocolor
 if &grepformat !~# '%c'
   set grepformat^=%f:%l:%c:%m
@@ -245,14 +251,18 @@ endif
 map <leader>a :Ag<space>
 map <leader>a* :Ag<space><cword><CR>
 "let g:ag_prg="ag --vimgrep --smart-case --nogroup --nocolor --skip-vcs-ignores"
+" }}}
 
-" vim-align
+" vim-align {{{
+" -----------------------------------------------------------------------
 map <leader>ah :Align =><CR>
 nnoremap <leader>a= :Align =<CR>
 map <leader>a# :Align #<CR>
 map <leader>a{ :Align {<CR>
+" }}}
 
-" CtrlP
+" CtrlP {{{
+" -----------------------------------------------------------------------
 map <leader>cf :ClearCtrlPCache<CR>
 map <leader>gb :CtrlPBuffer<CR>
 map <leader>gt :CtrlPBufTag<CR>
@@ -269,19 +279,27 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_use_caching = 0
 
 let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
+" }}}
 
-" nerdtree
+" NERDTree {{{
+" -----------------------------------------------------------------------
 let g:NERDTreeMinimalUI=1
 map <leader>e :NERDTreeFind<CR>
+" }}}
 
-" EasyAlign
+" EasyAlign {{{
+" -----------------------------------------------------------------------
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+" }}}
 
-" tagbar
+" Tagbar {{{
+" -----------------------------------------------------------------------
 map <leader>tt :TagbarToggle<cr>
+" }}}
 
-" airline
+" Airline {{{
+" -----------------------------------------------------------------------
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tagbar#enabled = 0
@@ -289,7 +307,10 @@ let g:airline_left_sep=''
 let g:airline_left_alt_sep=''
 let g:airline_right_sep=''
 let g:airline_right_alt_sep=''
+" }}}
 
+" Auto Complete {{{
+" -----------------------------------------------------------------------
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#ignore_sources = {}
@@ -311,6 +332,8 @@ else
   if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
   endif
+
+  let g:neocomplete#sources#omni#input_patterns.go = '\%([^.[:space:]]\.\|\h\)\w*'
 endif
 
 " Recommended key-mappings.
@@ -330,7 +353,18 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Neosnippet
+" -----------------------------------------------------------------------
 " Plugin key-mappings.
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
+" }}}
+
+" Syntastic {{{
+" -----------------------------------------------------------------------
+nmap <silent> gl <ESC>:w<CR>:SyntasticCheck<CR>:Errors<CR>
+" }}}
+
+" }}}
+
+" vim: foldmethod=marker
