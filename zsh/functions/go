@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+gml() {
+  command gometalinter --vendor --sort=linter --disable=gotype --deadline=1m "$@"
+}
+
+gometalinter-update() {
+  command gometalinter --install --update --force
+}
+
+cdg() {
+  cd ${GOPATH}/src/github.com/${1};
+}
