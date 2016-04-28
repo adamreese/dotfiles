@@ -70,8 +70,17 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+export GOPATH=${HOME}/p/go
+
+path=(
+  ${HOME}/.dotfiles/bin
+  ${GOPATH}/bin
+  /usr/local/{bin,sbin}
+  $path
+)
+
 function source_rc() {
-	[ -f $1 ] && source $1
+	[[ -f "$1" ]] && source "$1"
 }
 
 for f in ~/.zsh/functions/*; do source $f ; done
@@ -97,11 +106,3 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 
-export GOPATH=${HOME}/p/go
-
-path=(
-  ${HOME}/.dotfiles/bin
-  ${GOPATH}/bin
-  /usr/local/{bin,sbin}
-  $path
-)

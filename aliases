@@ -16,17 +16,6 @@ alias grep='grep -i'
 
 alias path='echo -e ${PATH//:/\\n}'
 
-# navigation
-alias cdd='cd ~/.dotfiles/'
-alias cdg='cd ~/p/go/src/github.com/'
-
-# git
-alias gaa='git add --all'
-alias gap='git add -p'
-alias gfa='git fetch --all'
-alias gpl='git pull'
-alias gs='git status -s'
-
 # github
 alias gh='hub browse'
 alias pr='hub pull-request'
@@ -45,41 +34,39 @@ alias tfl='tail -Fn30 log/*.log'
 # zsh specific command aliases
 if [ -n "$ZSH_VERSION" ]; then
 
-	# Split comma or colin separated data onto separate lines
-	alias -g S="| tr ',:' '\n'"
+  # Split comma or colin separated data onto separate lines
+  alias -g S="| tr ',:' '\n'"
 
-	alias -g H='| head'
-	alias -g T='| tail'
-	alias -g G='| grep'
-	alias -g L="| less"
+  alias -g H='| head'
+  alias -g T='| tail'
+  alias -g G='| grep'
+  alias -g L="| less"
 fi
 
 # osx specific command aliases
-if [ $(uname -s) = "Darwin" ] ; then
+if [[ $(uname -s) = "Darwin" ]]; then
 
-	# bundle
-	alias be='bundle-exec-hack'
-	alias bi='bundle-hack install'
-	alias beg='be guard'
-	alias bil='bundle install --local'
-	alias br='be rspec'
-	alias brff='be rspec --fail-fast'
+  # bundle
+  alias be='bundle-exec-hack'
+  alias bi='bundle-hack install'
+  alias beg='be guard'
+  alias bil='bundle install --local'
+  alias br='be rspec'
+  alias brff='be rspec --fail-fast'
 
-	#alias ctags='`brew --prefix`/bin/ctags'
+  # Show/hide hidden files in Finder
+  alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+  alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
-	# Show/hide hidden files in Finder
-	alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
-	alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+  alias rethinkdb.start='launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
+  alias rethinkdb.stop='launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
 
-	alias rethinkdb.start='launchctl load /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
-	alias rethinkdb.stop='launchctl unload /usr/local/opt/rethinkdb/homebrew.mxcl.rethinkdb.plist'
+  alias postgres.start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+  alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
+  alias postgres.restart='postgres.stop && sleep 1 && postgres.start'
 
-	alias postgres.start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-	alias postgres.stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-	alias postgres.restart='postgres.stop && sleep 1 && postgres.start'
-
-	# Update and cleanup brew
-	alias bubu='brew update && brew upgrade --all && brew cleanup'
+  # Update and cleanup brew
+  alias bubu='brew update && brew upgrade --all && brew cleanup'
 fi
 
 alias sam='ssh areese@sam'
