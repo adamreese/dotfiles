@@ -3,6 +3,7 @@
 # Shortcuts
 alias c='clear'
 alias e='exit'
+alias :q='exit'
 
 # Allow aliases to be with sudo
 alias sudo='sudo '
