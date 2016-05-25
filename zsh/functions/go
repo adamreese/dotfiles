@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
 gml() {
-  command gometalinter --vendor --sort=linter --disable=gotype --deadline=1m "$@"
+  local args
+  if (( $# > 0 )); then
+    args="$*"
+  else
+    args="./..."
+  fi
+  command gometalinter --vendor --sort=linter --disable=gotype --deadline=1m --linter='misspell:misspell ./*.go:PATH:LINE:MESSAGE' --enable=misspell $args
 }
 
 gometalinter-update() {
   command gometalinter --install --update --force
+  go get -u github.com/client9/misspell/...
 }
 
 cdg() {
-  cd ${GOPATH}/src/github.com/${1};
+  cd "${GOPATH}/src/github.com/${1}"
 }
