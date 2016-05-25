@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -70,7 +70,14 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# go
 export GOPATH=${HOME}/p/go
+export GO15VENDOREXPERIMENT=1
+
+# Neovim
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
+export NVIM_LISTEN_ADDRESS='/tmp/nvim'
 
 path=(
   ${HOME}/.dotfiles/bin
@@ -85,7 +92,6 @@ function source_rc() {
 
 for f in ~/.zsh/functions/*; do source $f ; done
 
-export WORKON_HOME=$HOME/.virtualenvs
 export PROJECTS=$HOME/p
 
 source_rc ~/.aliases
@@ -106,3 +112,4 @@ zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 
+export TERMINFO="${HOME}/.terminfo"

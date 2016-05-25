@@ -3,6 +3,11 @@ eyrc
 hellrazor
 hermes
 marketo
+nvim/.init.vim-rplugin~
+nvim/.netrwhist
+nvim/autoload/*
+nvim/plugged/*
+nvim/tmp/*
 restforce
 ronin
 salesforce
@@ -10,11 +15,10 @@ secret
 trello
 vim/.netrwhist
 vim/.viminfo
-vim/bundle/*
+vim/autoload/*
 vim/backups/*
-vim/plugin/*
+vim/bundle/*
+vim/plugged/*
 vim/swaps/*
 vim/undo/*
-vim/autoload/*
-vim/plugged/*
 vim/view/*
