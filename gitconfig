@@ -1,31 +1,31 @@
-# vim: set filetype=gitconfig
+# vim: ft=gitconfig :
+
 [init]
   templatedir = ~/.git_template
+
 [alias]
-  a = add
-  aa = add --all
-  aar = !git add --all && git reset --hard
-  ap = add --patch
-  br = branch
-  cm = commit
-  co = checkout
-  cp = cherry-pick
-  ct = checkout -t
+  a     = add
+  aa    = add --all
+  ap    = add --patch
+  br    = branch
+  cm    = commit
+  co    = checkout
+  cp    = cherry-pick
+  ct    = checkout --track
   ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
-  cav = commit -av
-  cv = commit -v
-  d = diff
-  dc = diff --cached
-  fa = fetch --all --tags --prune
-  l = log --decorate --oneline --graph
-  ll = log
-  pl = pull --rebase
-  ra = rebase --abort
-  rc = rebase --continue
-  ri = rebase -i
+  cv    = commit --verbose
+  d     = diff
+  dc    = diff --cached
+  fa    = fetch --all --tags
+  l     = log --decorate --oneline --graph
+  ll    = log
+  pl    = pull --rebase
+  ra    = rebase --abort
+  rc    = rebase --continue
+  ri    = rebase --interactive
 
   # Show the working tree status in short-format
-  s = status -s
+  s = status --short --branch
 
   # Delete branches that have been merged into master
   delete-merged = "!git checkout master && git branch --merged | grep -v master | xargs git branch -d"
@@ -33,31 +33,47 @@
   next-release = "!git log `git describe --tags --abbrev=0`..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
   nr = !git next-release
   plum = pull upstream master
+
 [credential]
   helper = osxkeychain
+
 [user]
-	name = Adam Reese
-	email = adam@reese.io
+  name  = Adam Reese
+  email = adam@reese.io
+
 [color]
-  diff = auto
+  diff   = auto
   status = auto
   branch = auto
+
 [core]
   editor = vim
   excludesfile = ~/.gitignore
+
+[fetch]
+  prune = true
+
+[rebase]
+  autosquash = true
+
 [push]
   default = current
+
 [branch]
   autosetuprebase = always
+
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+  clean  = git-media-clean %f
+  smudge = git-media-smudge %f
+
 [github]
-  user = adamreese
+  user     = adamreese
   password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
+
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+  clean    = git-lfs clean %f
+  smudge   = git-lfs smudge %f
+  required = true
+
 [rerere]
-	enabled = true
+  enabled = true

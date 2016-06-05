@@ -9,6 +9,7 @@ tags
 !tags/
 tmp/**/*
 !tmp/cache/.keep
+.envrc
 
 .powenv
 .powder
