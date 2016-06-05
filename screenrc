@@ -1,0 +1,29 @@
+# Always start `screen` with UTF-8 enabled (`screen -U`)
+defutf8 on
+utf8 on on
+
+# Disable the startup message
+startup_message off
+
+# Allow bold colors - necessary for some reason
+attrcolor b ".I"
+
+# Tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm-color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# Erase background with current bg color
+defbce "on"
+
+# Set a large scrollback buffer
+defscrollback 5000
+
+silencewait 15
+
+# enable mouse wheel
+termcapinfo xterm* ti@:te@
+
+caption always "%?%F%{...}%?%3n %t%? [%h]%?"
+hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d%{W}%{g}]'
+activity "%C -> %n%f %t activity!"
