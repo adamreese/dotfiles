@@ -12,7 +12,6 @@
   co    = checkout
   cp    = cherry-pick
   ct    = checkout --track
-  ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
   cv    = commit --verbose
   d     = diff
   dc    = diff --cached
@@ -30,9 +29,14 @@
   # Delete branches that have been merged into master
   delete-merged = "!git checkout master && git branch --merged | grep -v master | xargs git branch -d"
 
-  next-release = "!git log `git describe --tags --abbrev=0`..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
+  next-release = "!git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
   nr = !git next-release
   plum = pull upstream master
+
+  # List branches sorted by date
+  recent = "!r() { cur=$(git rev-parse --abbrev-ref HEAD); git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:yellow)%(refname:short)|%(color:bold green)(%(committerdate:relative))%(color:reset)|%(subject)|%(color:blue)<%(authorname)>%(color:reset)' | sed \"s/m${cur}|/m* ${cur}|/\" | column -ts'|'; }; r"
+
+  ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 
 [credential]
   helper = osxkeychain
