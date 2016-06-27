@@ -5,11 +5,9 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="areese"
 ZSH_THEME="areese"
 
 # Example aliases
-alias zshconfig="mvim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set this to use case-sensitive completion
@@ -31,7 +29,7 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_CORRECTION="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
@@ -55,7 +53,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export MANPATH="/usr/local/man:$MANPATH"
+# export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -70,46 +68,57 @@ fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# go
-export GOPATH=${HOME}/p/go
-export GO15VENDOREXPERIMENT=1
-
-# Neovim
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
-export NVIM_LISTEN_ADDRESS='/tmp/nvim'
+# Less
+export LESS='-g -i -M -R -S -w -z-4'
+if (( $+commands[lesspipe.sh] )); then
+  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+elif (( $+commands[lesspipe] )); then
+  export LESSOPEN='| /usr/bin/env lesspipe %s 2>&-'
+fi
 
 path=(
   ${HOME}/.dotfiles/bin
-  ${GOPATH}/bin
   /usr/local/{bin,sbin}
   $path
 )
 
-function source_rc() {
-	[[ -f "$1" ]] && source "$1"
-}
-
-for f in ~/.zsh/functions/*; do source $f ; done
+for rc_file (~/.zsh/functions/*(rN)); do
+  source $rc_file
+done
+unset rc_file
 
 export PROJECTS=$HOME/p
 
-source_rc ~/.aliases
-source_rc ~/.secret
-source_rc ~/.travis/travis.sh
+[[ -f "${HOME}/.aliases" ]] && source "${HOME}/.aliases"
+
+# make autocompletion faster by caching and prefix-only matching
+zstyle ':completion:*'           accept-exact '*(N)'
+zstyle ':completion::complete:*' accept-exact '*(N)'
+zstyle ':completion:*'           use-cache on
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion:*'           cache-path ~/.zsh/cache
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache
+
+# ignore completion functions for commands you don't have
+zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # Group matches and describe.
-zstyle ':completion:*:*:*:*:*' menu select
-zstyle ':completion:*:matches' group 'yes'
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' verbose yes
+# zstyle ':completion:*:*:*:*:*' menu select
+# zstyle ':completion:*:matches' group 'yes'
+# zstyle ':completion:*:options' description 'yes'
+# zstyle ':completion:*:options' auto-description '%d'
+# zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+# zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+# zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+# zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+# zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+# zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+# zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' verbose yes
 
 export TERMINFO="${HOME}/.terminfo"
+
+eval "$(direnv hook zsh)"
+
+unalias run-help
+autoload run-help

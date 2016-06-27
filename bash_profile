@@ -22,19 +22,9 @@ if [[ -d "/usr/local/share/chruby" ]] ; then
   fi
 fi
 
-## Perl
-if [[ -s "$HOME/.perl5/perlbrew/etc/bashrc" ]] ; then
-  export PERLBREW_ROOT=$HOME/.perl5/perlbrew
-  source "$HOME/.perl5/perlbrew/etc/bashrc"
-fi
-
 ## set PATH so it includes user's private bin if it exists
 if [[ -d "$HOME/bin" ]] ; then
   PATH="$HOME/bin:$PATH"
-fi
-
-if [[ -d "$HOME/Developer" ]] ; then
-  PATH="$HOME/Developer/bin:$PATH"
 fi
 
 ## brewer path

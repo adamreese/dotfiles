@@ -1,8 +1,14 @@
-#!/usr/bin/env bash
+# vim: ft=zsh :
 
-# Shortcut for docker-machine
+###############################################################################
+# docker-machine
+###############################################################################
+
+# dm
+#
 # Commands:
-#   dm use [MACHINE]   Start machine and source environment
+#   dm use         Start machine and source environment
+#   dm init        Create a new machine
 # -----------------------------------------------------------------------------
 dm() {
   local cmd="$1"
@@ -20,6 +26,13 @@ dm() {
   esac
 }
 
+# _docker_machine_use
+#
+# Usage:
+#   _docker_machine_use [machine_name]
+#
+# Source environment variables of machine.  Start machine if it is not
+# running.
 _docker_machine_use() {
   local machine="$1"
 
@@ -30,6 +43,14 @@ _docker_machine_use() {
   eval "$(docker-machine env "$machine")"
 }
 
+# _docker_machine_running
+#
+# Usage:
+#   _docker_machine_running [machine_name]
+#
+# Returns:
+#   0  If the machine is currently running
+#   1  If not.
 _docker_machine_running() {
   local machine="$1"
 
@@ -60,9 +81,70 @@ _docker_machine_init() {
     --engine-insecure-registry 100.64.0.0/10 \
     --xhyve-disk-size "$disk_size" \
     --xhyve-cpu-count "$cpus" \
-    --xhyve-memory-size "$mem"
+    --xhyve-memory-size "$mem" \
+    --xhyve-virtio-9p
 
 }
 
+###############################################################################
+# docker
+###############################################################################
+
+docker() {
+  local cmd="$1"
+
+  case "$cmd" in
+    clean)
+      _docker_clean
+      ;;
+    nuke)
+      _docker_nuke
+      ;;
+    screen)
+      _docker_screen
+      ;;
+    compact_disk)
+      _docker_compact_disk
+      ;;
+      *)
+      command docker "$@"
+  esac
+}
+
+_docker_clean() {
+  echo "Deleting stale containers..."
+  docker rm $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+  echo "Deleting stale images..."
+  docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+  echo "Deleting stale volumes..."
+  docker volume rm $(docker volume ls --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}
+
+_docker_nuke() {
+  local -a _containers
+  _containers=($(docker ps -aq))
+
+  if (( $#_containers > 0 )); then
+    echo "Stopping all containers..."
+    docker stop "${_containers[@]}"
+    docker wait "${_containers[@]}"
+
+    echo "Deleting all containers..."
+    docker rm "${_containers[@]}"
+  fi
+}
+
+_docker_screen() {
+  screen ${HOME}/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+}
+
+_docker_compact_disk(){
+  (
+  cd ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux
+  /Applications/Docker.app/Contents/MacOS/qemu-img convert -p -O qcow2 Docker.qcow2 Docker2.qcow2
+  mv Docker2.qcow2 Docker.qcow2
+  )
+}
+
 # Source default docker-machine if it is running
-eval "$(docker-machine env default 2> /dev/null)"
+# eval "$(docker-machine env default 2> /dev/null)"

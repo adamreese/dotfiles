@@ -1,37 +1,8 @@
-#!/usr/bin/env bash
+# vim: ft=zsh :
 
 # shortcut to PROJECTS folder
 p() {
-  cd $PROJECTS/$1;
-}
-
-# shortcut to EDITOR
-v() {
-  if [ $# -eq 0 ]; then
-    $EDITOR .
-  else
-    $EDITOR "$@"
-  fi
-}
-
-nvim() {
-  if (($# < 1 )); then
-    command nvim .
-  else
-    command nvim "$@"
-  fi
-}
-
-if hash nvim &>/dev/null; then
-  export EDITOR=nvim
-fi
-
-nv() {
-  if [ $# -eq 0 ]; then
-    open -a Neovim .
-  else
-    open -n -a Neovim "$@" --args --cwd "$PWD"
-  fi
+  cd $PROJECTS/$1
 }
 
 addpath() {

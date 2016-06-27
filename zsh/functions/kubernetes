@@ -1,7 +1,11 @@
-#!/usr/bin/env bash
+# vim: ft=zsh :
+
+# Return if reqs are not found
+if (( ! $+commands[kubectl] )); then
+  return 1
+fi
 
 export KUBE_ROOT=${GOPATH}/src/k8s.io/kubernetes
-export KUBECONFIG=${HOME}/.kube/config:${HOME}/kube-solo/kube/kubeconfig
 
 # Shortcut for kubectl
 # Commands:
@@ -25,10 +29,4 @@ k() {
 # -----------------------------------------------------------------------------
 if [[ ! "$MANPATH" == *${KUBE_ROOT}/docs/man* && -d "${KUBE_ROOT}/docs/man" ]]; then
   export MANPATH="$MANPATH:${KUBE_ROOT}/docs/man"
-fi
-
-# Auto-complete
-# -----------------------------------------------------------------------------
-if [[ -f "${KUBE_ROOT}/contrib/completions/zsh/kubectl" ]]; then
-  source "${KUBE_ROOT}/contrib/completions/zsh/kubectl"
 fi

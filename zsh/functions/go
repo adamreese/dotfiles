@@ -1,20 +1,46 @@
-#!/usr/bin/env bash
+# vim: ft=zsh :
+
+# Return if reqs are not found
+if (( ! $+commands[go] )); then
+  return 1
+fi
+
+export GOPATH=${HOME}/p/go
+
+path=(
+  ${GOPATH}/bin
+  $path
+)
 
 gml() {
-  local args
+  local -a args
   if (( $# > 0 )); then
-    args="$*"
+    args=($@)
   else
-    args="./..."
+    args=("./...")
   fi
-  command gometalinter --vendor --sort=linter --disable=gotype --deadline=1m --linter='misspell:misspell ./*.go:PATH:LINE:MESSAGE' --enable=misspell $args
-}
-
-gometalinter-update() {
-  command gometalinter --install --update --force
-  go get -u github.com/client9/misspell/...
+  command gometalinter \
+    --vendor \
+    --disable=gotype \
+    --enable=misspell \
+    --sort=linter \
+    --deadline=2m \
+    --cyclo-over=20 \
+    --dupl-threshold=80 \
+    --concurrency=6 \
+    $args
 }
 
 cdg() {
   cd "${GOPATH}/src/github.com/${1}"
+}
+
+go_check_bin_path() {
+  for b (${GOPATH}/bin/*(:t)); do
+    local -a _found
+    _found=($(which -a "$b"))
+    if (($#_found > 1)); then
+      echo "${(F)_found}"
+    fi
+  done
 }
