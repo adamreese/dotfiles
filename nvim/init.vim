@@ -1,96 +1,82 @@
+" Plugins {{{
+" -----------------------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
-" UltiSnips - The ultimate snippet solution for Vim.
-Plug 'SirVer/ultisnips'
-" Seamless navigation between tmux panes and vim splits
-Plug 'christoomey/vim-tmux-navigator'
-" Fuzzy file, buffer, mru, tag, etc
-Plug 'ctrlpvim/ctrlp.vim'
-" Go development plugin for Vim
-Plug 'fatih/vim-go'
-" A command-line fuzzy finder written in Go.
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-" A Vim alignment plugin
-Plug 'junegunn/vim-easy-align'
-" Vim plugin that displays tags in a window, ordered by scope
-Plug 'majutsushi/tagbar'
-" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
-Plug 'rking/ag.vim'
-" Vim plugin for intensely orgasmic commenting.
-Plug 'scrooloose/nerdcommenter'
-" A tree explorer plugin for vim.
-Plug 'scrooloose/nerdtree'
-" Syntax checking hacks for vim.
-Plug 'scrooloose/syntastic'
-" A Vim alignment plugin
-Plug 'slack/vim-align'
-" Lint for vim script.
-Plug 'syngan/vim-vimlint', { 'for': 'vim' }
-" Easily search for, substitute, and abbreviate multiple variants of a word
-Plug 'tpope/vim-abolish'
-" A Git wrapper so awesome, it should be illegal
-Plug 'tpope/vim-fugitive'
-" Enable repeating supported plugin maps with '.'
-Plug 'tpope/vim-repeat'
-" A Vim plugin for Vim plugins
-Plug 'tpope/vim-scriptease'
-" Quoting/parenthesizing made simple
-Plug 'tpope/vim-surround'
-" Lean & mean status/tabline for vim that's light as air.
-Plug 'itchyny/lightline.vim'
-
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-" A dark color scheme for Vim & gVim.
-Plug 'w0ng/vim-hybrid'
-" VimL parser.
-Plug 'ynkdir/vim-vimlparser', { 'for': 'vim' }
-" Interactive command execution in Vim.
 Plug 'Shougo/vimproc.vim', { 'build': 'make' }
+Plug 'SirVer/ultisnips'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'majutsushi/tagbar'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'slack/vim-align'
+Plug 'syngan/vim-vimlint', { 'for': 'vim' }
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'w0ng/vim-hybrid'
+Plug 'ynkdir/vim-vimlparser', { 'for': 'vim' }
+Plug 'tpope/vim-commentary'
 
 if has('nvim')
-  " A plugin for asynchronous :make using Neovim's job-control functionality.
-  Plug 'benekastah/neomake'
-  " Dark powered asynchronous completion framework for neovim.
-  Plug 'Shougo/deoplete.nvim'
-  " deoplete.nvim source for Go.
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
+  Plug 'benekastah/neomake',   { 'on': ['Neomake'] }
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  Plug 'zchee/deoplete-go',    { 'do': 'make'}
 else
-  " Next generation completion framework after neocomplcache.
   Plug 'Shougo/neocomplete'
+  Plug 'scrooloose/syntastic'
 endif
 
 call plug#end()
+" }}}
 
+" General Config {{{
+" -----------------------------------------------------------------------
 set number                   " Show line numbers
 set splitright               " Split vertical windows right to the current windows
 set splitbelow               " Split horizontal windows below to the current windows
 set autowrite                " Automatically save before :next, :make etc.
+set autoread                 " Set to auto read when a file is changed from the outside
 set hidden
-set ignorecase               " Search case insensitive...
-set smartcase                " ... but not it begins with upper case
 set completeopt=menu,menuone
 set nocursorcolumn           " speed up syntax highlighting
 set nocursorline
 set noswapfile               " Don't use swapfile
-set noshowmode               " Don't need to show mode since we have airline
-set magic                  " For regular expressions turn magic on
-set linebreak              " Wrap lines at convenient points
-set nobackup               " Don't create annoying backup files
+set noshowmode               " Don't need to show mode since we have lightline
+set magic                    " For regular expressions turn magic on
+set linebreak                " Wrap lines at convenient points
+set nobackup                 " Don't create annoying backup files
 set noerrorbells
 set novisualbell
-set laststatus=2
+set title                    " Sets the terminal title nicely.
 
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+" Search
+set ignorecase               " Search case insensitive...
+set smartcase                " ... but not it begins with upper case
+
+set scrolloff=8              " Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
 set lazyredraw
-set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
 
 set clipboard^=unnamed
 set clipboard^=unnamedplus
+" }}}
 
-" Indentation {{{
+" Formatting {{{
 " -----------------------------------------------------------------------
 set smartindent
 set smarttab
@@ -98,6 +84,8 @@ set shiftwidth=2          " 2 spaces per tab
 set softtabstop=2
 set tabstop=2
 set expandtab             " Use spaces instead of tabs
+set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
+set foldmethod=marker
 " }}}
 
 " Completion {{{
@@ -119,14 +107,18 @@ endif
 " }}}
 
 " UI {{{
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Enable true color
+if exists('+termguicolors')
+  set termguicolors
+endif
 
 syntax enable
 set background=dark
 
 let g:hybrid_custom_term_colors = 1
-"let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
 " }}}
 
@@ -164,6 +156,18 @@ nnoremap N Nzzzv
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
 
+" QuickFix navigation
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
+
+" Location list navigation
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
+
+" Error mnemonic (Neomake uses location list)
+nnoremap ]e :lnext<CR>
+nnoremap [e :lprevious<CR>
+
 " Common typos
 command! W w
 command! Q q
@@ -195,42 +199,35 @@ map <leader>ss :setlocal spell!<cr>
 " Sorting
 map <leader>srt :sort<cr>
 
-" Some useful quickfix shortcuts for quickfix
-if has('nvim')
-  " I'm using location list in vim-go
-  map <C-n> :lnext<CR>
-  map <C-m> :lprevious<CR>
-  nnoremap <leader>a :lclose<CR>
-else
-  map <C-n> :cn<CR>
-  map <C-m> :cp<CR>
-  nnoremap <leader>a :cclose<CR>
-endif
+map <leader>hr <ESC>o<ESC>77a-<ESC>gcco<ESC>cc<ESC>
 
 " }}}
 
 " Autocmds {{{
 " -----------------------------------------------------------------------
 if has("autocmd")
-  " Save files when vim loses focus
-  autocmd FocusLost * silent! wall
+  augroup vimrc
+    autocmd!
 
-  " remove trailing whitespace automatically
-  autocmd BufWritePre * :%s/\s\+$//e
+    " Save files when vim loses focus
+    autocmd FocusLost * silent! wall
 
-  " make quickfix windows take all the lower section of the screen
+    " remove trailing whitespace automatically
+    autocmd BufWritePre * :%s/\s\+$//e
+
+    " make quickfix windows take all the lower section of the screen
     " when there are multiple windows open
     autocmd FileType qf wincmd J
+  augroup END
 endif
 " }}}
+
+" Plugin Settings {{{
+" -----------------------------------------------------------------------
 
 " Neomake {{{
 " -----------------------------------------------------------------------
 if has('nvim')
-  " open list automatically but preserve cursor position
-  let g:neomake_open_list = 2
-  let g:neomake_list_height = 5
-
   let g:neomake_error_sign = {
         \ 'text': '>',
         \ 'texthl': 'ErrorMsg',
@@ -247,6 +244,45 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
+" }}}
+
+" UltiSnips {{{
+" -----------------------------------------------------------------------
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+
+  return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 " }}}
 
 " vim-align {{{
@@ -297,6 +333,11 @@ map <leader>tt :TagbarToggle<cr>
 " -----------------------------------------------------------------------
 map <leader>a :Ag<space>
 map <leader>a* :Ag<space><cword><CR>
+" }}}
+
+" fzf {{{
+" -----------------------------------------------------------------------
+map <leader>t :FZF<CR>
 " }}}
 
 " Lightline {{{
@@ -351,6 +392,7 @@ function! LightLineFilename()
   return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
         \ fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ 'NERD_tree' ? '' :
+        \ &ft =~ 'fzf' ? '' :
         \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
         \ ('' != fname ? fname : '[No Name]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
@@ -358,7 +400,7 @@ endfunction
 
 function! LightLineFugitive()
   try
-    if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+    if expand('%:t') !~? 'Tagbar\|NERD' && exists('*fugitive#head')
       let mark = ''  " edit here for cool mark
       let _ = fugitive#head()
       return _ !=# '' ? mark._ : ''
@@ -385,6 +427,7 @@ function! LightLineMode()
   return fname == '__Tagbar__' ? 'Tagbar' :
         \ fname == 'ControlP' ? 'CtrlP' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft =~ 'fzf' ? 'FZF' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
@@ -422,19 +465,10 @@ endfunction
 let g:tagbar_status_func = 'TagbarStatusFunc'
 
 function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
+  let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
+" }}}
 " }}}
 
 " vim: foldmethod=marker
