@@ -1,30 +1,31 @@
+" =======================================================================
 " Plugins {{{
-" -----------------------------------------------------------------------
+" =======================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'Shougo/vimproc.vim', { 'build': 'make' }
+Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
 Plug 'SirVer/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go',            { 'for': 'go' }
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'majutsushi/tagbar'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree',     { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
 Plug 'slack/vim-align'
-Plug 'syngan/vim-vimlint', { 'for': 'vim' }
+Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
 Plug 'w0ng/vim-hybrid'
-Plug 'ynkdir/vim-vimlparser', { 'for': 'vim' }
+Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
 Plug 'tpope/vim-commentary'
 
 if has('nvim')
@@ -33,20 +34,19 @@ if has('nvim')
   endfunction
   Plug 'benekastah/neomake',   { 'on': ['Neomake'] }
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-  Plug 'zchee/deoplete-go',    { 'do': 'make'}
+  Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
 else
   Plug 'Shougo/neocomplete'
-  Plug 'scrooloose/syntastic'
+  Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 endif
 
 call plug#end()
 " }}}
 
+" =======================================================================
 " General Config {{{
-" -----------------------------------------------------------------------
+" =======================================================================
 set number                   " Show line numbers
-set splitright               " Split vertical windows right to the current windows
-set splitbelow               " Split horizontal windows below to the current windows
 set autowrite                " Automatically save before :next, :make etc.
 set autoread                 " Set to auto read when a file is changed from the outside
 set hidden
@@ -62,21 +62,32 @@ set noerrorbells
 set novisualbell
 set title                    " Sets the terminal title nicely.
 
-" Search
-set ignorecase               " Search case insensitive...
-set smartcase                " ... but not it begins with upper case
-
 set scrolloff=8              " Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
-set lazyredraw
-
 set clipboard^=unnamed
 set clipboard^=unnamedplus
-" }}}
 
-" Formatting {{{
+" Split settings
+set splitright               " Split vertical windows right to the current windows
+set splitbelow               " Split horizontal windows below to the current windows
+
+" -----------------------------------------------------------------------
+" Search
+" -----------------------------------------------------------------------
+set ignorecase               " Search case insensitive...
+set smartcase                " ... but not it begins with upper case
+
+" -----------------------------------------------------------------------
+" Performance
+" -----------------------------------------------------------------------
+set lazyredraw " only redraw when needed
+if exists('&ttyfast') | set ttyfast | endif " if we have a fast terminal
+set updatetime=750 " reduce vim delay clock
+
+" -----------------------------------------------------------------------
+" Formatting
 " -----------------------------------------------------------------------
 set smartindent
 set smarttab
@@ -86,16 +97,16 @@ set tabstop=2
 set expandtab             " Use spaces instead of tabs
 set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
 set foldmethod=marker
-" }}}
 
-" Completion {{{
+" -----------------------------------------------------------------------
+" Completion
 " -----------------------------------------------------------------------
 set wildmode=list:longest
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
 set completeopt=longest,menuone
-" }}}
 
-" Persistent Undo {{{
+" -----------------------------------------------------------------------
+" Persistent Undo
 " -----------------------------------------------------------------------
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
@@ -104,15 +115,14 @@ if has('persistent_undo')
   set undodir=~/.vim/backups
   set undofile
 endif
-" }}}
 
-" UI {{{
+" -----------------------------------------------------------------------
+" UI
+" -----------------------------------------------------------------------
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Enable true color
-if exists('+termguicolors')
-  set termguicolors
-endif
+if exists('+termguicolors') | set termguicolors | endif
 
 syntax enable
 set background=dark
@@ -120,10 +130,14 @@ set background=dark
 let g:hybrid_custom_term_colors = 1
 " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " }}}
 
+" =======================================================================
 " Mappings {{{
-" -----------------------------------------------------------------------
+" =======================================================================
 " disable ex mode
 map Q <Nop>
 
@@ -203,8 +217,9 @@ map <leader>hr <ESC>o<ESC>77a-<ESC>gcco<ESC>cc<ESC>
 
 " }}}
 
+" =======================================================================
 " Autocmds {{{
-" -----------------------------------------------------------------------
+" =======================================================================
 if has("autocmd")
   augroup vimrc
     autocmd!
@@ -218,23 +233,34 @@ if has("autocmd")
     " make quickfix windows take all the lower section of the screen
     " when there are multiple windows open
     autocmd FileType qf wincmd J
+
+    autocmd FileType zsh set foldmethod=marker
   augroup END
 endif
 " }}}
 
+" =======================================================================
 " Plugin Settings {{{
-" -----------------------------------------------------------------------
+" =======================================================================
 
 " Neomake {{{
 " -----------------------------------------------------------------------
 if has('nvim')
+  let g:neomake_warning_sign = {
+        \ 'text': '❯',
+        \ 'texthl': 'WarningMsg',
+        \ }
   let g:neomake_error_sign = {
         \ 'text': '>',
         \ 'texthl': 'ErrorMsg',
         \ }
-  let g:neomake_warning_sign = { 'texthl': 'WarningMsg' }
-
-  autocmd! BufWritePost * Neomake
+  function! s:Neomake()
+    let l:ftypes = ['sh', 'go', 'vim']
+    if index(l:ftypes, &ft) != -1
+      Neomake
+    endif
+  endfunction
+  autocmd! BufWritePost * call s:Neomake()
 endif
 " }}}
 
@@ -242,8 +268,10 @@ endif
 " -----------------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
+let g:deoplete#sources#go#use_cache = 1
+let g:deoplete#sources#go#json_directory = $HOME.'/.cache/nvim/deoplete-go'
 " }}}
 
 " UltiSnips {{{
@@ -268,7 +296,6 @@ function! g:UltiSnips_Reverse()
   if g:ulti_jump_backwards_res == 0
     return "\<C-P>"
   endif
-
   return ""
 endfunction
 
@@ -316,6 +343,17 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " -----------------------------------------------------------------------
 let g:NERDTreeMinimalUI=1
 map <leader>e :NERDTreeFind<CR>
+
+" source: https://github.com/junegunn/dotfiles/blob/master/vimrc
+augroup nerd_loader
+  autocmd!
+  autocmd VimEnter * silent! autocmd! FileExplorer
+  autocmd BufEnter,BufNew *
+        \  if isdirectory(expand('<amatch>'))
+        \|   call plug#load('nerdtree')
+        \|   execute 'autocmd! nerd_loader'
+        \| endif
+augroup END
 " }}}
 
 " EasyAlign {{{
@@ -332,7 +370,11 @@ map <leader>tt :TagbarToggle<cr>
 " ag {{{
 " -----------------------------------------------------------------------
 map <leader>a :Ag<space>
-map <leader>a* :Ag<space><cword><CR>
+map <leader>a* :call SearchWordWithAg()<CR>
+
+function! SearchWordWithAg()
+  execute 'Ag' expand('<cword>')
+endfunction
 " }}}
 
 " fzf {{{

@@ -12,6 +12,7 @@ let g:go_highlight_error = 1
 let g:go_snippet_engine = "ultisnips"
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
+let g:go_def_mode = 'godef'
 
 nmap <buffer> <silent> gd <Plug>(go-def)
 nmap <buffer> <silent> gs <Plug>(go-def-split)
@@ -54,5 +55,3 @@ let g:tagbar_type_go = {
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'deadcode', 'unconvert']
 let g:syntastic_go_checkers = ['go', 'govet']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-"autocmd! BufWritePost *.go Neomake!
