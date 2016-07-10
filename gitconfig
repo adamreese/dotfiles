@@ -38,6 +38,9 @@
 
   ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 
+	# Interactive rebase with the given number of latest commits
+	reb = "!r() { git rebase -i HEAD~$1; }; r"
+
 [credential]
   helper = osxkeychain
 
@@ -72,7 +75,6 @@
 
 [github]
   user     = adamreese
-  password = !security 2>&1 >/dev/null find-generic-password -gs github.password | ruby -e 'print $1 if STDIN.gets =~ /^password: \\\"(.*)\\\"$/'
 
 [filter "lfs"]
   clean    = git-lfs clean %f
@@ -81,3 +83,11 @@
 
 [rerere]
   enabled = true
+
+[interactive]
+  diffFilter = diff-highlight
+
+[pager]
+  log  =  diff-highlight | less
+  show =  diff-highlight | less
+  diff =  diff-highlight | less
