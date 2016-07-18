@@ -14,8 +14,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree',     { 'on': ['NERDTreeFind', 'NERDTreeToggle'] }
+Plug 'scrooloose/nerdtree'
 Plug 'slack/vim-align'
 Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
 Plug 'tpope/vim-abolish'
@@ -343,17 +342,6 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " -----------------------------------------------------------------------
 let g:NERDTreeMinimalUI=1
 map <leader>e :NERDTreeFind<CR>
-
-" source: https://github.com/junegunn/dotfiles/blob/master/vimrc
-augroup nerd_loader
-  autocmd!
-  autocmd VimEnter * silent! autocmd! FileExplorer
-  autocmd BufEnter,BufNew *
-        \  if isdirectory(expand('<amatch>'))
-        \|   call plug#load('nerdtree')
-        \|   execute 'autocmd! nerd_loader'
-        \| endif
-augroup END
 " }}}
 
 " EasyAlign {{{
