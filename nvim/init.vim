@@ -127,8 +127,10 @@ syntax enable
 set background=dark
 
 let g:hybrid_custom_term_colors = 1
-" let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
+
+highlight clear SignColumn
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -250,7 +252,7 @@ if has('nvim')
         \ 'texthl': 'WarningMsg',
         \ }
   let g:neomake_error_sign = {
-        \ 'text': '>',
+        \ 'text': '❯',
         \ 'texthl': 'ErrorMsg',
         \ }
   function! s:Neomake()
