@@ -1,7 +1,7 @@
 # vim: ft=gitconfig :
 
 [init]
-  templatedir = ~/.git_template
+  templatedir = ~/.config/git/template
 
 [alias]
   a     = add
@@ -52,6 +52,7 @@
 [user]
   name  = Adam Reese
   email = adam@reese.io
+  signingkey = 7F8A9958
 
 [color]
   diff   = auto
@@ -60,7 +61,7 @@
 
 [core]
   editor = vim
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.config/git/ignore
 
 [fetch]
   prune = true
@@ -93,6 +94,6 @@
   diffFilter = diff-highlight
 
 [pager]
-  log  =  diff-highlight | less
-  show =  diff-highlight | less
-  diff =  diff-highlight | less
+  log  = diff-highlight | ${GIT_PAGER:-less -F -X}
+  show = diff-highlight | ${GIT_PAGER:-less -F -X}
+  diff = diff-highlight | ${GIT_PAGER:-less -F -X}
