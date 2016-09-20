@@ -18,6 +18,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'slack/vim-align'
 Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
@@ -25,7 +26,6 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
 Plug 'w0ng/vim-hybrid'
 Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
-Plug 'tpope/vim-commentary'
 
 if has('nvim')
   function! DoRemote(arg)
@@ -60,13 +60,11 @@ set nobackup                 " Don't create annoying backup files
 set noerrorbells
 set novisualbell
 set title                    " Sets the terminal title nicely.
+set shell=$SHELL
 
 set scrolloff=8              " Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
-
-set clipboard^=unnamed
-set clipboard^=unnamedplus
 
 " Split settings
 set splitright               " Split vertical windows right to the current windows
@@ -110,14 +108,13 @@ set completeopt=longest,menuone
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
   set undofile
 endif
 
 " -----------------------------------------------------------------------
 " UI
 " -----------------------------------------------------------------------
+
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Enable true color
@@ -134,6 +131,11 @@ highlight clear SignColumn
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" Don't try to highlight long lines.
+" This fixes some performance problems on huge files.
+set synmaxcol=800
+
 " }}}
 
 " =======================================================================
@@ -193,7 +195,10 @@ command! Wq wq
 " -----------------------------------------------------------------------
 let g:mapleader = ","
 
-nmap <leader>ev :tabedit $MYVIMRC<CR>
+" Edit vimrc
+nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+" Edit ftplugin for current filetype
+nnoremap <leader>eft :execute 'tabedit' . $HOME . '/.config/nvim/ftplugin/' . &filetype . '.vim'<CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -214,7 +219,14 @@ map <leader>ss :setlocal spell!<cr>
 " Sorting
 map <leader>srt :sort<cr>
 
-map <leader>hr <ESC>o<ESC>77a-<ESC>gcco<ESC>cc<ESC>
+" Make horizontal line
+nnoremap <leader>L mzO<esc>79i-<esc>`z
+
+" Copy to system clipboard
+nnoremap <silent> <leader>y "*y
+nnoremap <silent> <leader>Y "*Y
+vnoremap <silent> <leader>y "*y
+vnoremap <silent> <leader>Y "*Y
 
 " }}}
 
@@ -247,17 +259,18 @@ endif
 " Neomake {{{
 " -----------------------------------------------------------------------
 if has('nvim')
-  let g:neomake_warning_sign = {
-        \ 'text': '❯',
-        \ 'texthl': 'WarningMsg',
-        \ }
-  let g:neomake_error_sign = {
-        \ 'text': '❯',
-        \ 'texthl': 'ErrorMsg',
-        \ }
+  let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'WarningMsg' }
+  let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'ErrorMsg'   }
+
+  let s:neomake_active = 1
+  function! NeomakeToggle()
+    let s:neomake_active = !s:neomake_active
+    echom s:neomake_active ? "Enabled Neomake" : "Disabled Neomake"
+  endfunction
+  command! NeomakeToggle call NeomakeToggle()
+
   function! s:Neomake()
-    let l:ftypes = ['sh', 'go', 'vim']
-    if index(l:ftypes, &ft) != -1
+    if s:neomake_active && index(['sh', 'go', 'vim'], &ft) != -1
       Neomake
     endif
   endfunction
@@ -268,6 +281,8 @@ endif
 " deoplete {{{
 " -----------------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
@@ -343,6 +358,7 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " NERDTree {{{
 " -----------------------------------------------------------------------
 let g:NERDTreeMinimalUI=1
+let NERDTreeAutoDeleteBuffer=1
 map <leader>e :NERDTreeFind<CR>
 " }}}
 

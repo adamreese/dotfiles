@@ -6,13 +6,14 @@ setlocal nolist
 
 " vim-go
 let g:go_fmt_fail_silently = 1
-let g:go_fmt_options = "-s"
+" let g:go_fmt_options = "-s"
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_error = 1
 let g:go_snippet_engine = "ultisnips"
 let g:go_term_enabled = 1
 let g:go_term_mode = "split"
 let g:go_def_mode = 'godef'
+let g:go_fmt_command = "goimports"
 
 nmap <buffer> <silent> gd <Plug>(go-def)
 nmap <buffer> <silent> gs <Plug>(go-def-split)
@@ -55,3 +56,5 @@ let g:tagbar_type_go = {
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'deadcode', 'unconvert']
 let g:syntastic_go_checkers = ['go', 'govet']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+let g:neomake_go_enabled_makers = ['go', 'govet']
