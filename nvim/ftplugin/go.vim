@@ -22,6 +22,7 @@ nmap <buffer> <silent> gV <Plug>(go-vet)
 nmap <buffer> <Leader>c   <Plug>(go-coverage-toggle)
 nmap <buffer> <Leader>f   :GoImports<CR>
 nmap <buffer> <Leader>i   :GoImport<space>
+nmap <buffer> <Leader>gt  :GoDecls<CR>
 
 command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 

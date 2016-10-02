@@ -41,7 +41,6 @@ endif
 
 call plug#end()
 " }}}
-
 " =======================================================================
 " General Config {{{
 " =======================================================================
@@ -136,8 +135,19 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " This fixes some performance problems on huge files.
 set synmaxcol=800
 
-" }}}
+" Set terminal colors
+let s:num = 0
+for s:color in [
+      \ "1d1f21", "282a2e", "373b41", "969896",
+      \ "b4b7b4", "c5c8c6", "e0e0e0", "ffffff",
+      \ "cc6666", "de935f", "f0c674", "b5bd68",
+      \ "8abeb7", "81a2be", "b294bb", "a3685a",
+      \ ]
+  let g:terminal_color_{s:num} = s:color
+  let s:num += 1
+endfor
 
+" }}}
 " =======================================================================
 " Mappings {{{
 " =======================================================================
@@ -229,7 +239,6 @@ vnoremap <silent> <leader>y "*y
 vnoremap <silent> <leader>Y "*Y
 
 " }}}
-
 " =======================================================================
 " Autocmds {{{
 " =======================================================================
@@ -248,10 +257,11 @@ if has("autocmd")
     autocmd FileType qf wincmd J
 
     autocmd FileType zsh set foldmethod=marker
+
+    autocmd BufEnter term://* startinsert
   augroup END
 endif
 " }}}
-
 " =======================================================================
 " Plugin Settings {{{
 " =======================================================================
@@ -347,7 +357,7 @@ map <leader>gl :CtrlP lib<CR>
 map <leader>gs :CtrlP spec<CR>
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag -Q %s -l --nocolor -g "" --ignore _output'
+let g:ctrlp_user_command = 'ag -Q %s -l --nocolor --hidden -g "" --ignore _output'
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
@@ -359,6 +369,8 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " -----------------------------------------------------------------------
 let g:NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 map <leader>e :NERDTreeFind<CR>
 " }}}
 
@@ -373,7 +385,7 @@ nmap ga <Plug>(EasyAlign)
 map <leader>tt :TagbarToggle<cr>
 " }}}
 
-" ag {{{
+" AG {{{
 " -----------------------------------------------------------------------
 map <leader>a :Ag<space>
 map <leader>a* :call SearchWordWithAg()<CR>
@@ -383,9 +395,34 @@ function! SearchWordWithAg()
 endfunction
 " }}}
 
-" fzf {{{
+" FZF {{{
 " -----------------------------------------------------------------------
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
+
 map <leader>t :FZF<CR>
+
+command! -bang -nargs=* Agu call fzf#vim#ag(<q-args>, '--skip-vcs-ignores --color-path "0;32" --color-line-number "0;33" --color-match "30;43"', fzf#vim#default_layout)
+
+" For Commits and BCommits to customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+
+  let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'String'],
+  \ 'hl':      ['fg', 'String'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'String'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment']  }
+
 " }}}
 
 " Lightline {{{
@@ -399,7 +436,7 @@ let g:lightline.active = {
       \            [ 'go', 'ctrlpmark' ]
       \   ],
       \   'right': [
-      \            [ 'syntastic', 'lineinfo' ],
+      \            [ 'neomake', 'syntastic', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ]
       \   ]
@@ -416,8 +453,14 @@ let g:lightline.component_function = {
       \   'ctrlpmark':    'CtrlPMark',
       \ }
 
-let g:lightline.component_expand = { 'syntastic': 'SyntasticStatuslineFlag' }
-let g:lightline.component_type   = { 'syntastic': 'error' }
+let g:lightline.component_expand = {
+      \ 'syntastic': 'SyntasticStatuslineFlag',
+      \ 'neomake':   'neomake#statusline#LoclistStatus',
+      \ }
+let g:lightline.component_type   = {
+      \ 'syntastic': 'error',
+      \ 'neomake':   'error',
+      \ }
 let g:lightline.subseparator     = { 'left': '|', 'right': '|' }
 
 " The layout of lightline for the tab line when tabs exist.
@@ -483,6 +526,12 @@ function! LightLineGo()
   return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
 endfunction
 
+function! OnNeomakeCountsChanged()
+  call lightline#update()
+endfunction
+
+autocmd vimrc User NeomakeCountsChanged call OnNeomakeCountsChanged()
+
 function! CtrlPMark()
   if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
     call lightline#link('iR'[g:lightline.ctrlp_regex])
@@ -494,9 +543,9 @@ function! CtrlPMark()
 endfunction
 
 let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
 
 function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
   let g:lightline.ctrlp_regex = a:regex
