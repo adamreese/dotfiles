@@ -94,6 +94,18 @@
   diffFilter = diff-highlight
 
 [pager]
-  log  = diff-highlight | ${GIT_PAGER:-less -F -X}
-  show = diff-highlight | ${GIT_PAGER:-less -F -X}
-  diff = diff-highlight | ${GIT_PAGER:-less -F -X}
+  log  = diff-highlight | ${GIT_PAGER:-less -FX}
+  show = diff-highlight | ${GIT_PAGER:-less -FX}
+  diff = diff-highlight | ${GIT_PAGER:-less -FX}
+
+[difftool]
+  prompt = false
+
+[diff]
+  tool = vimdiff
+  algorithm = histogram
+  compactionHeuristic = true
+
+[difftool "vimdiff"]
+  cmd = nvim -d "$LOCAL" "$REMOTE"
+
