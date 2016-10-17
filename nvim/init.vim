@@ -3,8 +3,8 @@
 " =======================================================================
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
-Plug 'SirVer/ultisnips'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go',            { 'for': 'go' }
@@ -26,6 +26,8 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
 Plug 'w0ng/vim-hybrid'
 Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
+
+" Plug 'SirVer/ultisnips'
 
 if has('nvim')
   function! DoRemote(arg)
@@ -75,6 +77,12 @@ set splitbelow               " Split horizontal windows below to the current win
 set ignorecase               " Search case insensitive...
 set smartcase                " ... but not it begins with upper case
 
+" Use ag over grep
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
+endif
+
+
 " -----------------------------------------------------------------------
 " Performance
 " -----------------------------------------------------------------------
@@ -106,15 +114,16 @@ set completeopt=longest,menuone
 " -----------------------------------------------------------------------
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo')
-  set undofile
-endif
+if has('persistent_undo') | set undofile | endif
 
 " -----------------------------------------------------------------------
 " UI
 " -----------------------------------------------------------------------
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" disable background color erase
+if &term =~ '256color' | set t_ut= | endif
 
 " Enable true color
 if exists('+termguicolors') | set termguicolors | endif
@@ -138,10 +147,10 @@ set synmaxcol=800
 " Set terminal colors
 let s:num = 0
 for s:color in [
-      \ "1d1f21", "282a2e", "373b41", "969896",
-      \ "b4b7b4", "c5c8c6", "e0e0e0", "ffffff",
-      \ "cc6666", "de935f", "f0c674", "b5bd68",
-      \ "8abeb7", "81a2be", "b294bb", "a3685a",
+      \ '#2d3c46', '#a54242', '#8c9440', '#de935f',
+      \ '#5f819d', '#85678f', '#5e8d87', '#6c7a80',
+      \ '#425059', '#cc6666', '#b5bd67', '#f0c674',
+      \ '#81a2be', '#b294ba', '#8abeb7', '#c5c8c6',
       \ ]
   let g:terminal_color_{s:num} = s:color
   let s:num += 1
@@ -258,6 +267,10 @@ if has("autocmd")
 
     autocmd FileType zsh set foldmethod=marker
 
+    " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
+    " the top again
+    tnoremap <leader>q <C-\><C-n>gg<cr>
+
     autocmd BufEnter term://* startinsert
   augroup END
 endif
@@ -334,8 +347,8 @@ if !exists("g:UltiSnipsJumpBackwardTrigger")
   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 endif
 
-autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+" autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 " }}}
 
 " vim-align {{{
@@ -367,11 +380,16 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 
 " NERDTree {{{
 " -----------------------------------------------------------------------
-let g:NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeMinimalUI=1
+
 map <leader>e :NERDTreeFind<CR>
+
+" Leave my bindings alone
+let g:NERDTreeMapJumpPrevSibling='<Nop>'
+let g:NERDTreeMapJumpNextSibling='<Nop>'
 " }}}
 
 " EasyAlign {{{
@@ -401,28 +419,12 @@ if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
 
-map <leader>t :FZF<CR>
+nmap <silent> <leader>t :FZF<cr>
+" }}}
 
-command! -bang -nargs=* Agu call fzf#vim#ag(<q-args>, '--skip-vcs-ignores --color-path "0;32" --color-line-number "0;33" --color-match "30;43"', fzf#vim#default_layout)
-
-" For Commits and BCommits to customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-
-  let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'String'],
-  \ 'hl':      ['fg', 'String'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'String'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment']  }
-
+" DelimitMate {{{
+" -----------------------------------------------------------------------
+let g:delimitMate_expand_cr = 1
 " }}}
 
 " Lightline {{{
@@ -452,10 +454,9 @@ let g:lightline.component_function = {
       \   'go':           'LightLineGo',
       \   'ctrlpmark':    'CtrlPMark',
       \ }
-
 let g:lightline.component_expand = {
       \ 'syntastic': 'SyntasticStatuslineFlag',
-      \ 'neomake':   'neomake#statusline#LoclistStatus',
+      \ 'neomake':   'LightlineNeomake',
       \ }
 let g:lightline.component_type   = {
       \ 'syntastic': 'error',
@@ -524,6 +525,10 @@ endfunction
 
 function! LightLineGo()
   return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
+endfunction
+
+function! LightlineNeomake()
+  return exists('*neomake#statusline#LoclistStatus') ? neomake#statusline#LoclistStatus() : ''
 endfunction
 
 function! OnNeomakeCountsChanged()
