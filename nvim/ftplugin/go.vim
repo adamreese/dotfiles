@@ -55,7 +55,4 @@ let g:tagbar_type_go = {
       \ }
 
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'deadcode', 'unconvert']
-let g:syntastic_go_checkers = ['go', 'govet']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
 let g:neomake_go_enabled_makers = ['go', 'govet']

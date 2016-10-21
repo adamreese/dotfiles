@@ -38,7 +38,6 @@ if has('nvim')
   Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
 else
   Plug 'Shougo/neocomplete'
-  Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 endif
 
 call plug#end()
@@ -81,7 +80,6 @@ set smartcase                " ... but not it begins with upper case
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
 endif
-
 
 " -----------------------------------------------------------------------
 " Performance
@@ -230,13 +228,13 @@ nnoremap <leader><CR> :nohlsearch<CR>
 nnoremap <leader>pr :so %<CR>
 
 " Format buffer
-map <leader>= ggVG=<CR>
+nmap <leader>= ggVG=<CR>
 
 " Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+nmap <leader>ss :setlocal spell!<cr>
 
 " Sorting
-map <leader>srt :sort<cr>
+nnoremap <leader>srt :sort<cr>
 
 " Make horizontal line
 nnoremap <leader>L mzO<esc>79i-<esc>`z
@@ -246,6 +244,12 @@ nnoremap <silent> <leader>y "*y
 nnoremap <silent> <leader>Y "*Y
 vnoremap <silent> <leader>y "*y
 vnoremap <silent> <leader>Y "*Y
+
+if has('nvim')
+  " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
+  " the top again
+  tnoremap <leader>q <C-\><C-n>gg<cr>
+endif
 
 " }}}
 " =======================================================================
@@ -266,10 +270,6 @@ if has("autocmd")
     autocmd FileType qf wincmd J
 
     autocmd FileType zsh set foldmethod=marker
-
-    " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
-    " the top again
-    tnoremap <leader>q <C-\><C-n>gg<cr>
 
     autocmd BufEnter term://* startinsert
   augroup END
@@ -381,8 +381,6 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " NERDTree {{{
 " -----------------------------------------------------------------------
 let NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeMinimalUI=1
 
 map <leader>e :NERDTreeFind<CR>
@@ -438,7 +436,7 @@ let g:lightline.active = {
       \            [ 'go', 'ctrlpmark' ]
       \   ],
       \   'right': [
-      \            [ 'neomake', 'syntastic', 'lineinfo' ],
+      \            [ 'neomake', 'lineinfo' ],
       \            [ 'percent' ],
       \            [ 'fileformat', 'fileencoding', 'filetype' ]
       \   ]
@@ -454,14 +452,8 @@ let g:lightline.component_function = {
       \   'go':           'LightLineGo',
       \   'ctrlpmark':    'CtrlPMark',
       \ }
-let g:lightline.component_expand = {
-      \ 'syntastic': 'SyntasticStatuslineFlag',
-      \ 'neomake':   'LightlineNeomake',
-      \ }
-let g:lightline.component_type   = {
-      \ 'syntastic': 'error',
-      \ 'neomake':   'error',
-      \ }
+let g:lightline.component_expand = { 'neomake': 'LightlineNeomake' }
+let g:lightline.component_type   = { 'neomake': 'error' }
 let g:lightline.subseparator     = { 'left': '|', 'right': '|' }
 
 " The layout of lightline for the tab line when tabs exist.
