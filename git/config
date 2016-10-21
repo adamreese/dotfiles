@@ -103,7 +103,7 @@
 
 [diff]
   tool = vimdiff
-  algorithm = histogram
+  algorithm = patience
   compactionHeuristic = true
 
 [difftool "vimdiff"]
