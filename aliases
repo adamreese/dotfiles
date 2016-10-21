@@ -15,6 +15,8 @@ alias ll='ls -lph'
 # Perform case insensitive matching
 alias grep='grep -i'
 
+alias agp='ag --pager="less -iFMRSX"'
+
 # github
 alias gh='hub browse'
 alias pr='hub pull-request'
@@ -58,5 +60,5 @@ if [[ $(uname -s) = "Darwin" ]]; then
   alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
   # Update and cleanup brew
-  alias bubu='brew update && brew upgrade --all && brew cleanup'
+  alias bubu='brew update && brew upgrade && brew cleanup'
 fi
