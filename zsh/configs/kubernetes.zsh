@@ -7,26 +7,14 @@ fi
 
 export KUBE_ROOT=${GOPATH}/src/k8s.io/kubernetes
 
-# Shortcut for kubectl
-# Commands:
-#   k use CONTEXT   Change context in kubeconfig
-# -----------------------------------------------------------------------------
-k() {
-  local cmd="$1"
-  local context="$2"
-
-  case "$cmd" in
-    use)
-      kubectl config use-context "$context"
-      ;;
-    *)
-      kubectl "$@"
-      ;;
-  esac
-}
-
 # Man path
 # -----------------------------------------------------------------------------
 if [[ ! "$MANPATH" == *${KUBE_ROOT}/docs/man* && -d "${KUBE_ROOT}/docs/man" ]]; then
   export MANPATH="$MANPATH:${KUBE_ROOT}/docs/man"
 fi
+
+# Completion
+# -----------------------------------------------------------------------------
+source <(kubectl completion zsh)
+
+alias k=kubectl

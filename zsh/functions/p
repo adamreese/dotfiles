@@ -1,0 +1,7 @@
+# vim: ft=zsh :
+
+# shortcut to projects folder
+p() {
+  cd ${HOME}/p/$1
+}
+

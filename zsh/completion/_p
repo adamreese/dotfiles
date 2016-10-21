@@ -1,2 +1,2 @@
 #compdef p
-_files -W $PROJECTS -/
+_files -W ${HOME}/p/ -/

@@ -1,10 +1,8 @@
 # vim: ft=zsh :
 
-# shortcut to PROJECTS folder
-p() {
-  cd $PROJECTS/$1
-}
-
+# addpath
+#
+# Add a relative directory to $PATH
 addpath() {
   export PATH="$(cd "${1:-.}"; pwd):${PATH}"
 }

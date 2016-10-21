@@ -8,11 +8,13 @@ shell:
 	ln -fs $(DOTFILES)/bash_prompt ${HOME}/.bash_prompt
 	ln -fs $(DOTFILES)/zshrc ${HOME}/.zshrc
 	ln -fs $(DOTFILES)/zshenv ${HOME}/.zshenv
+	ln -fs $(DOTFILES)/zlogin ${HOME}/.zlogin
+	ln -fs $(DOTFILES)/zlogout ${HOME}/.zlogout
 	ln -fs $(DOTFILES)/ackrc ${HOME}/.ackrc
 	ln -fs $(DOTFILES)/ctags ${HOME}/.ctags
 	ln -fs ${DOTFILES}/aliases ${HOME}/.aliases
 	ln -fs ${DOTFILES}/agignore ${HOME}/.agignore
-	ln -fns ${DOTFILES}/zsh ${HOME}/.zsh
+	# ln -fns ${DOTFILES}/zsh ${HOME}/.zsh
 tmux:
 	ln -fs $(DOTFILES)/tmux.conf ${HOME}/.tmux.conf
 _vim:
@@ -27,9 +29,7 @@ _ruby:
 	ln -fs ${DOTFILES}/gemrc ${HOME}/.gemrc
 	ln -fs ${DOTFILES}/rspec ${HOME}/.rspec
 _git:
-	ln -fs $(DOTFILES)/gitconfig ${HOME}/.gitconfig
-	ln -fs $(DOTFILES)/gitignore ${HOME}/.gitignore
-	ln -fns $(DOTFILES)/git_template ${HOME}/.git_template
+	ln -fns $(DOTFILES)/git ${HOME}/.config/git
 _postgres:
 	ln -fs $(DOTFILES)/psqlrc ${HOME}/.psqlrc
 _sqlite:

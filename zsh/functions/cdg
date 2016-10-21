@@ -1,0 +1,8 @@
+# vim: ft=zsh :
+
+# cdg
+#
+# Change to directory from $GOPATH/src
+cdg() {
+  cd "${GOPATH}/src/github.com/${1}"
+}

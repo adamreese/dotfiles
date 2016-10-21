@@ -1,5 +1,8 @@
 # vim: ft=zsh :
 
+export VISUAL=vim
+export EDITOR=$VISUAL
+
 # Neovim
 if (( $+commands[nvim] )); then
   export EDITOR=nvim
