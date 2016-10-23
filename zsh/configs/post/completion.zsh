@@ -1,9 +1,3 @@
-# load our own completion functions
-fpath+=(~/.zsh/completion /usr/local/share/zsh/site-functions)
-
-# completion
-autoload -Uz compinit; compinit -i
-
 # make autocompletion faster by caching and prefix-only matching
 zstyle ':completion:*'           accept-exact '*(N)'
 zstyle ':completion::complete:*' accept-exact '*(N)'

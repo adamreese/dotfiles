@@ -22,3 +22,5 @@ vim/plugged/*
 vim/swaps/*
 vim/undo/*
 vim/view/*
+zsh/cache
+zsh/configs/local.zsh

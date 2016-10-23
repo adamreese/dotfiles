@@ -33,7 +33,6 @@ for config (~/.zsh/configs/pre/*.zsh(N-.)) source $config
 for config (~/.zsh/configs/*.zsh(N-.)) source $config
 for config (~/.zsh/configs/post/*.zsh(N-.)) source $config
 
-
 typeset -gU cdpath fpath mailpath path
 
 if (which zprof > /dev/null); then

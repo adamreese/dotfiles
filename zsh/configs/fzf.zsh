@@ -1,7 +1,7 @@
 # vim: ft=zsh :
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_DEFAULT_OPTS='--color=16,bg:-1,fg:-1,bg+:0,fg+:7,hl:12,hl+:3'
+export FZF_DEFAULT_OPTS='--color=fg:7,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4'
 
 # Setup fzf
 # ------------------------------------------------------------------------------
@@ -22,3 +22,8 @@ fi
 # Key bindings
 # ------------------------------------------------------------------------------
 # source "${HOME}/.fzf/shell/key-bindings.zsh"
+
+fgo() {
+  cd "${GOPATH}/src"
+  DIR=$(print -l github.com/*/*(/) google.golang.org/*/*(/) k8s.io/*(/) rsprd.com/*(/) | fzf) && cd "$DIR"
+}
