@@ -34,18 +34,6 @@ alias whois="whois -h whois-servers.net"
 # View logs
 alias tfl='tail -Fn30 log/*.log'
 
-# zsh specific command aliases
-if [ -n "$ZSH_VERSION" ]; then
-
-  # Split comma or colin separated data onto separate lines
-  alias -g S="| tr ',:' '\n'"
-
-  alias -g H='| head'
-  alias -g T='| tail'
-  alias -g G='| grep'
-  alias -g L="| less"
-fi
-
 # osx specific command aliases
 if [[ $(uname -s) = "Darwin" ]]; then
 
