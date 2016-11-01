@@ -10,11 +10,11 @@ export KUBE_ROOT=${GOPATH}/src/k8s.io/kubernetes
 # Man path
 # -----------------------------------------------------------------------------
 if [[ ! "$MANPATH" == *${KUBE_ROOT}/docs/man* && -d "${KUBE_ROOT}/docs/man" ]]; then
-  export MANPATH="$MANPATH:${KUBE_ROOT}/docs/man"
+  manpath+=("${KUBE_ROOT}/docs/man")
 fi
 
 # Completion
 # -----------------------------------------------------------------------------
-source <(kubectl completion zsh)
+[[ $- == *i* ]] && source <(kubectl completion zsh)
 
 alias k=kubectl
