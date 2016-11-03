@@ -1,0 +1,6 @@
+# vim: ft=zsh :
+
+# shortcut to gopath folder
+cd "${GOPATH}/src"
+_dir=$(ghq list ${1-}| fzf --select-1) && cd "$_dir"
+

@@ -51,4 +51,7 @@ if [[ $(uname -s) = "Darwin" ]]; then
 
   # Update and cleanup brew
   alias bubu='brew update && brew upgrade && brew cleanup'
+
+  # Flush dns cache
+  alias flush='sudo killall -HUP mDNSResponder'
 fi

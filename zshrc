@@ -25,15 +25,13 @@ source $ZSH/oh-my-zsh.sh
 
 [[ -f "${HOME}/.aliases" ]] && source "${HOME}/.aliases"
 
-for config (~/.zsh/functions/*(rN)) source $config
-
 # extra files in ~/.zsh/configs/pre , ~/.zsh/configs , and ~/.zsh/configs/post
 # these are loaded first, second, and third, respectively.
 for config (~/.zsh/configs/pre/*.zsh(N-.)) source $config
 for config (~/.zsh/configs/*.zsh(N-.)) source $config
 for config (~/.zsh/configs/post/*.zsh(N-.)) source $config
 
-typeset -gU cdpath fpath mailpath path
+typeset -gU cdpath fpath manpath path
 
 if (which zprof > /dev/null); then
   zprof | less

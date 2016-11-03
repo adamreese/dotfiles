@@ -8,4 +8,4 @@ alias -g T='| tail'
 alias -g G='| grep'
 alias -g L="| less"
 
-alias reload='exec zsh -l'
+alias reload="exec ${SHELL} -l"

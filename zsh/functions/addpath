@@ -3,6 +3,4 @@
 # addpath
 #
 # Add a relative directory to $PATH
-addpath() {
-  export PATH="$(cd "${1:-.}"; pwd):${PATH}"
-}
+export PATH="$(cd "${1:-.}"; pwd):${PATH}"

@@ -4,28 +4,6 @@
 # docker-machine
 ###############################################################################
 
-# dm
-#
-# Commands:
-#   dm use         Start machine and source environment
-#   dm init        Create a new machine
-# -----------------------------------------------------------------------------
-dm() {
-  local cmd="$1"
-  local machine="${2:-default}"
-
-  case "$cmd" in
-    use)
-      _docker_machine_use "$machine"
-      ;;
-    init)
-      _docker_machine_init "$machine"
-      ;;
-    *)
-    docker-machine "$@"
-  esac
-}
-
 # _docker_machine_use
 #
 # Usage:
@@ -84,3 +62,24 @@ _docker_machine_init() {
 
 # Source default docker-machine if it is running
 # eval "$(docker-machine env default 2> /dev/null)"
+
+# dm
+#
+# Commands:
+#   dm use         Start machine and source environment
+#   dm init        Create a new machine
+# -----------------------------------------------------------------------------
+_cmd="$1"
+_machine="${2:-default}"
+
+case "$_cmd" in
+  use)
+    _docker_machine_use "$_machine"
+    ;;
+  init)
+    _docker_machine_init "$_machine"
+    ;;
+  *)
+    docker-machine "$@"
+esac
+

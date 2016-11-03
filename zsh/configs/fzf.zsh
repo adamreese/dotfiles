@@ -22,8 +22,3 @@ fi
 # Key bindings
 # ------------------------------------------------------------------------------
 # source "${HOME}/.fzf/shell/key-bindings.zsh"
-
-fgo() {
-  cd "${GOPATH}/src"
-  local _dir=$(ghq list ${1-}| fzf --select-1) && cd "$_dir"
-}

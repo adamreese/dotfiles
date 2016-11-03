@@ -1,0 +1,6 @@
+# vim: ft=zsh :
+
+# shortcut to projects folder
+cd "${HOME}/p"
+_dir=$(find . -path ./go -prune -o -type d -name .git -print0 | xargs -0n1 dirname | sed 's|^\./||' | fzf --query "${1}" --select-1) && cd "$_dir"
+
