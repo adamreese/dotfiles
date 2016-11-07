@@ -76,11 +76,6 @@ set splitbelow               " Split horizontal windows below to the current win
 set ignorecase               " Search case insensitive...
 set smartcase                " ... but not it begins with upper case
 
-" Use ag over grep
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
-endif
-
 " -----------------------------------------------------------------------
 " Performance
 " -----------------------------------------------------------------------
@@ -234,7 +229,7 @@ nmap <leader>= ggVG=<CR>
 nmap <leader>ss :setlocal spell!<cr>
 
 " Sorting
-nnoremap <leader>srt :sort<cr>
+vnoremap <leader>srt :sort<cr>
 
 " Make horizontal line
 nnoremap <leader>L mzO<esc>79i-<esc>`z
@@ -377,13 +372,14 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " NERDTree {{{
 " -----------------------------------------------------------------------
 let NERDTreeAutoDeleteBuffer=1
+let NERDTreeIgnore=['\.git$', '\.gitignore']
+let NERDTreeShowHidden=1
+let g:NERDTreeMapJumpNextSibling='<Nop>'
+let g:NERDTreeMapJumpPrevSibling='<Nop>'
 let g:NERDTreeMinimalUI=1
 
-map <leader>e :NERDTreeFind<CR>
 
-" Leave my bindings alone
-let g:NERDTreeMapJumpPrevSibling='<Nop>'
-let g:NERDTreeMapJumpNextSibling='<Nop>'
+map <leader>e :NERDTreeFind<CR>
 " }}}
 
 " EasyAlign {{{
@@ -399,6 +395,11 @@ map <leader>tt :TagbarToggle<cr>
 
 " AG {{{
 " -----------------------------------------------------------------------
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor\ --smart-case\ --vimgrep
+  let g:ackprg = "ag --smart-case --vimgrep"
+endif
+
 map <leader>a :Ag<space>
 map <leader>a* :call SearchWordWithAg()<CR>
 
