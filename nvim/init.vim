@@ -265,10 +265,6 @@ if has("autocmd")
     " remove trailing whitespace automatically
     autocmd BufWritePre * :%s/\s\+$//e
 
-    " make quickfix windows take all the lower section of the screen
-    " when there are multiple windows open
-    autocmd FileType qf wincmd J
-
     autocmd FileType zsh set foldmethod=marker
 
     autocmd BufEnter term://* startinsert

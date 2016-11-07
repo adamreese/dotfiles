@@ -20,8 +20,8 @@ nmap <buffer> <silent> gs <Plug>(go-def-split)
 nmap <buffer> <silent> gk <Plug>(go-doc)
 nmap <buffer> <silent> gV <Plug>(go-vet)
 nmap <buffer> <Leader>c   <Plug>(go-coverage-toggle)
+nmap <buffer> <Leader>i   <Plug>(go-info)
 nmap <buffer> <Leader>f   :GoImports<CR>
-nmap <buffer> <Leader>i   :GoImport<space>
 nmap <buffer> <Leader>gt  :GoDecls<CR>
 
 command! -bang AS call go#alternate#Switch(<bang>0, 'split')
