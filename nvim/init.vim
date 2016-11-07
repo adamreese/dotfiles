@@ -5,6 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
+Plug 'benekastah/neomake',      { 'on': ['Neomake'] }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fatih/vim-go',            { 'for': 'go' }
@@ -33,7 +34,6 @@ if has('nvim')
   function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
-  Plug 'benekastah/neomake',   { 'on': ['Neomake'] }
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
   Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
 else
