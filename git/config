@@ -31,17 +31,8 @@
   # Show the working tree status in short-format
   s = status --short --branch
 
-  # Delete branches that have been merged into master
-  delete-merged = "!git checkout master && git branch --merged | grep -v master | xargs git branch -d"
-
   next-release = "!git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
   nr = !git next-release
-
-  # List branches sorted by date
-  recent = "!git for-each-ref --sort='-committerdate' --format='%(color:yellow)%(refname:short)|%(color:bold green)(%(committerdate:relative))%(color:reset)|%(subject)|%(color:blue)<%(authorname)>%(color:reset)' refs/heads | sed -e 's-refs/heads/--' | column -ts'|' | less -XFR"
-  latest = "!git for-each-ref --sort='-committerdate' --format='%(color:yellow)%(refname:short)|%(color:bold green)(%(committerdate:relative))%(color:reset)|%(subject)|%(color:blue)<%(authorname)>%(color:reset)' refs/remotes | sed -e 's-refs/remotes/origin/--'  | column -ts'|' | less -XFR"
-
-  ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
@@ -60,7 +51,6 @@
   branch = auto
 
 [core]
-  editor = vim
   excludesfile = ~/.config/git/ignore
 
 [fetch]
@@ -80,7 +70,7 @@
   smudge = git-media-smudge %f
 
 [github]
-  user     = adamreese
+  user = adamreese
 
 [filter "lfs"]
   clean    = git-lfs clean %f
@@ -102,9 +92,10 @@
   prompt = false
 
 [diff]
-  tool = vimdiff
   algorithm = patience
   compactionHeuristic = true
+  renames = copies
+  tool = vimdiff
 
 [difftool "vimdiff"]
   cmd = nvim -d "$LOCAL" "$REMOTE"

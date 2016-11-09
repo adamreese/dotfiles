@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+branch='%(color:yellow)%(refname:short)%(color:reset)'
+spacer='%(color:black) %(color:reset)'
+
+format="\
+%(HEAD) \
+$branch|\
+%(color:bold green)%(committerdate:relative)%(color:reset) | \
+%(contents:subject) \
+$spacer| \
+%(color:bold blue)%(authorname)%(color:reset)"
+
+git for-each-ref \
+    --sort=-committerdate \
+    --count=25 \
+    "refs/remotes/"  \
+    --format="$format" \
+  | sed -e 's-refs/remotes/origin/--' \
+  | column -ts '|'
