@@ -59,7 +59,6 @@ set linebreak                " Wrap lines at convenient points
 set nobackup                 " Don't create annoying backup files
 set noerrorbells
 set novisualbell
-set title                    " Sets the terminal title nicely.
 set shell=$SHELL
 
 set scrolloff=8              " Start scrolling when we're 8 lines away from margins
@@ -112,8 +111,12 @@ if has('persistent_undo') | set undofile | endif
 " -----------------------------------------------------------------------
 " UI
 " -----------------------------------------------------------------------
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+" Sets the terminal title nicely.
+set title titlestring+=%{fnamemodify(getcwd(),':t')}\ -\ NVIM
 
 " disable background color erase
 if &term =~ '256color' | set t_ut= | endif
@@ -424,141 +427,46 @@ let g:delimitMate_expand_cr = 1
 
 " Lightline {{{
 " -----------------------------------------------------------------------
-let g:lightline = { 'colorscheme': 'powerline' }
-
-let g:lightline.active = {
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
       \   'left':  [
-      \            [ 'mode', 'paste' ],
-      \            [ 'fugitive', 'filename' ],
-      \            [ 'go', 'ctrlpmark' ]
+      \     [ 'mode' ], [ 'fugitive' ], [ 'filename' ], [ 'go', 'ctrlpmark' ],
       \   ],
       \   'right': [
-      \            [ 'neomake', 'lineinfo' ],
-      \            [ 'percent' ],
-      \            [ 'fileformat', 'fileencoding', 'filetype' ]
+      \     [ 'neomake', 'lineinfo' ], [ 'fileformat', 'fileencoding' ], [ 'filetype' ],
       \   ]
+      \ },
+      \ 'inactive': {
+      \   'left': [
+      \     [ ], [ 'filename' ], [ ]
+      \   ],
+      \   'right': [
+      \     [ 'lineinfo' ], [ 'fileformat', 'fileencoding' ], [ 'filetype' ],
+      \   ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive':     'statusline#lightlineFugitive',
+      \   'filename':     'statusline#lightlineFilename',
+      \   'fileformat':   'statusline#lightlineFileformat',
+      \   'filetype':     'statusline#lightlineFiletype',
+      \   'fileencoding': 'statusline#lightlineFileencoding',
+      \   'mode':         'statusline#lightlineMode',
+      \   'go':           'statusline#lightlineGo',
+      \   'ctrlpmark':    'statusline#CtrlPMark',
+      \ },
+      \ 'component_expand': {
+      \   'neomake':   'statusline#lightlineNeomake',
+      \   'lineinfo':  'statusline#lightlineLineInfo',
+      \ },
+      \ 'component_type': {
+      \   'neomake': 'error',
+      \ },
+      \ 'subseparator': {
+      \   'left': '|',
+      \   'right': '|',
+      \ },
       \ }
-
-let g:lightline.component_function = {
-      \   'fugitive':     'LightLineFugitive',
-      \   'filename':     'LightLineFilename',
-      \   'fileformat':   'LightLineFileformat',
-      \   'filetype':     'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode':         'LightLineMode',
-      \   'go':           'LightLineGo',
-      \   'ctrlpmark':    'CtrlPMark',
-      \ }
-let g:lightline.component_expand = { 'neomake': 'LightlineNeomake' }
-let g:lightline.component_type   = { 'neomake': 'error' }
-let g:lightline.subseparator     = { 'left': '|', 'right': '|' }
-
-" The layout of lightline for the tab line when tabs exist.
-let g:lightline.tabline = { 'left': [ [ 'tabs' ] ] }
-
-let g:lightline.tab = {
-      \ 'active': [ 'filename', 'modified' ],
-      \ 'inactive': [ 'filename', 'modified' ] }
-
-function! LightLineModified()
-  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightLineFilename()
-  let fname = expand('%')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ 'NERD_tree' ? '' :
-        \ &ft =~ 'fzf' ? '' :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineFugitive()
-  try
-    if expand('%:t') !~? 'Tagbar\|NERD' && exists('*fugitive#head')
-      let mark = ''  " edit here for cool mark
-      let _ = fugitive#head()
-      return _ !=# '' ? mark._ : ''
-    endif
-  catch
-  endtry
-  return ''
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineMode()
-  let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft =~ 'fzf' ? 'FZF' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! LightLineGo()
-  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
-endfunction
-
-function! LightlineNeomake()
-  return exists('*neomake#statusline#LoclistStatus') ? neomake#statusline#LoclistStatus() : ''
-endfunction
-
-function! OnNeomakeCountsChanged()
-  call lightline#update()
-endfunction
-
-autocmd vimrc User NeomakeCountsChanged call OnNeomakeCountsChanged()
-
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
 " }}}
 " }}}
 
