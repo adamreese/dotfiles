@@ -2,8 +2,6 @@
 
 # bash_profile
 
-DOTFILES="$HOME/.dotfiles"
-
 # set 256 color profile where possible
 if [[ $COLORTERM == gnome-* && $TERM == xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
     export TERM=gnome-256color
@@ -15,11 +13,7 @@ fi
 if [[ -d "/usr/local/share/chruby" ]] ; then
   source /usr/local/share/chruby/chruby.sh
   source /usr/local/share/chruby/auto.sh
-
-  # Set a default ruby if a .ruby-version file exists in the home dir
-  if [[ -f ~/.ruby-version ]]; then
-    chruby $(cat ~/.ruby-version)
-  fi
+  chruby ruby-2.3
 fi
 
 ## set PATH so it includes user's private bin if it exists
@@ -30,17 +24,9 @@ fi
 ## brewer path
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
-if [[ -d "$HOME/Developer/lib/node_modules" ]] ; then
-  NODE_PATH="$HOME/Developer/lib/node_modules"
-fi
-
 ## source bash completions
 if [[ -d "/usr/local/etc/bash_completion.d" ]] ; then
   source /usr/local/etc/bash_completion.d/*.bash
-fi
-
-if [[ -f $(brew --prefix)/etc/bash_completion ]] ; then
-  . $(brew --prefix)/etc/bash_completion  # Bash completion (installed via Homebrew)
 fi
 
 source $HOME/.aliases                 # Aliases
