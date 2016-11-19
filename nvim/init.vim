@@ -43,74 +43,120 @@ endif
 call plug#end()
 " }}}
 " =======================================================================
-" General Config {{{
+" Settings {{{
 " =======================================================================
-set number                   " Show line numbers
+" General {{{
+" -----------------------------------------------------------------------
+set encoding=utf-8
+scriptencoding utf-8
+
 set autowrite                " Automatically save before :next, :make etc.
 set autoread                 " Set to auto read when a file is changed from the outside
 set hidden
-set completeopt=menu,menuone
-set nocursorcolumn           " speed up syntax highlighting
-set nocursorline
 set noswapfile               " Don't use swapfile
-set noshowmode               " Don't need to show mode since we have lightline
 set magic                    " For regular expressions turn magic on
-set linebreak                " Wrap lines at convenient points
 set nobackup                 " Don't create annoying backup files
 set noerrorbells
 set novisualbell
 set shell=$SHELL
-
-set scrolloff=8              " Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-" Split settings
-set splitright               " Split vertical windows right to the current windows
-set splitbelow               " Split horizontal windows below to the current windows
-
+set ttyfast
+if &compatible
+  set nocompatible
+endif
+" }}}
 " -----------------------------------------------------------------------
-" Search
+" Search {{{
 " -----------------------------------------------------------------------
 set ignorecase               " Search case insensitive...
 set smartcase                " ... but not it begins with upper case
-
+" }}}
 " -----------------------------------------------------------------------
-" Performance
+" Performance " {{{
 " -----------------------------------------------------------------------
 set lazyredraw " only redraw when needed
 if exists('&ttyfast') | set ttyfast | endif " if we have a fast terminal
 set updatetime=750 " reduce vim delay clock
-
+" set timeout timeoutlen=400
+set ttimeout ttimeoutlen=100
+" }}}
 " -----------------------------------------------------------------------
-" Formatting
+" Formatting {{{
 " -----------------------------------------------------------------------
+set autoindent
 set smartindent
 set smarttab
 set shiftwidth=2          " 2 spaces per tab
 set softtabstop=2
 set tabstop=2
 set expandtab             " Use spaces instead of tabs
-set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
-set foldmethod=marker
+" }}}
+" -----------------------------------------------------------------------
+" Wildmenu {{{
+" -----------------------------------------------------------------------
+if has('wildmenu')
+  set wildmode=list:longest,full
+  set wildoptions=tagfile
+  set wildignorecase
+  set wildignore+=.git,*.pyc,*.spl,*.o,*.out,*~,#*#,%*
+  set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
+endif
+" }}}
+" -----------------------------------------------------------------------
+" Folding {{{
+" -----------------------------------------------------------------------
+if has('folding')
+  set foldmethod=marker
+  set foldtext=FoldText()
 
+  " See: http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+  function! FoldText() "{{{
+    let l:line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    let l:lines_count = v:foldend - v:foldstart + 1
+    let l:lines_count_text = '| ' . printf('%10s', l:lines_count . ' lines') . ' |'
+    let l:foldchar = matchstr(&fillchars, 'fold:\zs.')
+    let l:foldtextstart = strpart('+' . repeat(l:foldchar, v:foldlevel*2) . l:line, 0, (winwidth(0)*2)/3)
+    let l:foldtextend = l:lines_count_text . repeat(l:foldchar, 8)
+    let l:foldtextlength = strlen(substitute(l:foldtextstart . l:foldtextend, '.', 'x', 'g')) + &foldcolumn
+    return l:foldtextstart . repeat(l:foldchar, winwidth(0)-l:foldtextlength) . l:foldtextend
+  endfunction "}}}
+endif
+" }}}
 " -----------------------------------------------------------------------
-" Completion
-" -----------------------------------------------------------------------
-set wildmode=list:longest
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
-set completeopt=longest,menuone
-
-" -----------------------------------------------------------------------
-" Persistent Undo
+" Persistent Undo {{{
 " -----------------------------------------------------------------------
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') | set undofile | endif
+if has('persistent_undo')
+  set undofile                         " actually use undo files
+  set undodir=~/.local/share/nvim/undo " keep undo files out of the way
+endif
+" }}}
+" -----------------------------------------------------------------------
+" Behavior {{{
+" -----------------------------------------------------------------------
+set backspace=indent,eol,start
+set completeopt+=menuone
+set completeopt-=preview
+set linebreak                " Wrap lines at convenient points
+set scrolloff=8              " Start scrolling when we're 8 lines away from margins
+set sidescroll=1
+set sidescrolloff=15
+set pumheight=20             " Pop-up menu's line height
+set splitbelow               " Split horizontal windows below to the current windows
+set splitright               " Split vertical windows right to the current windows
+" }}}
+" -----------------------------------------------------------------------
+" UI {{{
+" -----------------------------------------------------------------------
+set nocursorcolumn           " speed up syntax highlighting
+set nocursorline
+set noshowmode               " Don't need to show mode since we have lightline
+set number                   " Show line numbers
+set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
+set display=lastline
+set laststatus=2
+set laststatus=2
 
-" -----------------------------------------------------------------------
-" UI
-" -----------------------------------------------------------------------
 if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 endif
@@ -132,6 +178,7 @@ let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palett
 colorscheme hybrid
 
 highlight clear SignColumn
+highlight clear FoldColumn
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -151,7 +198,7 @@ for s:color in [
   let g:terminal_color_{s:num} = s:color
   let s:num += 1
 endfor
-
+" }}}
 " }}}
 " =======================================================================
 " Mappings {{{
@@ -208,12 +255,11 @@ command! Wq wq
 
 " Leader Commands
 " -----------------------------------------------------------------------
-let g:mapleader = ","
+let g:mapleader = ','
 
 " Edit vimrc
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
-" Edit ftplugin for current filetype
-nnoremap <leader>eft :execute 'tabedit' . $HOME . '/.config/nvim/ftplugin/' . &filetype . '.vim'<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Fast saving
 nnoremap <leader>w :w!<cr>
@@ -253,48 +299,53 @@ endif
 " =======================================================================
 " Autocmds {{{
 " =======================================================================
-if has("autocmd")
+if has('autocmd')
   augroup vimrc
     autocmd!
-
-    " Save files when vim loses focus
-    autocmd FocusLost * silent! wall
-
-    " remove trailing whitespace automatically
-    autocmd BufWritePre * :%s/\s\+$//e
-
-    autocmd FileType zsh set foldmethod=marker
-
-    autocmd BufEnter term://* startinsert
   augroup END
+
+  " Save files when vim loses focus
+  autocmd vimrc FocusLost * silent! wall
+
+  " remove trailing whitespace automatically
+  autocmd vimrc BufWritePre * :%s/\s\+$//e
+
+  " check timestamp more for 'autoread'
+  autocmd vimrc WinEnter * checktime
+
+  autocmd vimrc InsertEnter * :setlocal nohlsearch
+  autocmd vimrc InsertLeave * :setlocal hlsearch
+
+  autocmd vimrc BufEnter term://* startinsert
 endif
 " }}}
 " =======================================================================
 " Plugin Settings {{{
 " =======================================================================
-
 " Neomake {{{
 " -----------------------------------------------------------------------
-if has('nvim')
-  let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'WarningMsg' }
-  let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'ErrorMsg'   }
+let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'WarningMsg' }
+let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'ErrorMsg'   }
 
-  let s:neomake_active = 1
-  function! NeomakeToggle()
-    let s:neomake_active = !s:neomake_active
-    echom s:neomake_active ? "Enabled Neomake" : "Disabled Neomake"
-  endfunction
-  command! NeomakeToggle call NeomakeToggle()
+let s:neomake_active = 1
+function! NeomakeToggle() "{{{
+  let s:neomake_active = !s:neomake_active
+  echom s:neomake_active ? 'Enabled Neomake' : 'Disabled Neomake'
+endfunction "}}}
+command! NeomakeToggle call NeomakeToggle()
 
-  function! s:Neomake()
-    if s:neomake_active && index(['sh', 'go', 'vim'], &ft) != -1
-      Neomake
-    endif
-  endfunction
-  autocmd! BufWritePost * call s:Neomake()
-endif
+function! s:run_neomake() "{{{
+  let l:filetypes = [
+        \ 'css', 'go', 'html', 'json', 'markdown', 'ruby',
+        \ 'sh', 'vim', 'yaml'
+        \ ]
+  if s:neomake_active && empty(&buftype) && index(l:filetypes, &filetype) > -1
+    Neomake
+  endif
+endfunction "}}}
+autocmd vimrc BufWritePost * call <SID>run_neomake()
 " }}}
-
+" -----------------------------------------------------------------------
 " deoplete {{{
 " -----------------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
@@ -306,45 +357,7 @@ let g:deoplete#sources#go#align_class = 1
 let g:deoplete#sources#go#use_cache = 1
 let g:deoplete#sources#go#json_directory = $HOME.'/.cache/nvim/deoplete-go'
 " }}}
-
-" UltiSnips {{{
 " -----------------------------------------------------------------------
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-  return ""
-endfunction
-
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-" autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" autocmd InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-" }}}
-
 " vim-align {{{
 " -----------------------------------------------------------------------
 map <leader>ah :Align =><CR>
@@ -352,7 +365,7 @@ nnoremap <leader>a= :Align =<CR>
 map <leader>a# :Align #<CR>
 map <leader>a{ :Align {<CR>
 " }}}
-
+" -----------------------------------------------------------------------
 " CtrlP {{{
 " -----------------------------------------------------------------------
 map <leader>gb :CtrlPBuffer<CR>
@@ -371,46 +384,45 @@ let g:ctrlp_use_caching = 0
 
 let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " }}}
-
+" -----------------------------------------------------------------------
 " NERDTree {{{
 " -----------------------------------------------------------------------
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeIgnore=['\.git$', '\.gitignore']
-let NERDTreeShowHidden=1
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeIgnore=['\.git$', '\.gitignore']
+let g:NERDTreeShowHidden=1
 let g:NERDTreeMapJumpNextSibling='<Nop>'
 let g:NERDTreeMapJumpPrevSibling='<Nop>'
 let g:NERDTreeMinimalUI=1
 
-
 map <leader>e :NERDTreeFind<CR>
 " }}}
-
+" -----------------------------------------------------------------------
 " EasyAlign {{{
 " -----------------------------------------------------------------------
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " }}}
-
+" -----------------------------------------------------------------------
 " Tagbar {{{
 " -----------------------------------------------------------------------
 map <leader>tt :TagbarToggle<cr>
 " }}}
-
+" -----------------------------------------------------------------------
 " AG {{{
 " -----------------------------------------------------------------------
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor\ --smart-case\ --vimgrep
-  let g:ackprg = "ag --smart-case --vimgrep"
+  let &grepprg='ag --nogroup --nocolor --vimgrep'
+  let g:ackprg = 'ag --smart-case --vimgrep'
+
+  map <leader>a :Ag<space>
+  map <leader>a* :call SearchWordWithAg()<CR>
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
 endif
-
-map <leader>a :Ag<space>
-map <leader>a* :call SearchWordWithAg()<CR>
-
-function! SearchWordWithAg()
-  execute 'Ag' expand('<cword>')
-endfunction
 " }}}
-
+" -----------------------------------------------------------------------
 " FZF {{{
 " -----------------------------------------------------------------------
 if has('nvim')
@@ -418,17 +430,19 @@ if has('nvim')
 endif
 
 nmap <silent> <leader>t :FZF<cr>
-" }}}
+nnoremap <silent> <c-b>  :Buffers<cr>
 
+" }}}
+" -----------------------------------------------------------------------
 " DelimitMate {{{
 " -----------------------------------------------------------------------
 let g:delimitMate_expand_cr = 1
 " }}}
-
+" -----------------------------------------------------------------------
 " Lightline {{{
 " -----------------------------------------------------------------------
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'default',
       \ 'active': {
       \   'left':  [
       \     [ 'mode' ], [ 'fugitive' ], [ 'filename' ], [ 'go', 'ctrlpmark' ],
