@@ -5,12 +5,12 @@ if (( ! $+commands[kubectl] )); then
   return 1
 fi
 
-export KUBE_ROOT=${GOPATH}/src/k8s.io/kubernetes
+kube_root=${GOPATH}/src/k8s.io/kubernetes
 
 # Man path
 # -----------------------------------------------------------------------------
-if [[ ! "$MANPATH" == *${KUBE_ROOT}/docs/man* && -d "${KUBE_ROOT}/docs/man" ]]; then
-  manpath+=("${KUBE_ROOT}/docs/man")
+if [[ ! "$MANPATH" == *${kube_root}/docs/man* && -d "${kube_root}/docs/man" ]]; then
+  manpath+=("${kube_root}/docs/man")
 fi
 
 # Completion

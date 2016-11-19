@@ -1,24 +1,30 @@
 # vim: ft=zsh :
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_DEFAULT_OPTS='--color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4'
+export FZF_DEFAULT_OPTS='
+--color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4
+--bind=ctrl-u:page-up
+--bind=ctrl-d:page-down
+'
+
+fzf_root="${HOME}/.fzf"
 
 # Setup fzf
 # ------------------------------------------------------------------------------
-if [[ ! "$PATH" == *${HOME}/.fzf/bin* ]]; then
-  path+=("${HOME}/.fzf/bin")
+if [[ ! "$PATH" == *${fzf_root}/bin* ]]; then
+  path+=("${fzf_root}/bin")
 fi
 
 # Man path
 # ------------------------------------------------------------------------------
-if [[ ! "$MANPATH" == *${HOME}/.fzf/man* && -d "${HOME}/.fzf/man" ]]; then
-  manpath+=("${HOME}/.fzf/man")
+if [[ ! "$MANPATH" == *${fzf_root}/man* && -d "${fzf_root}/man" ]]; then
+  manpath+=("${fzf_root}/man")
 fi
 
 # Auto-completion
 # ------------------------------------------------------------------------------
-[[ $- == *i* ]] && source "${HOME}/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "${fzf_root}/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------------------------------------------------------------------------
-# source "${HOME}/.fzf/shell/key-bindings.zsh"
+# source "${fzf_root}/.fzf/shell/key-bindings.zsh"

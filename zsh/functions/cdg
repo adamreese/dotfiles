@@ -6,6 +6,5 @@
 #
 # uses https://github.com/motemen/ghq to list repos
 #
-cd "${GOPATH}/src"
-_dir=$(ghq list ${1-}| fzf --select-1) && cd "$_dir"
+_dir=$(ghq list ${1-}| fzf --select-1) && cd "${GOPATH}/src/${_dir}"
 
