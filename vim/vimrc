@@ -122,13 +122,42 @@ if has('folding')
 endif
 " }}}
 " -----------------------------------------------------------------------
-" Persistent Undo {{{
+" Temp Files {{{
 " -----------------------------------------------------------------------
+if exists('*mkdir') && !isdirectory($HOME.'/.vim/tmp')
+  call mkdir($HOME.'/.vim/tmp')
+  call mkdir($HOME.'/.vim/undo')
+  call mkdir($HOME.'/.vim/view')
+endif
+
+if has('mksession')
+  set viewdir=~/.vim/tmp/view         " override ~/.vim/view default
+  set viewoptions=cursor,folds        " save/restore just these (with `:{mk,load}view`)
+endif
+
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
-  set undofile                         " actually use undo files
-  set undodir=~/.vim/undo " keep undo files out of the way
+  if exists('$SUDO_USER')
+    set noundofile                    " don't create root-owned files
+  else
+    set undofile                      " actually use undo files
+    set undodir=$HOME/.vim/tmp/undo   " keep undo files out of the way
+  endif
+endif
+
+if exists('$SUDO_USER')
+  if has('nvim')
+    set shada=
+  else
+    set viminfo=                      " don't create root-owned files
+  endif
+else
+  if has('nvim')
+    set shada+=n$HOME/.vim/tmp/main.shada
+  else
+    set viminfo+=n$HOME/.vim/tmp/viminfo
+  endif
 endif
 " }}}
 " -----------------------------------------------------------------------
@@ -316,6 +345,8 @@ if has('autocmd')
   autocmd vimrc InsertLeave * :setlocal hlsearch
 
   autocmd vimrc BufEnter term://* startinsert
+
+  autocmd vimrc CursorHold * if exists(':rshada') | rshada | wshada | endif
 endif
 " }}}
 " =======================================================================
@@ -411,7 +442,7 @@ map <leader>tt :TagbarToggle<cr>
 " -----------------------------------------------------------------------
 if executable('ag')
   let &grepprg='ag --nogroup --nocolor --vimgrep'
-  let g:ackprg = 'ag --smart-case --vimgrep'
+  let g:ag_prg='ag --column --smart-case --nogroup --nocolor'
 
   map <leader>a :Ag<space>
   map <leader>a* :call SearchWordWithAg()<CR>
@@ -480,6 +511,32 @@ let g:lightline = {
       \   'right': '|',
       \ },
       \ }
+" }}}
+" -----------------------------------------------------------------------
+" Disable default plugins {{{
+" -----------------------------------------------------------------------
+let g:loaded_gzip              = 1
+let g:loaded_tar               = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_zip               = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_rrhelper          = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_vimball           = 1
+let g:loaded_vimballPlugin     = 1
+let g:loaded_getscript         = 1
+let g:loaded_getscriptPlugin   = 1
+let g:loaded_netrw             = 1
+let g:loaded_netrwPlugin       = 1
+let g:loaded_netrwSettings     = 1
+let g:loaded_netrwFileHandlers = 1
+let g:loaded_matchparen        = 1
+let g:loaded_LogiPat           = 1
+let g:loaded_logipat           = 1
+let g:loaded_tutor_mode_plugin = 1
+let g:loaded_spellfile_plugin  = 1
+let g:loaded_man               = 1
+let g:loaded_matchit           = 1
 " }}}
 " }}}
 

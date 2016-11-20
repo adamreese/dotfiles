@@ -101,7 +101,7 @@ function! statusline#StatusLineLineInfo() abort
   elseif expand('%:f') =~? '^term:\/\/'
     return ''
   endif
-  return printf('%d/%d', line('.'), line('$') )
+  return printf('%3d:%-2d', line('.'), col('.'))
 endfunction
 
 function! statusline#lightlineLineInfo() abort
