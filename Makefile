@@ -11,6 +11,7 @@ shell:
 	ln -fs $(DOTFILES)/zlogin ${HOME}/.zlogin
 	ln -fs $(DOTFILES)/zlogout ${HOME}/.zlogout
 	ln -fs $(DOTFILES)/ackrc ${HOME}/.ackrc
+	ln -fs $(DOTFILES)/agignore ${HOME}/.agignore
 	ln -fs $(DOTFILES)/ctags ${HOME}/.ctags
 	ln -fs ${DOTFILES}/aliases ${HOME}/.aliases
 	ln -fs ${DOTFILES}/agignore ${HOME}/.agignore
@@ -19,13 +20,12 @@ tmux:
 	ln -fs $(DOTFILES)/tmux.conf ${HOME}/.tmux.conf
 _vim:
 	ln -fns $(DOTFILES)/vim ${HOME}/.vim
-	ln -fs $(DOTFILES)/vimrc ${HOME}/.vimrc
+	ln -fns $(DOTFILES)/vim ${HOME}/.config/nvim
 	ln -fs $(DOTFILES)/gvimrc ${HOME}/.gvimrc
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 _ruby:
 	ln -fs $(DOTFILES)/irbrc ${HOME}/.irbrc
 	ln -fs $(DOTFILES)/pryrc ${HOME}/.pryrc
-	ln -fs $(DOTFILES)/rdebugrc ${HOME}/.rdebugrc
 	ln -fs ${DOTFILES}/gemrc ${HOME}/.gemrc
 	ln -fs ${DOTFILES}/rspec ${HOME}/.rspec
 _git:

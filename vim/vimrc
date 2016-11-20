@@ -1,66 +1,88 @@
 " =======================================================================
-" ~/.vimrc
+" Plugins {{{
 " =======================================================================
+call plug#begin('~/.config/vim/plugged')
 
-" Plugin Initialization {{{
+Plug 'Raimondi/delimitMate'
+Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
+Plug 'benekastah/neomake',      { 'on': ['Neomake'] }
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/vim-go',            { 'for': 'go' }
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'slack/vim-align'
+Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
+Plug 'w0ng/vim-hybrid'
+Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
+
+" Plug 'SirVer/ultisnips'
+
+if has('nvim')
+  function! DoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
+  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
+else
+  Plug 'Shougo/neocomplete'
+endif
+
+call plug#end()
+" }}}
+" =======================================================================
+" Settings {{{
+" =======================================================================
+" General {{{
 " -----------------------------------------------------------------------
-" This loads all the plugins specified in ~/.vim/vimrc.bundles
-if filereadable(expand("~/.vim/vimrc.bundles"))
-  source ~/.vim/vimrc.bundles
+set encoding=utf-8
+scriptencoding utf-8
+
+set autowrite                " Automatically save before :next, :make etc.
+set autoread                 " Set to auto read when a file is changed from the outside
+set hidden
+set noswapfile               " Don't use swapfile
+set magic                    " For regular expressions turn magic on
+set nobackup                 " Don't create annoying backup files
+set noerrorbells
+set novisualbell
+set shell=$SHELL
+set ttyfast
+if &compatible
+  set nocompatible
 endif
 " }}}
-
-" General Config {{{
 " -----------------------------------------------------------------------
-if !has('nvim')
-  set nocompatible
-  filetype off
-  filetype plugin indent on
-
-  set ttyfast
-  set ttymouse=xterm2
-  set ttyscroll=3
-
-  set laststatus=2
-  set encoding=utf-8              " Set default encoding to UTF-8
-  set autoread                    " Reload files changed outside vim
-  set autoindent
-  set backspace=indent,eol,start  " Allow backspace in insert mode
-  set incsearch                   " Shows the match while typing
-  set hlsearch                    " Highlight search results
-endif
-
-set fileformats+=mac
-set gcr=a:blinkon0         " Disable cursor blink
-set hidden                 " Better buffer management
-set history=1000           " Store lots of :cmdline history
-set number                 " Line numbers are good
-set shell=/bin/bash
-set showcmd                " Show incomplete cmds down the bottom
-set scrolloff=7            " Set 7 lines to the cursor - when moving vertically using j/k
-set visualbell             " No sounds
-set noerrorbells           " No beeps
-
-set splitright             " Split vertical windows right to the current windows
-set splitbelow             " Split horizontal windows below to the current windows
-set nocursorcolumn         " Do not highlight column
-set nocursorline           " Do not highlight line
-set ignorecase             " Ignore case when searching
-set magic                  " For regular expressions turn magic on
-set mat=2                  " How many tenths of a second to blink when matching brackets
-set noshowmatch            " Don't show matching brackets when text indicator is over them
-set smartcase              " When searching try to be smart about cases
-set tabpagemax=15          " Only show 15 tabs
-set linebreak              " Wrap lines at convenient points
-set noshowmode             " We show the mode with airline or lightline
-set noswapfile             " Don't use swapfile
-set nobackup               " Don't create annoying backup files
-set nowb
-set lazyredraw             " Don't redraw while executing macros (good performance config)
-set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
-
-" Indentation {{{
+" Search {{{
 " -----------------------------------------------------------------------
+set ignorecase               " Search case insensitive...
+set smartcase                " ... but not it begins with upper case
+" }}}
+" -----------------------------------------------------------------------
+" Performance " {{{
+" -----------------------------------------------------------------------
+set lazyredraw " only redraw when needed
+if exists('&ttyfast') | set ttyfast | endif " if we have a fast terminal
+set updatetime=750 " reduce vim delay clock
+" set timeout timeoutlen=400
+set ttimeout ttimeoutlen=100
+" }}}
+" -----------------------------------------------------------------------
+" Formatting {{{
+" -----------------------------------------------------------------------
+set autoindent
 set smartindent
 set smarttab
 set shiftwidth=2          " 2 spaces per tab
@@ -68,75 +90,118 @@ set softtabstop=2
 set tabstop=2
 set expandtab             " Use spaces instead of tabs
 " }}}
-
-" Completion {{{
 " -----------------------------------------------------------------------
-set wildmenu                " enable ctrl-n and ctrl-p to scroll thru matches
-set wildmode=list:longest
-set complete-=i             " do not scan included files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.log,.git
-set completeopt=longest,menuone
-" }}}
-
-" Scrolling {{{
+" Wildmenu {{{
 " -----------------------------------------------------------------------
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-" }}}
-
-" Time out on key codes but not mappings.
-" Basically this makes terminal Vim work sanely.
-if !has('gui_running')
-  set notimeout
-  set ttimeout
-  set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-  augroup END
+if has('wildmenu')
+  set wildmode=list:longest,full
+  set wildoptions=tagfile
+  set wildignorecase
+  set wildignore+=.git,*.pyc,*.spl,*.o,*.out,*~,#*#,%*
+  set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
 endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
-
 " }}}
-
-" UI {{{
 " -----------------------------------------------------------------------
-set t_Co=256
-syntax enable
-set background=dark
+" Folding {{{
+" -----------------------------------------------------------------------
+if has('folding')
+  set foldmethod=marker
+  set foldtext=FoldText()
 
-let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-colorscheme hybrid
-
-highlight clear SignColumn " SignColumn should match background
+  " See: http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+  function! FoldText() "{{{
+    let l:line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    let l:lines_count = v:foldend - v:foldstart + 1
+    let l:lines_count_text = '| ' . printf('%10s', l:lines_count . ' lines') . ' |'
+    let l:foldchar = matchstr(&fillchars, 'fold:\zs.')
+    let l:foldtextstart = strpart('+' . repeat(l:foldchar, v:foldlevel*2) . l:line, 0, (winwidth(0)*2)/3)
+    let l:foldtextend = l:lines_count_text . repeat(l:foldchar, 8)
+    let l:foldtextlength = strlen(substitute(l:foldtextstart . l:foldtextend, '.', 'x', 'g')) + &foldcolumn
+    return l:foldtextstart . repeat(l:foldchar, winwidth(0)-l:foldtextlength) . l:foldtextend
+  endfunction "}}}
+endif
 " }}}
-
+" -----------------------------------------------------------------------
 " Persistent Undo {{{
 " -----------------------------------------------------------------------
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
+  set undofile                         " actually use undo files
+  set undodir=~/.vim/undo " keep undo files out of the way
 endif
 " }}}
-
-" Mappings {{{
 " -----------------------------------------------------------------------
-let mapleader=","
+" Behavior {{{
+" -----------------------------------------------------------------------
+set backspace=indent,eol,start
+set completeopt+=menuone
+set completeopt-=preview
+set linebreak                " Wrap lines at convenient points
+set scrolloff=8              " Start scrolling when we're 8 lines away from margins
+set sidescroll=1
+set sidescrolloff=15
+set pumheight=20             " Pop-up menu's line height
+set splitbelow               " Split horizontal windows below to the current windows
+set splitright               " Split vertical windows right to the current windows
+" }}}
+" -----------------------------------------------------------------------
+" UI {{{
+" -----------------------------------------------------------------------
+set nocursorcolumn           " speed up syntax highlighting
+set nocursorline
+set noshowmode               " Don't need to show mode since we have lightline
+set number                   " Show line numbers
+set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
+set display=lastline
+set laststatus=2
 
-" Edit the vimrc file
-nmap <leader>ev :tabedit $MYVIMRC<CR>
-nmap <leader>evb :tabedit $MYVIMRC.bundles<CR>
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
 
+" Sets the terminal title nicely.
+set title titlestring+=%{fnamemodify(getcwd(),':t')}\ -\ VIM
+
+" disable background color erase
+if &term =~ '256color' | set t_ut= | endif
+
+" Enable true color
+if exists('+termguicolors') | set termguicolors | endif
+
+syntax enable
+set background=dark
+
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+colorscheme hybrid
+
+highlight clear SignColumn
+highlight clear FoldColumn
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" Don't try to highlight long lines.
+" This fixes some performance problems on huge files.
+set synmaxcol=800
+
+" Set terminal colors
+let s:num = 0
+for s:color in [
+      \ '#2d3c46', '#a54242', '#8c9440', '#de935f',
+      \ '#5f819d', '#85678f', '#5e8d87', '#6c7a80',
+      \ '#425059', '#cc6666', '#b5bd67', '#f0c674',
+      \ '#81a2be', '#b294ba', '#8abeb7', '#c5c8c6',
+      \ ]
+  let g:terminal_color_{s:num} = s:color
+  let s:num += 1
+endfor
+" }}}
+" }}}
+" =======================================================================
+" Mappings {{{
+" =======================================================================
 " disable ex mode
 map Q <Nop>
 
@@ -154,10 +219,11 @@ vnoremap > >gv
 noremap j gj
 noremap k gk
 
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Better split switching
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -168,91 +234,129 @@ nnoremap N Nzzzv
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
 
-" Easy buffer navigation
-noremap <leader>bp :bprevious<cr>
-noremap <leader>bn :bnext<cr>
+" QuickFix navigation
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
 
-" Splits ,v and ,h to open new splits (vertical and horizontal)
-nnoremap <leader>v <C-w>v<C-w>l
-nnoremap <leader>h <C-w>s<C-w>j
+" Location list navigation
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
 
-" Save and quit
-nmap <leader>wq :w!<cr>:bdelete<cr>
+" Error mnemonic (Neomake uses location list)
+nnoremap ]e :lnext<CR>
+nnoremap [e :lprevious<CR>
 
-" Tabs
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
+" Common typos
+command! W w
+command! Q q
+command! WQ wq
+command! Wq wq
+
+" Leader Commands
+" -----------------------------------------------------------------------
+let g:mapleader = ','
+
+" Edit vimrc
+nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" Fast saving
+nnoremap <leader>w :w!<cr>
+nnoremap <silent> <leader>q :q!<CR>
+
+" Remove search highlight
+nnoremap <leader><CR> :nohlsearch<CR>
+
+" Source the current Vim file
+nnoremap <leader>pr :so %<CR>
 
 " Format buffer
-map <leader>= ggVG=<CR>
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
-
-" Faster saving
-map <silent> <leader>w :w<cr>
-map <silent> <leader>wa :wa<cr>
-
-map <silent> <leader>q :q<cr>
-
-map <silent> <leader>bn :bnext<cr>
-map <silent> <leader>bd :bdelete<cr>
+nmap <leader>= ggVG=<CR>
 
 " Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
-
-" Delete empty lines
-nmap <leader>del :g/^$/d<cr>
+nmap <leader>ss :setlocal spell!<cr>
 
 " Sorting
-map <leader>srt :sort<cr>
+vnoremap <leader>srt :sort<cr>
 
-" remove trailing whitespace automatically
-autocmd BufWritePre * :%s/\s\+$//e
+" Make horizontal line
+nnoremap <leader>L mzO<esc>79i-<esc>`z
 
-map <leader>r19 :s/\v:([0-9a-z_]+)\s+\=\>\s+/\1: /g<CR>
-map <leader>r18 :s/\v([0-9a-z_"']+):\s+(.*)/:\1 => \2/g<CR>
+" Copy to system clipboard
+nnoremap <silent> <leader>y "*y
+nnoremap <silent> <leader>Y "*Y
+vnoremap <silent> <leader>y "*y
+vnoremap <silent> <leader>Y "*Y
 
-" Find merge conflict markers
-map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
-" }}}
-
-" Functions {{{
-" -----------------------------------------------------------------------
-if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
-  runtime! macros/matchit.vim
+if has('nvim')
+  " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
+  " the top again
+  tnoremap <leader>q <C-\><C-n>gg<cr>
 endif
-" }}}
 
-" Auto save {{{
-" -----------------------------------------------------------------------
-if has("autocmd")
+" }}}
+" =======================================================================
+" Autocmds {{{
+" =======================================================================
+if has('autocmd')
+  augroup vimrc
+    autocmd!
+  augroup END
+
   " Save files when vim loses focus
-  autocmd FocusLost * silent! wall
+  autocmd vimrc FocusLost * silent! wall
+
+  " remove trailing whitespace automatically
+  autocmd vimrc BufWritePre * :%s/\s\+$//e
+
+  " check timestamp more for 'autoread'
+  autocmd vimrc WinEnter * checktime
+
+  autocmd vimrc InsertEnter * :setlocal nohlsearch
+  autocmd vimrc InsertLeave * :setlocal hlsearch
+
+  autocmd vimrc BufEnter term://* startinsert
 endif
 " }}}
-
+" =======================================================================
 " Plugin Settings {{{
+" =======================================================================
+" Neomake {{{
 " -----------------------------------------------------------------------
+let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'WarningMsg' }
+let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'ErrorMsg'   }
 
-" ag {{{
-" -----------------------------------------------------------------------
-set grepprg=ag\ --nogroup\ --nocolor
-if &grepformat !~# '%c'
-  set grepformat^=%f:%l:%c:%m
-endif
+let s:neomake_active = 1
+function! NeomakeToggle() "{{{
+  let s:neomake_active = !s:neomake_active
+  echom s:neomake_active ? 'Enabled Neomake' : 'Disabled Neomake'
+endfunction "}}}
+command! NeomakeToggle call NeomakeToggle()
 
-map <leader>a :Ag<space>
-map <leader>a* :Ag<space><cword><CR>
-"let g:ag_prg="ag --vimgrep --smart-case --nogroup --nocolor --skip-vcs-ignores"
+function! s:run_neomake() "{{{
+  let l:filetypes = [
+        \ 'css', 'go', 'html', 'json', 'markdown', 'ruby',
+        \ 'sh', 'vim', 'yaml'
+        \ ]
+  if s:neomake_active && empty(&buftype) && index(l:filetypes, &filetype) > -1
+    Neomake
+  endif
+endfunction "}}}
+autocmd vimrc BufWritePost * call <SID>run_neomake()
 " }}}
-
+" -----------------------------------------------------------------------
+" deoplete {{{
+" -----------------------------------------------------------------------
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#align_class = 1
+let g:deoplete#sources#go#use_cache = 1
+let g:deoplete#sources#go#json_directory = $HOME.'/.cache/nvim/deoplete-go'
+" }}}
+" -----------------------------------------------------------------------
 " vim-align {{{
 " -----------------------------------------------------------------------
 map <leader>ah :Align =><CR>
@@ -260,10 +364,9 @@ nnoremap <leader>a= :Align =<CR>
 map <leader>a# :Align #<CR>
 map <leader>a{ :Align {<CR>
 " }}}
-
+" -----------------------------------------------------------------------
 " CtrlP {{{
 " -----------------------------------------------------------------------
-map <leader>cf :ClearCtrlPCache<CR>
 map <leader>gb :CtrlPBuffer<CR>
 map <leader>gt :CtrlPBufTag<CR>
 map <leader>gc :CtrlP app/controllers<CR>
@@ -273,98 +376,111 @@ map <leader>gl :CtrlP lib<CR>
 map <leader>gs :CtrlP spec<CR>
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_user_command = 'ag -Q %s -l --nocolor --hidden -g "" --ignore _output'
 
 " ag is fast enough that CtrlP doesn't need to cache
 let g:ctrlp_use_caching = 0
 
 let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " }}}
-
+" -----------------------------------------------------------------------
 " NERDTree {{{
 " -----------------------------------------------------------------------
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeIgnore=['\.git$', '\.gitignore']
+let g:NERDTreeShowHidden=1
+let g:NERDTreeMapJumpNextSibling='<Nop>'
+let g:NERDTreeMapJumpPrevSibling='<Nop>'
 let g:NERDTreeMinimalUI=1
+
 map <leader>e :NERDTreeFind<CR>
 " }}}
-
+" -----------------------------------------------------------------------
 " EasyAlign {{{
 " -----------------------------------------------------------------------
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 " }}}
-
+" -----------------------------------------------------------------------
 " Tagbar {{{
 " -----------------------------------------------------------------------
 map <leader>tt :TagbarToggle<cr>
 " }}}
-
-" Airline {{{
 " -----------------------------------------------------------------------
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tagbar#enabled = 0
-let g:airline_left_sep=''
-let g:airline_left_alt_sep=''
-let g:airline_right_sep=''
-let g:airline_right_alt_sep=''
-" }}}
+" AG {{{
+" -----------------------------------------------------------------------
+if executable('ag')
+  let &grepprg='ag --nogroup --nocolor --vimgrep'
+  let g:ackprg = 'ag --smart-case --vimgrep'
 
-" Auto Complete {{{
+  map <leader>a :Ag<space>
+  map <leader>a* :call SearchWordWithAg()<CR>
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
+endif
+" }}}
+" -----------------------------------------------------------------------
+" FZF {{{
 " -----------------------------------------------------------------------
 if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
-  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
-
-  " Use partial fuzzy matches like YouCompleteMe
-  call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-else
-  " neocomplete
-  let g:acp_enableAtStartup = 0                           " Disable AutoComplPop
-  let g:neocomplete#enable_at_startup = 1                 " Use neocomplete
-  let g:neocomplete#enable_smart_case = 0                 " Use smartcase
-  let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-  let g:neocomplete#max_list = 15
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-
-  let g:neocomplete#sources#omni#input_patterns.go = '\%([^.[:space:]]\.\|\h\)\w*'
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+nmap <silent> <leader>t :FZF<cr>
+nnoremap <silent> <c-b>  :Buffers<cr>
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Neosnippet
-" -----------------------------------------------------------------------
-" Plugin key-mappings.
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
 " }}}
-
-" Syntastic {{{
 " -----------------------------------------------------------------------
-nmap <silent> gl <ESC>:w<CR>:SyntasticCheck<CR>:Errors<CR>
+" DelimitMate {{{
+" -----------------------------------------------------------------------
+let g:delimitMate_expand_cr = 1
 " }}}
-
+" -----------------------------------------------------------------------
+" Lightline {{{
+" -----------------------------------------------------------------------
+let g:lightline = {
+      \ 'colorscheme': 'default',
+      \ 'active': {
+      \   'left':  [
+      \     [ 'mode' ], [ 'fugitive' ], [ 'filename' ], [ 'go', 'ctrlpmark' ],
+      \   ],
+      \   'right': [
+      \     [ 'neomake', 'lineinfo' ], [ 'fileformat', 'fileencoding' ], [ 'filetype' ],
+      \   ]
+      \ },
+      \ 'inactive': {
+      \   'left': [
+      \     [ ], [ 'filename' ], [ ]
+      \   ],
+      \   'right': [
+      \     [ 'lineinfo' ], [ 'fileformat', 'fileencoding' ], [ 'filetype' ],
+      \   ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive':     'statusline#lightlineFugitive',
+      \   'filename':     'statusline#lightlineFilename',
+      \   'fileformat':   'statusline#lightlineFileformat',
+      \   'filetype':     'statusline#lightlineFiletype',
+      \   'fileencoding': 'statusline#lightlineFileencoding',
+      \   'mode':         'statusline#lightlineMode',
+      \   'go':           'statusline#lightlineGo',
+      \   'ctrlpmark':    'statusline#CtrlPMark',
+      \ },
+      \ 'component_expand': {
+      \   'neomake':   'statusline#lightlineNeomake',
+      \   'lineinfo':  'statusline#lightlineLineInfo',
+      \ },
+      \ 'component_type': {
+      \   'neomake': 'error',
+      \ },
+      \ 'subseparator': {
+      \   'left': '|',
+      \   'right': '|',
+      \ },
+      \ }
+" }}}
 " }}}
 
 " vim: foldmethod=marker
