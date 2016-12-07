@@ -5,7 +5,7 @@ function! s:is_filetype_mode_filetype() abort
 endfunction
 
 function! s:is_no_lineinfo_filetype() abort
-  return index(['nerdtree', 'tagbar', 'fzf'], &filetype) >= 0
+  return index(['nerdtree', 'tagbar'], &filetype) >= 0
 endfunction
 
 function! s:is_no_fileformat_filetype() abort
@@ -20,9 +20,17 @@ function! s:is_readonly_filetype() abort
   return index(['nerdtree', 'help', 'tagbar', 'man', 'qf'], &filetype) >= 0
 endfunction
 
+function! s:is_terminal() abort
+  return expand('%:f') =~? '^term:\/\/'
+endfunction
+
+function! s:is_ctrlp() abort
+  return expand('%:f') ==# 'ControlP'
+endfunction
+
 function! s:readonly() abort
   if &readonly && !s:is_readonly_filetype()
-    return ' '
+    return ' [RO]'
   endif
   return ''
 endfunction
@@ -32,14 +40,18 @@ function! s:filename(fmt) abort
     return ''
   endif
 
-  let l:fname = expand(a:fmt)
-  if l:fname =~? '^term:\/\/'
+  if s:is_terminal()
     return s:filename('%:t')
-  elseif l:fname ==# 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-    return g:lightline.ctrlp_item
-  elseif l:fname != ''
-    return l:fname
   endif
+
+  if s:is_ctrlp() && has_key(g:lightline, 'ctrlp_item')
+    return g:lightline.ctrlp_item
+  endif
+
+  if len(expand(a:fmt)) > 0
+    return expand(a:fmt)
+  endif
+
   return '[No Name]'
 endfunction
 
@@ -55,7 +67,7 @@ function! s:modified() abort
 endfunction
 
 function! statusline#lightlineFilename() abort
-  return s:filename('%') . s:modified() . s:readonly()
+  return s:filename('%:.') . s:modified() . s:readonly()
 endfunction
 
 function! statusline#lightlineFugitive() abort
@@ -89,19 +101,21 @@ endfunction
 function! statusline#lightlineMode() abort
   if s:is_filetype_mode_filetype()
     return toupper(&filetype)
-  elseif expand('%:t') ==# 'ControlP'
+  elseif s:is_ctrlp()
     return 'CtrlP'
   endif
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
 function! statusline#StatusLineLineInfo() abort
-  if winwidth(0) < 70 || s:is_no_lineinfo_filetype()
+  if winwidth(0) < 70
     return ''
-  elseif expand('%:f') =~? '^term:\/\/'
+  elseif s:is_no_lineinfo_filetype()
+    return ''
+  elseif s:is_terminal()
     return ''
   endif
-  return printf('%3d:%-2d', line('.'), col('.'))
+  return printf('%d/%d☰ %3d', line('.'), line('$'), col('.'))
 endfunction
 
 function! statusline#lightlineLineInfo() abort
@@ -119,7 +133,7 @@ endfunction
 autocmd vimrc User NeomakeCountsChanged call lightline#update()
 
 function! statusline#CtrlPMark() abort
-  if expand('%:t') =~? 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+  if s:is_ctrlp() && has_key(g:lightline, 'ctrlp_item')
     call lightline#link('iR'[g:lightline.ctrlp_regex])
     return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
           \ , g:lightline.ctrlp_next], 0)

@@ -7,4 +7,4 @@ setlocal nobuflisted
 " when there are multiple windows open
 wincmd J
 
-nmap <buffer> <silent>  q :q<cr>
+nnoremap <buffer> <silent>  q :q<cr>
