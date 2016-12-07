@@ -8,4 +8,8 @@ alias -g T='| tail'
 alias -g G='| grep'
 alias -g L="| less"
 
-alias reload="exec ${SHELL} -l"
+
+reload() {
+  rm -f "${ZSH_COMPDUMP}" "${ZSH_COMPDUMP}.zwc"
+  exec ${SHELL} -l
+}

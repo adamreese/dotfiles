@@ -6,14 +6,14 @@ fpath+=(
 
 autoload -U ${HOME}/.zsh/functions/*(:t)
 
-
 # Create a cache directory if it doesn't exist.
-if [ ! -d "${ZDOTDIR:-${HOME}}/.zsh/cache" ]; then
-  mkdir -p "${ZDOTDIR:-${HOME}}/.zsh/cache"
+if [ ! -d "${ZDOTDIR:-${HOME}}/.cache/zsh" ]; then
+  mkdir -p "${ZDOTDIR:-${HOME}}/.cache/zsh"
 fi
 
 # Force starting compinit as early as possible
-autoload -Uz compinit && compinit -d "$ZSH_COMPDUMP"
+autoload -Uz compinit
+compinit -i -d "$ZSH_COMPDUMP"
 
 function compinit { }
 
