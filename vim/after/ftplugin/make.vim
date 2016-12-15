@@ -1,3 +1,6 @@
+setlocal noexpandtab
+setlocal nolist
+
 let g:tagbar_type_make = {
     \ 'ctagstype': 'make',
     \ 'kinds':[
