@@ -5,16 +5,21 @@ if (( ! $+commands[kubectl] )); then
   return 1
 fi
 
-kube_root=${GOPATH}/src/k8s.io/kubernetes
+# Aliases
+# -----------------------------------------------------------------------------
+alias k=kubectl
 
 # Man path
 # -----------------------------------------------------------------------------
-if [[ ! "$MANPATH" == *${kube_root}/docs/man* && -d "${kube_root}/docs/man" ]]; then
-  manpath+=("${kube_root}/docs/man")
-fi
+manpath+=($GOPATH/src/k8s.io/kubernetes/docs/man(N-/))
 
 # Completion
 # -----------------------------------------------------------------------------
-[[ $- == *i* ]] && source <(kubectl completion zsh)
+() {
+  local cache=${ZSH_CACHE_DIR}/kubectl.zsh
 
-alias k=kubectl
+  if [[ ! -s $cache || ${commands[kubectl]} -nt $cache ]]; then
+    kubectl completion zsh | egrep -v 'compinit' >| $cache
+  fi
+  source $cache
+}
