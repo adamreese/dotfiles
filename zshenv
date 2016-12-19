@@ -1,7 +1,29 @@
-# uncomment to profile prompt startup with zprof
-# zmodload zsh/zprof
+[[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof
 
-# Save the location of the current completion dump file.
-# Forces oh-my-zsh to use this location.
-ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.cache/zsh/zcompdump"
+typeset -gU cdpath fpath manpath path
 
+# load completion functions
+fpath=(
+  ${HOME}/.zsh/{completion,functions}(N-/)
+  /usr/local/share/zsh/site-functions(N-/)
+  /usr/local/share/zsh-completions(N-/)
+  ${fpath}
+)
+autoload -Uz ${HOME}/.zsh/functions/*(N:t)
+
+path=(
+  # mkdir .git/safe in the root of repositories you trust
+  .git/safe/../../bin
+  ${HOME}/.dotfiles/bin(N-/)
+
+  # GNU Coreutils
+  /usr/local/opt/coreutils/libexec/gnubin(N-/)
+  /usr/local/{bin,sbin}
+  ${path}
+)
+
+manpath=(
+  # GNU Coreutils
+  /usr/local/opt/coreutils/libexec/gnuman(N-/)
+  ${manpath}
+)

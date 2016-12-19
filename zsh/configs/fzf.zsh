@@ -11,15 +11,11 @@ fzf_root="${HOME}/.fzf"
 
 # Setup fzf
 # ------------------------------------------------------------------------------
-if [[ ! "$PATH" == *${fzf_root}/bin* ]]; then
-  path+=("${fzf_root}/bin")
-fi
+path+=(${fzf_root}/bin(N-/))
 
 # Man path
 # ------------------------------------------------------------------------------
-if [[ ! "$MANPATH" == *${fzf_root}/man* && -d "${fzf_root}/man" ]]; then
-  manpath+=("${fzf_root}/man")
-fi
+manpath+=(${fzf_root}/man(N-/))
 
 # Auto-completion
 # ------------------------------------------------------------------------------
@@ -28,3 +24,5 @@ fi
 # Key bindings
 # ------------------------------------------------------------------------------
 # source "${fzf_root}/.fzf/shell/key-bindings.zsh"
+
+unset fzf_root
