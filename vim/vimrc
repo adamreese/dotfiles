@@ -421,7 +421,7 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
 " NERDTree {{{
 " -----------------------------------------------------------------------
 let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc']
+let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc', '^BUILD$']
 let g:NERDTreeShowHidden=1
 let g:NERDTreeMapJumpNextSibling='<Nop>'
 let g:NERDTreeMapJumpPrevSibling='<Nop>'
@@ -446,7 +446,7 @@ map <leader>tt :TagbarToggle<cr>
 " -----------------------------------------------------------------------
 if executable('ag')
   let &grepprg='ag --nogroup --nocolor --vimgrep'
-  let g:ag_prg='ag --column --smart-case --nogroup --nocolor'
+  let g:ag_prg='ag --column --nogroup --nocolor'
 
   map <leader>a :Ag<space>
   map <leader>a* :call SearchWordWithAg()<CR>
