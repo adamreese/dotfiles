@@ -296,6 +296,9 @@ nmap <leader>ss :setlocal spell!<cr>
 " Sorting
 vnoremap <leader>srt :sort<cr>
 
+" Reselect last-pasted text
+nnoremap gp `[v`]
+
 " Make horizontal line
 nnoremap <leader>L mzO<esc>79i-<esc>`z
 
@@ -304,6 +307,8 @@ nnoremap <silent> <leader>y "*y
 nnoremap <silent> <leader>Y "*Y
 vnoremap <silent> <leader>y "*y
 vnoremap <silent> <leader>Y "*Y
+
+nnoremap <silent> <leader>,p "*p
 
 if has('nvim')
   " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
