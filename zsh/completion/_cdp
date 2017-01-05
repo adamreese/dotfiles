@@ -1,2 +1,2 @@
 #compdef cdp
-_files -W ${HOME}/p/ -/
+_files -W ${HOME}/p/

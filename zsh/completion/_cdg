@@ -1,2 +1,2 @@
 #compdef cdg
-_files -W "${GOPATH}/src/github.com" -/
+_files -W "${GOPATH}/src/github.com"
