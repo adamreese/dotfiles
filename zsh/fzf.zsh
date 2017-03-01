@@ -1,5 +1,5 @@
-# vim: ft=zsh :
-
+# zsh fzf
+# ------------------------------------------------------------------------------
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_DEFAULT_OPTS='
 --color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4
@@ -7,22 +7,17 @@ export FZF_DEFAULT_OPTS='
 --bind=ctrl-d:page-down
 '
 
-fzf_root="${HOME}/.fzf"
-
-# Setup fzf
+# Setup FZF
 # ------------------------------------------------------------------------------
-path+=(${fzf_root}/bin(N-/))
+path+=(${HOME}/.fzf/bin(N-/))
 
 # Man path
 # ------------------------------------------------------------------------------
-manpath+=(${fzf_root}/man(N-/))
+manpath+=(${HOME}/.fzf/man(N-/))
 
-# Auto-completion
+# Completion
 # ------------------------------------------------------------------------------
-[[ $- == *i* ]] && source "${fzf_root}/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "${HOME}/.fzf/shell/completion.zsh" 2> /dev/null
 
-# Key bindings
 # ------------------------------------------------------------------------------
-# source "${fzf_root}/.fzf/shell/key-bindings.zsh"
-
-unset fzf_root
+# vim:ft=zsh

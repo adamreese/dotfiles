@@ -1,0 +1,40 @@
+# Return if reqs are not found
+if (( ! $+commands[gometalinter] )); then
+  return 1
+fi
+
+gml() {
+  typeset -a args=("./...")
+
+  if (( $# )); then
+    args=($@)
+  fi
+
+  command gometalinter \
+    --disable-all \
+    --enable deadcode \
+    --enable errcheck \
+    --enable goconst \
+    --enable goimports \
+    --enable gosimple \
+    --enable ineffassign \
+    --enable interfacer \
+    --enable misspell \
+    --enable staticcheck \
+    --enable structcheck \
+    --enable unconvert \
+    --enable unused \
+    --enable varcheck \
+    --enable vet \
+    --enable vetshadow \
+    --exclude 'error return value not checked.*(Close|Log|Print|Encode).*\(errcheck\)$' \
+    --exclude '.*_test\.go:.*error return value not checked.*\(errcheck\)$' \
+    --tests \
+    --vendor \
+    --deadline 2m \
+    --concurrency=4 \
+    $args
+}
+
+# -----------------------------------------------------------------------------
+# vim:ft=zsh

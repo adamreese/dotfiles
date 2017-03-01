@@ -5,3 +5,4 @@ vim/tmp
 zsh/cache
 zsh/configs/local.zsh
 *.zwc
+zsh/local.zsh

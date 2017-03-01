@@ -1,0 +1,6 @@
+[submodule "zsh/modules/zshmarks"]
+	path = zsh/modules/zshmarks
+	url = https://github.com/jocelynmallon/zshmarks.git
+[submodule "zsh/modules/history-substring-search/external"]
+	path = zsh/modules/history-substring-search/external
+	url = https://github.com/zsh-users/zsh-history-substring-search.git

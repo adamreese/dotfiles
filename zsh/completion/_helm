@@ -1,0 +1,177 @@
+#compdef helm
+
+_helm_charts() {
+  helm search | awk '{print 1}'
+        _alternative ':go packages:_path_files -W "$p/src" -/'
+}
+
+_helm_get() {
+  local curcontext="$curcontext" state line
+  typeset -A opt_args
+
+  _arguments -C \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+
+      local -a subcommands
+      subcommands=(
+        'hooks:download all hooks for a named release'
+        'manifest:download the manifest for a named release'
+        'values:download the values file for a named release'
+      )
+      _describe -t commands 'helm get' subcommands
+      _arguments \
+        '--revision[get the named release with revision]'
+      ;;
+
+    (options)
+      case $line[1] in
+        (hooks)
+          ;;
+        (manifest)
+          ;;
+        (values)
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_helm_inspect() {
+  local curcontext="$curcontext" state line
+  typeset -A opt_args
+
+  _arguments -C \
+    ':command:->command' \
+    '*::options:->options'
+
+  case $state in
+    (command)
+
+      local -a subcommands
+      subcommands=(
+        'chart:shows inspect chart'
+        'values:shows inspect values'
+      )
+      _describe -t commands 'helm inspect' subcommands
+      _arguments \
+        '--keyring[path to the keyring containing public verification keys (default "$HOME/.gnupg/pubring.gpg")]' \
+        '--verify[verify the provenance data for this chart]' \
+        '--version[version of the chart. By default, the newest chart is shown]'
+      ;;
+
+    (options)
+      case $line[1] in
+        (chart)
+          ;;
+        (values)
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_helm() {
+  local context curcontext=$curcontext state line ret=1
+  declare -A opt_args
+
+  local -a commands
+
+  commands=(
+  "create:create a new chart with the given name"
+  "delete:given a release name, delete the release from Kubernetes"
+  "dependency:manage a chart's dependencies"
+  "fetch:download a chart from a repository and (optionally) unpack it in local directory"
+  "get:download a named release"
+  "history:fetch release history"
+  "home:displays the location of HELM_HOME"
+  "init:initialize Helm on both client and server"
+  "inspect:inspect a chart"
+  "install:install a chart archive"
+  "lint:examines a chart for possible issues"
+  "list:list releases"
+  "package:package a chart directory into a chart archive"
+  "repo:add, list, remove, update, and index chart repositories"
+  "rollback:roll back a release to a previous revision"
+  "search:search for a keyword in charts"
+  "serve:start a local http web server"
+  "status:displays the status of the named release"
+  "upgrade:upgrade a release"
+  "verify:verify that a chart at the given path has been signed and is valid"
+  "version:print the client/server version information"
+  )
+
+  _arguments -C \
+    '--debug[Print debug verbose informational messages]' \
+    '--home[The location of helm config $HELM_HOME]' \
+    '--host[address of tiller. Overrides $HELM_HOST]' \
+    '--kube-context[name of the kubeconfig context to use]' \
+    {--help,-h}'[show help]' \
+    "1: :{_describe 'helm command' commands}" \
+    '*:: :->args' \
+    && ret=0
+
+  case $state in
+    (args)
+      case $words[1] in
+        (create)
+          _arguments \
+            {-p,--starter}'[the named Helm starter scaffold'] \
+            '*:path:_path_files -/' \
+            && ret=0
+          ;;
+        (delete)
+          _arguments \
+            '--dry-run[simulate a delete]' \
+            '--no-hooks[prevent hooks from running during deletion]' \
+            '--purge[remove the release from the store and make its name free for later use]' \
+            '--timeout[time in seconds to wait for any individual kubernetes operation (like Jobs for hooks) (default 300)]' \
+            && ret=0
+          ;;
+        (dependency)
+          ;;
+        (get)
+          _helm_get
+          ;;
+        (history)
+          _arguments \
+            '--max[maximum number of revision to include in history (default 256)]' \
+            && ret=0
+          ;;
+        (inspect)
+          _helm_inspect
+          ;;
+        (install)
+          _arguments \
+            '--skip-import[When initializing skip importing from other package managers]' \
+            '--non-interactive[Disable interactive prompts]' \
+            '--dry-run[simulate an install]' \
+            '--keyring[location of public keys used for verification (default "$HOME/.gnupg/pubring.gpg")]' \
+            {-n,--name}'[release name. If unspecified, it will autogenerate one for you]' \
+            '--name-template[specify template used to name the release]' \
+            '--namespace[namespace to install the release into]' \
+            '--no-hooks[prevent hooks from running during install]' \
+            '--replace[re-use the given name, even if that name is already used. This is unsafe in production]' \
+            '--set[set values on the command line. Separate values with commas: key1=val1,key2=val2]' \
+            {-f,--values}'[specify values in a YAML file]' \
+            '--verify[verify the package before installing it]' \
+            '--version[specify the exact chart version to install. If this is not specified, the latest version is installed]' \
+            '*:path:_path_files -/' \
+            && ret=0
+          ;;
+        (lint|package|upgrade)
+          _arguments '*:path:_path_files -/' && ret=0
+          ;;
+      esac
+      ;;
+  esac
+
+  return ret
+}
+
+_helm "$@"
+
+# vim: ft=zsh sw=2 ts=2 et

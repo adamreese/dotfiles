@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 # Shortcuts
-alias c='clear'
-alias e='exit'
-alias q='exit'
+alias  c='clear'
+alias  e='exit'
+alias  q='exit'
 alias :q='exit'
+alias  g='git'
 
 # Allow aliases to be with sudo
 alias sudo='sudo '

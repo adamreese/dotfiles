@@ -74,7 +74,7 @@ if exists('+inccommand')
 endif
 " }}}
 " -----------------------------------------------------------------------
-" Performance " {{{
+" Performance {{{
 " -----------------------------------------------------------------------
 set lazyredraw " only redraw when needed
 if exists('&ttyfast') | set ttyfast | endif " if we have a fast terminal
@@ -155,14 +155,14 @@ endfor
 " Behavior {{{
 " -----------------------------------------------------------------------
 set backspace=indent,eol,start
-set completeopt=menu,menuone
-set linebreak                " Wrap lines at convenient points
-set scrolloff=8              " Start scrolling when we're 8 lines away from margins
+set completeopt=menu,menuone     " show PUM, even for one thing
+set linebreak                    " Wrap lines at convenient points
+set scrolloff=8                  " Start scrolling when we're 8 lines away from margins
 set sidescroll=1
 set sidescrolloff=15
-set pumheight=20             " Pop-up menu's line height
-set splitbelow               " Split horizontal windows below to the current windows
-set splitright               " Split vertical windows right to the current windows
+set pumheight=20                 " Pop-up menu's line height
+set splitbelow                   " Split horizontal windows below to the current windows
+set splitright                   " Split vertical windows right to the current windows
 " }}}
 " -----------------------------------------------------------------------
 " UI {{{
@@ -492,15 +492,13 @@ let g:lightline = {
       \     [ ], [ 'filename' ], [ ]
       \   ],
       \   'right': [
-      \     [ 'lineinfo' ], [ 'fileformat', 'fileencoding' ], [ 'filetype' ],
+      \     [ 'lineinfo' ], [ 'filetype' ],
       \   ]
       \ },
       \ 'component_function': {
       \   'fugitive':     'statusline#lightlineFugitive',
       \   'filename':     'statusline#lightlineFilename',
-      \   'fileformat':   'statusline#lightlineFileformat',
       \   'filetype':     'statusline#lightlineFiletype',
-      \   'fileencoding': 'statusline#lightlineFileencoding',
       \   'mode':         'statusline#lightlineMode',
       \   'go':           'statusline#lightlineGo',
       \   'ctrlpmark':    'statusline#CtrlPMark',
@@ -520,4 +518,5 @@ let g:lightline = {
 " }}}
 " }}}
 
+" -----------------------------------------------------------------------
 " vim: foldmethod=marker

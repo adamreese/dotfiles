@@ -77,13 +77,6 @@ function! statusline#lightlineFugitive() abort
   return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 
-function! statusline#lightlineFileformat() abort
-  if winwidth(0) < 70 || s:is_no_fileformat_filetype()
-    return ''
-  endif
-  return &fileformat
-endfunction
-
 function! statusline#lightlineFiletype() abort
   if winwidth(0) < 70 || s:is_no_fileformat_filetype()
     return ''
@@ -91,20 +84,15 @@ function! statusline#lightlineFiletype() abort
   return strlen(&filetype) ? &filetype : 'no ft'
 endfunction
 
-function! statusline#lightlineFileencoding() abort
-  if winwidth(0) < 70 || s:is_no_fileformat_filetype()
-    return ''
-  endif
-  return strlen(&fileencoding) ? &fileencoding : &encoding
-endfunction
-
 function! statusline#lightlineMode() abort
-  if s:is_filetype_mode_filetype()
+  if winwidth(0) < 70
+    return ''
+  elseif s:is_filetype_mode_filetype()
     return toupper(&filetype)
   elseif s:is_ctrlp()
     return 'CtrlP'
   endif
-  return winwidth(0) > 60 ? lightline#mode() : ''
+  return lightline#mode()
 endfunction
 
 function! statusline#StatusLineLineInfo() abort
@@ -115,7 +103,7 @@ function! statusline#StatusLineLineInfo() abort
   elseif s:is_terminal()
     return ''
   endif
-  return printf('%d/%d☰ %3d', line('.'), line('$'), col('.'))
+  return printf('%d/%d☰ %2d', line('.'), line('$'), col('.'))
 endfunction
 
 function! statusline#lightlineLineInfo() abort

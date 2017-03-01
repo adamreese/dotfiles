@@ -1,0 +1,11 @@
+typeset -a _args=(-aCI '.git')
+if (( $# )); then
+  _args+=($@)
+else
+  _args+=(-L 2)
+fi
+
+command tree $_args
+
+# ------------------------------------------------------------------------------
+# vim:ft=zsh

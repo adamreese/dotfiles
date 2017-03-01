@@ -1,0 +1,8 @@
+# shortcut to projects folder
+cd /usr/local/Cellar
+
+# _dir=$(fzf +m) && cd $_dir
+_dir=$(find . -d 3 -type d -print0 | xargs -0n1 dirname | sed 's|^\./||' | sort -u | fzf --query "${1}" --select-1) && cd "$_dir"
+
+# -----------------------------------------------------------------------------
+# vim:ft=zsh
