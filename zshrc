@@ -7,10 +7,10 @@ export ZSH=${ZDOTDIR:-${HOME}}/.zsh
 autoload -Uz compinit; compinit
 autoload -Uz bashcompinit; bashcompinit
 
-for config_file (${ZSH}/*.zsh(N-.)); do
-  source $config_file
+for file (${ZSH}/*.zsh(N-.)); do
+  source $file
 done
-unset config_file
+unset file
 
 if [[ ! ${TERM} == (linux|*bsd*|dumb) ]]; then
   autoload -Uz promptinit && promptinit
@@ -20,6 +20,9 @@ fi
 hash -d -- dotfiles=${HOME}/.dotfiles
 hash -d --    gosrc=${GOPATH}/src
 hash -d --   cellar=/usr/local/Cellar
+
+source ${ZSH}/modules/zshmarks/init.zsh
+source ${ZSH}/modules/history-substring-search/init.zsh
 
 # ------------------------------------------------------------------------------
 [[ $ZSH_DEBUG ]] && zprof | less
