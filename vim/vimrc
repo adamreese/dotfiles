@@ -445,8 +445,8 @@ map <leader>tt :TagbarToggle<cr>
 " AG {{{
 " -----------------------------------------------------------------------
 if executable('ag')
-  let &grepprg='ag --nogroup --nocolor --vimgrep'
-  let g:ag_prg='ag --column --nogroup --nocolor'
+  let &grepprg='ag --nocolor --nogroup --hidden --vimgrep'
+  let g:ag_prg='ag --nocolor --nogroup --hidden --column'
 
   map <leader>a :Ag<space>
   map <leader>a* :call SearchWordWithAg()<CR>
