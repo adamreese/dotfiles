@@ -37,6 +37,9 @@
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
 
+  new  = log --no-merges --oneline ORIG_HEAD..
+  news = log --no-merges --stat ORIG_HEAD..
+
 [credential]
   helper = osxkeychain
 
@@ -99,4 +102,3 @@
 
 [difftool "vimdiff"]
   cmd = nvim -d "$LOCAL" "$REMOTE"
-
