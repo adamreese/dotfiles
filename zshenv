@@ -3,6 +3,15 @@
 # ------------------------------------------------------------------------------
 [[ -n $ZSH_DEBUG ]] && zmodload zsh/zprof
 
+# XDG Base Directory
+# ------------------------------------------------------------------------------
+# https://specifications.freedesktop.org/basedir-spec/latest
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+
+# Path
+# ------------------------------------------------------------------------------
 typeset -gU cdpath fpath manpath path
 
 # load completion functions
