@@ -1,8 +1,13 @@
+" =======================================================================
+" ftplugin/go.vim
+" =======================================================================
+scriptencoding utf-8
+
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal noexpandtab
 setlocal autoindent
-setlocal nolist
+setlocal listchars=tab:\ \ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·
 
 " vim-go
 let g:go_fmt_fail_silently = 1

@@ -1,53 +1,78 @@
 " =======================================================================
+" vimrc {{{
+" =======================================================================
+
+if has('vim_starting') | set encoding=utf-8 nobomb | endif
+scriptencoding utf-8
+
+let $cache_dir = expand($HOME.'/.cache/vim')
+
+" }}}
+" =======================================================================
 " Plugins {{{
 " =======================================================================
+
 call plug#begin('~/.vim/plugged')
 
-Plug 'Raimondi/delimitMate'
+Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
 Plug 'benekastah/neomake',      { 'on': ['Neomake'] }
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fatih/vim-go',            { 'for': 'go' }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'kepbod/quick-scope'
 Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
+Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'slack/vim-align'
-Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
-Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
+Plug 'tweekmonster/startuptime.vim'
+Plug 'vimwiki/vimwiki'
 Plug 'w0ng/vim-hybrid'
-Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
-Plug 'FelikZ/ctrlp-py-matcher'
 
+if exists('$TMUX')
+  Plug 'christoomey/vim-tmux-navigator'
+endif
+
+" -- Languages ----------------------------------------------------------
+Plug 'chrisbra/vim-zsh',        { 'for': 'zsh' }
+Plug 'fatih/vim-go',            { 'for': 'go' }
+Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
+Plug 'tmux-plugins/vim-tmux',   { 'for': 'tmux' }
+Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
+Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
+
+" -- Completion ---------------------------------------------------------
+Plug 'Raimondi/delimitMate'
 if has('nvim')
   function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
   Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
   Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
+  Plug 'Shougo/neco-vim',      { 'for': 'vim' }
 else
   Plug 'Shougo/neocomplete'
 endif
 
 call plug#end()
+
 " }}}
 " =======================================================================
 " Settings {{{
 " =======================================================================
+
+" -----------------------------------------------------------------------
 " General {{{
 " -----------------------------------------------------------------------
-set encoding=utf-8
-scriptencoding utf-8
 
 set autowrite                " Automatically save before :next, :make etc.
 set autoread                 " Set to auto read when a file is changed from the outside
@@ -58,76 +83,100 @@ set nobackup                 " Don't create annoying backup files
 set noerrorbells
 set novisualbell
 set shell=$SHELL
-set ttyfast
-if &compatible
-  set nocompatible
+set dictionary=/usr/share/dict/words
+set history=1000
+
+if has('vim_starting')
+  if &compatible
+    set nocompatible
+  endif
 endif
+
+if exists('$TMUX')
+  set ttyfast
+  set ttymouse=sgr
+endif
+
 " }}}
 " -----------------------------------------------------------------------
 " Search {{{
 " -----------------------------------------------------------------------
+
 set ignorecase               " Search case insensitive...
 set smartcase                " ... but not it begins with upper case
 
 if exists('+inccommand')
   set inccommand=nosplit
 endif
+
 " }}}
 " -----------------------------------------------------------------------
 " Performance {{{
 " -----------------------------------------------------------------------
-set lazyredraw " only redraw when needed
-if exists('&ttyfast') | set ttyfast | endif " if we have a fast terminal
-set updatetime=750 " reduce vim delay clock
-" set timeout timeoutlen=750
-set ttimeout ttimeoutlen=100
+
+set lazyredraw               " only redraw when needed
+set ttimeout
+set ttimeoutlen=10
+set timeout
+set timeoutlen=1000
+
+" Don't try to highlight long lines.
+" This fixes some performance problems on huge files.
+set synmaxcol=200
+
 " }}}
 " -----------------------------------------------------------------------
 " Formatting {{{
 " -----------------------------------------------------------------------
+
 set autoindent
 set smartindent
 set smarttab
-set shiftwidth=2          " 2 spaces per tab
+set shiftwidth=2             " 2 spaces per tab
 set softtabstop=2
 set tabstop=2
-set expandtab             " Use spaces instead of tabs
+set expandtab                " Use spaces instead of tabs
+
 " }}}
 " -----------------------------------------------------------------------
 " Wildmenu {{{
 " -----------------------------------------------------------------------
+
 if has('wildmenu')
   set wildmode=list:longest,full
-  set wildoptions=tagfile
   set wildignorecase
-  set wildignore+=.git,*.pyc,*.spl,*.o,*.out,*~,#*#,%*
+  set wildignore+=*.pyc,*.spl,*.o,*.out,*~,#*#,%*
   set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
 endif
+
 " }}}
 " -----------------------------------------------------------------------
 " Folding {{{
 " -----------------------------------------------------------------------
+
 if has('folding')
   set foldmethod=marker
   set foldtext=vimrc#foldtext()
 endif
+
 " }}}
 " -----------------------------------------------------------------------
-" Temp Files {{{
+" Vim directories {{{
 " -----------------------------------------------------------------------
+
 if has('mksession')
-  set viewdir=~/.cache/vim/view       " override ~/.vim/view default
-  set viewoptions=cursor,folds        " save/restore just these (with `:{mk,load}view`)
+  set viewdir=$cache_dir/view/              " override ~/.vim/view default
+  set viewoptions=cursor,folds              " save/restore just these (with `:{mk,load}view`)
 endif
 
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
   if exists('$SUDO_USER')
-    set noundofile                    " don't create root-owned files
+    set noundofile                          " don't create root-owned files
   else
-    set undofile                      " actually use undo files
-    set undodir=$HOME/.cache/vim/undo   " keep undo files out of the way
+    set undofile                            " actually use undo files
+    set undodir=$cache_dir/undo//           " keep undo files out of the way
   endif
 endif
 
@@ -135,13 +184,13 @@ if exists('$SUDO_USER')
   if has('nvim')
     set shada=
   else
-    set viminfo=                      " don't create root-owned files
+    set viminfo=
   endif
 else
   if has('nvim')
-    set shada+=n$HOME/.cache/vim/main.shada
+    set shada+=n$cache_dir/main.shada
   else
-    set viminfo+=n$HOME/.cache/vim/viminfo
+    set viminfo+=n$cache_dir/viminfo
   endif
 endif
 
@@ -150,31 +199,49 @@ for s:dir in [&undodir, &viewdir]
     call mkdir(s:dir, 'p')
   endif
 endfor
+
 " }}}
 " -----------------------------------------------------------------------
 " Behavior {{{
 " -----------------------------------------------------------------------
+
 set backspace=indent,eol,start
-set completeopt=menu,menuone     " show PUM, even for one thing
-set linebreak                    " Wrap lines at convenient points
-set scrolloff=8                  " Start scrolling when we're 8 lines away from margins
+set completeopt=menu,menuone,longest " show PUM, even for one thing
+set complete-=i                      " Don't scan includes, since it can be very slow.
+set linebreak                        " Wrap lines at convenient points
+set scrolloff=8                      " Start scrolling when we're 8 lines away from margins
 set sidescroll=1
 set sidescrolloff=15
-set pumheight=20                 " Pop-up menu's line height
-set splitbelow                   " Split horizontal windows below to the current windows
-set splitright                   " Split vertical windows right to the current windows
+set pumheight=20                     " Pop-up menu's line height
+set splitbelow                       " Split horizontal windows below to the current windows
+set splitright                       " Split vertical windows right to the current windows
+
 " }}}
 " -----------------------------------------------------------------------
 " UI {{{
 " -----------------------------------------------------------------------
+
+set display=lastline
+set laststatus=2
+set list                          " Display tabs and trailing spaces visually
 set nocursorcolumn                " speed up syntax highlighting
 set nocursorline
 set noshowmode                    " Don't need to show mode since we have lightline
 set number                        " Show line numbers
-set list listchars=tab:>-,trail:* " Display tabs and trailing spaces visually
-set display=lastline
-set laststatus=2
 set title                         " Sets the terminal title nicely.
+
+set shortmess+=A                  " ignore annoying swapfile messages
+set shortmess+=I                  " no splash screen
+set shortmess+=O                  " file-read message overwrites previous
+set shortmess+=T                  " truncate non-file messages in middle
+set shortmess+=W                  " don't echo "[w]"/"[written]" when writing
+set shortmess+=a                  " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=o                  " overwrite file-written messages
+set shortmess+=t                  " truncate file messages at start
+
+if has('linebreak')
+  set linebreak
+endif
 
 if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
@@ -192,16 +259,6 @@ let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
 
-highlight clear SignColumn
-highlight clear FoldColumn
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Don't try to highlight long lines.
-" This fixes some performance problems on huge files.
-set synmaxcol=800
-
 " Set terminal colors
 let s:num = 0
 for s:color in [
@@ -213,11 +270,13 @@ for s:color in [
   let g:terminal_color_{s:num} = s:color
   let s:num += 1
 endfor
+
 " }}}
 " }}}
 " =======================================================================
 " Mappings {{{
 " =======================================================================
+
 " disable ex mode
 nnoremap  Q <Nop>
 nnoremap gQ <Nop>
@@ -269,8 +328,10 @@ command! Q q
 command! WQ wq
 command! Wq wq
 
+" -----------------------------------------------------------------------
 " Leader Commands
 " -----------------------------------------------------------------------
+
 let g:mapleader = ','
 
 " Edit vimrc
@@ -320,6 +381,7 @@ endif
 " =======================================================================
 " Autocmds {{{
 " =======================================================================
+
 if has('autocmd')
   augroup vimrc
     autocmd!
@@ -339,62 +401,98 @@ if has('autocmd')
 
   autocmd vimrc BufEnter term://* startinsert
 endif
+
 " }}}
 " =======================================================================
-" Plugin Settings {{{
+" Plugin {{{
 " =======================================================================
-" Neomake {{{
+
 " -----------------------------------------------------------------------
+" Plugin: neomake {{{
+" -----------------------------------------------------------------------
+
 let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'WarningMsg' }
 let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'ErrorMsg'   }
 
 function! s:run_neomake() "{{{
+  if &buftype ==# 'nofile' | return | endif
+
   let l:filetypes = [
         \ 'css', 'go', 'html', 'json', 'markdown',
         \ 'ruby', 'sh', 'vim', 'yaml' ]
-  if empty(&buftype) && index(l:filetypes, &filetype) > -1
+  if index(l:filetypes, &filetype) > -1
     Neomake
   endif
 endfunction "}}}
 autocmd vimrc BufWritePost * call <SID>run_neomake()
-" }}}
-" -----------------------------------------------------------------------
-" Deoplete {{{
-" -----------------------------------------------------------------------
-let g:deoplete#auto_complete_delay = 50
-let g:deoplete#min_pattern_length = 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-" let g:deoplete#file#enable_buffer_path = 1
-
-" call deoplete#custom#set('go', 'matchers', ['matcher_full_fuzzy'])
-" call deoplete#custom#set('go', 'sorters', [])
-let g:deoplete#sources#go#align_class = 1
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#json_directory = $HOME.'/.cache/deoplete/go/darwin_amd64'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#use_cache = 1
-
-let g:deoplete#ignore_sources = {} " Initialize
-let g:deoplete#ignore_sources.go = ['dictionary', 'member', 'omni', 'tag', 'syntax']
-
-" call deoplete#enable_logging('DEBUG', $HOME.'/.cache/deoplete.log')
-" call deoplete#custom#set('core', 'debug_enabled', 1)
-" call deoplete#custom#set('go', 'debug_enabled', 1)
-" let g:deoplete#enable_profile = 1
 
 " }}}
 " -----------------------------------------------------------------------
-" vim-align {{{
+" Plugin: deoplete {{{
 " -----------------------------------------------------------------------
-map <leader>ah :Align =><CR>
+
+if has_key(g:plugs, 'deoplete.nvim')
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 50
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#max_abbr_width = 0
+  let g:deoplete#max_menu_width = 0
+
+  call deoplete#custom#set('_', 'converters', ['converter_auto_paren', 'converter_remove_overlap', 'converter_truncate_abbr', 'converter_truncate_menu'])
+  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#set('go', 'sorters', [])
+
+  call deoplete#custom#set('go', 'mark', '')
+  call deoplete#custom#set('buffer', 'mark', 'buffer')
+  call deoplete#custom#set('omni', 'mark', 'omni')
+  call deoplete#custom#set('file', 'mark', 'file')
+
+  call deoplete#custom#set('go', 'rank', 9999)
+
+  let g:deoplete#sources#go#align_class = 1
+  let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+  let g:deoplete#sources#go#json_directory = $cache_dir.'/deoplete/go/darwin_amd64'
+  let g:deoplete#sources#go#package_dot = 1
+  let g:deoplete#sources#go#pointer = 1
+  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const', 'package']
+  let g:deoplete#sources#go#use_cache = 1
+
+  if !exists('g:necovim#complete_functions')
+    let g:necovim#complete_functions = {}
+  endif
+  let g:necovim#complete_functions.Ref = 'ref#complete'
+
+  let g:deoplete#ignore_sources    = get(g:,'deoplete#ignore_sources',{})
+  let g:deoplete#ignore_sources._  = ['around']
+  let g:deoplete#ignore_sources.go = ['buffer', 'dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
+
+  inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+  set isfname-==
+
+  " call deoplete#enable_logging('DEBUG', $HOME.'/.cache/deoplete.log')
+  " call deoplete#custom#set('core', 'debug_enabled', 1)
+  " call deoplete#custom#set('go', 'debug_enabled', 1)
+  " let g:deoplete#enable_profile = 1
+endif
+
+" }}}
+" -----------------------------------------------------------------------
+" Plugin: vim-align {{{
+" -----------------------------------------------------------------------
+
+map      <leader>ah :Align =><CR>
 nnoremap <leader>a= :Align =<CR>
-map <leader>a# :Align #<CR>
-map <leader>a{ :Align {<CR>
+map      <leader>a# :Align #<CR>
+map      <leader>a{ :Align {<CR>
+
 " }}}
 " -----------------------------------------------------------------------
-" CtrlP {{{
+" Plugin: ctrlp {{{
 " -----------------------------------------------------------------------
+
 map <leader>gb :CtrlPBuffer<CR>
 map <leader>gt :CtrlPBufTag<CR>
 map <leader>gc :CtrlP app/controllers<CR>
@@ -416,10 +514,12 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ft'}
+
 " }}}
 " -----------------------------------------------------------------------
-" NERDTree {{{
+" Plguin: nerdtree {{{
 " -----------------------------------------------------------------------
+
 let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc', '^BUILD$']
 let g:NERDTreeShowHidden=1
@@ -429,21 +529,27 @@ let g:NERDTreeMinimalUI=1
 
 noremap <leader>e :NERDTreeFind<CR>
 noremap <Leader>n :NERDTreeToggle<cr>
+
 " }}}
 " -----------------------------------------------------------------------
-" EasyAlign {{{
+" Plguin: easyalign {{{
 " -----------------------------------------------------------------------
+
 vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
+
 " }}}
 " -----------------------------------------------------------------------
-" Tagbar {{{
+" Plguin: tagbar {{{
 " -----------------------------------------------------------------------
+
 map <leader>tt :TagbarToggle<cr>
+
 " }}}
 " -----------------------------------------------------------------------
-" AG {{{
+" Plguin: ag {{{
 " -----------------------------------------------------------------------
+
 if executable('ag')
   let &grepprg='ag --nocolor --nogroup --hidden --vimgrep'
   let g:ag_prg='ag --nocolor --nogroup --hidden --column'
@@ -455,10 +561,12 @@ if executable('ag')
     execute 'Ag' expand('<cword>')
   endfunction
 endif
+
 " }}}
 " -----------------------------------------------------------------------
-" FZF {{{
+" Plguin: fzf {{{
 " -----------------------------------------------------------------------
+
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
@@ -470,53 +578,20 @@ nnoremap <silent> <c-b>  :Buffers<cr>
 
 " }}}
 " -----------------------------------------------------------------------
-" DelimitMate {{{
+" Plguin: delimitmate {{{
 " -----------------------------------------------------------------------
-let g:delimitMate_expand_cr = 1
-" }}}
-" -----------------------------------------------------------------------
-" Lightline {{{
-" -----------------------------------------------------------------------
-let g:lightline = {
-      \ 'colorscheme': 'default',
-      \ 'active': {
-      \   'left':  [
-      \     [ 'mode' ], [ 'fugitive' ], [ 'filename' ], [ 'go', 'ctrlpmark' ],
-      \   ],
-      \   'right': [
-      \     [ 'neomake', 'lineinfo' ], [ 'fileformat', 'fileencoding' ], [ 'filetype' ],
-      \   ]
-      \ },
-      \ 'inactive': {
-      \   'left': [
-      \     [ ], [ 'filename' ], [ ]
-      \   ],
-      \   'right': [
-      \     [ 'lineinfo' ], [ 'filetype' ],
-      \   ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive':     'statusline#lightlineFugitive',
-      \   'filename':     'statusline#lightlineFilename',
-      \   'filetype':     'statusline#lightlineFiletype',
-      \   'mode':         'statusline#lightlineMode',
-      \   'go':           'statusline#lightlineGo',
-      \   'ctrlpmark':    'statusline#CtrlPMark',
-      \ },
-      \ 'component_expand': {
-      \   'neomake':   'statusline#lightlineNeomake',
-      \   'lineinfo':  'statusline#lightlineLineInfo',
-      \ },
-      \ 'component_type': {
-      \   'neomake': 'error',
-      \ },
-      \ 'subseparator': {
-      \   'left': '|',
-      \   'right': '|',
-      \ },
-      \ }
-" }}}
-" }}}
 
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_smart_quotes = 1
+
+" }}}
+" -----------------------------------------------------------------------
+" Plguin: quick-scope {{{
+" -----------------------------------------------------------------------
+
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" }}}
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

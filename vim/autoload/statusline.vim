@@ -1,3 +1,6 @@
+" =======================================================================
+" autoload/statusline.vim
+" =======================================================================
 scriptencoding utf-8
 
 function! s:is_filetype_mode_filetype() abort
@@ -66,28 +69,26 @@ function! s:modified() abort
   return '[-]'
 endfunction
 
-function! statusline#lightlineFilename() abort
+function! statusline#filename() abort
   return s:filename('%:.') . s:modified() . s:readonly()
 endfunction
 
-function! statusline#lightlineFugitive() abort
+function! statusline#fugitive() abort
   if s:is_readonly_filetype()
     return ''
   endif
   return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 
-function! statusline#lightlineFiletype() abort
+function! statusline#filetype() abort
   if winwidth(0) < 70 || s:is_no_fileformat_filetype()
     return ''
   endif
   return strlen(&filetype) ? &filetype : 'no ft'
 endfunction
 
-function! statusline#lightlineMode() abort
-  if winwidth(0) < 70
-    return ''
-  elseif s:is_filetype_mode_filetype()
+function! statusline#mode() abort
+  if s:is_filetype_mode_filetype()
     return toupper(&filetype)
   elseif s:is_ctrlp()
     return 'CtrlP'
@@ -95,7 +96,7 @@ function! statusline#lightlineMode() abort
   return lightline#mode()
 endfunction
 
-function! statusline#StatusLineLineInfo() abort
+function! statusline#statuslineinfo() abort
   if winwidth(0) < 70
     return ''
   elseif s:is_no_lineinfo_filetype()
@@ -103,18 +104,21 @@ function! statusline#StatusLineLineInfo() abort
   elseif s:is_terminal()
     return ''
   endif
-  return printf('%d/%d☰ %2d', line('.'), line('$'), col('.'))
+  return printf('%3.0f%% %3d:%-2d',
+        \ round((line('.') * 1.0) / line('$') * 100),
+        \ line('.'),
+        \ col('.'))
 endfunction
 
-function! statusline#lightlineLineInfo() abort
-  return '%{statusline#StatusLineLineInfo()}'
+function! statusline#lineinfo() abort
+  return '%{statusline#statuslineinfo()}'
 endfunction
 
-function! statusline#lightlineGo() abort
+function! statusline#go() abort
   return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
 endfunction
 
-function! statusline#lightlineNeomake() abort
+function! statusline#neomake() abort
   return exists('*neomake#statusline#LoclistStatus') ? neomake#statusline#LoclistStatus() : ''
 endfunction
 
