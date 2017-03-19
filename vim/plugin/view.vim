@@ -5,7 +5,7 @@
 scriptencoding utf-8
 
 let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
-let &fillchars='vert:│,fold:─'
+let &fillchars='vert:┃,fold:─'
 let &showbreak='↳ '
 
 highlight! clear SignColumn

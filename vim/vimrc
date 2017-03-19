@@ -6,6 +6,7 @@ if has('vim_starting') | set encoding=utf-8 nobomb | endif
 scriptencoding utf-8
 
 let $cache_dir = expand($HOME.'/.cache/vim')
+let $data_dir  = expand($HOME.'/.local/share/vim')
 
 " }}}
 " =======================================================================
@@ -165,7 +166,7 @@ endif
 " -----------------------------------------------------------------------
 
 if has('mksession')
-  set viewdir=$cache_dir/view/              " override ~/.vim/view default
+  set viewdir=$data_dir/view/               " override ~/.vim/view default
   set viewoptions=cursor,folds              " save/restore just these (with `:{mk,load}view`)
 endif
 
@@ -176,7 +177,7 @@ if has('persistent_undo')
     set noundofile                          " don't create root-owned files
   else
     set undofile                            " actually use undo files
-    set undodir=$cache_dir/undo//           " keep undo files out of the way
+    set undodir=$data_dir/undo//           " keep undo files out of the way
   endif
 endif
 
@@ -188,9 +189,9 @@ if exists('$SUDO_USER')
   endif
 else
   if has('nvim')
-    set shada+=n$cache_dir/main.shada
+    set shada+=n$data_dir/main.shada
   else
-    set viminfo+=n$cache_dir/viminfo
+    set viminfo+=n$data_dir/viminfo
   endif
 endif
 
@@ -466,10 +467,8 @@ if has_key(g:plugs, 'deoplete.nvim')
 
   let g:deoplete#ignore_sources    = get(g:,'deoplete#ignore_sources',{})
   let g:deoplete#ignore_sources._  = ['around']
-  let g:deoplete#ignore_sources.go = ['buffer', 'dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
+  let g:deoplete#ignore_sources.go = ['dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
 
-  inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
   set isfname-==
 
   " call deoplete#enable_logging('DEBUG', $HOME.'/.cache/deoplete.log')
@@ -591,6 +590,14 @@ let g:delimitMate_smart_quotes = 1
 " -----------------------------------------------------------------------
 
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" }}}
+" -----------------------------------------------------------------------
+" Plugin: committia.vim {{{
+" -----------------------------------------------------------------------
+
+let g:committia_open_only_vim_starting = 0
+let g:committia_use_singlecolumn       = 'always'
 
 " }}}
 " -----------------------------------------------------------------------
