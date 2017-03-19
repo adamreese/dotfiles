@@ -5,12 +5,12 @@ alias  c='clear'
 alias  e='exit'
 alias  q='exit'
 alias :q='exit'
-alias  g='git'
 
 # Allow aliases to be with sudo
 alias sudo='sudo '
 alias apt-get='sudo apt-get'
 
+# ls
 alias ls='ls -pG'
 alias ll='ls -lph'
 
@@ -19,6 +19,10 @@ alias grep='grep -i'
 
 alias agp='ag --pager="less -iFMRSX"'
 alias agh='ag --hidden'
+
+# Git
+alias   g='git'
+alias glg='git log --stat'
 
 # github
 alias gh='hub browse'
@@ -39,19 +43,19 @@ alias tfl='tail -Fn30 log/*.log'
 if [[ $(uname -s) = "Darwin" ]]; then
 
   # bundle
-  alias be='bundle-exec-hack'
-  alias bi='bundle-hack install'
-  alias beg='be guard'
-  alias bil='bundle install --local'
-  alias br='be rspec'
-  alias brff='be rspec --fail-fast'
+  alias   be='bundle-exec-hack'
+  alias   bi='bundle-hack install'
+  alias   br='bundle-exec-hack rspec'
+  alias  beg='bundle-exec-hack guard'
+  alias  bil='bundle install --local'
+  alias brff='bundle-exec-hack rspec --fail-fast'
 
   # Show/hide hidden files in Finder
   alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
   alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
   # Update and cleanup brew
-  alias bubu='brew update && brew upgrade && brew cleanup'
+  alias  bubu='brew update && brew upgrade && brew cleanup'
   alias bubua='brew update && brew upgrade --fetch-HEAD && brew cleanup'
 
   # Flush dns cache
