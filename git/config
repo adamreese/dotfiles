@@ -48,11 +48,6 @@
   email = adam@reese.io
   signingkey = 7F8A9958
 
-[color]
-  diff   = auto
-  status = auto
-  branch = auto
-
 [core]
   excludesfile = ~/.config/git/ignore
 
@@ -96,9 +91,32 @@
 
 [diff]
   algorithm = patience
-  compactionHeuristic = true
+
+  # Enable an experimental heuristic that shifts the hunk boundary in an
+  # attempt to make the resulting patch easier to read.
+  indentHeuristic = true
+
+  # Detect copies as well as renames
   renames = copies
   tool = vimdiff
 
 [difftool "vimdiff"]
   cmd = nvim -d "$LOCAL" "$REMOTE"
+
+[color "diff"]
+  meta       = yellow
+  frag       = magenta
+  old        = red strike
+  new        = green italic
+  whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal    = "red bold"
+  oldHighlight = "red bold 52"
+  newNormal    = "green bold"
+  newHighlight = "green bold 22"
+
+[color "status"]
+  added     = green
+  changed   = yellow
+  untracked = red
