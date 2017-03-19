@@ -41,5 +41,9 @@ docker-compact-disk() {
   mv Docker2.qcow2 Docker.qcow2
 }
 
+docker-screen() {
+  screen -D -R -S moby ${HOME}/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+}
+
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
