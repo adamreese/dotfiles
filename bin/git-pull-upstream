@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+remote="upstream"
+if ! git remote | grep upstream > /dev/null; then
+  remote="origin"
+fi
+
+git pull "${remote}" "$@"
