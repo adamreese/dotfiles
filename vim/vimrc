@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
+Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake',      { 'on': ['Neomake'] }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
@@ -50,6 +51,7 @@ Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
 Plug 'tmux-plugins/vim-tmux',   { 'for': 'tmux' }
 Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
 Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " -- Completion ---------------------------------------------------------
 Plug 'Raimondi/delimitMate'
