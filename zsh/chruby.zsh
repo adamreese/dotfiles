@@ -1,5 +1,9 @@
 # zsh chruby
 # -----------------------------------------------------------------------------
+
+# use system ruby for now
+return 1
+
 if (( ! $+commands[chruby-exec] )); then
   return 1
 fi
