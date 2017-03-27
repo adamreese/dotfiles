@@ -26,6 +26,7 @@ if [[ ! ${TERM} == (linux|*bsd*|dumb) ]]; then
   prompt areese
 fi
 
+hash -d --     docs=${HOME}/Documents
 hash -d -- dotfiles=${HOME}/.dotfiles
 hash -d --    gosrc=${GOPATH}/src
 hash -d --   cellar=/usr/local/Cellar
