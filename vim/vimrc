@@ -55,6 +55,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " -- Completion ---------------------------------------------------------
 Plug 'Raimondi/delimitMate'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
 if has('nvim')
   function! DoRemote(arg)
     UpdateRemotePlugins
@@ -477,6 +480,13 @@ if has_key(g:plugs, 'deoplete.nvim')
   " call deoplete#custom#set('core', 'debug_enabled', 1)
   " call deoplete#custom#set('go', 'debug_enabled', 1)
   " let g:deoplete#enable_profile = 1
+
+  imap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
+  smap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
+
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
 endif
 
 " }}}

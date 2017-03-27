@@ -10,14 +10,15 @@ setlocal autoindent
 setlocal listchars=tab:\ \ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·
 
 " vim-go
-let g:go_fmt_fail_silently = 1
-" let g:go_fmt_options = "-s"
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_error = 1
-let g:go_term_enabled = 1
-let g:go_term_mode = 'split'
 let g:go_def_mode = 'godef'
 let g:go_fmt_command = 'goimports'
+let g:go_fmt_options = "-s"
+let g:go_fmt_fail_silently = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_error = 1
+let g:go_snippet_engine = "neosnippet"
+let g:go_term_enabled = 1
+let g:go_term_mode = 'split'
 
 nmap <buffer> <silent> gd <Plug>(go-def)
 nmap <buffer> <silent> gs <Plug>(go-def-split)
