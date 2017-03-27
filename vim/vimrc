@@ -125,7 +125,7 @@ set timeoutlen=1000
 
 " Don't try to highlight long lines.
 " This fixes some performance problems on huge files.
-set synmaxcol=200
+set synmaxcol=1000
 
 " }}}
 " -----------------------------------------------------------------------
