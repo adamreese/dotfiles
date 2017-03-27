@@ -1,0 +1,7 @@
+bundler
+global
+neovim
+pry
+rake
+travis
+travis-lint
