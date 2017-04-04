@@ -236,6 +236,10 @@ set noshowmode                    " Don't need to show mode since we have lightl
 set number                        " Show line numbers
 set title                         " Sets the terminal title nicely.
 
+" Don't wink at me
+set guicursor=n-c-v:block-nCursor-blinkon0
+set guicursor+=i-ci:ver1-iCursor-blinkwait300-blinkon200-blinkoff150
+
 set shortmess+=A                  " ignore annoying swapfile messages
 set shortmess+=I                  " no splash screen
 set shortmess+=O                  " file-read message overwrites previous
@@ -249,9 +253,6 @@ if has('linebreak')
   set linebreak
 endif
 
-if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-endif
 
 if exists('+termguicolors')
   set t_ut=         " disable background color erase
