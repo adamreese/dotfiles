@@ -12,7 +12,7 @@ setlocal listchars=tab:\ \ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·
 " vim-go
 let g:go_def_mode = 'godef'
 let g:go_fmt_command = 'goimports'
-let g:go_fmt_options = "-s"
+" let g:go_fmt_options = "-s"
 let g:go_fmt_fail_silently = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_error = 1
@@ -24,10 +24,11 @@ nmap <buffer> <silent> gd <Plug>(go-def)
 nmap <buffer> <silent> gs <Plug>(go-def-split)
 nmap <buffer> <silent> gk <Plug>(go-doc)
 nmap <buffer> <silent> gV <Plug>(go-vet)
-nmap <buffer> <Leader>c   <Plug>(go-coverage-toggle)
-nmap <buffer> <Leader>i   <Plug>(go-info)
-nmap <buffer> <Leader>f   :GoImports<CR>
-nmap <buffer> <Leader>gt  :GoDecls<CR>
+
+nmap <buffer> <localleader>c   <Plug>(go-coverage-toggle)
+nmap <buffer> <localleader>i   <Plug>(go-info)
+nmap <buffer> <localleader>f   :GoImports<CR>
+nmap <buffer> <localleader>gt  :GoDecls<CR>
 
 command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 

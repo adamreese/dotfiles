@@ -5,8 +5,10 @@
 if has('vim_starting') | set encoding=utf-8 nobomb | endif
 scriptencoding utf-8
 
-let $cache_dir = expand($HOME.'/.cache/vim')
-let $data_dir  = expand($HOME.'/.local/share/vim')
+" Create global config for cache and data directories
+let $CACHEDIR = expand($HOME.'/.cache/vim')
+let $DATADIR  = expand($HOME.'/.local/share/vim')
+let $VIMDIR   = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " }}}
 " =======================================================================
@@ -18,11 +20,12 @@ call plug#begin('~/.vim/plugged')
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
 Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake',      { 'on': ['Neomake'] }
+Plug 'benekastah/neomake',      { 'on': 'Neomake' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim',         { 'on': 'GV' }
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'kepbod/quick-scope'
 Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
@@ -170,37 +173,40 @@ endif
 " Vim directories {{{
 " -----------------------------------------------------------------------
 
+set directory=$DATADIR/swap//
+set backupdir=$DATADIR/backup/
+set spellfile=$VIMDIR./spell/en.utf-8.add
+
 if has('mksession')
-  set viewdir=$data_dir/view/               " override ~/.vim/view default
-  set viewoptions=cursor,folds              " save/restore just these (with `:{mk,load}view`)
+  set viewdir=$DATADIR/view/   " override ~/.vim/view default
+  set viewoptions=cursor,folds " save/restore just these (with `:{mk,load}view`)
 endif
 
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
-  if exists('$SUDO_USER')
-    set noundofile                          " don't create root-owned files
-  else
-    set undofile                            " actually use undo files
-    set undodir=$data_dir/undo//           " keep undo files out of the way
-  endif
+  set undofile                " actually use undo files
+  set undodir=$DATADIR/undo// " keep undo files out of the way
 endif
 
+if has('nvim')
+  set shada+=n$DATADIR/main.shada
+else
+  set viminfo+=n$DATADIR/viminfo
+endif
+
+" Don't create root-owned files
 if exists('$SUDO_USER')
+  set noundofile
+
   if has('nvim')
     set shada=
   else
     set viminfo=
   endif
-else
-  if has('nvim')
-    set shada+=n$data_dir/main.shada
-  else
-    set viminfo+=n$data_dir/viminfo
-  endif
 endif
 
-for s:dir in [&undodir, &viewdir]
+for s:dir in [&backupdir, &directory, &undodir, &viewdir]
   if !isdirectory(s:dir)
     call mkdir(s:dir, 'p')
   endif
@@ -213,7 +219,7 @@ endfor
 
 set backspace=indent,eol,start
 set completeopt=menu,menuone,longest " show PUM, even for one thing
-set complete-=i                      " Don't scan includes, since it can be very slow.
+set complete=.                       " Default: .,w,b,u,t
 set linebreak                        " Wrap lines at convenient points
 set scrolloff=8                      " Start scrolling when we're 8 lines away from margins
 set sidescroll=1
@@ -281,7 +287,7 @@ endfor
 " }}}
 " }}}
 " =======================================================================
-" Mappings {{{
+" Mapping {{{
 " =======================================================================
 
 " disable ex mode
@@ -289,10 +295,10 @@ nnoremap  Q <Nop>
 nnoremap gQ <Nop>
 
 " disable ri check
-map K <Nop>
+noremap K <Nop>
 
 " disable q window
-map q: :q
+noremap q: :q
 
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -307,6 +313,9 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
+
+" Split sizing
+nnoremap <C-=> <C-W>=
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -336,39 +345,50 @@ command! WQ wq
 command! Wq wq
 
 " -----------------------------------------------------------------------
-" Leader Commands
+" Mapping: Leader
 " -----------------------------------------------------------------------
 
 let g:mapleader = ','
+let g:maplocalleader = ','
 
 " Edit vimrc
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>sv :source  $MYVIMRC<CR>
 
 " Fast saving
-nnoremap <leader>w :w!<cr>
-nnoremap <silent> <leader>q :q!<CR>
+nnoremap <silent> <leader>w :write!<CR>
+nnoremap <silent> <leader>q :quit!<CR>
 
 " Remove search highlight
 nnoremap <leader><CR> :nohlsearch<CR>
 
 " Source the current Vim file
-nnoremap <leader>pr :so %<CR>
+nnoremap <leader>pr :source %<CR>
 
 " Format buffer
-nmap <leader>= ggVG=<CR>
+nnoremap <leader>= ggVG=<CR>
 
 " Pressing ,ss will toggle and untoggle spell checking
-nmap <leader>ss :setlocal spell!<cr>
+nnoremap <leader>ss :setlocal spell!<CR>
 
 " Sorting
-vnoremap <leader>srt :sort<cr>
-
-" Reselect last-pasted text
-nnoremap gp `[v`]
+vnoremap <leader>srt :sort<CR>
 
 " Make horizontal line
 nnoremap <leader>L mzO<esc>79i-<esc>`z
+
+if has('nvim')
+  " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
+  " the top again
+  tnoremap <leader>q <C-\><C-n>gg<CR>
+endif
+
+" -----------------------------------------------------------------------
+" Mapping: Copy & Paste
+" -----------------------------------------------------------------------
+
+" Reselect last-pasted text
+nnoremap gp `[v`]
 
 " Copy to system clipboard
 nnoremap <silent> <leader>y "*y
@@ -376,13 +396,8 @@ nnoremap <silent> <leader>Y "*Y
 vnoremap <silent> <leader>y "*y
 vnoremap <silent> <leader>Y "*Y
 
+" Paste from system clipboard
 nnoremap <silent> <leader>,p "*p
-
-if has('nvim')
-  " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
-  " the top again
-  tnoremap <leader>q <C-\><C-n>gg<cr>
-endif
 
 " }}}
 " =======================================================================
@@ -439,15 +454,19 @@ autocmd vimrc BufWritePost * call <SID>run_neomake()
 " -----------------------------------------------------------------------
 
 if has_key(g:plugs, 'deoplete.nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 50
-  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#enable_at_startup          = 1
+  let g:deoplete#auto_complete_delay        = 50
   let g:deoplete#auto_complete_start_length = 1
-  let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#max_abbr_width = 0
-  let g:deoplete#max_menu_width = 0
+  let g:deoplete#file#enable_buffer_path    = 1
+  let g:deoplete#max_abbr_width             = 0
+  let g:deoplete#max_menu_width             = 0
 
-  call deoplete#custom#set('_', 'converters', ['converter_auto_paren', 'converter_remove_overlap', 'converter_truncate_abbr', 'converter_truncate_menu'])
+  call deoplete#custom#set('_', 'converters', [
+        \ 'converter_auto_paren',
+        \ 'converter_remove_overlap',
+        \ 'converter_truncate_abbr',
+        \ 'converter_truncate_menu',
+        \ ])
   call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
   call deoplete#custom#set('go', 'sorters', [])
 
@@ -458,24 +477,21 @@ if has_key(g:plugs, 'deoplete.nvim')
 
   call deoplete#custom#set('go', 'rank', 9999)
 
-  let g:deoplete#sources#go#align_class = 1
-  let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-  let g:deoplete#sources#go#json_directory = $cache_dir.'/deoplete/go/darwin_amd64'
-  let g:deoplete#sources#go#package_dot = 1
-  let g:deoplete#sources#go#pointer = 1
-  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const', 'package']
-  let g:deoplete#sources#go#use_cache = 1
+  let g:deoplete#sources#go#align_class    = 1
+  let g:deoplete#sources#go#gocode_binary  = $GOPATH.'/bin/gocode'
+  let g:deoplete#sources#go#json_directory = $CACHEDIR.'/deoplete/go/darwin_amd64'
+  let g:deoplete#sources#go#package_dot    = 1
+  let g:deoplete#sources#go#pointer        = 1
+  let g:deoplete#sources#go#sort_class     = ['func', 'type', 'var', 'const', 'package']
+  let g:deoplete#sources#go#use_cache      = 1
 
-  if !exists('g:necovim#complete_functions')
-    let g:necovim#complete_functions = {}
-  endif
+  let g:necovim#complete_functions     = get(g:, 'necovim#complete_functions',{})
   let g:necovim#complete_functions.Ref = 'ref#complete'
 
   let g:deoplete#ignore_sources    = get(g:,'deoplete#ignore_sources',{})
   let g:deoplete#ignore_sources._  = ['around']
   let g:deoplete#ignore_sources.go = ['dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
 
-  set isfname-==
 
   " call deoplete#enable_logging('DEBUG', $HOME.'/.cache/deoplete.log')
   " call deoplete#custom#set('core', 'debug_enabled', 1)
@@ -484,6 +500,7 @@ if has_key(g:plugs, 'deoplete.nvim')
 
   imap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
   smap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
+  set isfname-==
 
   if has('conceal')
     set conceallevel=2 concealcursor=niv
@@ -492,26 +509,37 @@ endif
 
 " }}}
 " -----------------------------------------------------------------------
+" Plugin: vim-easy-align {{{
+" -----------------------------------------------------------------------
+
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" }}}
+" -----------------------------------------------------------------------
 " Plugin: vim-align {{{
 " -----------------------------------------------------------------------
 
-map      <leader>ah :Align =><CR>
+noremap  <leader>ah :Align =><CR>
 nnoremap <leader>a= :Align =<CR>
-map      <leader>a# :Align #<CR>
-map      <leader>a{ :Align {<CR>
+noremap  <leader>a# :Align #<CR>
+noremap  <leader>a{ :Align {<CR>
 
 " }}}
 " -----------------------------------------------------------------------
 " Plugin: ctrlp {{{
 " -----------------------------------------------------------------------
 
-map <leader>gb :CtrlPBuffer<CR>
-map <leader>gt :CtrlPBufTag<CR>
-map <leader>gc :CtrlP app/controllers<CR>
-map <leader>gm :CtrlP app/models<CR>
-map <leader>gv :CtrlP app/views<CR>
-map <leader>gl :CtrlP lib<CR>
-map <leader>gs :CtrlP spec<CR>
+noremap <leader>gb :CtrlPBuffer<CR>
+noremap <leader>gt :CtrlPBufTag<CR>
+noremap <leader>gc :CtrlP app/controllers<CR>
+noremap <leader>gm :CtrlP app/models<CR>
+noremap <leader>gv :CtrlP app/views<CR>
+noremap <leader>gl :CtrlP lib<CR>
+noremap <leader>gs :CtrlP spec<CR>
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 let g:ctrlp_user_command = 'ag %s -i --nogroup -l --nocolor --hidden --ignore ''BUILD'' --ignore ''_output'' -g ""'
@@ -540,22 +568,14 @@ let g:NERDTreeMapJumpPrevSibling='<Nop>'
 let g:NERDTreeMinimalUI=1
 
 noremap <leader>e :NERDTreeFind<CR>
-noremap <Leader>n :NERDTreeToggle<cr>
-
-" }}}
-" -----------------------------------------------------------------------
-" Plguin: easyalign {{{
-" -----------------------------------------------------------------------
-
-vmap <Enter> <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+noremap <Leader>n :NERDTreeToggle<CR>
 
 " }}}
 " -----------------------------------------------------------------------
 " Plguin: tagbar {{{
 " -----------------------------------------------------------------------
 
-map <leader>tt :TagbarToggle<cr>
+noremap <leader>tt :TagbarToggle<CR>
 
 " }}}
 " -----------------------------------------------------------------------
@@ -566,8 +586,8 @@ if executable('ag')
   let &grepprg='ag --nocolor --nogroup --hidden --vimgrep'
   let g:ag_prg='ag --nocolor --nogroup --hidden --column'
 
-  map <leader>a :Ag<space>
-  map <leader>a* :call SearchWordWithAg()<CR>
+  noremap <leader>a  :Ag<space>
+  noremap <leader>a* :call SearchWordWithAg()<CR>
 
   function! SearchWordWithAg()
     execute 'Ag' expand('<cword>')
@@ -583,17 +603,21 @@ if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
 
+if !has('nvim') && $TERM_PROGRAM ==# 'iTerm.app'
+  let g:fzf_launcher = 'vim-fzf'
+endif
+
 let g:fzf_nvim_statusline = 0
 
-nmap <silent> <leader>t :FZF<cr>
-nnoremap <silent> <c-b>  :Buffers<cr>
+nnoremap <silent> <leader>t :FZF<CR>
+nnoremap <silent> <c-b>     :Buffers<CR>
 
 " }}}
 " -----------------------------------------------------------------------
 " Plguin: delimitmate {{{
 " -----------------------------------------------------------------------
 
-let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_cr    = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_smart_quotes = 1
 
@@ -609,8 +633,22 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Plugin: committia.vim {{{
 " -----------------------------------------------------------------------
 
-let g:committia_open_only_vim_starting = 0
-let g:committia_use_singlecolumn       = 'always'
+let g:committia_open_only_vim_starting  = 0
+let g:committia_use_singlecolumn        = 'always'
+
+" }}}
+" -----------------------------------------------------------------------
+" Plugin: gitgutter {{{
+" -----------------------------------------------------------------------
+
+let g:gitgutter_enabled = 0
+
+let g:gitgutter_sign_added            = '▏'
+let g:gitgutter_sign_modified         = '▏'
+let g:gitgutter_sign_removed          = '▏'
+let g:gitgutter_sign_modified_removed = '║'
+
+nnoremap <leader>gg :GitGutterToggle<CR>
 
 " }}}
 " -----------------------------------------------------------------------
