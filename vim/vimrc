@@ -165,7 +165,7 @@ endif
 
 if has('folding')
   set foldmethod=marker
-  set foldtext=vimrc#foldtext()
+  set foldtext=folding#text()
 endif
 
 " }}}
