@@ -224,7 +224,7 @@ let g:gitgutter_sign_modified_removed = '║'
 nnoremap <leader>gg :GitGutterToggle<CR>
 
 " }}}
-" Plugin: lightline
+" Plugin: lightline {{{
 " -----------------------------------------------------------------------
 
 let g:lightline = {
@@ -266,5 +266,6 @@ let g:lightline = {
       \ },
       \ }
 
+" }}}
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
