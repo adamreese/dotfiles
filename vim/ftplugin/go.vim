@@ -16,7 +16,7 @@ let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_error = 1
-let g:go_snippet_engine = "neosnippet"
+let g:go_snippet_engine = 'neosnippet'
 let g:go_term_enabled = 1
 let g:go_term_mode = 'split'
 
@@ -25,7 +25,7 @@ nmap <buffer> <silent> gs <Plug>(go-def-split)
 nmap <buffer> <silent> gk <Plug>(go-doc)
 nmap <buffer> <silent> gV <Plug>(go-vet)
 
-nmap <buffer> <localleader>c   <Plug>(go-coverage-toggle)
+nmap <buffer> <localleader>gc  <Plug>(go-coverage-toggle)
 nmap <buffer> <localleader>i   <Plug>(go-info)
 nmap <buffer> <localleader>f   :GoImports<CR>
 nmap <buffer> <localleader>gt  :GoDecls<CR>
