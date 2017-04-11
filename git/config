@@ -49,6 +49,7 @@
   signingkey = 7F8A9958
 
 [core]
+  editor = $EDITOR
   excludesfile = ~/.config/git/ignore
 
 [fetch]
