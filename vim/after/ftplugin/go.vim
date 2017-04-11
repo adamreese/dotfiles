@@ -1,7 +1,8 @@
 " =======================================================================
-" plugin/vimrc.vim
+" after/ftplugin/go.vim
 " =======================================================================
 
-command! -bang Profile call vimrc#profile(<bang>0)
+setlocal formatoptions+=cr noexpandtab
+setlocal textwidth=80
 
-command! ReloadSyntax :syntax sync fromstart
+setlocal omnifunc=

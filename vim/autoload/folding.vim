@@ -15,3 +15,6 @@ function! folding#text() abort
   let l:foldtextlength = strlen(substitute(l:foldtextstart . l:foldtextend, '.', 'x', 'g')) + &foldcolumn
   return l:foldtextstart . repeat(l:foldchar, winwidth(0)-l:foldtextlength) . l:foldtextend
 endfunction "}}}
+
+" -----------------------------------------------------------------------
+" vim:foldmethod=marker

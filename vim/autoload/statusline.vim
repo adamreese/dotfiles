@@ -24,11 +24,11 @@ function! s:is_readonly_filetype() abort
 endfunction
 
 function! s:is_terminal() abort
-  return expand('%:f') =~? '^term:\/\/'
+  return expand('%:t') =~? '^term:\/\/'
 endfunction
 
 function! s:is_ctrlp() abort
-  return expand('%:f') ==# 'ControlP'
+  return expand('%:t') ==# 'ControlP'
 endfunction
 
 function! s:readonly() abort
@@ -156,3 +156,6 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
+
+" -----------------------------------------------------------------------
+" vim:foldmethod=marker

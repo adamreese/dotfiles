@@ -13,5 +13,7 @@ wincmd J
 
 nnoremap <buffer> <silent> q :q<cr>
 
-" Open result in horizontal split window
+" Open result in vsplit, tab, split
 nnoremap <buffer> s <C-w><CR>
+nnoremap <buffer> v <C-w><CR><C-w>L
+nnoremap <buffer> t <C-W><CR><C-W>T
