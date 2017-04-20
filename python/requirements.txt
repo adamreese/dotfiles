@@ -1,0 +1,5 @@
+neovim
+neovim-remote
+proselint
+vim-vint
+yamllint
