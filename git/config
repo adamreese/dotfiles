@@ -52,6 +52,9 @@
   editor = $EDITOR
   excludesfile = ~/.config/git/ignore
 
+[commit]
+  gpgsign = true
+
 [fetch]
   prune = true
 
