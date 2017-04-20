@@ -1,10 +1,11 @@
-# vim: ft=zsh :
-
+# ------------------------------------------------------------------------------
 # cdg
 #
 # Fuzzy finder for GOPATH projects
-#
-# uses https://github.com/motemen/ghq to list repos
-#
+# Depends on https://github.com/motemen/ghq
+# ------------------------------------------------------------------------------
+
 _dir=$(ghq list ${1-}| fzf-tmux --select-1) && cd "${GOPATH}/src/${_dir}"
 
+# ------------------------------------------------------------------------------
+# vim:ft=zsh

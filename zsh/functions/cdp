@@ -1,6 +1,12 @@
-# vim: ft=zsh :
+# ------------------------------------------------------------------------------
+# p
+#
+# Fuzzy finder for $HOME/p
+# Depends on https://github.com/motemen/ghq
+# ------------------------------------------------------------------------------
 
-# shortcut to projects folder
 cd "${HOME}/p"
 _dir=$(find . -path ./go -prune -o -type d -name .git -print0 | xargs -0n1 dirname | sed 's|^\./||' | fzf-tmux --query "${1}" --select-1) && cd "$_dir"
 
+# ------------------------------------------------------------------------------
+# vim:ft=zsh

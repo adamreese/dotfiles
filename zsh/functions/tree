@@ -1,4 +1,10 @@
-typeset -a _args=(-aCI '.git')
+# ------------------------------------------------------------------------------
+# tree
+#
+# Set tree defaults when no options are passed
+# ------------------------------------------------------------------------------
+
+typeset -a _args=(-aC --dirsfirst -I '.git')
 if (( $# )); then
   _args+=($@)
 else
