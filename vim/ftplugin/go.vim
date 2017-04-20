@@ -25,7 +25,7 @@ nmap <buffer> <silent> gs <Plug>(go-def-split)
 nmap <buffer> <silent> gk <Plug>(go-doc)
 nmap <buffer> <silent> gV <Plug>(go-vet)
 
-nmap <buffer> <localleader>gc  <Plug>(go-coverage-toggle)
+nmap <buffer> <localleader>tc  <Plug>(go-coverage-toggle)
 nmap <buffer> <localleader>i   <Plug>(go-info)
 nmap <buffer> <localleader>f   :GoImports<CR>
 nmap <buffer> <localleader>gt  :GoDecls<CR>

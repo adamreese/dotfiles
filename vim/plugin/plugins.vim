@@ -216,14 +216,14 @@ let g:committia_use_singlecolumn        = 'always'
 " Plugin: gitgutter {{{
 " -----------------------------------------------------------------------
 
-let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = get(g:, 'gitgutter_enabled', 0)
 
 let g:gitgutter_sign_added            = '▏'
 let g:gitgutter_sign_modified         = '▏'
 let g:gitgutter_sign_removed          = '▏'
 let g:gitgutter_sign_modified_removed = '║'
 
-nnoremap <leader>gg :GitGutterToggle<CR>
+nnoremap <leader>tgg :GitGutterToggle<CR>
 
 " }}}
 " Plugin: lightline {{{
