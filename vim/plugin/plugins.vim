@@ -50,10 +50,10 @@ if has_key(g:plugs, 'deoplete.nvim')
   let g:deoplete#sources#go#sort_class     = ['func', 'type', 'var', 'const', 'package']
   let g:deoplete#sources#go#use_cache      = 0
 
-  let g:necovim#complete_functions     = get(g:, 'necovim#complete_functions',{})
+  let g:necovim#complete_functions     = get(g:, 'necovim#complete_functions', {})
   let g:necovim#complete_functions.Ref = 'ref#complete'
 
-  let g:deoplete#ignore_sources    = get(g:,'deoplete#ignore_sources',{})
+  let g:deoplete#ignore_sources    = get(g:, 'deoplete#ignore_sources', {})
   let g:deoplete#ignore_sources._  = ['around', 'neosnippet']
   let g:deoplete#ignore_sources.go = ['buffer', 'dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
 
