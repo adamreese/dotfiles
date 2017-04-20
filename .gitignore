@@ -2,6 +2,7 @@ vim/autoload/plug.vim
 vim/autoload/plug.vim.old
 vim/plugged
 vim/tmp
+vim/vimrc.local
 zsh/cache
 zsh/configs/local.zsh
 *.zwc
