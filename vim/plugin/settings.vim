@@ -54,7 +54,7 @@ set timeoutlen=1000
 set synmaxcol=1000
 
 " }}}
-" Formatting: {{{
+" Indent: {{{
 " -----------------------------------------------------------------------
 
 set autoindent
@@ -135,7 +135,6 @@ endfor
 set backspace=indent,eol,start
 set completeopt=menu,menuone,longest " show PUM, even for one thing
 set complete=.                       " Default: .,w,b,u,t
-set linebreak                        " Wrap lines at convenient points
 set scrolloff=8                      " Start scrolling when we're 8 lines away from margins
 set sidescroll=1
 set sidescrolloff=15
@@ -156,9 +155,9 @@ set noshowmode                    " Don't need to show mode since we have lightl
 set number                        " Show line numbers
 set title                         " Sets the terminal title nicely.
 
-" Don't wink at me
-set guicursor=n-c-v:block-nCursor-blinkon0
-set guicursor+=i-ci:ver1-iCursor-blinkwait300-blinkon200-blinkoff150
+" Disable blinking cursor
+set guicursor&
+set guicursor+=a:blinkon0
 
 set shortmess+=A                  " ignore annoying swapfile messages
 set shortmess+=I                  " no splash screen
