@@ -2,11 +2,6 @@
 " ftplugin/proto.vim
 " =======================================================================
 
-setlocal tabstop=2
-setlocal shiftwidth=2
-setlocal noexpandtab
-setlocal nolist
-
 let g:tagbar_type_proto = {
     \ 'ctagstype' : 'protobuf',
     \ 'kinds' : [
