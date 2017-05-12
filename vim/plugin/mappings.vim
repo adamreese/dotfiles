@@ -43,46 +43,46 @@ noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
 
 " QuickFix navigation
-nnoremap ]q :cnext<CR>zz
-nnoremap [q :cprevious<CR>zz
+nnoremap ]q :<C-u>cnext<CR>zz
+nnoremap [q :<C-u>cprevious<CR>zz
 
 " Location list navigation
-nnoremap ]l :lnext<CR>zz
-nnoremap [l :lprevious<CR>zz
+nnoremap ]l :<C-u>lnext<CR>zz
+nnoremap [l :<C-u>lprevious<CR>zz
 
 " Error mnemonic (Neomake uses location list)
-nnoremap ]e :lnext<CR>zz
-nnoremap [e :lprevious<CR>zz
+nnoremap ]e :<C-u>lnext<CR>zz
+nnoremap [e :<C-u>lprevious<CR>zz
 
 " -----------------------------------------------------------------------
 " Mapping: Leader
 " -----------------------------------------------------------------------
 
 " Edit vimrc
-nnoremap <leader>ev :tabedit $MYVIMRC<CR>
-nnoremap <leader>sv :source  $MYVIMRC<CR>
+nnoremap <leader>ev :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <leader>sv :<C-u>source  $MYVIMRC<CR>
 
 " Fast saving
-nnoremap <silent> <leader>w :write!<CR>
-nnoremap <silent> <leader>q :quit!<CR>
+nnoremap <silent> <leader>w :<C-u>write!<CR>
+nnoremap <silent> <leader>q :<C-u>quit!<CR>
 
 " Remove search highlight
-nnoremap <silent> <leader><CR> :nohlsearch<CR>
+nnoremap <silent> <leader><CR> :<C-u>nohlsearch<CR>
 
 " Close quickfix/location window
-nnoremap <leader>c :cclose<bar>lclose<CR>
+nnoremap <leader>c :<C-u>cclose<bar>lclose<CR>
 
 " Source the current Vim file
-nnoremap <leader>pr :source %<CR>
+nnoremap <leader>pr :<C-u>source %<CR>
 
 " Format buffer
 nnoremap <leader>= ggVG=<CR>
 
 " Pressing ,ss will toggle and untoggle spell checking
-nnoremap <leader>ss :setlocal spell!<CR>
+nnoremap <leader>ss :<C-u>setlocal spell!<CR>
 
 " Sorting
-vnoremap <leader>srt :sort<CR>
+vnoremap <leader>srt :<C-u>sort<CR>
 
 " Make horizontal line
 nnoremap <leader>L mzO<esc>79i-<esc>`z

@@ -20,15 +20,15 @@ let g:go_snippet_engine = 'neosnippet'
 let g:go_term_enabled = 1
 let g:go_term_mode = 'split'
 
+nmap <buffer> <silent> K  <Plug>(go-doc)
 nmap <buffer> <silent> gd <Plug>(go-def)
 nmap <buffer> <silent> gs <Plug>(go-def-split)
-nmap <buffer> <silent> gk <Plug>(go-doc)
 nmap <buffer> <silent> gV <Plug>(go-vet)
 
 nmap <buffer> <localleader>tc  <Plug>(go-coverage-toggle)
 nmap <buffer> <localleader>i   <Plug>(go-info)
-nmap <buffer> <localleader>f   :GoImports<CR>
-nmap <buffer> <localleader>gt  :GoDecls<CR>
+nmap <buffer> <localleader>f   :<C-u>GoImports<CR>
+nmap <buffer> <localleader>gt  :<C-u>GoDecls<CR>
 
 command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 

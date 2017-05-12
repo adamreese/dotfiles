@@ -107,22 +107,18 @@ nmap ga <Plug>(EasyAlign)
 " Plugin: vim-align {{{
 " -----------------------------------------------------------------------
 
-noremap  <leader>ah :Align =><CR>
-nnoremap <leader>a= :Align =<CR>
-noremap  <leader>a# :Align #<CR>
-noremap  <leader>a{ :Align {<CR>
+noremap  <leader>ah :<C-u>Align =><CR>
+nnoremap <leader>a= :<C-u>Align =<CR>
+noremap  <leader>a# :<C-u>Align #<CR>
+noremap  <leader>a{ :<C-u>Align {<CR>
 
 " }}}
 " Plugin: ctrlp {{{
 " -----------------------------------------------------------------------
 
-noremap <leader>gb :CtrlPBuffer<CR>
-noremap <leader>gt :CtrlPBufTag<CR>
-noremap <leader>gc :CtrlP app/controllers<CR>
-noremap <leader>gm :CtrlP app/models<CR>
-noremap <leader>gv :CtrlP app/views<CR>
-noremap <leader>gl :CtrlP lib<CR>
-noremap <leader>gs :CtrlP spec<CR>
+noremap <leader>gb :<C-u>CtrlPBuffer<CR>
+noremap <leader>gt :<C-u>CtrlPBufTag<CR>
+noremap <leader>gv :<C-u>CtrlP $VIMDIR<CR>
 
 " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
 let g:ctrlp_user_command = 'ag %s -i --nogroup -l --nocolor --hidden --ignore ''BUILD'' --ignore ''_output'' -g ""'
@@ -149,14 +145,14 @@ let g:NERDTreeMapJumpNextSibling='<Nop>'
 let g:NERDTreeMapJumpPrevSibling='<Nop>'
 let g:NERDTreeMinimalUI=1
 
-noremap <leader>e :NERDTreeFind<CR>
-noremap <Leader>n :NERDTreeToggle<CR>
+noremap <leader>e :<C-u>NERDTreeFind<CR>
+noremap <Leader>n :<C-u>NERDTreeToggle<CR>
 
 " }}}
 " Plugin: tagbar {{{
 " -----------------------------------------------------------------------
 
-noremap <leader>tt :TagbarToggle<CR>
+noremap <leader>tt :<C-u>TagbarToggle<CR>
 
 " }}}
 " Plugin: ag {{{
@@ -166,8 +162,8 @@ if executable('ag')
   let &grepprg='ag --nocolor --nogroup --hidden --vimgrep'
   let g:ag_prg='ag --nocolor --nogroup --hidden --column'
 
-  noremap <leader>a  :Ag<space>
-  noremap <leader>a* :call SearchWordWithAg()<CR>
+  noremap <leader>a  :<C-u>Ag<space>
+  noremap <leader>a* :<C-u>call SearchWordWithAg()<CR>
 
   function! SearchWordWithAg()
     execute 'Ag' expand('<cword>')
@@ -188,8 +184,8 @@ endif
 
 let g:fzf_nvim_statusline = 0
 
-nnoremap <silent> <leader>t :FZF<CR>
-nnoremap <silent> <c-b>     :Buffers<CR>
+nnoremap <silent> <leader>t :<C-u>FZF<CR>
+nnoremap <silent> <c-b>     :<C-u>Buffers<CR>
 
 " }}}
 " Plugin: delimitmate {{{
@@ -223,7 +219,7 @@ let g:gitgutter_sign_modified         = '▏'
 let g:gitgutter_sign_removed          = '▏'
 let g:gitgutter_sign_modified_removed = '║'
 
-nnoremap <leader>tgg :GitGutterToggle<CR>
+nnoremap <leader>tgg :<C-u>GitGutterToggle<CR>
 
 " }}}
 " Plugin: lightline {{{

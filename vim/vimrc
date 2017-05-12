@@ -92,9 +92,14 @@ let g:maplocalleader = ','
 " Local Settings: {{{
 " -----------------------------------------------------------------------
 
-let s:vimrc_local = $VIMDIR . '/.vimrc.local'
+let s:vimrc_local = $VIMDIR . '/vimrc.local'
 if filereadable(s:vimrc_local)
   execute 'source ' . s:vimrc_local
+endif
+
+let s:vimrc_project = $PWD . '/.vimrc.local'
+if filereadable(s:vimrc_project)
+  execute 'source ' . s:vimrc_project
 endif
 
 " }}}
