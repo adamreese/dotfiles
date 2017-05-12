@@ -26,6 +26,7 @@ Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
 Plug 'airblade/vim-gitgutter'
 Plug 'benekastah/neomake',      { 'on': 'Neomake' }
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'haya14busa/incsearch.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'

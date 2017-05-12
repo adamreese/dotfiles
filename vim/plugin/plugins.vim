@@ -196,6 +196,14 @@ let g:delimitMate_expand_space = 1
 let g:delimitMate_smart_quotes = 1
 
 " }}}
+" Plugin: incsearch {{{
+" -----------------------------------------------------------------------
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" }}}
 " Plugin: quick-scope {{{
 " -----------------------------------------------------------------------
 
