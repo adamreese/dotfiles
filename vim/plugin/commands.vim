@@ -18,5 +18,8 @@ function! s:reload() abort
 endfunction
 command! ReloadSyntax :call s:reload()
 
+" shfmt
+command! -nargs=0 -bang -complete=command Shfmt %!shfmt -i 2
+
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker
