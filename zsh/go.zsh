@@ -17,6 +17,8 @@ gocover() {
   go tool cover -html=$TMPDIR/coverage.out
 }
 
+alias gml="gometalinter --config=${XDG_CONFIG_HOME}/gometalinter.json"
+
 # -----------------------------------------------------------------------------
 # Global alias pipe to panicparse.
 #
