@@ -12,9 +12,9 @@ $spacer| \
 %(color:bold blue)%(authorname)%(color:reset)"
 
 git for-each-ref \
-    --sort=-committerdate \
-    --count=25 \
-    "refs/remotes/"  \
-    --format="$format" \
+  --sort=-committerdate \
+  --count=25 \
+  "refs/remotes/" \
+  --format="$format" \
   | sed -e 's-refs/remotes/origin/--' \
   | column -ts '|'

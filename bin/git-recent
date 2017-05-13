@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
-branch='%(color:yellow)%(refname:short)%(color:reset)'
+branch='%(color:blue)%(refname:short)%(color:reset)'
 spacer='%(color:black) %(color:reset)'
 
 format="
 %(HEAD) \
 $branch|\
-%(color:bold green)%(committerdate:relative)%(color:reset)| \
 %(contents:subject) \
+%(color:bold black)%(committerdate:relative)%(color:reset) \
 $spacer|"
 
 git for-each-ref \
-    --sort=-committerdate \
-    --count=25 \
-    "refs/heads/"  \
-    --format="$format" \
+  --sort=-committerdate \
+  --count=25 \
+  "refs/heads/" \
+  --format="$format" \
   | sed -e 's-refs/remotes/origin/--' \
   | column -ts '|'
