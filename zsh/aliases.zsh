@@ -13,6 +13,8 @@ alias -g G='| grep'
 alias -g L='| less'
 alias -g J='| jq .'
 
+alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
+
 alias j='jump'
 
 reload() {

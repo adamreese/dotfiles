@@ -130,7 +130,7 @@ prompt_filthy_git_branch() {
 }
 
 prompt_status() {
-  echo -n "%(?.%F{white}.%F{red})❯%f "
+  echo -n "%(?.%F{003}.%F{red})❯%f "
 }
 
 prompt_dir() {
@@ -148,7 +148,7 @@ prompt_dir() {
   else
     rtn="%~%u"
   fi
-  print -n "[%F{green}${rtn}%f] "
+  print -n "%F{green}${rtn}%f "
 }
 
 areese_prompt() {

@@ -28,6 +28,7 @@ path=(
   # mkdir .git/safe in the root of repositories you trust
   .git/safe/../../bin
   ${HOME}/.dotfiles/bin(N-/)
+  ${HOME}/.local/bin(N-/)
 
   # GNU Coreutils
   /usr/local/opt/coreutils/libexec/gnubin(N-/)

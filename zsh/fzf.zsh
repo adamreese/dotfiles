@@ -6,8 +6,6 @@ _fzf_opts=(
   --color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4
   --bind=ctrl-u:page-up
   --bind=ctrl-d:page-down
-  --height 40%
-  --border
 )
 export FZF_DEFAULT_OPTS="${_fzf_opts}"
 
