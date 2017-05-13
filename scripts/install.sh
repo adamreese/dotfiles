@@ -122,9 +122,6 @@ symlink_files() {
 
   # shell
   symlink aliases      .aliases
-  symlink bash_profile .bash_profile
-  symlink bash_prompt  .bash_prompt
-  symlink bashrc       .bashrc
   symlink zlogin       .zlogin
   symlink zlogout      .zlogout
   symlink zsh          .zsh
