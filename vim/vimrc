@@ -28,11 +28,7 @@ Plug 'benekastah/neomake',      { 'on': 'Neomake' }
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf',            { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim',         { 'on': 'GV' }
 Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'kepbod/quick-scope'
 Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
 Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
@@ -50,6 +46,7 @@ Plug 'tweekmonster/startuptime.vim'
 Plug 'uarun/vim-protobuf'
 Plug 'vimwiki/vimwiki'
 Plug 'w0ng/vim-hybrid'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 
 if exists('$TMUX')
   Plug 'christoomey/vim-tmux-navigator'
@@ -62,7 +59,6 @@ Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
 Plug 'tmux-plugins/vim-tmux',   { 'for': 'tmux' }
 Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
 Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 " -- Completion ---------------------------------------------------------
 Plug 'Raimondi/delimitMate'

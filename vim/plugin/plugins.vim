@@ -204,12 +204,6 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 " }}}
-" Plugin: quick-scope {{{
-" -----------------------------------------------------------------------
-
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" }}}
 " Plugin: committia.vim {{{
 " -----------------------------------------------------------------------
 
