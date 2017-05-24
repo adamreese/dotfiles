@@ -1,1 +1,1 @@
-/Users/adamreese/.dotfiles/vim/vimrc
+execute 'source' fnamemodify(expand('<sfile>'), ':h').'/vimrc'
