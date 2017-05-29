@@ -10,15 +10,5 @@ _fzf_opts=(
 export FZF_DEFAULT_OPTS="${_fzf_opts}"
 
 unset _fzf_opts
-
-# Setup FZF paths
-# ------------------------------------------------------------------------------
-path+=(${HOME}/.fzf/bin(N-/))
-manpath+=(${HOME}/.fzf/man(N-/))
-
-# Completion
-# ------------------------------------------------------------------------------
-[[ $- == *i* ]] && source "${HOME}/.fzf/shell/completion.zsh" 2> /dev/null
-
 # ------------------------------------------------------------------------------
 # vim:ft=zsh
