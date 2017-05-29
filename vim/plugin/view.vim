@@ -3,14 +3,13 @@
 " =======================================================================
 scriptencoding utf-8
 
-" UI: {{{
+" UI: {{{1
 " -----------------------------------------------------------------------
 let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
 let &fillchars='diff:⣿,vert:│,fold:─'
 let &showbreak='↳ '
 
-" }}}
-" Highlights: {{{
+" Highlights: {{{1
 " -----------------------------------------------------------------------
 highlight! clear SignColumn
 highlight! clear FoldColumn
@@ -19,8 +18,6 @@ highlight! ColorColumn guibg=#303030
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" }}}
 
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

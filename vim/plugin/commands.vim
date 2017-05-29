@@ -9,16 +9,12 @@ command! WQ wq
 command! Wq wq
 
 " Profile
-command! -bang Profile call acr#profile(<bang>0)
+command! -bang Profile call ar#profile(<bang>0)
 
 " ReloadSyntax
-function! s:reload() abort
-  syntax sync fromstart
-  redraw!
-endfunction
-command! ReloadSyntax :call s:reload()
+command! ReloadSyntax call ar#reload_syntax()
 
-" shfmt
+" Shfmt
 command! -nargs=0 -bang -complete=command Shfmt %!shfmt -i 2
 
 " -----------------------------------------------------------------------

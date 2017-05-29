@@ -2,7 +2,7 @@
 " plugin/settings.vim
 " =======================================================================
 
-" General: {{{
+" General: {{{1
 " -----------------------------------------------------------------------
 
 set autowrite                " Automatically save before :next, :make etc.
@@ -28,8 +28,7 @@ if exists('$TMUX')
   set ttymouse=sgr
 endif
 
-" }}}
-" Search: {{{
+" Search: {{{1
 " -----------------------------------------------------------------------
 
 set ignorecase               " Search case insensitive...
@@ -39,8 +38,7 @@ if exists('+inccommand')
   set inccommand=nosplit
 endif
 
-" }}}
-" Performance: {{{
+" Performance: {{{1
 " -----------------------------------------------------------------------
 
 set lazyredraw               " only redraw when needed
@@ -53,8 +51,7 @@ set timeoutlen=1000
 " This fixes some performance problems on huge files.
 set synmaxcol=1000
 
-" }}}
-" Indent: {{{
+" Indent: {{{1
 " -----------------------------------------------------------------------
 
 set autoindent
@@ -65,8 +62,7 @@ set softtabstop=2
 set tabstop=2
 set expandtab                " Use spaces instead of tabs
 
-" }}}
-" Wildmenu: {{{
+" Wildmenu: {{{1
 " -----------------------------------------------------------------------
 
 if has('wildmenu')
@@ -76,8 +72,7 @@ if has('wildmenu')
   set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
 endif
 
-" }}}
-" Folding: {{{
+" Folding: {{{1
 " -----------------------------------------------------------------------
 
 if has('folding')
@@ -85,8 +80,7 @@ if has('folding')
   set foldtext=folding#text()
 endif
 
-" }}}
-" Directories: {{{
+" Directories: {{{1
 " -----------------------------------------------------------------------
 
 set directory=$DATADIR/swap//
@@ -128,8 +122,7 @@ for s:dir in [&backupdir, &directory, &undodir, &viewdir]
   endif
 endfor
 
-" }}}
-" Behavior: {{{
+" Behavior: {{{1
 " -----------------------------------------------------------------------
 
 set backspace=indent,eol,start
@@ -142,8 +135,7 @@ set pumheight=20                     " Pop-up menu's line height
 set splitbelow                       " Split horizontal windows below to the current windows
 set splitright                       " Split vertical windows right to the current windows
 
-" }}}
-" UI: {{{
+" UI: {{{1
 " -----------------------------------------------------------------------
 
 set display=lastline
@@ -197,6 +189,5 @@ for s:color in [
   let s:num += 1
 endfor
 
-" }}}
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

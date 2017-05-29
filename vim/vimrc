@@ -1,11 +1,10 @@
 " =======================================================================
-" vimrc {{{
+" vimrc {{{1
 " =======================================================================
 if has('vim_starting') | set encoding=utf-8 nobomb | endif
 scriptencoding utf-8
-" }}}
 " =======================================================================
-" Enviroment: {{{
+" Enviroment: {{{1
 " =======================================================================
 
 " Create global config for cache and data directories
@@ -13,9 +12,8 @@ let $CACHEDIR = expand($HOME.'/.cache/vim')
 let $DATADIR  = expand($HOME.'/.local/share/vim')
 let $VIMDIR   = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
-" }}}
 " =======================================================================
-" Plug: {{{
+" Plug: {{{1
 " =======================================================================
 
 call plug#begin($VIMDIR.'/plugged')
@@ -44,21 +42,24 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'uarun/vim-protobuf'
-Plug 'vimwiki/vimwiki'
 Plug 'w0ng/vim-hybrid'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': 'UpdateRemotePlugins' }
+endif
 
 if exists('$TMUX')
   Plug 'christoomey/vim-tmux-navigator'
 endif
 
 " -- Languages ----------------------------------------------------------
-Plug 'chrisbra/vim-zsh',        { 'for': 'zsh' }
-Plug 'fatih/vim-go',            { 'for': 'go' }
-Plug 'syngan/vim-vimlint',      { 'for': 'vim' }
-Plug 'tmux-plugins/vim-tmux',   { 'for': 'tmux' }
-Plug 'vim-ruby/vim-ruby',       { 'for': 'ruby' }
-Plug 'ynkdir/vim-vimlparser',   { 'for': 'vim' }
+Plug 'fatih/vim-go',                 { 'for': 'go' }
+Plug 'syngan/vim-vimlint',           { 'for': 'vim' }
+Plug 'tmux-plugins/vim-tmux',        { 'for': 'tmux' }
+Plug 'vim-ruby/vim-ruby',            { 'for': 'ruby' }
+Plug 'ynkdir/vim-vimlparser',        { 'for': 'vim' }
+Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
 
 " -- Completion ---------------------------------------------------------
 Plug 'Raimondi/delimitMate'
@@ -66,10 +67,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
 if has('nvim')
-  function! DoRemote(arg)
-    UpdateRemotePlugins
-  endfunction
-  Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+  Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
   Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
   Plug 'Shougo/neco-vim',      { 'for': 'vim' }
 else
@@ -78,17 +76,15 @@ endif
 
 call plug#end()
 
-" }}}
 " =======================================================================
-" Map Leaader: {{{
+" Map Leaader: {{{1
 " =======================================================================
 
 let g:mapleader = ','
 let g:maplocalleader = ','
 
-" }}}
 " -----------------------------------------------------------------------
-" Local Settings: {{{
+" Local Settings: {{{1
 " -----------------------------------------------------------------------
 
 let s:vimrc_local = $VIMDIR . '/vimrc.local'
@@ -101,6 +97,5 @@ if filereadable(s:vimrc_project)
   execute 'source ' . s:vimrc_project
 endif
 
-" }}}
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

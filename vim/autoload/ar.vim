@@ -1,14 +1,14 @@
 " =======================================================================
-" autoload/acr.vim
+" autoload/ar.vim
 " =======================================================================
 
-if exists('g:loaded_acr') | finish | endif
-let g:loaded_acr = 1
+if exists('g:loaded_ar') | finish | endif
+let g:loaded_ar = 1
 
 " -----------------------------------------------------------------------
-"  arc#profile() {{{
+"  ar#profile() {{{1
 " -----------------------------------------------------------------------
-function! acr#profile(bang) abort
+function! ar#profile(bang) abort
   if a:bang
     profile pause
     noautocmd qall
@@ -17,7 +17,15 @@ function! acr#profile(bang) abort
     profile func *
     profile file *
   endif
-endfunction "}}}
+endfunction
+
+" -----------------------------------------------------------------------
+" ar#reload_syntax() {{{1
+" -----------------------------------------------------------------------
+function! ar#reload_syntax() abort
+  syntax sync fromstart
+  redraw!
+endfunction
 
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

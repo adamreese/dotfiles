@@ -1,7 +1,7 @@
 " =======================================================================
 " autoload/folding.vim
 " =======================================================================
-"  vimrc#foldtext() {{{
+"  vimrc#foldtext() {{{1
 " -----------------------------------------------------------------------
 
 " See: http://dhruvasagar.com/2013/03/28/vim-better-foldtext
@@ -14,7 +14,7 @@ function! folding#text() abort
   let l:foldtextend = l:lines_count_text . repeat(l:foldchar, 8)
   let l:foldtextlength = strlen(substitute(l:foldtextstart . l:foldtextend, '.', 'x', 'g')) + &foldcolumn
   return l:foldtextstart . repeat(l:foldchar, winwidth(0)-l:foldtextlength) . l:foldtextend
-endfunction "}}}
+endfunction
 
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker
