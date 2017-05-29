@@ -2,6 +2,8 @@
 " plugin/mappings.vim
 " =======================================================================
 
+inoremap jj <ESC>
+
 " disable ex mode
 nnoremap  Q <Nop>
 nnoremap gQ <Nop>
