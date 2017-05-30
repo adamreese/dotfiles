@@ -1,9 +1,10 @@
-log
-tags
-tmp
-vendor
 .git/
+Godeps/
 bower_components/
 node_modules/
-Godeps/
+tmp/
+vendor/
+
+tags
+
 *.pb.go
