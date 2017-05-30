@@ -162,7 +162,7 @@ install_go_packages() {
   echo "Installing default go packages"
   while read -r pkg; do
     echo "${pkg}"
-    go get -u --fix "${pkg}"
+    go get -u "${pkg}"
   done < "${DOTFILES}/go/default-packages"
 }
 
