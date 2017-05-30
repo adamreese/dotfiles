@@ -40,7 +40,8 @@ path=(${GOPATH}/src/k8s.io/helm/bin ${path})
 # example: `helm get HL`
 alias -g HL='$(helm last)'
 
-zcmp helm
+# disable for now
+# zcmp helm
 
 # -----------------------------------------------------------------------------
 # vim: ft=zsh :
