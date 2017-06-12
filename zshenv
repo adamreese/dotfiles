@@ -16,13 +16,13 @@ typeset -gU cdpath fpath manpath path
 
 # load completion functions
 fpath=(
-  ${HOME}/.zsh/{completion,functions}(N-/)
-  ${HOME}/.zsh/modules/*/{completion,functions}(N-/)
+  ${XDG_CONFIG_HOME}/zsh/{completion,functions}(N-/)
+  ${XDG_CONFIG_HOME}/zsh/modules/*/{completion,functions}(N-/)
   /usr/local/share/zsh/site-functions(N-/)
   /usr/local/share/zsh-completions(N-/)
   ${fpath}
 )
-autoload -Uz ${HOME}/.zsh/functions/*(N:t)
+autoload -Uz ${XDG_CONFIG_HOME}/zsh/functions/*(N:t)
 
 path=(
   # mkdir .git/safe in the root of repositories you trust

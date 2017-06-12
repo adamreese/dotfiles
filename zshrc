@@ -2,7 +2,7 @@
 # zshrc
 # ------------------------------------------------------------------------------
 
-export ZSH=${ZDOTDIR:-${HOME}}/.zsh
+export ZSH=${ZDOTDIR:-${XDG_CONFIG_HOME}}/zsh
 
 zmodules=(zshmarks history-substring-search)
 fpath=(${${zmodules}:+${ZSH}/modules/${^zmodules}/functions(/FN)} ${fpath})

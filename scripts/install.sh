@@ -124,7 +124,7 @@ symlink_files() {
   symlink aliases      .aliases
   symlink zlogin       .zlogin
   symlink zlogout      .zlogout
-  symlink zsh          .zsh
+  symlink zsh          .config/zsh
   symlink zshrc        .zshrc
 
   # search
