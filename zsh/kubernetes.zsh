@@ -4,31 +4,11 @@ if (( ! $+commands[kubectl] )); then
   return 1
 fi
 
-# Completion
-# -----------------------------------------------------------------------------
-autoload -Uz zrecompile
-
-# zcmp
-#
-# compile and source cobra style zsh completions
-zcmp() {
-  typeset cachefile=${HOME}/.cache/zsh/${1}.zsh
-
-  if [[ ! -s $cachefile || ${commands[${1}]} -nt $cachefile ]]; then
-    "${1}" completion zsh | egrep -v 'compinit' >| $cachefile
-  fi
-
-  zrecompile -p "${cachefile}" && command rm -f "${cachefile}.zwc.old"
-  [[ -s "${cachefile}.zwc" ]] || zcompile $cachefile
-  source $cachefile
-}
-
-
 # Kubernetes
 # -----------------------------------------------------------------------------
 alias k=kubectl
 
-zcmp kubectl
+zcompcobra kubectl
 
 # Helm
 # -----------------------------------------------------------------------------
@@ -41,7 +21,7 @@ path=(${GOPATH}/src/k8s.io/helm/bin ${path})
 alias -g HL='$(helm last)'
 
 # disable for now
-# zcmp helm
+# zcompcobra helm
 
 # -----------------------------------------------------------------------------
 # vim: ft=zsh :

@@ -1,0 +1,20 @@
+# ------------------------------------------------------------------------------
+# zcompcobra
+#
+# compile and source cobra style zsh completions
+# ------------------------------------------------------------------------------
+
+autoload -Uz zrecompile
+
+typeset cachefile=${HOME}/.cache/zsh/${1}.zsh
+
+if [[ ! -s $cachefile || ${commands[${1}]} -nt $cachefile ]]; then
+  "${1}" completion zsh | egrep -v 'compinit' >| $cachefile
+fi
+
+zrecompile -p "${cachefile}" && command rm -f "${cachefile}.zwc.old"
+[[ -s "${cachefile}.zwc" ]] || zcompile $cachefile
+source $cachefile
+
+# ------------------------------------------------------------------------------
+# vim:ft=zsh
