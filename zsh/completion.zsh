@@ -22,7 +22,7 @@ setopt NO_FLOW_CONTROL        # Disable start/stop characters in shell editor.
 
 # enable caching
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${ZDOTDIR:-${HOME}}/.cache/zsh"
+zstyle ':completion::complete:*' cache-path "${ZSH_CACHE}"
 
 # group matches and describe.
 zstyle ':completion:*'                 accept-exact '*(N)'
