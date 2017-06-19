@@ -85,7 +85,7 @@ endif
 
 set directory=$DATADIR/swap//
 set backupdir=$DATADIR/backup/
-set spellfile=$VIMDIR./spell/en.utf-8.add
+set spellfile=$VIMDIR/spell/en.utf-8.add
 
 if has('mksession')
   set viewdir=$DATADIR/view/   " override ~/.vim/view default
