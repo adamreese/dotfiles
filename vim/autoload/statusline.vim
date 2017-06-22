@@ -73,7 +73,7 @@ function! statusline#filename() abort
   return s:filename('%:.') . s:modified() . s:readonly()
 endfunction
 
-function! statusline#fugitive() abort
+function! statusline#git_branch() abort
   if s:is_readonly_filetype()
     return ''
   endif

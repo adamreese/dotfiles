@@ -18,6 +18,7 @@ let $VIMDIR   = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 call plug#begin($VIMDIR.'/plugged')
 
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/vimproc.vim',      { 'build': 'make' }
@@ -43,11 +44,6 @@ Plug 'tpope/vim-surround'
 Plug 'tweekmonster/startuptime.vim'
 Plug 'uarun/vim-protobuf'
 Plug 'w0ng/vim-hybrid'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-
-if has('nvim')
-  Plug 'Shougo/denite.nvim', { 'do': 'UpdateRemotePlugins' }
-endif
 
 if exists('$TMUX')
   Plug 'christoomey/vim-tmux-navigator'
@@ -55,11 +51,13 @@ endif
 
 " -- Languages ----------------------------------------------------------
 Plug 'fatih/vim-go',                 { 'for': 'go' }
+Plug 'jodosha/vim-godebug',          { 'for': 'go' }
 Plug 'syngan/vim-vimlint',           { 'for': 'vim' }
 Plug 'tmux-plugins/vim-tmux',        { 'for': 'tmux' }
 Plug 'vim-ruby/vim-ruby',            { 'for': 'ruby' }
 Plug 'ynkdir/vim-vimlparser',        { 'for': 'vim' }
 Plug 'plasticboy/vim-markdown',      { 'for': 'markdown' }
+Plug 'ternjs/tern_for_vim',          { 'for': 'javascript', 'do': 'npm install --global tern' }
 
 " -- Completion ---------------------------------------------------------
 Plug 'Raimondi/delimitMate'
@@ -67,9 +65,10 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': 'UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-go',    { 'for': 'go', 'do': 'make'}
-  Plug 'Shougo/neco-vim',      { 'for': 'vim' }
+  Plug 'Shougo/deoplete.nvim',     { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-go',        { 'for': 'go', 'do': 'make'}
+  Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript', 'do': 'npm install -g tern' }
+  Plug 'Shougo/neco-vim',          { 'for': 'vim' }
 else
   Plug 'Shougo/neocomplete'
 endif

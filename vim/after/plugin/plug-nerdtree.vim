@@ -2,8 +2,8 @@
 " plugin/plug-nerdtree.vim
 " =======================================================================
 
-let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc', '^BUILD$']
+" let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc', '\.pyc', '^BUILD$']
 let g:NERDTreeShowHidden=1
 let g:NERDTreeMapJumpNextSibling='<Nop>'
 let g:NERDTreeMapJumpPrevSibling='<Nop>'

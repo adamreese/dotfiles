@@ -6,7 +6,7 @@ let g:lightline = {
       \ 'colorscheme': 'default',
       \ 'active': {
       \   'left':  [
-      \     [ 'mode', 'paste' ], [ 'fugitive' ], [ 'filename' ],
+      \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename' ],
       \   ],
       \   'right': [
       \     [ 'neomake', 'lineinfo' ], [ 'filetype' ], [ 'go', 'ctrlpmark' ],
@@ -21,7 +21,7 @@ let g:lightline = {
       \   ]
       \ },
       \ 'component_function': {
-      \   'fugitive':     'statusline#fugitive',
+      \   'git_branch':   'statusline#git_branch',
       \   'filename':     'statusline#filename',
       \   'filetype':     'statusline#filetype',
       \   'mode':         'statusline#mode',

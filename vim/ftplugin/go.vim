@@ -29,8 +29,11 @@ nmap <buffer> <localleader>tc  <Plug>(go-coverage-toggle)
 nmap <buffer> <localleader>i   <Plug>(go-info)
 nmap <buffer> <localleader>f   :<C-u>GoImports<CR>
 nmap <buffer> <localleader>gt  :<C-u>GoDecls<CR>
+nmap <buffer> <localleader>gl  :<C-u>Neomake gometalinter<CR>
 
+command! -bang A  call go#alternate#Switch(<bang>0, 'edit')
 command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 
 let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
@@ -61,7 +64,6 @@ let g:tagbar_type_go = {
       \ }
 
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'deadcode', 'unconvert']
-let g:neomake_go_enabled_makers = ['go', 'govet']
 
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
