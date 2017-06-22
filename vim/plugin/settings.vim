@@ -126,12 +126,13 @@ endfor
 " -----------------------------------------------------------------------
 
 set backspace=indent,eol,start
-set completeopt=menu,menuone,longest " show PUM, even for one thing
 set complete=.                       " Default: .,w,b,u,t
+set completeopt=menu,menuone,longest " show PUM, even for one thing
+set isfname-==                       " Don't consider = symbol as part filename. Helps for deoplete file source.
+set pumheight=20                     " Pop-up menu's line height
 set scrolloff=8                      " Start scrolling when we're 8 lines away from margins
 set sidescroll=1
 set sidescrolloff=15
-set pumheight=20                     " Pop-up menu's line height
 set splitbelow                       " Split horizontal windows below to the current windows
 set splitright                       " Split vertical windows right to the current windows
 
