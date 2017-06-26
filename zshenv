@@ -28,8 +28,6 @@ fpath=(
 autoload -Uz ${ZSH}/functions/*(N:t)
 
 path=(
-  # mkdir .git/safe in the root of repositories you trust
-  .git/safe/../../bin
   ${HOME}/.dotfiles/bin(N-/)
   ${HOME}/.local/bin(N-/)
 

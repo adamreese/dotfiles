@@ -31,6 +31,12 @@ hash -d -- dotfiles=${HOME}/.dotfiles
 hash -d --    gosrc=${GOPATH}/src
 hash -d --   cellar=/usr/local/Cellar
 
+# mkdir .git/safe in the root of repositories you trust
+path=(
+  .git/safe/../../bin
+  ${path}
+)
+
 # ------------------------------------------------------------------------------
 [[ $ZSH_DEBUG ]] && zprof | less
 # ------------------------------------------------------------------------------
