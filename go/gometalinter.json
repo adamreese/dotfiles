@@ -2,8 +2,6 @@
   "DisableAll": true,
   "Enable": [
     "deadcode",
-    "dupl",
-    "errcheck",
     "goconst",
     "gocyclo",
     "goimports",
@@ -17,9 +15,9 @@
     "unparam",
     "unused",
     "varcheck",
-    "vet",
-    "vetshadow"
+    "vet"
   ],
+  "EnableGC": true,
   "Exclude": [
     "error return value not checked.*(Close|Log|Print|Encode).*\\(errcheck\\)$",
     ".*_test\\.go:.*error return value not checked.*\\(errcheck\\)$",
