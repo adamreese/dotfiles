@@ -15,7 +15,7 @@ alias ls='ls -pG'
 alias ll='ls -lph'
 
 # Perform case insensitive matching
-alias grep='grep -i'
+alias grep='grep -i --color=auto'
 
 alias agp='ag --pager="less -iFMRSX"'
 alias agh='ag --hidden'
