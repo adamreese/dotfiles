@@ -10,6 +10,8 @@ setlocal textwidth=80
 
 setlocal nofoldenable
 
+setlocal conceallevel=0
+
 let g:tagbar_type_markdown = {
     \ 'ctagstype' : 'markdown',
     \ 'kinds' : [
