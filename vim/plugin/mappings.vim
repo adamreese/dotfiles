@@ -29,7 +29,7 @@ nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 
 " Split sizing
-nnoremap <C-=>   <C-W>=
+nnoremap <C-=> <C-W>=
 
 " Window cycling
 nnoremap <Tab>   <C-w>w
@@ -56,6 +56,10 @@ nnoremap [l :<C-u>lprevious<CR>zz
 nnoremap ]e :<C-u>lnext<CR>zz
 nnoremap [e :<C-u>lprevious<CR>zz
 
+" Command mode emacs style bindings
+cnoremap <C-a> <Home>
+cnoremap <C-d> <Del>
+
 " -----------------------------------------------------------------------
 " Mapping: Leader
 " -----------------------------------------------------------------------
@@ -80,7 +84,7 @@ nnoremap <leader>pr :<C-u>source %<CR>
 " Format buffer
 nnoremap <leader>= ggVG=<CR>
 
-" Pressing ,ss will toggle and untoggle spell checking
+" Toggle spell checking
 nnoremap <leader>ss :<C-u>setlocal spell!<CR>
 
 " Sorting
