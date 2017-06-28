@@ -31,6 +31,7 @@ Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'majutsushi/tagbar',       { 'on': 'TagbarToggle' }
 Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
+Plug 'sbdchd/neoformat',        { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdtree'
 Plug 'slack/vim-align'
 Plug 'tpope/vim-abolish'
