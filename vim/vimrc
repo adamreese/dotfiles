@@ -4,7 +4,7 @@
 if has('vim_starting') | set encoding=utf-8 nobomb | endif
 scriptencoding utf-8
 " =======================================================================
-" Enviroment: {{{1
+" Environment: {{{1
 " =======================================================================
 
 " Create global config for cache and data directories
@@ -76,7 +76,7 @@ endif
 call plug#end()
 
 " =======================================================================
-" Map Leaader: {{{1
+" Map Leader: {{{1
 " =======================================================================
 
 let g:mapleader = ','
