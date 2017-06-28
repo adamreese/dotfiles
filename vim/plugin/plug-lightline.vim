@@ -2,6 +2,12 @@
 " plugin/plug-lightline.vim
 " =======================================================================
 
+let g:lightline_readonly_filetypes      = ['help', 'man', 'nerdtree', 'qf', 'tagbar']
+let g:lightline_mode_filetypes          = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
+let g:lightline_no_lineinfo_filetypes   = ['fzf', 'tagbar']
+let g:lightline_no_fileformat_filetypes = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
+let g:lightline_no_filename_filetypes   = ['fzf', 'nerdtree', 'tagbar', 'qf']
+
 let g:lightline = {
       \ 'colorscheme': 'default',
       \ 'active': {
@@ -26,7 +32,7 @@ let g:lightline = {
       \   'filetype':     'statusline#filetype',
       \   'mode':         'statusline#mode',
       \   'go':           'statusline#go',
-      \   'ctrlpmark':    'statusline#CtrlPMark',
+      \   'ctrlpmark':    'statusline#ctrlpmark',
       \ },
       \ 'component_expand': {
       \   'neomake':   'statusline#neomake',

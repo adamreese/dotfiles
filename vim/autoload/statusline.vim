@@ -3,24 +3,24 @@
 " =======================================================================
 scriptencoding utf-8
 
-function! s:is_filetype_mode_filetype() abort
-  return index(['nerdtree', 'help', 'tagbar', 'man', 'qf', 'fzf'], &filetype) >= 0
+function! s:is_mode_filetype() abort
+  return index(g:lightline_mode_filetypes, &filetype) >= 0
 endfunction
 
 function! s:is_no_lineinfo_filetype() abort
-  return index(['nerdtree', 'tagbar'], &filetype) >= 0
+  return index(g:lightline_no_lineinfo_filetypes, &filetype) >= 0
 endfunction
 
 function! s:is_no_fileformat_filetype() abort
-  return index(['nerdtree', 'help', 'tagbar', 'man', 'qf', 'fzf'], &filetype) >= 0
+  return index(g:lightline_no_fileformat_filetypes, &filetype) >= 0
 endfunction
 
 function! s:is_no_filename_filetype() abort
-  return index(['nerdtree', 'tagbar', 'qf', 'fzf'], &filetype) >= 0
+  return index(g:lightline_no_filename_filetypes, &filetype) >= 0
 endfunction
 
 function! s:is_readonly_filetype() abort
-  return index(['nerdtree', 'help', 'tagbar', 'man', 'qf'], &filetype) >= 0
+  return index(g:lightline_readonly_filetypes, &filetype) >= 0
 endfunction
 
 function! s:is_terminal() abort
@@ -83,12 +83,14 @@ endfunction
 function! statusline#filetype() abort
   if winwidth(0) < 70 || s:is_no_fileformat_filetype()
     return ''
+  elseif s:is_ctrlp()
+    return ''
   endif
   return strlen(&filetype) ? &filetype : 'no ft'
 endfunction
 
 function! statusline#mode() abort
-  if s:is_filetype_mode_filetype()
+  if s:is_mode_filetype()
     return toupper(&filetype)
   elseif s:is_ctrlp()
     return 'CtrlP'
@@ -104,6 +106,7 @@ function! statusline#statuslineinfo() abort
   elseif s:is_terminal()
     return ''
   endif
+
   return printf('%3.0f%% %3d:%-2d',
         \ round((line('.') * 1.0) / line('$') * 100),
         \ line('.'),
@@ -124,7 +127,7 @@ endfunction
 
 autocmd vimrc User NeomakeCountsChanged call lightline#update()
 
-function! statusline#CtrlPMark() abort
+function! statusline#ctrlpmark() abort
   if s:is_ctrlp() && has_key(g:lightline, 'ctrlp_item')
     call lightline#link('iR'[g:lightline.ctrlp_regex])
     return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
@@ -147,13 +150,6 @@ function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked) abo
 endfunction
 
 function! CtrlPStatusFunc_2(str) abort
-  return lightline#statusline(0)
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
 
