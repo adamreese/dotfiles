@@ -1,0 +1,11 @@
+{
+  "plugins": {
+    "complete_strings": {},
+    "doc_comment": {
+      "strong": true
+    },
+    "node": {},
+    "modules": {},
+    "commonjs": {}
+  }
+}

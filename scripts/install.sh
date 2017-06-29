@@ -91,54 +91,57 @@ symlink_files() {
   announce_step "Symlinking dotfiles"
 
   # vim
-  symlink vim          .vim
-  symlink vim          .config/nvim
-  symlink vim/gvimrc   .gvimrc
+  symlink vim                  .vim
+  symlink vim                  .config/nvim
+  symlink vim/gvimrc           .gvimrc
 
   # ruby
-	symlink ruby/irbrc   .irbrc
-	symlink ruby/pryrc   .pryrc
-	symlink ruby/gemrc   .gemrc
-	symlink ruby/rspec   .rspec
+	symlink ruby/irbrc           .irbrc
+	symlink ruby/pryrc           .pryrc
+	symlink ruby/gemrc           .gemrc
+	symlink ruby/rspec           .rspec
 
   # git
-  symlink git          .config/git
+  symlink git                  .config/git
 
   # go
   symlink go/gometalinter.json .config/gometalinter.json
 
+  # javascript
+  symlink node/tern-config     .tern-config
+
   # tmux
-  symlink tmux.conf    .tmux.conf
+  symlink tmux.conf            .tmux.conf
 
   # screen
-  symlink screenrc     .screenrc
+  symlink screenrc             .screenrc
 
   # database
-	symlink psqlrc       .psqlrc
-	symlink sqliterc     .sqliterc
+	symlink psqlrc               .psqlrc
+	symlink sqliterc             .sqliterc
 
   # slate
-	symlink slate        .slate
+	symlink slate                .slate
 
   # shell
-  symlink aliases      .aliases
-  symlink zlogin       .zlogin
-  symlink zlogout      .zlogout
-  symlink zsh          .config/zsh
-  symlink zshrc        .zshrc
+  symlink aliases              .aliases
+  symlink zlogin               .zlogin
+  symlink zlogout              .zlogout
+  symlink zsh                  .config/zsh
+  symlink zshrc                .zshrc
 
   # search
-  symlink ackrc        .ackrc
-  symlink agignore     .agignore
+  symlink ackrc                .ackrc
+  symlink agignore             .agignore
 
   # ctags
-  symlink ctags        .ctags
+  symlink ctags                .ctags
 
   # bookmarks
-  symlink bookmarks    .bookmarks
+  symlink bookmarks            .bookmarks
 
   # bin
-  symlink bin          .local/bin
+  symlink bin                  .local/bin
 
   print_success "Completed symlinks"
 }
@@ -166,8 +169,16 @@ install_go_packages() {
   done < "${DOTFILES}/go/default-packages"
 }
 
+install_node_packages() {
+  echo "Installing default node packages"
+  while read -r pkg; do
+    echo "${pkg}"
+    npm install --global --production "${pkg}"
+  done < "${DOTFILES}/node/default-packages"
+}
+
 usage() {
-  echo "${0} {brew, go, python, ruby, symlink}"
+  echo "${0} {brew, go, python, ruby, node, symlink}"
 }
 
 # -----------------------------------------------------------------------------
@@ -185,6 +196,7 @@ main() {
       go)      install_go_packages     ;;
       python)  install_python_packages ;;
       ruby)    install_ruby_gems       ;;
+      node)    install_node_packages   ;;
       symlink) symlink_files           ;;
       *)       usage                   ;;
     esac

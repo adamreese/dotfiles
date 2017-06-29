@@ -21,3 +21,6 @@ Procfile-development
 
 # Project specific vim configuration
 .vimrc.local
+
+.tern-port
+.tern-project
