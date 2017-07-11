@@ -17,6 +17,7 @@ setopt PUSHD_TO_HOME             # Push to home directory when no argument is gi
 setopt EXTENDED_GLOB             # Use extended globbing syntax.
 setopt MULTIOS                   # Write to multiple descriptors.
 setopt NO_CLOBBER                # Disables overwrite existing files with `>`. Use `> | ` or `>!` instead
+setopt GLOB_DOTS                 # Do not require a leading `.' in a filename to be matched explicitly.
 
 # Aliases
 # -----------------------------------------------------------------------------
