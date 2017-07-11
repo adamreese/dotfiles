@@ -15,7 +15,7 @@ let g:lightline = {
       \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename' ],
       \   ],
       \   'right': [
-      \     [ 'neomake', 'lineinfo' ], [ 'filetype' ], [ 'go', 'ctrlpmark' ],
+      \     [ 'neomake', 'lineinfo' ], [ 'filetype' ], [ 'go', 'ctrlp_mark' ],
       \   ]
       \ },
       \ 'inactive': {
@@ -27,12 +27,12 @@ let g:lightline = {
       \   ]
       \ },
       \ 'component_function': {
-      \   'git_branch':   'statusline#git_branch',
-      \   'filename':     'statusline#filename',
-      \   'filetype':     'statusline#filetype',
-      \   'mode':         'statusline#mode',
-      \   'go':           'statusline#go',
-      \   'ctrlpmark':    'statusline#ctrlpmark',
+      \   'git_branch':    'statusline#git_branch',
+      \   'filename':      'statusline#filename',
+      \   'filetype':      'statusline#filetype',
+      \   'mode':          'statusline#mode',
+      \   'go':            'statusline#go',
+      \   'ctrlp_mark':    'statusline#ctrlp_mark',
       \ },
       \ 'component_expand': {
       \   'neomake':   'statusline#neomake',
@@ -46,6 +46,13 @@ let g:lightline = {
       \   'right': '|',
       \ },
       \ }
+
+let g:tagbar_status_func = 'statusline#tagbar_status'
+
+augroup lightline_neovim
+  autocmd!
+  autocmd User NeomakeCountsChanged call lightline#update()
+augroup END
 
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

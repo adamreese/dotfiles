@@ -127,7 +127,7 @@ endfunction
 
 autocmd vimrc User NeomakeCountsChanged call lightline#update()
 
-function! statusline#ctrlpmark() abort
+function! statusline#ctrlp_mark() abort
   if s:is_ctrlp() && has_key(g:lightline, 'ctrlp_item')
     call lightline#link('iR'[g:lightline.ctrlp_regex])
     return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
@@ -150,6 +150,10 @@ function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked) abo
 endfunction
 
 function! CtrlPStatusFunc_2(str) abort
+  return lightline#statusline(0)
+endfunction
+
+function! statusline#tagbar_status(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 
