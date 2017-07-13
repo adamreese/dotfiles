@@ -17,5 +17,9 @@ not_stdlib() {
   xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'
 }
 
-packages | xargs go list -f '{{join .'${item^}' "\n"}}' | sort -u | not_stdlib
+not_internal() {
+  grep -v "${package}"
+}
+
+packages | xargs go list -f '{{join .'${item^}' "\n"}}' | sort -u | not_stdlib | not_internal
 
