@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Bash 'Strict Mode'
+# http://redsymbol.net/articles/unofficial-bash-strict-mode
+set -euo pipefail
+IFS=$'\n\t'
+
+item=${1:-deps}
+
+package="${PWD#$GOPATH/src/}"
+
+packages() {
+  go list "${package}/..." | grep -vF "${package}/vendor"
+}
+
+not_stdlib() {
+  xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'
+}
+
+packages | xargs go list -f '{{join .'${item^}' "\n"}}' | sort -u | not_stdlib
+
