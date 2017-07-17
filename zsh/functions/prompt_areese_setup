@@ -151,9 +151,15 @@ prompt_dir() {
   print -n "%F{green}${rtn}%f "
 }
 
+prompt_host() {
+  # show username@host if logged in through SSH
+  [[ "$SSH_CONNECTION" != '' ]] && echo -n '%F{242}[%n@%m]%f '
+}
+
 areese_prompt() {
   echo -n "$NEWLINE"
 
+  prompt_host
   prompt_dir
   prompt_git
   echo -n "$NEWLINE"
