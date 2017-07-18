@@ -1,22 +1,24 @@
 " =======================================================================
 " vimrc {{{1
 " =======================================================================
+
 if has('vim_starting') | set encoding=utf-8 nobomb | endif
 scriptencoding utf-8
+
 " =======================================================================
 " Environment: {{{1
 " =======================================================================
 
 " Create global config for cache and data directories
-let $CACHEDIR = expand($HOME.'/.cache/vim')
-let $DATADIR  = expand($HOME.'/.local/share/vim')
-let $VIMDIR   = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:cache_dir = expand($HOME.'/.cache/vim/')
+let g:data_dir  = expand($HOME.'/.local/share/vim/')
+let g:vim_dir   = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " =======================================================================
 " Plug: {{{1
 " =======================================================================
 
-call plug#begin($VIMDIR.'/plugged')
+call plug#begin(g:vim_dir . '/plugged')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'FelikZ/ctrlp-py-matcher'
@@ -87,12 +89,12 @@ let g:maplocalleader = ','
 " Local Settings: {{{1
 " -----------------------------------------------------------------------
 
-let s:vimrc_local = $VIMDIR . '/vimrc.local'
+let s:vimrc_local = g:vim_dir . '/vimrc.local'
 if filereadable(s:vimrc_local)
   execute 'source ' . s:vimrc_local
 endif
 
-let s:vimrc_project = $PWD . '/.vimrc.local'
+let s:vimrc_project = '.vimrc.local'
 if filereadable(s:vimrc_project)
   execute 'source ' . s:vimrc_project
 endif

@@ -83,26 +83,26 @@ endif
 " Directories: {{{1
 " -----------------------------------------------------------------------
 
-set directory=$DATADIR/swap//
-set backupdir=$DATADIR/backup/
-set spellfile=$VIMDIR/spell/en.utf-8.add
+execute 'set directory=' . g:data_dir . '/swap//'
+execute 'set backupdir=' . g:data_dir . '/backup/'
+execute 'set spellfile=' . g:vim_dir  . '/spell/en.utf-8.add'
 
 if has('mksession')
-  set viewdir=$DATADIR/view/   " override ~/.vim/view default
+  execute 'set viewdir=' . g:data_dir . '/view/'
   set viewoptions=cursor,folds " save/restore just these (with `:{mk,load}view`)
 endif
 
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 if has('persistent_undo')
-  set undofile                " actually use undo files
-  set undodir=$DATADIR/undo// " keep undo files out of the way
+  set undofile
+  execute 'set undodir=' . g:data_dir . '/undo/'
 endif
 
 if has('nvim')
-  set shada+=n$DATADIR/main.shada
+  exec 'set shada+=n' . g:data_dir . '/main.shada'
 else
-  set viminfo+=n$DATADIR/viminfo
+  exec 'set viminfo+=n' . g:data_dir . '/viminfo'
 endif
 
 " Don't create root-owned files

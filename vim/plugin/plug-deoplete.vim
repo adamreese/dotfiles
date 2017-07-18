@@ -18,7 +18,7 @@ let g:deoplete#max_menu_width             = 0
 
 let g:deoplete#sources#go#align_class    = 1
 let g:deoplete#sources#go#gocode_binary  = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#json_directory = $CACHEDIR.'/deoplete/go/darwin_amd64'
+let g:deoplete#sources#go#json_directory = g:cache_dir . 'deoplete/go/darwin_amd64'
 let g:deoplete#sources#go#package_dot    = 1
 let g:deoplete#sources#go#pointer        = 1
 let g:deoplete#sources#go#sort_class     = ['func', 'type', 'var', 'const', 'package']
@@ -36,7 +36,7 @@ if s:enable_debug
   call deoplete#custom#set('buffer', 'debug_enabled', 0)
   call deoplete#custom#set('core', 'debug_enabled', 1)
   call deoplete#custom#set('go', 'debug_enabled', 1)
-  call deoplete#enable_logging('DEBUG', $CACHEDIR.'/deoplete.log')
+  call deoplete#enable_logging('DEBUG', g:cache_dir . 'deoplete.log')
 endif
 
 call deoplete#custom#set('_', 'converters', [
