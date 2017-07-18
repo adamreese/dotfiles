@@ -54,7 +54,7 @@ endif
 
 " -- Languages ----------------------------------------------------------
 Plug 'fatih/vim-go',                 { 'for': 'go' }
-Plug 'jodosha/vim-godebug',          { 'for': 'go' }
+Plug 'sebdah/vim-delve',             { 'for': 'go' }
 Plug 'syngan/vim-vimlint',           { 'for': 'vim' }
 Plug 'tmux-plugins/vim-tmux',        { 'for': 'tmux' }
 Plug 'vim-ruby/vim-ruby',            { 'for': 'ruby' }
