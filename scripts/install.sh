@@ -125,10 +125,10 @@ symlink_files() {
 
   # shell
   symlink aliases              .aliases
-  symlink zlogin               .zlogin
-  symlink zlogout              .zlogout
+  symlink zsh/zlogin           .zlogin
+  symlink zsh/zlogout          .zlogout
+  symlink zsh/zshrc            .zshrc
   symlink zsh                  .config/zsh
-  symlink zshrc                .zshrc
 
   # search
   symlink ackrc                .ackrc
