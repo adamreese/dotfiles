@@ -138,7 +138,7 @@ symlink_files() {
   symlink ctags                .ctags
 
   # bookmarks
-  symlink bookmarks            .bookmarks
+  symlink bookmarks            .config/bookmarks
 
   # bin
   symlink bin                  .local/bin

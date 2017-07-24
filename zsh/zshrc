@@ -11,27 +11,48 @@ autoload -Uz ${ZSH}/modules/${^zmodules}/functions/*(N:t)
 autoload -Uz compinit; compinit
 autoload -Uz bashcompinit; bashcompinit
 
+# ------------------------------------------------------------------------------
+# source configuration files
+
 for file (${ZSH}/*.zsh(N-.)); do
   source $file
 done
 unset file
+
+# ------------------------------------------------------------------------------
+# plugin configuration
+
+export BOOKMARKS_FILE=${XDG_CONFIG_HOME}/bookmarks
+
+# ------------------------------------------------------------------------------
+# load plugins
 
 for file (${ZSH}/modules/${^zmodules}/init.zsh(N-.)); do
   source $file
 done
 unset file
 
+# ------------------------------------------------------------------------------
+# load prompt
+
 if [[ ! ${TERM} == (linux|*bsd*|dumb) ]]; then
   autoload -Uz promptinit && promptinit
   prompt areese
 fi
+
+# ------------------------------------------------------------------------------
+# hash directories
 
 hash -d --     docs=${HOME}/Documents
 hash -d -- dotfiles=${HOME}/.dotfiles
 hash -d --    gosrc=${GOPATH}/src
 hash -d --   cellar=/usr/local/Cellar
 
+# ------------------------------------------------------------------------------
+# path hack
+#
 # mkdir .git/safe in the root of repositories you trust
+
 path=(
   .git/safe/../../bin
   ${path}
