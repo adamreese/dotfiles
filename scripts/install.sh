@@ -111,7 +111,7 @@ symlink_files() {
   symlink node/tern-config     .tern-config
 
   # tmux
-  symlink tmux.conf            .tmux.conf
+  symlink tmux/tmux.conf       .tmux.conf
 
   # screen
   symlink screenrc             .screenrc
