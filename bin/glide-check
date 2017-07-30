@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+package="${PWD#$GOPATH/src/}"
+
+packages() {
+  go list "${package}/..." | grep -vF "${package}/vendor"
+}
+
+deps() {
+  xargs go list -f '{{join .Deps "\n"}}'
+}
+
+not_stdlib() {
+  xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'
+}
+
+not_internal() {
+  grep -v "${package}"
+}
+
+echo "==> Running vendor check..."
+found=$(packages | deps | sort -u | not_stdlib | not_internal) || :
+if [[ -n "${found}" ]]; then
+  echo "Non vendored dependencies found:"
+  for d in $found; do printf "\t%s\n" "$d"; done
+  echo
+  echo "These dependencies should be tracked in 'glide.yaml'."
+  echo "Consider running "glide update" or "glide get" to vendor a new dependency."
+  exit 1
+fi
