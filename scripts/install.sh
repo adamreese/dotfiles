@@ -121,7 +121,7 @@ symlink_files() {
 	symlink sqlite/sqliterc      .sqliterc
 
   # slate
-	symlink slate                .slate
+	symlink slate/slate          .slate
 
   # shell
   symlink zsh/zlogin           .zlogin
@@ -136,7 +136,7 @@ symlink_files() {
   symlink ctags/ctags          .ctags
 
   # bookmarks
-  symlink bookmarks            .config/bookmarks
+  symlink zsh/bookmarks        .config/bookmarks
 
   # bin
   symlink bin                  .local/bin
