@@ -134,7 +134,7 @@ symlink_files() {
   symlink agignore             .agignore
 
   # ctags
-  symlink ctags                .ctags
+  symlink ctags/ctags          .ctags
 
   # bookmarks
   symlink bookmarks            .config/bookmarks
