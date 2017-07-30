@@ -114,11 +114,11 @@ symlink_files() {
   symlink tmux/tmux.conf       .tmux.conf
 
   # screen
-  symlink screenrc             .screenrc
+  symlink screen/screenrc      .screenrc
 
   # database
-	symlink psqlrc               .psqlrc
-	symlink sqliterc             .sqliterc
+	symlink postgres/psqlrc      .psqlrc
+	symlink sqlite/sqliterc      .sqliterc
 
   # slate
 	symlink slate                .slate
@@ -130,8 +130,7 @@ symlink_files() {
   symlink zsh                  .config/zsh
 
   # search
-  symlink ackrc                .ackrc
-  symlink agignore             .agignore
+  symlink ag/agignore          .agignore
 
   # ctags
   symlink ctags/ctags          .ctags
