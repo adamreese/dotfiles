@@ -124,7 +124,6 @@ symlink_files() {
 	symlink slate                .slate
 
   # shell
-  symlink aliases              .aliases
   symlink zsh/zlogin           .zlogin
   symlink zsh/zlogout          .zlogout
   symlink zsh/zshrc            .zshrc
