@@ -1,6 +1,6 @@
 vim/autoload/plug.vim
 vim/autoload/plug.vim.old
-vim/plugged
+vim/vendor
 vim/tmp
 vim/vimrc.local
 zsh/cache
