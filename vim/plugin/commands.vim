@@ -8,6 +8,9 @@ command! Q q
 command! WQ wq
 command! Wq wq
 
+" Plug Upgrade and Update
+command! PU PlugUpgrade | PlugUpdate
+
 " Profile
 command! -bang Profile call ar#profile(<bang>0)
 
