@@ -146,6 +146,7 @@ set nocursorcolumn                " speed up syntax highlighting
 set nocursorline
 set noshowmode                    " Don't need to show mode since we have lightline
 set number                        " Show line numbers
+set textwidth=78
 set title                         " Sets the terminal title nicely.
 
 " Disable blinking cursor
