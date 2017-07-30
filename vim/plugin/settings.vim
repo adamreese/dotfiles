@@ -23,9 +23,13 @@ if has('vim_starting')
   endif
 endif
 
-if exists('$TMUX')
+if !has('nvim')
   set ttyfast
-  set ttymouse=sgr
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  endif
 endif
 
 " Search: {{{1

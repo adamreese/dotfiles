@@ -64,16 +64,15 @@ cnoremap <C-d> <Del>
 " Mapping: Leader
 " -----------------------------------------------------------------------
 
-" Edit vimrc
-nnoremap <leader>ev :<C-u>tabedit $MYVIMRC<CR>
-nnoremap <leader>sv :<C-u>source  $MYVIMRC<CR>
+" Source vimrc
+nnoremap <leader>sv :<C-u>source $MYVIMRC<CR>
 
 " Fast saving
-nnoremap <silent> <leader>w :<C-u>write!<CR>
-nnoremap <silent> <leader>q :<C-u>quit!<CR>
+nnoremap <silent><leader>w :<C-u>write!<CR>
+nnoremap <silent><leader>q :<C-u>quit!<CR>
 
 " Remove search highlight
-nnoremap <silent> <leader><CR> :<C-u>nohlsearch<CR>
+nnoremap <silent><leader><CR> :<C-u>nohlsearch<CR>
 
 " Close quickfix/location window
 nnoremap <leader>c :<C-u>cclose<bar>lclose<CR>

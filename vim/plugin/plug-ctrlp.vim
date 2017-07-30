@@ -4,7 +4,7 @@
 
 noremap <leader>gb :<C-u>CtrlPBuffer<CR>
 noremap <leader>gt :<C-u>CtrlPBufTag<CR>
-noremap <leader>gv :<C-u>CtrlP g:vim_dir<CR>
+noremap <leader>ev :<C-u>execute 'CtrlP ' . g:vim_dir<CR>
 
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
