@@ -191,5 +191,9 @@ for s:color in [
   let s:num += 1
 endfor
 
+" Enable bash syntax
+" $VIMRUNTIME/syntax/sh.vim
+let g:is_bash = 1
+
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker
