@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug-neosnippet.vim
 " =======================================================================
-if !has_key(g:plugs, 'neosnippet') | finish | endif
+if !ar#is_loaded('neosnippet') | finish | endif
 
 imap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
 smap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""

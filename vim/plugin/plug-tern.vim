@@ -1,6 +1,7 @@
 " =======================================================================
 " plugin/plug-tern.vim
 " =======================================================================
+if !ar#is_loaded('tern_for_vim') | finish | endif
 
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent', '--no-port-file']

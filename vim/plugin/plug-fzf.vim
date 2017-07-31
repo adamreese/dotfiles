@@ -1,6 +1,7 @@
 " =======================================================================
 " plugin/plug-fzf.vim
 " =======================================================================
+if !ar#is_loaded('fzf.vim') | finish | endif
 
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
@@ -10,10 +11,24 @@ if !has('nvim') && $TERM_PROGRAM ==# 'iTerm.app'
   let g:fzf_launcher = 'vim-fzf'
 endif
 
+let g:fzf_layout = { 'down': '16' }
+
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
 let g:fzf_nvim_statusline = 0
 
-nnoremap <silent> <leader>t :<C-u>FZF<CR>
-nnoremap <silent> <c-b>     :<C-u>Buffers<CR>
+nnoremap [FZF]   <Nop>
+nmap     <space> [FZF]
+
+nnoremap [FZF]f :Files<cr>
+nnoremap [FZF]b :Buffers<cr>
+nnoremap [FZF]h :Helptags<cr>
+nnoremap [FZF]t :BTags<cr>
+nnoremap [FZF]T :Tags<cr>
+
+nnoremap [FZF]ev :<C-u>execute 'Files ' . g:vim_dir<CR>
+nnoremap [FZF]ed :Files ~/.dotfiles<CR>
 
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

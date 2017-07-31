@@ -1,6 +1,7 @@
 " =======================================================================
 " plugin/plug-ctrlp.vim
 " =======================================================================
+if !ar#is_loaded('ctrlp.vim') | finish | endif
 
 noremap <leader>gb :<C-u>CtrlPBuffer<CR>
 noremap <leader>gt :<C-u>CtrlPBufTag<CR>

@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug-deoplete.vim
 " =======================================================================
-if !has_key(g:plugs, 'deoplete.nvim') | finish | endif
+if !ar#is_loaded('deoplete.nvim') | finish | endif
 
 let s:enable_debug = 0
 
