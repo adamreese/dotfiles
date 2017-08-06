@@ -1,9 +1,10 @@
 " =======================================================================
-" plugin/plug-committa.vim
+" plugin/plug/delimitmate.vim
 " =======================================================================
 
-let g:committia_open_only_vim_starting  = 0
-let g:committia_use_singlecolumn        = 'always'
+let g:delimitMate_expand_cr    = 1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_smart_quotes = 1
 
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

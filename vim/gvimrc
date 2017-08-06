@@ -4,14 +4,14 @@
 set showtabline=1
 
 " Turn off the blinking cursor in normal mode
-set gcr=n:blinkon0
+set guicursor=n:blinkon0
 
 " Stop beeping at me
 set noerrorbells visualbell t_vb=
 
 set guifont=Inconsolata-dz:h12
 
-if has("gui_macvim")
+if has('gui_macvim')
   " Hide the MacVim toolbar
   set guioptions-=T
 

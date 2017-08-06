@@ -1,10 +1,12 @@
 " =======================================================================
-" plugin/plug-delimitmate.vim
+" plugin/plug/tern_for_vim.vim
 " =======================================================================
+if !ar#is_loaded('tern_for_vim') | finish | endif
 
-let g:delimitMate_expand_cr    = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_smart_quotes = 1
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent', '--no-port-file']
+let g:tern_request_timeout = 1
+let g:tern_set_omni_function = 0
 
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

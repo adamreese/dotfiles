@@ -1,12 +1,9 @@
 " =======================================================================
-" plugin/plug-tern.vim
+" plugin/plug/committa.vim
 " =======================================================================
-if !ar#is_loaded('tern_for_vim') | finish | endif
 
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent', '--no-port-file']
-let g:tern_request_timeout = 1
-let g:tern_set_omni_function = 0
+let g:committia_open_only_vim_starting  = 0
+let g:committia_use_singlecolumn        = 'always'
 
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

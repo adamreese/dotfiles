@@ -1,6 +1,7 @@
 " =======================================================================
-" plugin/plug-tagbar.vim
+" plugin/plug/tagbar.vim
 " =======================================================================
+if !ar#is_loaded('tagbar') | finish | endif
 
 noremap <leader>tt :<C-u>TagbarToggle<CR>
 

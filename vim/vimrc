@@ -38,7 +38,6 @@ Plug 'rhysd/committia.vim'
 Plug 'rking/ag.vim'
 Plug 'sbdchd/neoformat',             { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdtree'
-Plug 'slack/vim-align'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'

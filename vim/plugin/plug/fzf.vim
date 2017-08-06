@@ -1,7 +1,10 @@
 " =======================================================================
-" plugin/plug-fzf.vim
+" plugin/plug/fzf.vim
 " =======================================================================
 if !ar#is_loaded('fzf.vim') | finish | endif
+
+" Settings
+" -----------------------------------------------------------------------
 
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
@@ -17,6 +20,9 @@ let g:fzf_layout = { 'down': '16' }
 let g:fzf_buffers_jump = 1
 
 let g:fzf_nvim_statusline = 0
+
+" Mappings
+" -----------------------------------------------------------------------
 
 nnoremap [FZF]   <Nop>
 nmap     <space> [FZF]

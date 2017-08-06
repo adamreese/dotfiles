@@ -1,5 +1,5 @@
 " =======================================================================
-" plugin/plug-deoplete.vim
+" plugin/plug/deoplete.vim
 " =======================================================================
 if !ar#is_loaded('deoplete.nvim') | finish | endif
 
@@ -9,8 +9,6 @@ let g:echodoc_enable_at_startup = 1
 
 let g:deoplete#enable_at_startup          = 1
 let g:deoplete#auto_complete_delay        = 0
-" let g:deoplete#auto_complete_delay        = 50
-" let g:deoplete#auto_complete_start_length = 1
 let g:deoplete#auto_refresh_delay         = 100
 let g:deoplete#file#enable_buffer_path    = 1
 let g:deoplete#max_abbr_width             = 0

@@ -1,6 +1,7 @@
 " =======================================================================
-" plugin/plug-lightline.vim
+" plugin/plug/lightline.vim
 " =======================================================================
+if !ar#is_loaded('lightline.vim') | finish | endif
 
 let g:lightline_readonly_filetypes      = ['help', 'man', 'nerdtree', 'qf', 'tagbar']
 let g:lightline_mode_filetypes          = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
