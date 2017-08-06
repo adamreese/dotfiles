@@ -88,5 +88,11 @@ reload() {
   exec ${SHELL} -l
 }
 
+ # fun
+alias lod='echo "ಠ_ಠ"'
+alias idk='echo "¯\_(ツ)_/¯"'
+alias wtf='echo "❨╯°□°❩╯︵┻━┻"'
+alias wat='echo "(☉_☉)"'
+
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
