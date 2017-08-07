@@ -3,8 +3,6 @@
 " =======================================================================
 if !ar#is_loaded('deoplete.nvim') | finish | endif
 
-let s:enable_debug = 0
-
 let g:echodoc_enable_at_startup = 1
 
 let g:deoplete#enable_at_startup          = 1
@@ -29,7 +27,7 @@ let g:deoplete#ignore_sources    = get(g:, 'deoplete#ignore_sources', {})
 let g:deoplete#ignore_sources._  = ['around', 'neosnippet']
 let g:deoplete#ignore_sources.go = ['buffer', 'dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
 
-if s:enable_debug
+if get(g:, 'enable_debug', 0)
   call deoplete#custom#set('deoplete', 'debug_enabled', 1)
   call deoplete#custom#set('buffer', 'debug_enabled', 0)
   call deoplete#custom#set('core', 'debug_enabled', 1)

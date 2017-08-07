@@ -2,6 +2,7 @@
 " plugin/mappings.vim
 " =======================================================================
 
+" Exit insert mode
 inoremap jj <ESC>
 
 " disable ex mode
@@ -88,9 +89,6 @@ nnoremap <leader>ss :<C-u>setlocal spell!<CR>
 
 " Sorting
 vnoremap <leader>srt :<C-u>sort<CR>
-
-" Make horizontal line
-nnoremap <leader>L mzO<esc>79i-<esc>`z
 
 if has('nvim')
   " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
