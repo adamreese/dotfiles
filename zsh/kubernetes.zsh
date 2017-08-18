@@ -1,17 +1,17 @@
 # zsh kubernetes
 # -----------------------------------------------------------------------------
-if (( ! $+commands[kubectl] )); then
-  return 1
-fi
+(( ${+commands[kubectl]} )) || return
 
 # Kubernetes
 # -----------------------------------------------------------------------------
+
 alias k=kubectl
 
 zcompcobra kubectl
 
 # Helm
 # -----------------------------------------------------------------------------
+
 export HELM_HOST=:44134
 
 path=(${GOPATH}/src/k8s.io/helm/bin ${path})
@@ -26,6 +26,12 @@ if [[ -s "${ZSH_CACHE}/helm.zsh" ]]; then
   emulate bash -c 'source "${ZSH_CACHE}/helm.zsh"'
 fi
 
+# Minikube
+# -----------------------------------------------------------------------------
+
+mkenv() {
+  eval "$(minikube docker-env $@)"
+}
 
 # -----------------------------------------------------------------------------
 # vim: ft=zsh :

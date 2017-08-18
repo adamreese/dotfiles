@@ -1,5 +1,6 @@
 # zsh gcloud
 # -----------------------------------------------------------------------------
+(( ${+commands[gcloud]} )) || return
 
 gcloud_path="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 

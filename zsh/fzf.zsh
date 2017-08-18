@@ -1,5 +1,7 @@
 # zsh fzf
 # ------------------------------------------------------------------------------
+(( ${+commands[fzf]} )) || return
+
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 _fzf_opts=(
