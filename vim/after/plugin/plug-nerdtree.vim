@@ -3,7 +3,7 @@
 " =======================================================================
 
 " let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc', '\.pyc', '^BUILD$']
+let g:NERDTreeIgnore=['\.git$', '\.gitignore', '\.zwc', '\.pyc', '^BUILD$', 'tags']
 let g:NERDTreeShowHidden=1
 let g:NERDTreeMapJumpNextSibling='<Nop>'
 let g:NERDTreeMapJumpPrevSibling='<Nop>'
