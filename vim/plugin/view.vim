@@ -11,10 +11,17 @@ let &showbreak='↳ '
 
 " Highlights: {{{1
 " -----------------------------------------------------------------------
-highlight! clear SignColumn
-highlight! clear FoldColumn
+
+if g:colors_name ==# 'hybrid'
+  highlight! clear SignColumn
+  highlight! clear FoldColumn
+  highlight! ColorColumn guibg=#2C323C
+  highlight! CursorLine guibg=#2C323C
+  highlight! EndOfBuffer guifg=#282c34
+  highlight! VertSplit guifg=#425059
+endif
+
 highlight! Comment cterm=italic gui=italic
-highlight! ColorColumn guibg=#303030
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
