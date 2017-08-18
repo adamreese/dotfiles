@@ -11,7 +11,7 @@ packages() {
 }
 
 not_stdlib() {
-  xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}'
+  xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}' || :
 }
 
 not_internal() {
