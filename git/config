@@ -1,8 +1,5 @@
 # vim: ft=gitconfig :
 
-[init]
-  templatedir = ~/.config/git/template
-
 [alias]
   a     = add
   aa    = add --all
