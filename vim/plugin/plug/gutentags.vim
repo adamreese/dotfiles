@@ -1,6 +1,6 @@
 " =======================================================================
-" ftplugin/vim.vim
+" plugin/plug/gutentags.vim
 " =======================================================================
+if !ar#is_loaded('vim-gutentags') | finish | endif
 
-setlocal colorcolumn=+3
-
+let g:gutentags_ctags_tagfile = '.git/tags'

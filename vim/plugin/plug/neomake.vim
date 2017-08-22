@@ -22,7 +22,8 @@ endfunction
 
 augroup vimrc_neomake
   autocmd!
-  autocmd  BufWritePost * call <SID>neomake_run()
+  autocmd BufWritePost * call <SID>neomake_run()
+  autocmd VimLeave * let g:neomake_verbose = 0
 augroup END
 
 " -----------------------------------------------------------------------
