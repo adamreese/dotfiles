@@ -55,16 +55,16 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
 
 " -- Languages ----------------------------------------------------------
-Plug 'cespare/vim-toml',               { 'for': 'toml' }
-Plug 'fatih/vim-go',                   { 'for': 'go' }
+Plug 'cespare/vim-toml'
+Plug 'fatih/vim-go'
 Plug 'leafgarland/typescript-vim'
-Plug 'plasticboy/vim-markdown',        { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown'
 Plug 'sebdah/vim-delve',               { 'for': 'go' }
 Plug 'syngan/vim-vimlint',             { 'for': 'vim' }
-Plug 'ternjs/tern_for_vim',            { 'for': 'javascript', 'do': 'npm install' }
-Plug 'tmux-plugins/vim-tmux',          { 'for': 'tmux' }
+Plug 'ternjs/tern_for_vim',            { 'do': 'npm install' }
+Plug 'tmux-plugins/vim-tmux'
 Plug 'uarun/vim-protobuf'
-Plug 'vim-ruby/vim-ruby',              { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby'
 Plug 'ynkdir/vim-vimlparser',          { 'for': 'vim' }
 
 " -- Completion ---------------------------------------------------------
