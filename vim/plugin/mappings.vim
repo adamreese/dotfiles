@@ -9,9 +9,6 @@ inoremap jj <ESC>
 nnoremap  Q <Nop>
 nnoremap gQ <Nop>
 
-" disable ri check
-noremap K <Nop>
-
 " disable q window
 noremap q: :q
 
