@@ -7,6 +7,7 @@ setlocal spell
 
 " Automatically wrap at 80 characters
 setlocal textwidth=80
+setlocal colorcolumn=+3
 
 setlocal nofoldenable
 
@@ -20,3 +21,7 @@ let g:tagbar_type_markdown = {
         \ 'k:Heading_L3'
     \ ]
     \ }
+
+" -----------------------------------------------------------------------
+" vim: foldmethod=marker
+

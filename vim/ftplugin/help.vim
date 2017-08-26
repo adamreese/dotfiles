@@ -1,6 +1,17 @@
 " =======================================================================
 " ftplugin/help.vim
 " =======================================================================
+let s:cpo_save = &cpoptions
+set cpoptions&vim
+" -----------------------------------------------------------------------
 
-nnoremap <buffer> <silent>  q :q<cr>
+setlocal keywordprg=:help
+setlocal iskeyword+=-
 
+nnoremap <buffer><silent>  q :q<cr>
+
+" -----------------------------------------------------------------------
+let &cpoptions = s:cpo_save
+unlet s:cpo_save
+" -----------------------------------------------------------------------
+" vim: foldmethod=marker

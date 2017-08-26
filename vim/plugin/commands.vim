@@ -18,7 +18,7 @@ command! -bang Profile call ar#profile(<bang>0)
 command! ReloadSyntax call ar#reload_syntax()
 
 " Shfmt
-command! -nargs=0 -bang -complete=command Shfmt %!shfmt -i 2
+command! -nargs=0 -bang -complete=command Shfmt %!shfmt -p -i 2
 
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

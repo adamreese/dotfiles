@@ -3,15 +3,20 @@
 " =======================================================================
 
 let g:tagbar_type_proto = {
-    \ 'ctagstype' : 'protobuf',
+    \ 'ctagstype' : 'Protobuf',
     \ 'kinds' : [
-        \ 'i:imports:1:0',
-        \ 'p:package:0:0',
-        \ 'm:message:0:1',
-        \ 'e:enum:0:1',
-        \ 'f:field:0:0',
+        \ 'p:packages',
+        \ 'e:enum constants',
+        \ 'f:fields',
+        \ 'g:enum types',
+        \ 'i:imports',
+        \ 'm:messages',
+        \ 'r:rpc',
+        \ 's:services',
     \ ],
     \ 'sro' : '.',
-        \ 'kind2scope': { },
-        \ 'scope2kind': { }
+    \ 'sort' : 0,
 \}
+
+" -----------------------------------------------------------------------
+" vim: foldmethod=marker

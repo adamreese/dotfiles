@@ -17,3 +17,6 @@ nnoremap <buffer> <silent> q :q<cr>
 nnoremap <buffer> s <C-w><CR>
 nnoremap <buffer> v <C-w><CR><C-w>L
 nnoremap <buffer> t <C-W><CR><C-W>T
+
+" -----------------------------------------------------------------------
+" vim: foldmethod=marker

@@ -1,5 +1,5 @@
 " =======================================================================
-" plugin/plug/gutentags.vim
+" plugin/plug/vim-gutentags.vim
 " =======================================================================
 if !ar#is_loaded('vim-gutentags') | finish | endif
 

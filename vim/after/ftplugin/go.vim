@@ -2,7 +2,9 @@
 " after/ftplugin/go.vim
 " =======================================================================
 
-setlocal formatoptions+=cr noexpandtab
-setlocal textwidth=80
-
+setlocal formatoptions+=cr
+setlocal noexpandtab
 setlocal omnifunc=
+
+" -----------------------------------------------------------------------
+" vim: foldmethod=marker

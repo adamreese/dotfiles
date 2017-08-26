@@ -151,6 +151,7 @@ set nocursorline
 set noshowmode                    " Don't need to show mode since we have lightline
 set number                        " Show line numbers
 set textwidth=78
+set colorcolumn=+3                " the line will be right after column 80, &tw+3
 set title                         " Sets the terminal title nicely.
 
 " Disable blinking cursor

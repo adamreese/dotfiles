@@ -6,3 +6,6 @@
 setlocal textwidth=72
 setlocal spell
 setlocal complete+=kspell
+
+" -----------------------------------------------------------------------
+" vim: foldmethod=marker
