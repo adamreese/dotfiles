@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/easy-align.vim
 " =======================================================================
-if !ar#is_loaded('vim-easy-align') | finish | endif
+if !ar#is_plugged('vim-easy-align') | finish | endif
 
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)

@@ -35,7 +35,7 @@ endfunction
 "
 " Returns true if the plugin is loaded.
 function! ar#is_loaded(name) abort
-  if index(g:plugs_order, a:name) > -1
+  if index(g:plugs_order, a:name) < 0
     return 0
   endif
 
@@ -47,6 +47,14 @@ function! ar#is_loaded(name) abort
   return empty(l:plug_dir)
         \ ? 0
         \ : stridx(&runtimepath, l:plug_dir) > -1
+endfunction
+
+" -----------------------------------------------------------------------
+" ar#is_plugged
+"
+" Returns true if the plugin is installed.
+function! ar#is_plugged(name) abort
+    return index(g:plugs_order, a:name) > -1
 endfunction
 
 " -----------------------------------------------------------------------
