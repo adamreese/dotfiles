@@ -16,8 +16,6 @@ alias ls='ls -pG'
 alias l='ls -lAh'
 alias la='ls -lAh'
 alias ll='ls -lh'
-alias ll='ls -lph'
-alias lsa='ls -lah'
 
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
