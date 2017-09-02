@@ -11,13 +11,18 @@ alias :q='exit'
 alias sudo='sudo '
 alias apt-get='sudo apt-get'
 
-# ls
+# List directory contents
 alias ls='ls -pG'
+alias l='ls -lAh'
+alias la='ls -lAh'
+alias ll='ls -lh'
 alias ll='ls -lph'
+alias lsa='ls -lah'
 
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
 
+# ag
 alias agp='ag --pager="less -iFMRSX"'
 alias agh='ag --hidden'
 
@@ -43,7 +48,15 @@ alias whois="whois -h whois-servers.net"
 # View logs
 alias tfl='tail -Fn30 log/*.log'
 
-# osx specific command aliases
+alias j='jump'
+
+# aliases inside tmux session
+if [[ $TERM == *"tmux"* ]]; then
+  alias :sp='tmux split-window'
+  alias :vs='tmux split-window -h'
+fi
+
+# masOS specific command aliases
 if [[ $(uname -s) = "Darwin" ]]; then
 
   # bundle
@@ -77,8 +90,6 @@ alias -g J='| jq .'
 
 alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
 
-alias j='jump'
-
 reload() {
   # remove all zcompiled files
   command rm -f ${ZDOTDIR:-${HOME}}/.{zshrc.zwc,zcompdump,zcompdump.zwc}(-.N)
@@ -92,7 +103,7 @@ reload() {
 alias lod='echo "ಠ_ಠ"'
 alias idk='echo "¯\_(ツ)_/¯"'
 alias wtf='echo "❨╯°□°❩╯︵┻━┻"'
-alias wat='echo "(☉_☉)"'
+alias wat='echo "⚆_⚆"'
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
