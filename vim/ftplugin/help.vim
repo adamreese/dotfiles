@@ -8,7 +8,7 @@ set cpoptions&vim
 setlocal keywordprg=:help
 setlocal iskeyword+=-
 
-nnoremap <buffer><silent>  q :q<cr>
+nnoremap <buffer><silent>  q :bd<cr>
 
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
