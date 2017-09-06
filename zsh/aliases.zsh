@@ -7,6 +7,8 @@ alias  e='exit'
 alias  q='exit'
 alias :q='exit'
 
+alias -- -='cd -'
+
 # Allow aliases to be with sudo
 alias sudo='sudo '
 alias apt-get='sudo apt-get'
@@ -77,6 +79,20 @@ if [[ $(uname -s) = "Darwin" ]]; then
   alias flush='sudo killall -HUP mDNSResponder'
 fi
 
+ # fun
+alias lod='echo "ಠ_ಠ"'
+alias idk='echo "¯\_(ツ)_/¯"'
+alias wtf='echo "❨╯°□°❩╯︵┻━┻"'
+alias wat='echo "⚆_⚆"'
+
+# Global Aliases
+# -----------------------------------------------------------------------------
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
 # Split comma or colin separated data onto separate lines
 alias -g S="| tr ',:' '\n'"
 
@@ -88,6 +104,7 @@ alias -g J='| jq .'
 
 alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
 
+# reload shell and completion
 reload() {
   # remove all zcompiled files
   command rm -f ${ZDOTDIR:-${HOME}}/.{zshrc.zwc,zcompdump,zcompdump.zwc}(-.N)
@@ -96,12 +113,6 @@ reload() {
   # start again
   exec ${SHELL} -l
 }
-
- # fun
-alias lod='echo "ಠ_ಠ"'
-alias idk='echo "¯\_(ツ)_/¯"'
-alias wtf='echo "❨╯°□°❩╯︵┻━┻"'
-alias wat='echo "⚆_⚆"'
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh

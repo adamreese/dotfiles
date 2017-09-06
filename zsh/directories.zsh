@@ -19,24 +19,5 @@ setopt MULTIOS                   # Write to multiple descriptors.
 setopt NO_CLOBBER                # Disables overwrite existing files with `>`. Use `> | ` or `>!` instead
 setopt GLOB_DOTS                 # Do not require a leading `.' in a filename to be matched explicitly.
 
-# Aliases
-# -----------------------------------------------------------------------------
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
-
-alias -- -='cd -'
-
-for index ({1..9}) alias "$index"="cd +${index}"; unset index
-
-alias md='mkdir -p'
-alias rd=rmdir
-alias d='dirs -v | head -10'
-
-# Push and pop directories on directory stack
-alias pu='pushd'
-alias po='popd'
-
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
