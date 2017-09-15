@@ -112,6 +112,7 @@ symlink_files() {
 
   # tmux
   symlink tmux/tmux.conf       .tmux.conf
+  symlink tmux                 .tmux
 
   # screen
   symlink screen/screenrc      .screenrc
@@ -127,6 +128,7 @@ symlink_files() {
   symlink zsh/zlogin           .zlogin
   symlink zsh/zlogout          .zlogout
   symlink zsh/zshrc            .zshrc
+  symlink zsh/zshenv           .zshenv
   symlink zsh                  .config/zsh
 
   # search
