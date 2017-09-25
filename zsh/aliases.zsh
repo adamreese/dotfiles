@@ -77,6 +77,8 @@ elif [[ $(uname -s) = "Linux" ]]; then
   alias reboot='sudo systemctl reboot'
   alias poweroff='sudo systemctl poweroff'
   alias systemctl="sudo systemctl"
+
+  alias archup='yaourt -Syua --noconfirm'
 fi
 
  # fun
