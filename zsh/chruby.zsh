@@ -9,7 +9,7 @@ return 1
 source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
 source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
 
-chruby ruby-2.3
+chruby ruby-2.4
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh

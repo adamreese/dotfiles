@@ -12,7 +12,7 @@ zcompcobra kubectl
 # Helm
 # -----------------------------------------------------------------------------
 
-export HELM_HOST=:44134
+# export HELM_HOST=:44134
 
 path=(${GOPATH}/src/k8s.io/helm/bin ${path})
 

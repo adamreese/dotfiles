@@ -13,12 +13,6 @@ alias -- -='cd -'
 alias sudo='sudo '
 alias apt-get='sudo apt-get'
 
-# List directory contents
-alias ls='ls -pG'
-alias  l='ls -lAh'
-alias la='ls -lAh'
-alias ll='ls -lh'
-
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
 
