@@ -80,12 +80,15 @@
   enabled = true
 
 [interactive]
-  diffFilter = diff-highlight
+  diffFilter = diff-so-fancy --patch-mode | less --tabs=4 -RFX
+  ; diffFilter = diff-highlight
 
 [pager]
   log  = diff-highlight | ${GIT_PAGER:-less -FX}
-  show = diff-highlight | ${GIT_PAGER:-less -FX}
-  diff = diff-highlight | ${GIT_PAGER:-less -FX}
+  ; show = diff-highlight | ${GIT_PAGER:-less -FX}
+  ; diff = diff-highlight | ${GIT_PAGER:-less -FX}
+  show = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+  diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
 
 [difftool]
   prompt = false
