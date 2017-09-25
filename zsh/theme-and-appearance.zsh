@@ -8,11 +8,11 @@ if [[ -z "$LS_COLORS" ]]; then
   (( $+commands[dircolors] )) && eval "$(dircolors -b)"
 fi
 
-hash gls >/dev/null 2>&1 || alias gls="ls"
+hash gls >/dev/null 2>&1 || alias gls='ls'
 
-if gls --color > /dev/null 2>&1; then colorflag="--color"; else colorflag="-G"; fi;
+if gls --color > /dev/null 2>&1; then colorflag='--color'; else colorflag='-G'; fi;
 
-alias ls='gls -Ah ${colorflag} --group-directories-first'
+alias ls="gls -Ah ${colorflag} --group-directories-first"
 alias l='ls -l'
 
 # Take advantage of $LS_COLORS for completion as well.
