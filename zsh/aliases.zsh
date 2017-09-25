@@ -15,7 +15,7 @@ alias apt-get='sudo apt-get'
 
 # List directory contents
 alias ls='ls -pG'
-alias l='ls -lAh'
+alias  l='ls -lAh'
 alias la='ls -lAh'
 alias ll='ls -lh'
 
@@ -77,6 +77,12 @@ if [[ $(uname -s) = "Darwin" ]]; then
 
   # Flush dns cache
   alias flush='sudo killall -HUP mDNSResponder'
+
+# linux specific command aliases
+elif [[ $(uname -s) = "Linux" ]]; then
+  alias reboot='sudo systemctl reboot'
+  alias poweroff='sudo systemctl poweroff'
+  alias systemctl="sudo systemctl"
 fi
 
  # fun
