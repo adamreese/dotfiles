@@ -93,6 +93,9 @@ if has('nvim')
   tnoremap <leader>q <C-\><C-n>gg<CR>
 endif
 
+" Save changes to a readonly file with sudo
+cmap w!! w !sudo tee %
+
 " -----------------------------------------------------------------------
 " Mapping: Copy & Paste
 " -----------------------------------------------------------------------
