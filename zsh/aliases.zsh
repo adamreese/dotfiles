@@ -71,14 +71,14 @@ if [[ $(uname -s) = "Darwin" ]]; then
 
   # Flush dns cache
   alias flush='sudo killall -HUP mDNSResponder'
+fi
 
-# linux specific command aliases
-elif [[ $(uname -s) = "Linux" ]]; then
-  alias reboot='sudo systemctl reboot'
-  alias poweroff='sudo systemctl poweroff'
-  alias systemctl="sudo systemctl"
+if (( ${+commands[yaourt]} )); then
+  alias archup='sudo pacman -Syu && yaourt -Syua --noconfirm'
+fi
 
-  alias archup='yaourt -Syua --noconfirm'
+if (( ${+commands[journalctl]} )); then
+  alias jj='journalctl'
 fi
 
  # fun
