@@ -15,6 +15,9 @@ export ZSH="${ZDOTDIR:-${XDG_CONFIG_HOME}}/zsh"
 export ZSH_CACHE="${XDG_CACHE_HOME}/zsh"
 [[ ! -d ${ZSH_CACHE} ]] || mkdir -p "${ZSH_CACHE}"
 
+# application specific xdg
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
 # Path
 # ------------------------------------------------------------------------------
 typeset -gU cdpath fpath manpath path
@@ -44,6 +47,9 @@ manpath=(
   /usr/local/opt/coreutils/libexec/gnuman(N-/)
   ${manpath}
 )
+
+# https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
+export TZ=:/etc/localtime
 
 # ------------------------------------------------------------------------------
 # vi:ft=zsh
