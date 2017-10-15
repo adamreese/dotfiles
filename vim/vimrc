@@ -55,6 +55,7 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
 
 " -- Languages ----------------------------------------------------------
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'cespare/vim-toml'
 Plug 'fatih/vim-go'
 Plug 'leafgarland/typescript-vim'
