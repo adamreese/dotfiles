@@ -96,10 +96,10 @@ symlink_files() {
   symlink vim/gvimrc           .gvimrc
 
   # ruby
-	symlink ruby/irbrc           .irbrc
-	symlink ruby/pryrc           .pryrc
-	symlink ruby/gemrc           .gemrc
-	symlink ruby/rspec           .rspec
+  symlink ruby/irbrc           .irbrc
+  symlink ruby/pryrc           .pryrc
+  symlink ruby/gemrc           .gemrc
+  symlink ruby/rspec           .rspec
 
   # git
   symlink git                  .config/git
@@ -118,11 +118,11 @@ symlink_files() {
   symlink screen/screenrc      .screenrc
 
   # database
-	symlink postgres/psqlrc      .psqlrc
-	symlink sqlite/sqliterc      .sqliterc
+  symlink postgres             .config/pg
+  symlink sqlite/sqliterc      .sqliterc
 
   # slate
-	symlink slate/slate          .slate
+  symlink slate/slate          .slate
 
   # shell
   symlink zsh/zlogin           .zlogin
