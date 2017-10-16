@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+tags=$(
+  git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}'
+)
+
+branches=$(
+  git for-each-ref --count=25 --sort=-committerdate --format='%(refname:short)' refs/heads \
+    | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}'
+)
+
+remote_branches=$(
+  git for-each-ref --count=25 --sort=-committerdate --format='%(refname:short)' refs/remotes \
+    | awk '{print "\x1b[34;1mremote\x1b[m\t" $1}'
+)
+
+target=$(
+  (
+    echo "$tags"
+    echo "$branches"
+    echo "$remote_branches"
+  ) \
+    | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2
+)
+
+git checkout $(echo "$target" | awk '{print $2}')
