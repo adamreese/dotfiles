@@ -50,15 +50,7 @@ if [[ $TERM == *"tmux"* ]]; then
   alias :vs='tmux split-window -h'
 fi
 
-if (( ${+commands[yaourt]} )); then
-  alias archup='sudo pacman -Syu && yaourt -Syua --noconfirm'
-fi
-
-if (( ${+commands[journalctl]} )); then
-  alias jj='journalctl'
-fi
-
- # fun
+# fun
 alias lod='echo "ಠ_ಠ"'
 alias idk='echo "¯\_(ツ)_/¯"'
 alias wtf='echo "❨╯°□°❩╯︵┻━┻"'
