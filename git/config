@@ -28,17 +28,13 @@
   # Show the working tree status in short-format
   s = status --short --branch
 
-  next-release = "!git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:'%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit"
-  nr = !git next-release
-
   # Interactive rebase with the given number of latest commits
   reb = "!r() { git rebase -i HEAD~$1; }; r"
 
   new  = log --no-merges --oneline ORIG_HEAD..
   news = log --no-merges --stat ORIG_HEAD..
 
-[credential]
-  helper = osxkeychain
+  fork = clone --origin upsteam
 
 [user]
   name  = Adam Reese
@@ -124,3 +120,6 @@
   added     = green
   changed   = yellow
   untracked = red
+
+[include]
+  path = "~/.config/git/config.local"

@@ -1,9 +1,10 @@
+*.zwc
+git/config.local
 vim/autoload/plug.vim
 vim/autoload/plug.vim.old
-vim/vendor
 vim/tmp
+vim/vendor
 vim/vimrc.local
 zsh/cache
 zsh/configs/local.zsh
-*.zwc
 zsh/local.zsh
