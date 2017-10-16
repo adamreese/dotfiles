@@ -6,11 +6,9 @@
 
 alias     stop='sudo systemctl stop'
 alias    start='sudo systemctl start'
-alias   enable='sudo systemctl enable'
 alias   reboot='sudo systemctl reboot'
 alias   reload='sudo systemctl reload'
 alias   status='sudo systemctl status'
-alias  disable='sudo systemctl disable'
 alias  restart='sudo systemctl restart'
 alias poweroff='sudo systemctl poweroff'
 
