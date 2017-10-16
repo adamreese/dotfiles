@@ -75,8 +75,8 @@ alias -g J='| jq .'
 
 alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
 
-# reload shell and completion
-reload() {
+# zreload shell and completion
+zreload() {
   # remove all zcompiled files
   command rm -f ${ZDOTDIR:-${HOME}}/.{zshrc.zwc,zcompdump,zcompdump.zwc}(-.N)
   command rm -f ${ZSH}/**/*.zwc(-.N)
