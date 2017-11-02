@@ -30,6 +30,8 @@ setopt NO_CHECK_JOBS        # Don't report on jobs when shell exit.
 # S = chop long lines (rather than wrap them onto next line)
 # X = suppress alternate screen
 export LESS='iFKMRSX'
+# disable less history
+export LESSHISTFILE=-
 
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"

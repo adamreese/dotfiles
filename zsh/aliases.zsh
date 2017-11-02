@@ -16,6 +16,9 @@ alias apt-get='sudo apt-get'
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
 
+# Safety first
+alias rm='rm -iv'
+
 # ag
 alias agp='ag --pager="less -iFMRSX"'
 alias agh='ag --hidden'
@@ -42,6 +45,7 @@ alias whois="whois -h whois-servers.net"
 # View logs
 alias tfl='tail -Fn30 log/*.log'
 
+# github.com/jocelynmallon/zshmarks
 alias j='jump'
 
 # aliases inside tmux session
