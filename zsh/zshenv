@@ -9,6 +9,7 @@
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_CONFIG_HOME="${HOME}/.config"
 export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp/run}"
 
 ZSH="${ZDOTDIR:-${XDG_CONFIG_HOME}}/zsh"
 
@@ -18,6 +19,8 @@ ZSH_CACHE="${XDG_CACHE_HOME}/zsh"
 # application specific xdg
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export GLIDE_HOME="${XDG_CACHE_HOME}/glide"
+export GNUPGHOME="${XDG_CONFIG_HOME}/gnupg"
+export HELM_HOME="${XDG_CONFIG_HOME}/helm"
 export PSQLRC="${XDG_CONFIG_HOME}/pg/psqlrc"
 export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 
