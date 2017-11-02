@@ -44,16 +44,23 @@ fi
 # Editor
 # -----------------------------------------------------------------------------
 export EDITOR=vim
-export VISUAL=${EDITOR}
 
 # Neovim
 if (( $+commands[nvim] )); then
   export EDITOR=nvim
 
-  alias vim='nvim'
+  alias     vim='nvim'
+  alias    view='nvim -R'
   alias vimdiff='nvim -dO'
-  alias view='nvim -R'
+
+  if [[ -z $XDG_RUNTIME_DIR ]]; then
+    export NVIM_LISTEN_ADDRESS="/tmp/neovim_socket"
+  else
+    export NVIM_LISTEN_ADDRESS="${XDG_RUNTIME_DIR}/neovim_socket"
+  fi
 fi
+
+export VISUAL=${EDITOR}
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
