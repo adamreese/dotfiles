@@ -21,6 +21,31 @@ function! ar#profile(bang) abort
 endfunction
 
 " -----------------------------------------------------------------------
+" ar#ensure_plugin_manager
+"
+" Auto install plugin manager
+function! ar#ensure_plugin_manager() abort
+  if empty(glob(expand(g:vim_dir . '/autoload/plug.vim')))
+    call ar#plug_install()
+  endif
+endfunction
+
+" -----------------------------------------------------------------------
+" ar#plug_install
+"
+" Install plugin manager
+function! ar#plug_install() abort
+  execute 'silent !curl --create-dirs -fLo '
+        \  g:vim_dir . '/autoload/plug.vim '
+        \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+  augroup ar_plug_install
+    autocmd!
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  augroup END
+endfunction
+
+" -----------------------------------------------------------------------
 " ar#plug_if
 "
 " Conditionally load plugins.
