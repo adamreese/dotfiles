@@ -5,8 +5,6 @@
 let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
       \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
         \ 'c:constants',
         \ 'v:variables',
         \ 't:types',
