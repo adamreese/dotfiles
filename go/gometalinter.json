@@ -3,7 +3,6 @@
   "Enable": [
     "deadcode",
     "goconst",
-    "gocyclo",
     "goimports",
     "ineffassign",
     "interfacer",
