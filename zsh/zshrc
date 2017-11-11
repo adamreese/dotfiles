@@ -2,8 +2,6 @@
 # zshrc
 # ------------------------------------------------------------------------------
 
-export ZSH=${ZDOTDIR:-${XDG_CONFIG_HOME}}/zsh
-
 zmodules=(zshmarks history-substring-search)
 fpath=(${${zmodules}:+${ZSH}/modules/${^zmodules}/functions(/FN)} ${fpath})
 autoload -Uz ${ZSH}/modules/${^zmodules}/functions/*(N:t)
@@ -18,11 +16,6 @@ for file (${ZSH}/*.zsh(N-.)); do
   source $file
 done
 unset file
-
-# ------------------------------------------------------------------------------
-# plugin configuration
-
-export BOOKMARKS_FILE=${XDG_CONFIG_HOME}/bookmarks
 
 # ------------------------------------------------------------------------------
 # load plugins
@@ -54,6 +47,7 @@ hash -d --   cellar=/usr/local/Cellar
 # mkdir .git/safe in the root of repositories you trust
 
 path=(
+  _scratch/bin
   .git/safe/../../bin
   ${path}
 )

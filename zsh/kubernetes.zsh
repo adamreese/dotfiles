@@ -22,8 +22,8 @@ alias -g HL='$(helm last)'
 
 # disable for now
 # zcompcobra helm
-if [[ -s "${ZSH_CACHE}/helm.zsh" ]]; then
-  emulate bash -c 'source "${ZSH_CACHE}/helm.zsh"'
+if [[ -s "${ZSH_CACHE_DIR}/helm.zsh" ]]; then
+  emulate bash -c 'source "${ZSH_CACHE_DIR}/helm.zsh"'
 fi
 
 # Minikube

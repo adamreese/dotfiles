@@ -1,8 +1,8 @@
 # zsh history
 # -----------------------------------------------------------------------------
 
-## Command history configuration
-HISTFILE="${ZDOTDIR:-$HOME}/.zhistory"
+# Command history configuration
+HISTFILE="${HOME}/.local/zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 

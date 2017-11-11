@@ -8,7 +8,7 @@ gcloud_path="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 # -----------------------------------------------------------------------------
 autoload -Uz zrecompile
 
-typeset gcache=${ZSH_CACHE}/gcloud.zsh
+typeset gcache=${ZSH_CACHE_DIR}/gcloud.zsh
 
 if [[ ! -s ${gcache} || ${commands[gcloud]} -nt ${gcache} ]]; then
   egrep -v 'compinit' ${gcloud_path}/completion.zsh.inc >| ${gcache}

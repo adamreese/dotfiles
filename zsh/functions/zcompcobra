@@ -6,7 +6,7 @@
 
 autoload -Uz zrecompile
 
-typeset cachefile=${ZSH_CACHE}/${1}.zsh
+typeset cachefile=${ZSH_CACHE_DIR}/${1}.zsh
 
 if [[ ! -s ${cachefile} || ${commands[${1}]} -nt ${cachefile} ]]; then
   "${1}" completion zsh | egrep -v 'compinit' >| ${cachefile}

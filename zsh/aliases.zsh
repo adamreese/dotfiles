@@ -16,9 +16,6 @@ alias apt-get='sudo apt-get'
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
 
-# Safety first
-alias rm='rm -iv'
-
 # ag
 alias agp='ag --pager="less -iFMRSX"'
 alias agh='ag --hidden'
