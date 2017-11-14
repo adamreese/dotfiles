@@ -121,5 +121,8 @@
   changed   = yellow
   untracked = red
 
+[init]
+  templateDir = ~/.config/git/templates
+
 [include]
   path = "~/.config/git/config.local"
