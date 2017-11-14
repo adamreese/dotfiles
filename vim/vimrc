@@ -31,6 +31,7 @@ Plug 'benekastah/neomake',             { 'on': 'Neomake' }
 Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-tmux-navigator', ar#plug_if(exists('$TMUX'))
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc',          { 'on': ['<Plug>(jsdoc)', 'JsDoc'] }
 Plug 'itchyny/lightline.vim'
@@ -58,7 +59,9 @@ Plug 'tpope/vim-rhubarb'
 " -- Languages ----------------------------------------------------------
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'cespare/vim-toml'
+Plug 'chrisbra/vim-zsh'
 Plug 'fatih/vim-go'
+Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'sebdah/vim-delve',               { 'for': 'go' }
