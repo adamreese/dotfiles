@@ -7,6 +7,7 @@ setlocal shiftwidth=2
 setlocal noexpandtab
 setlocal nolist
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

@@ -29,5 +29,6 @@ noremap <leader>gb :<C-u>CtrlPBuffer<CR>
 noremap <leader>gt :<C-u>CtrlPBufTag<CR>
 noremap <leader>ev :<C-u>execute 'CtrlP ' . g:vim_dir<CR>
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

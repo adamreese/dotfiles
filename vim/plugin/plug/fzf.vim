@@ -5,7 +5,6 @@ if !ar#is_loaded('fzf.vim') | finish | endif
 
 " Settings
 " -----------------------------------------------------------------------
-
 if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --inline-info'
 endif
@@ -23,7 +22,6 @@ let g:fzf_nvim_statusline = 0
 
 " Mappings
 " -----------------------------------------------------------------------
-
 nnoremap [FZF]   <Nop>
 nmap     <space> [FZF]
 
@@ -36,5 +34,14 @@ nnoremap [FZF]T :Tags<cr>
 nnoremap [FZF]ev :<C-u>execute 'Files ' . g:vim_dir<CR>
 nnoremap [FZF]ed :Files ~/.dotfiles<CR>
 
+" Commands
+" -----------------------------------------------------------------------
+command! Plugs call fzf#run({
+      \ 'source':  map(sort(keys(g:plugs)), 'g:plug_home."/".v:val'),
+      \ 'options': '--delimiter / --nth -1',
+      \ 'sink':    'tabedit',
+      \ })
+
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

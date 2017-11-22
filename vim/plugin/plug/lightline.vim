@@ -55,5 +55,6 @@ augroup lightline_neovim
   autocmd User NeomakeCountsChanged call lightline#update()
 augroup END
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

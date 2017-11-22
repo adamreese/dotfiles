@@ -32,3 +32,7 @@ if has('gui_macvim')
   map <M-D-Right> :tabnext<CR>
   map <M-D-Left> :tabprev<CR>
 endif
+
+" Modeline {{{1
+" -----------------------------------------------------------------------
+" vim:foldmethod=marker

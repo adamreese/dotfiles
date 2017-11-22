@@ -26,5 +26,6 @@ highlight! Comment cterm=italic gui=italic
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

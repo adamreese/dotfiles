@@ -8,6 +8,6 @@ if !ar#is_plugged('vim-jsdoc') | finish | endif
 
 let g:jsdoc_return = 0
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
-

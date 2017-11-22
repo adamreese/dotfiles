@@ -18,6 +18,7 @@ let g:go_term_mode = 'split'
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_error = 1
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

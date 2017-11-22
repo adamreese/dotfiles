@@ -12,5 +12,6 @@ command! -buffer -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

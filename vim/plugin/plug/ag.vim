@@ -14,6 +14,6 @@ if executable('ag')
   endfunction
 endif
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
-

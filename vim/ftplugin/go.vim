@@ -15,5 +15,6 @@ setlocal listchars=tab:\ \ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

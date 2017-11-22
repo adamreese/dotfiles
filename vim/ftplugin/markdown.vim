@@ -22,6 +22,7 @@ let g:tagbar_type_markdown = {
     \ ]
     \ }
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

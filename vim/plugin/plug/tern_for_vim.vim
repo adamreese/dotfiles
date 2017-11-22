@@ -8,6 +8,7 @@ let g:tern#arguments = ['--persistent', '--no-port-file']
 let g:tern_request_timeout = 1
 let g:tern_set_omni_function = 0
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

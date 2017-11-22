@@ -31,5 +31,6 @@ augroup vimrc
 
 augroup END
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

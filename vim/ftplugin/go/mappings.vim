@@ -16,6 +16,7 @@ nmap <buffer><localleader>gl     :<C-u>Neomake gometalinter<CR>
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

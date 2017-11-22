@@ -30,5 +30,6 @@ let g:tagbar_type_go = {
       \ 'ctagsargs' : '-sort -silent'
       \ }
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

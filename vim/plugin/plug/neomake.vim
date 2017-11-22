@@ -27,5 +27,6 @@ augroup vimrc_neomake
   autocmd VimLeave * let g:neomake_verbose = 0
 augroup END
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

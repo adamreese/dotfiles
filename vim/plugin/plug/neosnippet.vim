@@ -20,6 +20,7 @@ endif
 imap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
 smap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

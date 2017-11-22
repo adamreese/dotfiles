@@ -106,5 +106,6 @@ if filereadable(s:vimrc_project)
   execute 'source ' . s:vimrc_project
 endif
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

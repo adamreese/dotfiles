@@ -112,5 +112,6 @@ vnoremap <silent> <leader>Y "*Y
 " Paste from system clipboard
 nnoremap <silent> <leader>,p "*p
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

@@ -4,5 +4,6 @@
 
 setlocal colorcolumn=+3
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker

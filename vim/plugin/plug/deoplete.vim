@@ -69,6 +69,7 @@ augroup vimrc_deoplete
   autocmd VimEnter * try | call s:deoplete_init() | catch | endtry
 augroup END
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 

@@ -4,6 +4,7 @@
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
 
