@@ -48,6 +48,9 @@
 [commit]
   gpgsign = true
 
+[tag]
+  forceSignAnnotated = true
+
 [fetch]
   prune = true
 
