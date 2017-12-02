@@ -121,8 +121,33 @@ function! statusline#go() abort
   return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
 endfunction
 
+function! statusline#search() abort
+  return exists('*anzu#search_status') ? anzu#search_status() : ''
+endfunction
+
 function! statusline#neomake() abort
-  return exists('*neomake#statusline#LoclistStatus') ? neomake#statusline#LoclistStatus() : ''
+  return exists('g:loaded_neomake') ? neomake#statusline#LoclistStatus() : ''
+endfunction
+
+function! statusline#neomake_error() abort
+  return s:neomake_count('E')
+endfunction
+
+function! statusline#neomake_warning() abort
+  return s:neomake_count('W')
+endfunction
+
+function! statusline#neomake_info() abort
+  return s:neomake_count('I')
+endfunction
+
+function! s:neomake_count(group) abort
+  if ! exists('g:loaded_neomake')
+    return ''
+  endif
+  let l:counts = neomake#statusline#LoclistCounts()
+  let l:g = get(l:counts, a:group, 0)
+  return l:g > 0 ? printf('%s:%d', a:group, l:g) : ''
 endfunction
 
 autocmd vimrc User NeomakeCountsChanged call lightline#update()

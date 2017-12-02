@@ -10,13 +10,12 @@ let g:lightline_no_fileformat_filetypes = ['fzf', 'help', 'man', 'nerdtree', 'ta
 let g:lightline_no_filename_filetypes   = ['fzf', 'nerdtree', 'tagbar', 'qf']
 
 let g:lightline = {
-      \ 'colorscheme': 'default',
       \ 'active': {
       \   'left':  [
       \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename' ],
       \   ],
       \   'right': [
-      \     [ 'neomake', 'lineinfo' ], [ 'filetype' ], [ 'go', 'ctrlp_mark' ],
+      \     [ 'lint_error', 'lint_warning', 'lint_info', 'lineinfo' ], [ 'filetype' ], [ 'search', 'go', 'ctrlp_mark' ],
       \   ]
       \ },
       \ 'inactive': {
@@ -32,20 +31,23 @@ let g:lightline = {
       \   'filename':      'statusline#filename',
       \   'filetype':      'statusline#filetype',
       \   'mode':          'statusline#mode',
+      \   'search':        'statusline#search',
       \   'go':            'statusline#go',
       \   'ctrlp_mark':    'statusline#ctrlp_mark',
       \ },
       \ 'component_expand': {
-      \   'neomake':   'statusline#neomake',
-      \   'lineinfo':  'statusline#lineinfo',
+      \   'lint_error':   'statusline#neomake_error',
+      \   'lint_warning': 'statusline#neomake_warning',
+      \   'lint_info':    'statusline#neomake_info',
+      \   'lineinfo':     'statusline#lineinfo',
       \ },
-      \ 'component_type': {
-      \   'neomake': 'error',
+      \   'component_type': {
+      \   'lint_error':   'error',
+      \   'lint_warning': 'warning',
+      \   'lint_info':    'warning',
       \ },
-      \ 'subseparator': {
-      \   'left': '|',
-      \   'right': '|',
-      \ },
+      \ 'separator':    { 'left': "\ue0b8", 'right': "\ue0ba"},
+      \ 'subseparator': { 'left': '|', 'right': '|' },
       \ }
 
 let g:tagbar_status_func = 'statusline#tagbar_status'

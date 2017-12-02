@@ -35,8 +35,8 @@ nnoremap <S-Tab> <C-w>W
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
 
 " Same when moving up and down
 noremap <C-d> <C-d>zz
@@ -70,7 +70,7 @@ nnoremap <silent><leader>w :<C-u>write!<CR>
 nnoremap <silent><leader>q :<C-u>quit!<CR>
 
 " Remove search highlight
-nnoremap <silent><leader><CR> :<C-u>nohlsearch<CR>
+" nnoremap <silent><leader><CR> :<C-u>nohlsearch<CR>
 
 " Close quickfix/location window
 nnoremap <leader>c :<C-u>cclose<bar>lclose<CR>

@@ -38,6 +38,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
+Plug 'osyo-manga/vim-anzu'
 Plug 'rking/ag.vim'
 Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdtree'
