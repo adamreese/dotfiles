@@ -69,7 +69,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'sebdah/vim-delve',               { 'for': 'go' }
 Plug 'syngan/vim-vimlint',             { 'for': 'vim' }
-Plug 'ternjs/tern_for_vim',            { 'do': 'npm install' }
+Plug 'ternjs/tern_for_vim',            { 'do': 'yarn install' }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'

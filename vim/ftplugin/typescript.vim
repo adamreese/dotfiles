@@ -1,6 +1,11 @@
 " =======================================================================
 " ftplugin/typescript.vim
 " =======================================================================
+let s:cpo_save = &cpoptions
+set cpoptions&vim
+" -----------------------------------------------------------------------
+
+nmap <buffer><silent>gd          :<C-u>TSTypeDef<CR>
 
 let g:tagbar_type_typescript = {
     \ 'ctagstype' : 'typescript',
@@ -41,5 +46,9 @@ let g:tagbar_type_typescript = {
     \ }
     \ }
 
+" Modeline {{{1
+" -----------------------------------------------------------------------
+let &cpoptions = s:cpo_save
+unlet s:cpo_save
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
