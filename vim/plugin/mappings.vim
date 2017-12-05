@@ -33,26 +33,9 @@ nnoremap <C-=> <C-W>=
 nnoremap <Tab>   <C-w>w
 nnoremap <S-Tab> <C-w>W
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
-
 " Same when moving up and down
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
-
-" QuickFix navigation
-nnoremap ]q :<C-u>cnext<CR>zz
-nnoremap [q :<C-u>cprevious<CR>zz
-
-" Location list navigation
-nnoremap ]l :<C-u>lnext<CR>zz
-nnoremap [l :<C-u>lprevious<CR>zz
-
-" Error mnemonic (Neomake uses location list)
-nnoremap ]e :<C-u>lnext<CR>zz
-nnoremap [e :<C-u>lprevious<CR>zz
 
 " Command mode emacs style bindings
 cnoremap <C-a> <Home>

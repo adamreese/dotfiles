@@ -23,6 +23,9 @@ endif
 
 highlight! Comment cterm=italic gui=italic
 
+highlight! clear QuickFixLine
+highlight! QuickFixLine cterm=underline gui=underline guibg=none
+
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 

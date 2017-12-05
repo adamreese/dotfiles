@@ -28,6 +28,7 @@ Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/vimproc.vim',             { 'build': 'make' }
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
+Plug 'blueyed/vim-qf_resize'
 Plug 'chrisbra/unicode.vim'
 Plug 'christoomey/vim-tmux-navigator', ar#plug_if(exists('$TMUX'))
 Plug 'ctrlpvim/ctrlp.vim'
@@ -40,6 +41,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
 Plug 'osyo-manga/vim-anzu'
 Plug 'rking/ag.vim'
+Plug 'romainl/vim-qf'
 Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-abolish'
