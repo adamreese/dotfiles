@@ -6,6 +6,7 @@ if !ar#is_loaded('vim-go') | finish | endif
 " Settings
 " -----------------------------------------------------------------------
 
+let g:go_decls_mode = 'fzf'
 let g:go_def_mode = 'godef'
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1

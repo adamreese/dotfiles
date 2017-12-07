@@ -198,6 +198,7 @@ endfor
 " Enable bash syntax
 " $VIMRUNTIME/syntax/sh.vim
 let g:is_bash = 1
+let g:vimsyn_noopererror = 1
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
