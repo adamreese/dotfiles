@@ -27,10 +27,6 @@ function! s:is_terminal() abort
   return expand('%:t') =~? '^term:\/\/'
 endfunction
 
-function! s:is_ctrlp() abort
-  return expand('%:t') ==# 'ControlP'
-endfunction
-
 function! s:readonly() abort
   if &readonly && !s:is_readonly_filetype()
     return ' [RO]'
@@ -45,10 +41,6 @@ function! s:filename(fmt) abort
 
   if s:is_terminal()
     return s:filename('%:t')
-  endif
-
-  if s:is_ctrlp() && has_key(g:lightline, 'ctrlp_item')
-    return g:lightline.ctrlp_item
   endif
 
   if len(expand(a:fmt)) > 0
@@ -83,8 +75,6 @@ endfunction
 function! statusline#filetype() abort
   if winwidth(0) < 70 || s:is_no_fileformat_filetype()
     return ''
-  elseif s:is_ctrlp()
-    return ''
   endif
   return strlen(&filetype) ? &filetype : 'no ft'
 endfunction
@@ -92,8 +82,6 @@ endfunction
 function! statusline#mode() abort
   if s:is_mode_filetype()
     return toupper(&filetype)
-  elseif s:is_ctrlp()
-    return 'CtrlP'
   endif
   return lightline#mode()
 endfunction
@@ -151,32 +139,6 @@ function! s:neomake_count(group) abort
 endfunction
 
 autocmd vimrc User NeomakeCountsChanged call lightline#update()
-
-function! statusline#ctrlp_mark() abort
-  if s:is_ctrlp() && has_key(g:lightline, 'ctrlp_item')
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  endif
-  return ''
-endfunction
-
-let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked) abort
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str) abort
-  return lightline#statusline(0)
-endfunction
 
 function! statusline#tagbar_status(current, sort, fname, ...) abort
   return lightline#statusline(0)

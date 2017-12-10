@@ -5,11 +5,11 @@ if !ar#is_loaded('fzf.vim') | finish | endif
 
 " Settings
 " -----------------------------------------------------------------------
-if has('nvim')
+if g:nvim
   let $FZF_DEFAULT_OPTS .= ' --inline-info --bind ctrl-a:select-all '
 endif
 
-if !has('nvim') && $TERM_PROGRAM ==# 'iTerm.app'
+if !g:nvim && $TERM_PROGRAM ==# 'iTerm.app'
   let g:fzf_launcher = 'vim-fzf'
 endif
 

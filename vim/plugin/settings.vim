@@ -103,7 +103,7 @@ if has('persistent_undo')
   execute 'set undodir=' . g:data_dir . '/undo/'
 endif
 
-if has('nvim')
+if g:nvim
   exec 'set shada+=n' . g:data_dir . '/main.shada'
 else
   exec 'set viminfo+=n' . g:data_dir . '/viminfo'
@@ -113,7 +113,7 @@ endif
 if exists('$SUDO_USER')
   set noundofile
 
-  if has('nvim')
+  if g:nvim
     set shada=
   else
     set viminfo=

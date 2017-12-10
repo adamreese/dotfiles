@@ -15,7 +15,7 @@ let g:lightline = {
       \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename' ],
       \   ],
       \   'right': [
-      \     [ 'lint_error', 'lint_warning', 'lint_info', 'lineinfo' ], [ 'filetype' ], [ 'search', 'go', 'ctrlp_mark' ],
+      \     [ 'lint_error', 'lint_warning', 'lint_info', 'lineinfo' ], [ 'filetype' ], [ 'search', 'go' ],
       \   ]
       \ },
       \ 'inactive': {
@@ -33,7 +33,6 @@ let g:lightline = {
       \   'mode':          'statusline#mode',
       \   'search':        'statusline#search',
       \   'go':            'statusline#go',
-      \   'ctrlp_mark':    'statusline#ctrlp_mark',
       \ },
       \ 'component_expand': {
       \   'lint_error':   'statusline#neomake_error',
@@ -46,7 +45,6 @@ let g:lightline = {
       \   'lint_warning': 'warning',
       \   'lint_info':    'warning',
       \ },
-      \ 'separator':    { 'left': "\ue0b8", 'right': "\ue0ba"},
       \ 'subseparator': { 'left': '|', 'right': '|' },
       \ }
 

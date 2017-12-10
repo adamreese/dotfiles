@@ -70,7 +70,7 @@ nnoremap <leader>ss :<C-u>setlocal spell!<CR>
 " Sorting
 vnoremap <leader>srt :<C-u>sort<CR>
 
-if has('nvim')
+if g:nvim
   " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
   " the top again
   tnoremap <leader>q <C-\><C-n>gg<CR>
