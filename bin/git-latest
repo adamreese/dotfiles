@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 branch='%(color:yellow)%(refname:short)%(color:reset)'
 spacer='%(color:black) %(color:reset)'

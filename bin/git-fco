@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 tags=$(
   git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}'
