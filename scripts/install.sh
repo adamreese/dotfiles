@@ -164,8 +164,7 @@ install_ruby_gems() {
 install_go_packages() {
   echo "Installing default go packages"
   while read -r pkg; do
-    echo "${pkg}"
-    go get -u "${pkg}"
+    go get -u -v "${pkg}"
   done < "${DOTFILES}/go/default-packages"
 }
 
