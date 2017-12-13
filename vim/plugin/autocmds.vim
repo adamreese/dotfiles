@@ -13,6 +13,9 @@ augroup vimrc
   " remove trailing whitespace automatically
   autocmd BufWritePre * :%s/\s\+$//e
 
+  " disable paste
+  autocmd InsertLeave * set nopaste
+
   " check timestamp more for 'autoread'
   autocmd WinEnter * checktime
 
