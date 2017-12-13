@@ -8,6 +8,7 @@ if !ar#is_loaded('vim-go') | finish | endif
 
 let g:go_decls_mode = 'fzf'
 let g:go_def_mode = 'godef'
+let g:go_echo_command_info = 0
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_fail_silently = 1
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'deadcode', 'unconvert']

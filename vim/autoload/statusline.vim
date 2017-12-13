@@ -106,7 +106,7 @@ function! statusline#lineinfo() abort
 endfunction
 
 function! statusline#go() abort
-  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
+  return exists('*go#statusline#Show') ? go#statusline#Show() : ''
 endfunction
 
 function! statusline#search() abort
