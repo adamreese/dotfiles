@@ -5,7 +5,10 @@ let s:cpo_save = &cpoptions
 set cpoptions&vim
 " -----------------------------------------------------------------------
 
-nmap <buffer><silent>gd          :<C-u>TSTypeDef<CR>
+nmap <buffer><silent>K                   :<C-U>TSDoc<CR>
+nmap <buffer><silent>gd                  :<C-U>TSTypeDef<CR>
+nmap <buffer><silent>gs                  :<C-U>TSDefPreview<CR>
+nmap <silent><buffer><localleader>i      :<C-U>TSType<CR>
 
 let g:tagbar_type_typescript = {
     \ 'ctagstype' : 'typescript',

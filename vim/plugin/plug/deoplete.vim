@@ -12,6 +12,7 @@ let g:deoplete#file#enable_buffer_path    = 1
 let g:deoplete#max_abbr_width             = 0
 let g:deoplete#max_menu_width             = 0
 
+" go
 let g:deoplete#sources#go#align_class    = 1
 let g:deoplete#sources#go#gocode_binary  = $GOPATH.'/bin/gocode'
 let g:deoplete#sources#go#json_directory = g:cache_dir . 'deoplete/go/darwin_amd64'
@@ -19,6 +20,21 @@ let g:deoplete#sources#go#package_dot    = 1
 let g:deoplete#sources#go#pointer        = 1
 let g:deoplete#sources#go#sort_class     = ['func', 'type', 'var', 'const', 'package']
 let g:deoplete#sources#go#use_cache      = 0
+
+" ternjs
+let g:deoplete#sources#ternjs#types            = 1
+let g:deoplete#sources#ternjs#docs             = 1
+let g:deoplete#sources#ternjs#case_insensitive = 1
+"Add extra filetypes
+let g:deoplete#sources#ternjs#filetypes = [
+      \ 'ts',
+      \ 'tsx',
+      \ 'typescript.tsx',
+      \ 'typescript',
+      \ 'javascript',
+      \ 'jsx',
+      \ 'javascript.jsx',
+      \ ]
 
 let g:necovim#complete_functions     = get(g:, 'necovim#complete_functions', {})
 let g:necovim#complete_functions.Ref = 'ref#complete'
