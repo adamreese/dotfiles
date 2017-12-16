@@ -11,8 +11,7 @@ path[1,0]=${GOPATH}/bin
 # gocover
 # Run test coverage on a package and open the results in a browser.
 gocover() {
-  go test ${1} -coverprofile=$TMPDIR/coverage.out
-  go tool cover -html=$TMPDIR/coverage.out
+  goverage -coverprofile=$TMPDIR/coverage.out "$@" && go tool cover -html=$TMPDIR/coverage.out
 }
 
 alias gml="gometalinter --config=${XDG_CONFIG_HOME}/gometalinter.json"

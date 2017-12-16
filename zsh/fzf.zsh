@@ -3,14 +3,43 @@
 (( ${+commands[fzf]} )) || return
 
 typeset -gx FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+typeset -gx FZF_DEFAULT_OPTS="--color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4 --bind=ctrl-u:page-up --bind=ctrl-d:page-down"
+typeset -gx FZF_CTRL_T_OPTS='--select-1 --exit-0 --preview "(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -200" --bind "?:toggle-preview"'
 
-_fzf_opts=(
-  --color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4
-  --bind=ctrl-u:page-up
-  --bind=ctrl-d:page-down
-)
-typeset -gx FZF_DEFAULT_OPTS="${_fzf_opts}"
+# CTRL-T - Paste the selected file path(s) into the command line
+__fsel() {
+  setopt localoptions pipefail 2> /dev/null
+  local opts="--height 40% --reverse -m ${FZF_DEFAULT_OPTS} ${FZF_CTRL_T_OPTS}"
+  while read item; do
+    echo -n "${(q)item} "
+  done < <(eval "${FZF_DEFAULT_COMMAND} | $(__fzfcmd) ${opts} -m $@")
+  local ret=$?
+  echo
+  return $ret
+}
 
-unset _fzf_opts
+__fzfcmd() {
+  ((${FZF_TMUX:-0} < 1)) && echo "fzf-tmux -d${FZF_TMUX_HEIGHT:-40%}" || echo "fzf"
+}
+
+widget-fzf-file() {
+  LBUFFER="${LBUFFER}$(__fsel)"
+  local ret=$?
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  return $ret
+}
+zle     -N   widget-fzf-file
+bindkey '^T' widget-fzf-file
+
+widget-fzf-branch() {
+  if git rev-parse --git-dir &>/dev/null; then
+    git-fco
+    zle accept-line
+  fi
+}
+zle     -N   widget-fzf-branch
+bindkey '^B' widget-fzf-branch
+
 # ------------------------------------------------------------------------------
 # vim:ft=zsh
