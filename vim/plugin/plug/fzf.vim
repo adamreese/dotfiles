@@ -9,10 +9,6 @@ if g:nvim
   let $FZF_DEFAULT_OPTS .= ' --inline-info --bind ctrl-a:select-all '
 endif
 
-if !g:nvim && $TERM_PROGRAM ==# 'iTerm.app'
-  let g:fzf_launcher = 'vim-fzf'
-endif
-
 let g:fzf_layout = { 'down': '16' }
 
 " [Buffers] Jump to the existing window if possible
@@ -25,28 +21,27 @@ let g:fzf_nvim_statusline = 0
 nnoremap [FZF]   <Nop>
 nmap     <space> [FZF]
 
-nnoremap <silent>[FZF]f  :<C-u>Files<CR>
-nnoremap <silent>[FZF]p  :<C-u>Plugs<CR>
-nnoremap <silent>[FZF]b  :<C-u>Buffers<CR>
-nnoremap <silent>[FZF]h  :<C-u>Helptags<CR>
-nnoremap <silent>[FZF]t  :<C-u>BTags<CR>
-nnoremap <silent>[FZF]T  :<C-u>Tags<CR>
-nnoremap <silent>[FZF]ev :<C-u>VimFiles<CR>
-nnoremap <silent>[FZF]ed :<C-u>DotFiles<CR>
+nnoremap <silent>[FZF]f     :<C-U>Files<CR>
+nnoremap <silent>[FZF]p     :<C-U>Plugs<CR>
+nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
+nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
+nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
+nnoremap <silent>[FZF]T     :<C-U>Tags<CR>
+nnoremap <silent>[FZF]ev    :<C-U>VimFiles<CR>
+nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
 
-nnoremap <silent><C-p> :Files<CR>
-noremap <leader>gb :<C-u>Buffers<CR>
-noremap <leader>gt :<C-u>BTags<CR>
-noremap <leader>ev :<C-u>VimFiles<CR>
+nnoremap <silent><C-P>      :<C-U>Files<CR>
+nnoremap <silent><leader>gb :<C-U>Buffers<CR>
+nnoremap <silent><leader>gt :<C-U>BTags<CR>
+nnoremap <silent><leader>ev :<C-U>VimFiles<CR>
 
 " Commands
 " -----------------------------------------------------------------------
-command! Plugs call fzf#run(fzf#wrap('Plugs', {
+command! Plugs call fzf#run(fzf#wrap('Plugs', extend({
       \ 'dir':     g:plug_home,
       \ 'source':  sort(keys(g:plugs)),
-      \ 'options': '--delimiter / --nth -1',
       \ 'sink':    'tabedit',
-      \ }))
+      \ }, g:fzf_layout)))
 
 command! Modified call fzf#run(fzf#wrap('Modified',
       \   fzf#vim#with_preview(extend({
