@@ -21,20 +21,21 @@ setopt NO_FLOW_CONTROL        # Disable start/stop characters in shell editor.
 # ------------------------------------------------------------------------------
 
 # enable caching
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${ZSH_CACHE_DIR}"
+zstyle ':completion::complete:*'       use-cache on
+zstyle ':completion::complete:*'       cache-path "${ZSH_CACHE_DIR}"
 
 # group matches and describe.
 zstyle ':completion:*'                 accept-exact '*(N)'
-zstyle ':completion:*'                 format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*'                 matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:*:*:*:*'         menu select=2
+zstyle ':completion:*:options'         auto-description '%d'
+zstyle ':completion:*:options'         description 'yes'
+
+zstyle ':completion:*'                 format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*:corrections'     format ' %F{green}-- %d (errors: %e) --%f'
 zstyle ':completion:*:default'         list-prompt '%S%M matches%s'
 zstyle ':completion:*:descriptions'    format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*:messages'        format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:options'         auto-description '%d'
-zstyle ':completion:*:options'         description 'yes'
 zstyle ':completion:*:warnings'        format ' %F{red}-- no matches found --%f'
 
 # separate matches into groups
@@ -46,16 +47,18 @@ zstyle ':completion:*'                 verbose yes
 zstyle ':completion:*:-command-:*:'    verbose false
 
 # Fuzzy match mistyped completions.
-zstyle ':completion:*' completer _complete _match _approximate _ignored
-
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*'                 completer _complete _match _approximate _ignored
+zstyle ':completion:*:match:*'         original only
+zstyle ':completion:*:approximate:*'   max-errors 1 numeric
 
 # Increase the number of errors based on the length of the typed word.
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
+# Ignore file patterns
+zstyle ':completion:*:*files'          ignored-patterns '*?.zwc'
+
 # ignore useless commands and functions
-zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|prompt_*)'
+zstyle ':completion:*:functions'       ignored-patterns '(_*|pre(cmd|exec))' 'prompt_*'
 
 # completion sorting
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
