@@ -5,6 +5,9 @@ let s:cpo_save = &cpoptions
 set cpoptions&vim
 " -----------------------------------------------------------------------
 
+setlocal nofoldenable
+setlocal foldmethod=syntax
+
 nmap <buffer><silent>K                   :<C-U>TSDoc<CR>
 nmap <buffer><silent>gd                  :<C-U>TSTypeDef<CR>
 nmap <buffer><silent>gs                  :<C-U>TSDefPreview<CR>

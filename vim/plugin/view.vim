@@ -6,7 +6,7 @@ scriptencoding utf-8
 " UI: {{{1
 " -----------------------------------------------------------------------
 let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
-let &fillchars='diff:⣿,vert:│,fold:─'
+let &fillchars='diff:⣿,vert:│,fold: '
 let &showbreak='↳ '
 
 " Highlights: {{{1

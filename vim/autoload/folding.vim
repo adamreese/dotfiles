@@ -7,18 +7,29 @@ scriptencoding utf-8
 " folding#text
 " -----------------------------------------------------------------------
 
-" See: http://dhruvasagar.com/2013/03/28/vim-better-foldtext
 function! folding#text() abort
-  let l:line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let l:linelen = winwidth( 0 ) - (&number ? &numberwidth : 0) - &foldcolumn - 3
 
+  let l:marker  = strpart(&foldmarker, 0, stridx(&foldmarker, ',')) . '\d*'
   let l:range   = foldclosedend(v:foldstart) - foldclosed(v:foldstart) + 1
-  let l:foldchar = matchstr(&fillchars, 'fold:\zs.')
 
-  let l:foldtextstart = '+' . strpart(repeat(l:foldchar, v:foldlevel*2) . l:line, 0, (winwidth(0)*2)/3)
+  let l:left    = substitute(getline(v:foldstart), l:marker, '', '')
+  let l:leftlen = len(l:left)
 
-  let l:foldtextend = printf('┤ %3s ├%s', l:range, repeat(l:foldchar, 8))
-  let l:foldtextlength = strlen(substitute(l:foldtextstart . l:foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return l:foldtextstart . repeat(l:foldchar, winwidth(0)-l:foldtextlength) . l:foldtextend
+  let l:right    = printf('%d [%d]', l:range, v:foldlevel)
+  let l:rightlen = len(l:right)
+
+  let l:tmp    = strpart(l:left, 0, l:linelen - l:rightlen)
+  let l:tmplen = len(l:tmp)
+
+  if l:leftlen > len(l:tmp)
+    let l:left    = strpart(l:tmp, 0, l:tmplen - 4) . '... '
+    let l:leftlen = l:tmplen
+  endif
+
+  let l:fill = repeat(' ', l:linelen - (l:leftlen + l:rightlen))
+
+  return l:left . l:fill . l:right . repeat(' ', 100)
 endfunction
 
 " -----------------------------------------------------------------------
