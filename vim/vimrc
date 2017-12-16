@@ -64,9 +64,12 @@ Plug 'cespare/vim-toml'
 Plug 'chrisbra/vim-zsh'
 Plug 'fatih/vim-go'
 Plug 'jparise/vim-graphql'
+Plug 'kana/vim-gf-user',               { 'for': 'vim' }
 Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 Plug 'sebdah/vim-delve',               { 'for': 'go' }
+Plug 'sgur/vim-gf-autoload',           { 'for': 'vim' }
 Plug 'syngan/vim-vimlint',             { 'for': 'vim' }
 Plug 'ternjs/tern_for_vim',            { 'do': 'yarn install' }
 Plug 'tmux-plugins/vim-tmux'

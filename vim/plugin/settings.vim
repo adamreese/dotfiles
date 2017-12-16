@@ -23,7 +23,7 @@ if has('vim_starting')
   endif
 endif
 
-if !has('nvim')
+if !g:nvim
   set ttyfast
   if has('mouse_sgr')
     set ttymouse=sgr
