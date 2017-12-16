@@ -12,7 +12,7 @@ command! Wq wq
 command! PU PlugUpgrade | PlugUpdate
 
 " Profile
-command! -bang Profile call ar#profile(<bang>0)
+command! Profile call ar#profile()
 
 " ReloadSyntax
 command! ReloadSyntax call ar#reload_syntax()

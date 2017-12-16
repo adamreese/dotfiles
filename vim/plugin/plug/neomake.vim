@@ -6,7 +6,7 @@ scriptencoding utf-8
 if !ar#is_plugged('neomake') | finish | endif
 
 let g:neomake_enable = 1
-let g:neomake_warning_sign = { 'text': '!', 'texthl': 'WarningMsg' }
+let g:neomake_warning_sign = { 'text': '⚠', 'texthl': 'WarningMsg' }
 let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'ErrorMsg'   }
 
 let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter.json']

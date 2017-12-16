@@ -50,10 +50,13 @@ set ttimeout
 set ttimeoutlen=10
 set timeout
 set timeoutlen=1000
+set updatetime=500
 
 " Don't try to highlight long lines.
 " This fixes some performance problems on huge files.
 set synmaxcol=1000
+
+set maxmempattern=2000000
 
 " Indent: {{{1
 " -----------------------------------------------------------------------

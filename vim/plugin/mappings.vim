@@ -16,6 +16,9 @@ noremap q: :q
 vnoremap < <gv
 vnoremap > >gv
 
+" Make dot work in visual mode
+vnoremap . :norm.<CR>
+
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk

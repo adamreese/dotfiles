@@ -1,38 +1,50 @@
 " =======================================================================
 " autoload/ar.vim
 " =======================================================================
-
 if exists('g:loaded_ar') | finish | endif
 let g:loaded_ar = 1
 
-" -----------------------------------------------------------------------
-" ar#profile
-"
-" Start vim profiling.
-function! ar#profile(bang) abort
-  if a:bang
+let s:profile_enabled = 0
+let s:profile_log     = '/tmp/vim_profile.log'
+
+" Toggle vim profiling
+function! ar#profile() abort
+  if s:profile_enabled
     profile pause
     noautocmd qall
   else
-    profile start /tmp/profile.log
+    let s:profile_enabled = 1
+    profile start s:profile_log
     profile func *
     profile file *
   endif
 endfunction
 
+" Reload and sync syntax.
+function! ar#reload_syntax() abort
+  syntax sync fromstart
+  redraw!
+endfunction
+
+" Find and source project-specific Vim configs
+function! ar#source_project_config() abort
+  let l:projectfile = findfile('.vimrc.local', expand('%:p').';')
+  if filereadable(l:projectfile)
+    execute 'source' l:projectfile
+  endif
+endfunction
+
 " -----------------------------------------------------------------------
-" ar#ensure_plugin_manager
-"
-" Auto install plugin manager
+" Plugins
+" -----------------------------------------------------------------------
+
+" Auto install plugin manager if not detected
 function! ar#ensure_plugin_manager() abort
   if empty(glob(expand(g:vim_dir . '/autoload/plug.vim')))
     call ar#plug_install()
   endif
 endfunction
 
-" -----------------------------------------------------------------------
-" ar#plug_install
-"
 " Install plugin manager
 function! ar#plug_install() abort
   execute 'silent !curl --create-dirs -fLo '
@@ -45,9 +57,6 @@ function! ar#plug_install() abort
   augroup END
 endfunction
 
-" -----------------------------------------------------------------------
-" ar#plug_if
-"
 " Conditionally load plugins.
 " https://github.com/junegunn/vim-plug/wiki/faq
 function! ar#plug_if(condition, ...) abort
@@ -55,10 +64,7 @@ function! ar#plug_if(condition, ...) abort
   return a:0 ? extend(l:enabled, a:000[0]) : l:enabled
 endfunction
 
-" -----------------------------------------------------------------------
-" ar#is_loaded
-"
-" Returns true if the plugin is loaded.
+" Returns true if the plugin {name} is loaded.
 function! ar#is_loaded(name) abort
   if index(g:plugs_order, a:name) < 0
     return 0
@@ -69,26 +75,12 @@ function! ar#is_loaded(name) abort
     return 0
   endif
 
-  return empty(l:plug_dir)
-        \ ? 0
-        \ : stridx(&runtimepath, l:plug_dir) > -1
+  return empty(l:plug_dir) ? 0 : stridx(&runtimepath, l:plug_dir) > -1
 endfunction
 
-" -----------------------------------------------------------------------
-" ar#is_plugged
-"
-" Returns true if the plugin is installed.
+" Returns true if the plugin {name} is installed.
 function! ar#is_plugged(name) abort
     return index(g:plugs_order, a:name) > -1
-endfunction
-
-" -----------------------------------------------------------------------
-" ar#reload_syntax
-"
-" Reload and sync syntax.
-function! ar#reload_syntax() abort
-  syntax sync fromstart
-  redraw!
 endfunction
 
 " -----------------------------------------------------------------------

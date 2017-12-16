@@ -104,11 +104,6 @@ if filereadable(s:vimrc_local)
   execute 'source ' . s:vimrc_local
 endif
 
-let s:vimrc_project = '.vimrc.local'
-if filereadable(s:vimrc_project)
-  execute 'source ' . s:vimrc_project
-endif
-
 " Modeline {{{1
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker

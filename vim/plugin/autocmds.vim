@@ -32,6 +32,7 @@ augroup vimrc
   " from https://github.com/now/vim-quit-if-only-quickfix-buffer-left/blob/master/plugin/now/quit-if-only-quickfix-buffer-left.vim
   autocmd WinEnter * if winnr('$') == 1 && &buftype == 'quickfix' | quit | endif
 
+  autocmd BufRead,BufNewFile * call ar#source_project_config()
 augroup END
 
 " Modeline {{{1
