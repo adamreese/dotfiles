@@ -26,6 +26,14 @@ if [[ -s "${ZSH_CACHE_DIR}/helm.zsh" ]]; then
   emulate bash -c 'source "${ZSH_CACHE_DIR}/helm.zsh"'
 fi
 
+# Brigade
+# -----------------------------------------------------------------------------
+
+export BRIGADE_NAMESPACE=brigade-dev
+export BRIGADE_PROJECT_NAMESPACE=${BRIGADE_NAMESPACE}
+
+path[1,0]=${GOPATH}/src/github.com/Azure/brigade/bin
+
 # Minikube
 # -----------------------------------------------------------------------------
 
