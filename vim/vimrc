@@ -70,12 +70,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 Plug 'sebdah/vim-delve',               { 'for': 'go' }
 Plug 'sgur/vim-gf-autoload',           { 'for': 'vim' }
-Plug 'syngan/vim-vimlint',             { 'for': 'vim' }
 Plug 'ternjs/tern_for_vim',            { 'do': 'yarn install' }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
-Plug 'ynkdir/vim-vimlparser',          { 'for': 'vim' }
 
 " -- Completion ---------------------------------------------------------
 Plug 'Raimondi/delimitMate'
