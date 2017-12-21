@@ -55,9 +55,6 @@ nnoremap <leader>sv :<C-u>source $MYVIMRC<CR>
 nnoremap <silent><leader>w :<C-u>write!<CR>
 nnoremap <silent><leader>q :<C-u>quit!<CR>
 
-" Remove search highlight
-" nnoremap <silent><leader><CR> :<C-u>nohlsearch<CR>
-
 " Close quickfix/location window
 nnoremap <leader>c :<C-u>cclose<bar>lclose<CR>
 
@@ -69,6 +66,9 @@ nnoremap <leader>= ggVG=<CR>
 
 " Toggle spell checking
 nnoremap <leader>ss :<C-u>setlocal spell!<CR>
+
+" Toggle wrapping
+nnoremap <leader>tw :<C-u>setlocal wrap!<CR>
 
 " Sorting
 vnoremap <leader>srt :<C-u>sort<CR>
