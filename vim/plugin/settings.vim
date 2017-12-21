@@ -17,12 +17,6 @@ set shell=$SHELL
 set dictionary=/usr/share/dict/words
 set history=1000
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible
-  endif
-endif
-
 if !g:nvim
   set ttyfast
   if has('mouse_sgr')
