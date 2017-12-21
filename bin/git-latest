@@ -16,6 +16,7 @@ git for-each-ref \
   --sort=-committerdate \
   --count=25 \
   "refs/remotes/" \
+  --color \
   --format="$format" \
   | sed -e 's-refs/remotes/origin/--' \
   | column -ts '|'

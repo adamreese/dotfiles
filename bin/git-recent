@@ -7,14 +7,15 @@ spacer='%(color:black) %(color:reset)'
 format="
 %(HEAD) \
 $branch|\
-%(contents:subject) \
-%(color:bold black)%(committerdate:relative)%(color:reset) \
+%(contents:subject)|\
+%(color:dim)%(committerdate:relative)%(color:reset) \
 $spacer|"
 
 git for-each-ref \
   --sort=-committerdate \
   --count=25 \
   "refs/heads/" \
+  --color \
   --format="$format" \
   | sed -e 's-refs/remotes/origin/--' \
   | column -ts '|'
