@@ -5,7 +5,7 @@
 source "${commands[chruby-exec]:h:h}/share/chruby/chruby.sh"
 source "${commands[chruby-exec]:h:h}/share/chruby/auto.sh"
 
-chruby ruby-2.4
+chruby ruby-2.5
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
