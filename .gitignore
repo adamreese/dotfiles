@@ -9,3 +9,4 @@ vim/vimrc.local
 zsh/cache
 zsh/configs/local.zsh
 zsh/local.zsh
+zsh/.zcompdump
