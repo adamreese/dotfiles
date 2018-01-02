@@ -13,7 +13,7 @@
 
 typeset -gxm 'XDG_*'
 
-ZSH="${ZDOTDIR:-${XDG_CONFIG_HOME}}/zsh"
+: ${ZDOTDIR:=${HOME}/.dotfiles/zsh}
 
 ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 [[ ! -d ${ZSH_CACHE_DIR} ]] || mkdir -p "${ZSH_CACHE_DIR}"
@@ -37,13 +37,13 @@ typeset -gU cdpath fpath manpath path
 
 # load completion functions
 fpath=(
-  ${ZSH}/{completion,functions}(N-/)
-  ${ZSH}/modules/*/{completion,functions}(N-/)
+  ${ZDOTDIR}/{completion,functions}(N-/)
+  ${ZDOTDIR}/modules/*/{completion,functions}(N-/)
   /usr/local/share/zsh/site-functions(N-/)
   /usr/local/share/zsh-completions(N-/)
   ${fpath}
 )
-autoload -Uz ${ZSH}/functions/*(N:t)
+autoload -Uz ${ZDOTDIR}/functions/*(N:t)
 
 path=(
   ${HOME}/.dotfiles/bin(N-/)

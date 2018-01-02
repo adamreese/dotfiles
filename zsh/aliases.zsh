@@ -39,7 +39,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # Enhanced WHOIS lookups
 alias whois="whois -h whois-servers.net"
 
-# View logs
+# [t]ail [f]ollow [l]ogs
 alias tfl='tail -Fn30 log/*.log'
 
 # github.com/jocelynmallon/zshmarks
@@ -65,7 +65,7 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-# Split comma or colin separated data onto separate lines
+# [S]plit comma or colin separated data onto separate lines
 alias -g S="| tr ',:' '\n'"
 
 alias -g H='| head'
@@ -74,13 +74,14 @@ alias -g G='| grep'
 alias -g L='| less'
 alias -g J='| jq .'
 
+# [D]iff-so-fancy
 alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
 
 # zreload shell and completion
 zreload() {
   # remove all zcompiled files
-  command rm -f ${ZDOTDIR:-${HOME}}/.{zshrc.zwc,zcompdump,zcompdump.zwc}(-.N)
-  command rm -f ${ZSH}/**/*.zwc(-.N)
+  command rm -f ${ZDOTDIR}/.{zshrc.zwc,zcompdump,zcompdump.zwc}(-.N)
+  command rm -f ${ZDOTDIR}/**/*.zwc(-.N)
 
   # start again
   exec ${SHELL} -l

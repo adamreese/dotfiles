@@ -1,4 +1,5 @@
-# shortcut to projects folder
+# [p]roject directory fuzzy finder
+
 cd "${HOME}/p/${1}"
 
 # -----------------------------------------------------------------------------

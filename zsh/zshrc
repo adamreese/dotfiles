@@ -3,8 +3,8 @@
 # ------------------------------------------------------------------------------
 
 zmodules=(zshmarks history-substring-search)
-fpath=(${${zmodules}:+${ZSH}/modules/${^zmodules}/functions(/FN)} ${fpath})
-autoload -Uz ${ZSH}/modules/${^zmodules}/functions/*(N:t)
+fpath=(${${zmodules}:+${ZDOTDIR}/modules/${^zmodules}/functions(/FN)} ${fpath})
+autoload -Uz ${ZDOTDIR}/modules/${^zmodules}/functions/*(N:t)
 
 autoload -Uz compinit; compinit
 autoload -Uz bashcompinit; bashcompinit
@@ -12,7 +12,7 @@ autoload -Uz bashcompinit; bashcompinit
 # ------------------------------------------------------------------------------
 # source configuration files
 
-for file (${ZSH}/*.zsh(N-.)); do
+for file (${ZDOTDIR}/*.zsh(N-.)); do
   source $file
 done
 unset file
@@ -20,7 +20,7 @@ unset file
 # ------------------------------------------------------------------------------
 # load plugins
 
-for file (${ZSH}/modules/${^zmodules}/init.zsh(N-.)); do
+for file (${ZDOTDIR}/modules/${^zmodules}/init.zsh(N-.)); do
   source $file
 done
 unset file
