@@ -27,7 +27,8 @@ zstyle ':completion::complete:*'       cache-path "${ZSH_CACHE_DIR}"
 # group matches and describe.
 zstyle ':completion:*'                 accept-exact '*(N)'
 zstyle ':completion:*'                 matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*:*:*:*:*'         menu select=2
+zstyle ':completion:*'                 menu select=2
+zstyle ':completion:*'                 rehash true
 zstyle ':completion:*:options'         auto-description '%d'
 zstyle ':completion:*:options'         description 'yes'
 
@@ -35,7 +36,7 @@ zstyle ':completion:*'                 format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*:corrections'     format ' %F{green}-- %d (errors: %e) --%f'
 zstyle ':completion:*:default'         list-prompt '%S%M matches%s'
 zstyle ':completion:*:descriptions'    format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*:messages'        format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:messages'        format ' %F{purple}-- %d --%f'
 zstyle ':completion:*:warnings'        format ' %F{red}-- no matches found --%f'
 
 # separate matches into groups
