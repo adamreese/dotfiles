@@ -5,6 +5,9 @@
 # -----------------------------------------------------------------------------
 alias sshtmp='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
+# Trying out gpg-agent for ssh
+return 1
+
 if (( ! $+commands[ssh-agent] )); then
   return 1
 fi
