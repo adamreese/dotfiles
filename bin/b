@@ -6,7 +6,7 @@
 which fzf > /dev/null 2>&1 || brew reinstall --HEAD fzf || exit 1
 
 ruby -x "$0"                                          |
-  fzf-tmux -u 30% --ansi --multi --no-hscroll --tiebreak=begin |
+  fzf-tmux --query "$1" -u 30% --ansi --multi --no-hscroll --tiebreak=begin |
   awk 'BEGIN { FS = "\t" } { print $2 }'                       |
   xargs open
 
