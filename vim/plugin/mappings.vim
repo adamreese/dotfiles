@@ -36,9 +36,13 @@ nnoremap <C-=> <C-W>=
 nnoremap <Tab>   <C-w>w
 nnoremap <S-Tab> <C-w>W
 
-" Same when moving up and down
-noremap <C-d> <C-d>zz
-noremap <C-u> <C-u>zz
+" Center screen
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+nnoremap <BS> {
+nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
+onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 
 " Command mode emacs style bindings
 cnoremap <C-a> <Home>
