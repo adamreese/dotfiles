@@ -1,10 +1,12 @@
+
 # fe [FUZZY PATTERN] - Open the selected file with the default editor
 #   - Bypass fuzzy finder if there's only one match (--select-1)
 #   - Exit if there's no match (--exit-0)
 fe() {
   IFS='
 '
-  local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
+  local preview='(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -200'
+  local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0 --preview ${preview}))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
   unset IFS
 }
@@ -84,13 +86,20 @@ fkill() {
   fi
 }
 
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
+
 # fbr - checkout git branch (including remote branches)
 fbr() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+  branch=$(fzf-down -d $(( 2 + $(wc -l <<< "$branches") )) +m <<< "${branches}") &&
+  git checkout $(sed "s/.* //" <<< "${branch}" | sed "s#remotes/[^/]*/##")
 }
 
 # fco - checkout git branch/tag
