@@ -27,6 +27,7 @@ nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
 nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
 nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
 nnoremap <silent>[FZF]T     :<C-U>Tags<CR>
+nnoremap <silent>[FZF]m     :<C-U>Modified<CR>
 nnoremap <silent>[FZF]ev    :<C-U>VimFiles<CR>
 nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
 
@@ -64,6 +65,20 @@ command! DotFiles call fzf#run(fzf#wrap('DotFiles',
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
