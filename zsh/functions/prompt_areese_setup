@@ -13,9 +13,8 @@ GIT_PROMPT_UNPUSHED="↑"
 
 prompt_git() {
   # Check if the current directory is in a Git repository.
-  command git rev-parse --is-inside-work-tree &>/dev/null || return
+  [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] || return 1
 
-  # local branch=$(vcs_info_msg_0_)
   local branch=$(prompt_filthy_git_branch)
   local repo_status="$(parse_git_dirty)$(parse_git_unpushed_unpulled)"
   local repo_status=$(prompt_filthy_git_repo_status)
@@ -24,9 +23,7 @@ prompt_git() {
 }
 
 parse_git_dirty() {
-  local dirty=''
-  dirty=$(command git status --porcelain 2> /dev/null | tail -n1)
-  if [[ -n $dirty ]]; then
+  if [[ -n "$(command git status --porcelain 2> /dev/null | tail -n1)" ]]; then
     echo "${GIT_PROMPT_DIRTY}"
   fi
 }
@@ -53,15 +50,6 @@ parse_git_unpushed_unpulled() {
 }
 
 prompt_filthy_git_repo_status() {
-
-  # # set GIT_TERMINAL_PROMPT=0 to disable auth prompting for git fetch (git 2.3+)
-  # export GIT_TERMINAL_PROMPT=0
-  # # set ssh BachMode to disable all interactive ssh password prompting
-  # export GIT_SSH_COMMAND=${GIT_SSH_COMMAND:-"ssh -o BatchMode=yes"}
-
-  # # Do a fetch asynchronously
-  # command git -c gc.auto=0 fetch &>/dev/null &!
-
   local dirty count up down rtn=""
 
   dirty=$(command git status --porcelain 2> /dev/null | tail -n1)
@@ -135,7 +123,7 @@ prompt_status() {
 
 prompt_dir() {
   local git_root current_path rtn
-  if command git rev-parse --is-inside-work-tree &>/dev/null; then
+  if [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == true ]]; then
     # Print the name of the repository
     git_root=$(command git rev-parse --show-toplevel 2>/dev/null)
     rtn="${git_root##*/}"
@@ -167,22 +155,15 @@ areese_prompt() {
 }
 
 prompt_areese_precmd() {
-  # vcs_info
   PROMPT='$(areese_prompt)'
 }
 
 prompt_areese_setup() {
   autoload -Uz add-zsh-hook
-  # autoload -Uz vcs_info
 
   add-zsh-hook precmd prompt_areese_precmd
 
   prompt_opts=(cr subst percent)
-
-  # zstyle ':vcs_info:*' enable git
-  # zstyle ':vcs_info:*' check-for-changes false
-  # zstyle ':vcs_info:git*' formats '%b '
-  # zstyle ':vcs_info:git*' actionformats '%b|%a '
 }
 
 prompt_areese_setup "$@"

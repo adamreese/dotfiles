@@ -30,7 +30,8 @@ unset file
 
 if [[ ! ${TERM} == (linux|*bsd*|dumb) ]]; then
   autoload -Uz promptinit && promptinit
-  prompt areese
+  # prompt areese
+  prompt pure
 fi
 
 # ------------------------------------------------------------------------------
