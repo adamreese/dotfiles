@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if git remote | grep upstream >/dev/null; then
+USERNAME=adamreese
+
+if git remote show upstream >/dev/null 2>&1; then
   echo "upstream already exists" 1>&2;
   exit 1
 fi
@@ -15,10 +17,16 @@ main() {
   fi
 
   git checkout master
+
+  url=$(git remote get-url origin)
+  project=${url##*/}
+  project=${project%.git}
+
   git remote rename origin upstream
-  url=$(git remote get-url upstream)
-  git remote add origin "git@github.com:adamreese/${url#git@github.com:*/}"
+  git remote add origin "git@github.com:${USERNAME}/${project}.git"
   git fetch origin
+
+  git checkout -
 
   if [[ -n "$stashed" ]]; then
     git stash pop
