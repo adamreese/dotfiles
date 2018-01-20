@@ -4,12 +4,8 @@ IFS=$'\n\t'
 
 package="${PWD#$GOPATH/src/}"
 
-packages() {
-  go list "${package}/..." | grep -vF "${package}/vendor"
-}
-
 deps() {
-  xargs go list -f '{{join .Deps "\n"}}'
+  go list -f '{{join .Deps "\n"}}' ./...
 }
 
 not_stdlib() {
@@ -21,7 +17,7 @@ not_internal() {
 }
 
 echo "==> Running vendor check..."
-found=$(packages | deps | sort -u | not_stdlib | not_internal) || :
+found=$(deps | sort -u | not_stdlib | not_internal) || :
 if [[ -n "${found}" ]]; then
   echo "Non vendored dependencies found:"
   for d in $found; do printf "\t%s\n" "$d"; done

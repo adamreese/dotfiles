@@ -6,17 +6,10 @@ item=${1:-deps}
 
 package="${PWD#$GOPATH/src/}"
 
-packages() {
-  go list "${package}/..." | grep -vF "${package}/vendor"
-}
-
 not_stdlib() {
   xargs go list -f '{{if not .Standard}}{{.ImportPath}}{{end}}' || :
 }
 
-not_internal() {
-  grep -v "${package}"
-}
-
-packages | xargs go list -f '{{join .'${item^}' "\n"}}' | sort -u | not_stdlib | not_internal
-
+while read -r pkg; do
+  echo "${pkg#${package}/vendor/}"
+done < <(go list -f '{{join .'${item^}' "\n"}}' ./... | sort -u | not_stdlib)
