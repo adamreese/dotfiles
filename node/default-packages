@@ -12,6 +12,7 @@ jshint
 jsinspect
 jsonlint
 markdownlint-cli
+neovim
 package-json-validator
 prettier
 prettier-eslint-cli
