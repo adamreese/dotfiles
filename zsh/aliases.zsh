@@ -77,15 +77,5 @@ alias -g J='| jq .'
 # [D]iff-so-fancy
 alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
 
-# zreload shell and completion
-zreload() {
-  # remove all zcompiled files
-  command rm -f ${ZDOTDIR}/.{zshrc.zwc,zcompdump,zcompdump.zwc}(-.N)
-  command rm -f ${ZDOTDIR}/**/*.zwc(-.N)
-
-  # start again
-  exec ${SHELL} -l
-}
-
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
