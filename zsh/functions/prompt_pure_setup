@@ -101,13 +101,16 @@ prompt_pure_string_length_to_var() {
 prompt_pure_preprompt_render() {
   setopt localoptions noshwordsplit
 
+  # Initialize the preprompt array.
+  local -a preprompt_parts
+
+  # Username and machine, if applicable.
+  [[ -n $prompt_pure_username ]] && preprompt_parts+=('$prompt_pure_username')
+
   # Set color for git branch/dirty status, change color if dirty checking has
   # been delayed.
   local git_color=blue
   [[ -n ${prompt_pure_git_last_dirty_check_timestamp+x} ]] && git_color=red
-
-  # Initialize the preprompt array.
-  local -a preprompt_parts
 
   # Set the path.
 
@@ -141,8 +144,6 @@ prompt_pure_preprompt_render() {
     preprompt_parts+=('%F{white}${prompt_pure_git_arrows}%f')
   fi
 
-  # Username and machine, if applicable.
-  [[ -n $prompt_pure_username ]] && preprompt_parts+=('$prompt_pure_username')
   # Execution time.
   [[ -n $prompt_pure_cmd_exec_time ]] && preprompt_parts+=('%F{242}${prompt_pure_cmd_exec_time}%f')
 
@@ -476,10 +477,10 @@ prompt_pure_setup() {
   add-zsh-hook preexec prompt_pure_preexec
 
   # show username@host if logged in through SSH
-  [[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%F{242}%n@%m%f'
+  [[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%F{242}[%n@%m]%f'
 
   # show username@host if root, with username in white
-  [[ $UID -eq 0 ]] && prompt_pure_username='%F{white}%n%f%F{242}@%m%f'
+  [[ $UID -eq 0 ]] && prompt_pure_username='%F{white}[%n%f%F{242}@%m]%f'
 
   # if a virtualenv is activated, display it in grey
   PROMPT='%(12V.%F{242}%12v%f .)'
