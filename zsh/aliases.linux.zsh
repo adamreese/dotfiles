@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 
 # masOS specific command aliases
-[[ "${OSTYPE}" == "Linux" ]] && return
+[[ "${OSTYPE}" == linux* ]] || return
 
 alias     stop='sudo systemctl stop'
 alias    start='sudo systemctl start'

@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 
 # masOS specific command aliases
-[[ "${OSTYPE}" == "Darwin" ]] && return
+[[ "${OSTYPE}" == darwin* ]] || return
 
 # bundle
 alias   be='bundle-exec-hack'
