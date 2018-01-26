@@ -112,7 +112,6 @@ symlink_files() {
 
   # tmux
   symlink tmux/tmux.conf       .tmux.conf
-  symlink tmux                 .tmux
 
   # screen
   symlink screen/screenrc      .screenrc
