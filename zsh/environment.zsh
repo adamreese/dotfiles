@@ -54,12 +54,6 @@ if (( $+commands[nvim] )); then
   alias     vim='nvim'
   alias    view='nvim -R'
   alias vimdiff='nvim -dO'
-
-  if [[ -z $XDG_RUNTIME_DIR ]]; then
-    export NVIM_LISTEN_ADDRESS="/tmp/neovim_socket"
-  else
-    export NVIM_LISTEN_ADDRESS="${XDG_RUNTIME_DIR}/neovim_socket"
-  fi
 fi
 
 export VISUAL=${EDITOR}
