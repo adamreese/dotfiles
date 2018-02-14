@@ -1,7 +1,12 @@
+PACKAGES = go node python ruby
+
 .PHONY: all
-all: symlink
-	./scripts/install.sh brew go python ruby
+all: shell $(PACKAGES)
 
 .PHONY: shell
 shell:
-	./scripts/install.sh symlink
+	scripts/install.sh symlink
+
+.PHONY: $(PACKAGES)
+$(PACKAGES):
+	$@/install.sh

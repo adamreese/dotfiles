@@ -14,7 +14,7 @@ die() {
   # ${BASH_SOURCE[1]} is the file name of the caller.
   local error="${1:-Unknown Error.}"
   local code="${2:-1}"
-  printf >&2 "\e[0;31m  [✖] %s:%s: %s (exit %s)\e[0m\n" \
+  printf >&2 '\e[0;31m  [✖] %s:%s: %s (exit %s)\e[0m\n' \
     "${BASH_SOURCE[1]}" \
     "${BASH_LINENO[0]}" \
     "${error}" \
@@ -38,11 +38,11 @@ announce_step() {
 }
 
 print_error() {
-  printf "\e[0;31m  [✖] %s %s\e[0m\n" "${1}" "${2}"
+  printf '\e[0;31m  [✖] %s %s\e[0m\n' "${1}" "${2}"
 }
 
 print_success() {
-  printf "\e[0;32m  [✔] %s\e[0m\n" "${1}"
+  printf '\e[0;32m  [✔] %s\e[0m\n' "${1}"
 }
 
 # symlink
@@ -124,11 +124,7 @@ symlink_files() {
   symlink slate/slate          .slate
 
   # shell
-  symlink zsh/zlogin           .zlogin
-  symlink zsh/zlogout          .zlogout
-  symlink zsh/zshrc            .zshrc
   symlink zsh/zshenv           .zshenv
-  symlink zsh                  .config/zsh
 
   # search
   symlink ag/agignore          .agignore
@@ -145,38 +141,8 @@ symlink_files() {
   print_success "Completed symlinks"
 }
 
-install_python_packages() {
-  echo "Updating global pip"
-  pip3 install --upgrade pip
-
-  echo "Updating global pip requirements"
-  pip3 install --upgrade --requirement "${DOTFILES}/python/requirements.txt"
-}
-
-install_ruby_gems() {
-  echo "Installing default gems"
-  while read -r gemname; do
-    gem install "$gemname"
-  done < "${DOTFILES}/ruby/default-gems"
-}
-
-install_go_packages() {
-  echo "Installing default go packages"
-  while read -r pkg; do
-    go get -u -v "${pkg}"
-  done < "${DOTFILES}/go/default-packages"
-}
-
-install_node_packages() {
-  echo "Installing default node packages"
-  while read -r pkg; do
-    echo "${pkg}"
-    npm install --global --production "${pkg}"
-  done < "${DOTFILES}/node/default-packages"
-}
-
 usage() {
-  echo "${0} {brew, go, python, ruby, node, symlink}"
+  echo "${0} {brew, symlink}"
 }
 
 # -----------------------------------------------------------------------------
@@ -191,10 +157,6 @@ main() {
   while (( "$#" > 0 )); do
     case "$1" in
       brew)    install_homebrew        ;;
-      go)      install_go_packages     ;;
-      python)  install_python_packages ;;
-      ruby)    install_ruby_gems       ;;
-      node)    install_node_packages   ;;
       symlink) symlink_files           ;;
       *)       usage                   ;;
     esac
