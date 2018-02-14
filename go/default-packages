@@ -5,6 +5,10 @@ github.com/alecthomas/gocyclo
 github.com/alecthomas/gometalinter
 github.com/client9/misspell/cmd/misspell
 github.com/cweill/gotests/...
+github.com/davidrjenni/reftools/cmd/fillstruct
+github.com/dominikh/go-tools/cmd/keyify
+github.com/fatih/gomodifytags
+github.com/fatih/motion
 github.com/fzipp/gocyclo
 github.com/golang/dep/cmd/dep
 github.com/golang/lint/golint
@@ -12,6 +16,7 @@ github.com/golang/protobuf/protoc-gen-go
 github.com/gordonklaus/ineffassign
 github.com/haya14busa/goverage
 github.com/jgautheron/goconst/cmd/goconst
+github.com/josharian/impl
 github.com/jstemmer/gotags
 github.com/jteeuwen/go-bindata/...
 github.com/kisielk/errcheck
@@ -33,6 +38,7 @@ github.com/stripe/safesql
 github.com/tools/godep
 github.com/tsenart/deadcode
 github.com/walle/lll/cmd/lll
+github.com/zmb3/gogetdoc
 golang.org/x/tools/...
 honnef.co/go/tools/cmd/gosimple
 honnef.co/go/tools/cmd/megacheck
