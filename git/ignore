@@ -9,7 +9,6 @@ tags
 !tags/
 tmp/**/*
 !tmp/cache/.keep
-.envrc
 .notes/
 _scratch/
 
@@ -22,5 +21,10 @@ Procfile-development
 # Project specific vim configuration
 .vimrc.local
 
+# ternjs
 .tern-port
 .tern-project
+
+# direnv
+.direnv
+.envrc
