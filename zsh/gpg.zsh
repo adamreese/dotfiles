@@ -19,5 +19,10 @@ if grep -q '^enable-ssh-support' "${GNUPGHOME}/gpg-agent.conf" /dev/null 2>&1; t
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
 
+# Disable GUI prompts inside SSH.
+if [[ -n "$SSH_CONNECTION" ]]; then
+  export PINENTRY_USER_DATA='USE_CURSES=1'
+fi
+
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
