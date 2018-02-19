@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-format='%C(yellow)%h%Creset %s %C(bold blue)<%an>%Creset'
+format='%C(yellow)%h%Creset %s %C(bold blue)<%an>%C(reset)'
 latest_tag="$(git describe --tags --abbrev=0)"
 
-git log ${latest_tag}..HEAD --pretty=format:${format} --abbrev-commit
+git log "${latest_tag}"..HEAD --pretty="format:${format}" --abbrev-commit
