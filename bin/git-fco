@@ -1,27 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-tags=$(
-  git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}'
-)
+_get_refs() {
+  local color="$1" label="$2" refs="$3"
+  git for-each-ref \
+    --count=25 \
+    --sort=-committerdate \
+    --color \
+    --format="%(color:${color})${label}%(color:reset)%09%(refname:short)" \
+    "${refs}"
+}
 
-branches=$(
-  git for-each-ref --count=25 --sort=-committerdate --format='%(refname:short)' refs/heads \
-    | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}'
-)
+_source() {
+  _get_refs blue tag    refs/tags
+  _get_refs blue branch refs/heads
+  _get_refs red  remote refs/remotes
+}
 
-remote_branches=$(
-  git for-each-ref --count=25 --sort=-committerdate --format='%(refname:short)' refs/remotes \
-    | awk '{print "\x1b[34;1mremote\x1b[m\t" $1}'
-)
+_filter() {
+  fzf-tmux -l30 -- --no-hscroll --ansi +m -d '\t' -n 2
+}
 
-target=$(
-  (
-    echo "$tags"
-    echo "$branches"
-    echo "$remote_branches"
-  ) \
-    | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2
-)
+_sink() {
+  awk '{print $2}'
+}
 
-git checkout $(echo "$target" | awk '{print $2}')
+_selected=$(_source | _filter | _sink)
+
+if [[ -n "${_selected}" ]]; then
+  git checkout "${_selected}"
+fi
