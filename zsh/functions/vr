@@ -1,0 +1,23 @@
+# vr
+# -----------------------------------------------------------------------------
+# helper for creating neovim remote sessions
+
+typeset -a _args=(.)
+if (( $# )); then
+  _args=($@)
+fi
+
+local git_root="$(git rev-parse --show-toplevel 2>/dev/null)"
+
+if (( $+commands[nvr] )) && [[ -n "${git_root}" ]]; then
+  git_root="${git_root/#${HOME}}"
+
+  socket="/tmp/nvim${git_root//\//-}.sock"
+
+  nvr -s --servername "${socket}" $_args
+else
+  nvim $_args
+fi
+
+# -----------------------------------------------------------------------------
+# vim:ft=zsh
