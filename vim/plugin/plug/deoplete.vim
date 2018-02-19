@@ -62,6 +62,7 @@ function! s:deoplete_init() abort
         \ 'converter_truncate_menu',
         \ ])
 
+  call deoplete#custom#set('_', 'min_pattern_length', 1)
   call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
 
   call deoplete#custom#set('go', 'sorters', [])
@@ -75,8 +76,8 @@ function! s:deoplete_init() abort
   call deoplete#custom#set('go',     'rank', 9999)
   call deoplete#custom#set('ternjs', 'rank', 9999)
 
-  call deoplete#custom#set('neosnippet', 'disabled_syntaxes', ['goComment'])"
-  call deoplete#custom#set('vim', 'disabled_syntaxes', ['Comment'])
+  call deoplete#custom#set('neosnippet', 'disabled_syntaxes', ['goComment'])
+  call deoplete#custom#set('vim',        'disabled_syntaxes', ['Comment'])
 
 endfunction
 
