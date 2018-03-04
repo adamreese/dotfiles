@@ -26,6 +26,14 @@ function! ar#reload_syntax() abort
   redraw!
 endfunction
 
+" Detect project root directory
+function! ar#project_root() abort
+  if exists('b:git_dir') && !empty(b:git_dir)
+    return fnamemodify(b:git_dir, ':h')
+  endif
+  return getcwd()
+endfunction
+
 " Find and source project-specific Vim configs
 function! ar#source_project_config() abort
   let l:projectfile = findfile('.vimrc.local', expand('%:p').';')
