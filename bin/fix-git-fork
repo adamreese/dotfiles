@@ -4,7 +4,7 @@ set -euo pipefail
 USERNAME=adamreese
 
 if git remote show upstream >/dev/null 2>&1; then
-  echo "upstream already exists" 1>&2;
+  echo "upstream already exists" 1>&2
   exit 1
 fi
 

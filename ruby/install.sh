@@ -2,9 +2,9 @@
 set -euo pipefail
 
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
-[[ -a "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
+[[ -e "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
 
 echo "Installing default gems"
 while read -r gemname; do
   gem install "$gemname"
-done < "${DOTFILES}/ruby/default-gems"
+done <"${DOTFILES}/ruby/default-gems"

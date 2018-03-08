@@ -6,7 +6,7 @@ set -euo pipefail
 IFS=$'\n\t'
 
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
-[[ -a "${DOTFILES}" ]] || die "${DOTFILES} directory does not exist"
+[[ -e "${DOTFILES}" ]] || die "${DOTFILES} directory does not exist"
 
 # die
 # -----------------------------------------------------------------------------
@@ -34,7 +34,7 @@ trap onerror ERR
 # announce_step
 # -----------------------------------------------------------------------------
 announce_step() {
-  echo -e "\033[0;32m \u279E   \033[0;0m $*"
+  printf '\033[0;32m \u279E   \033[0;0m%s\n' "$*"
 }
 
 print_error() {
@@ -53,9 +53,9 @@ symlink() {
   local fulltargetpath="${HOME}/${targetpath}"
 
   # ensure the source exists
-  [[ -a "${sourcepath}" ]] || die "${sourcepath} does not exist"
+  [[ -e "${sourcepath}" ]] || die "${sourcepath} does not exist"
 
-  if [[ -a "$fulltargetpath" ]]; then
+  if [[ -e "$fulltargetpath" ]]; then
     local rp
     rp=$(realpath "${fulltargetpath}")
     if [[ "$rp" == "${sourcepath}" ]]; then
@@ -154,11 +154,11 @@ usage() {
 # TODO macos defaults
 
 main() {
-  while (( "$#" > 0 )); do
+  while (($# > 0)); do
     case "$1" in
-      brew)    install_homebrew        ;;
-      symlink) symlink_files           ;;
-      *)       usage                   ;;
+      brew) install_homebrew ;;
+      symlink) symlink_files ;;
+      *) usage ;;
     esac
     shift
   done

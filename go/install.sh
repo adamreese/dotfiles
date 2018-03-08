@@ -2,15 +2,15 @@
 set -euo pipefail
 
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
-[[ -a "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
+[[ -e "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
 
 is_repo_outdated() {
   (
-  cd "${1:-.}"
-  git rev-parse --is-inside-work-tree &&
-    git fetch -q &&
-    git rev-parse --abbrev-ref @'{u}' &&
-    (($(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0))
+    cd "${1:-.}"
+    git rev-parse --is-inside-work-tree &&
+      git fetch -q &&
+      git rev-parse --abbrev-ref @'{u}' &&
+      (($(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0))
   )
 }
 

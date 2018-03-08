@@ -16,6 +16,6 @@ git for-each-ref \
   --count=25 \
   "refs/heads/" \
   --color \
-  --format="$format" \
-  | sed -e 's-refs/remotes/origin/--' \
-  | column -ts '|'
+  --format="$format" |
+  sed -e 's-refs/remotes/origin/--' |
+  column -ts '|'
