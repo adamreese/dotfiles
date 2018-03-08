@@ -45,4 +45,5 @@ honnef.co/go/tools/cmd/megacheck
 honnef.co/go/tools/cmd/staticcheck
 honnef.co/go/tools/cmd/unused
 mvdan.cc/interfacer
+mvdan.cc/sh/cmd/shfmt
 mvdan.cc/unparam
