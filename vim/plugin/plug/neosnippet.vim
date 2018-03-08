@@ -5,11 +5,11 @@ if !ar#is_loaded('neosnippet') | finish | endif
 
 " Settings
 " -----------------------------------------------------------------------
-
 let g:neosnippet#disable_runtime_snippets      = { 'go' : 1, }
 let g:neosnippet#enable_completed_snippet      = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#expand_word_boundary          = 0
+let g:neosnippet#snippets_directory            = g:vim_dir . '/snippets'
 
 if has('conceal')
   set conceallevel=2 concealcursor=niv
@@ -17,9 +17,15 @@ endif
 
 " Mappings
 " -----------------------------------------------------------------------
+let s:cpo_save = &cpoptions
+set cpoptions&vim
 
-imap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
-smap <expr><C-k> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : ""
+imap <special> <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <special> <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <special> <C-k> <Plug>(neosnippet_expand_target)
+
+let &cpoptions = s:cpo_save
+unlet s:cpo_save
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
