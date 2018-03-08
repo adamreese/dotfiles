@@ -79,6 +79,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 
 Plug 'Shougo/deoplete.nvim',           ar#plug_if(g:nvim, { 'do': ':UpdateRemotePlugins' })
 Plug 'Shougo/neco-vim',                ar#plug_if(g:nvim, { 'for': 'vim' })
