@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
-[[ -a "${DOTFILES}" ]] || die "${DOTFILES} directory does not exist"
+[[ -a "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
 
 echo "Updating global pip"
 pip3 install --upgrade pip
