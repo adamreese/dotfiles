@@ -5,8 +5,10 @@
 " Exit insert mode
 inoremap jj <ESC>
 
+" map Q for formatting rather than Ex mode
+noremap Q gq
+
 " disable ex mode
-nnoremap  Q <Nop>
 nnoremap gQ <Nop>
 
 " disable q window
