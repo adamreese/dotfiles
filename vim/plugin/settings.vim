@@ -197,6 +197,9 @@ endfor
 let g:is_bash = 1
 let g:vimsyn_noopererror = 1
 
+" Disable menu
+let g:did_install_default_menus = 1
+
 " Modeline {{{1
 " -----------------------------------------------------------------------
 " vim:foldmethod=marker
