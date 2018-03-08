@@ -7,16 +7,16 @@ DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
 is_repo_outdated() {
   (
     cd "${1:-.}"
-    git rev-parse --is-inside-work-tree &&
-      git fetch -q &&
-      git rev-parse --abbrev-ref @'{u}' &&
+    git rev-parse --is-inside-work-tree &>/dev/null &&
+      git fetch &>/dev/null &&
+      git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
       (($(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0))
   )
 }
 
 update() {
   local pkg="${1}"
-  dir="${GOPATH}/src/${pkg%...}"
+  local dir="${GOPATH}/src/${pkg%...}"
   if [[ ! -d "${dir}" ]] || is_repo_outdated "${dir}"; then
     echo "${pkg}"
     go get -u "${pkg}"
