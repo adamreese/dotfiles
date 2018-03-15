@@ -25,6 +25,7 @@ call ar#ensure_plugin_manager()
 call plug#begin(g:vim_dir . '/vendor')
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'AndrewRadev/bufferize.vim',      { 'on': [ 'Bufferize' ] }
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/vimproc.vim',             { 'build': 'make' }
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
@@ -45,6 +46,7 @@ Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
@@ -61,6 +63,7 @@ Plug 'tpope/vim-rhubarb'
 " -- Languages ----------------------------------------------------------
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'cespare/vim-toml'
+Plug 'chrisbra/vim-sh-indent'
 Plug 'chrisbra/vim-zsh'
 Plug 'fatih/vim-go'
 Plug 'jparise/vim-graphql'
