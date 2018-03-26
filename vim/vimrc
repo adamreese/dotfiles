@@ -39,6 +39,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
+Plug 'mhinz/vim-sayonara',             { 'on': 'Sayonara' }
 Plug 'mileszs/ack.vim'
 Plug 'osyo-manga/vim-anzu'
 Plug 'romainl/vim-qf'
