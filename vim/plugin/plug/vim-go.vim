@@ -18,7 +18,7 @@ let g:go_term_mode          = 'split'
 let g:go_gocode_unimported_packages = 1  " Include suggestions for unimported packages.
 
 let s:pkgroot = substitute(ar#project_root(), expand('$GOPATH/src/'), '', '')
-if isdirectory(s:pkgroot)
+if !empty(s:pkgroot)
   let g:go_fmt_options = { 'goimports': '-local ' . s:pkgroot }
 endif
 
