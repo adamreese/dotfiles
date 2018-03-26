@@ -1,20 +1,15 @@
 " =======================================================================
 " plugin/plug/ag.vim
 " =======================================================================
+if !executable('ag') | finish | end
 
-let g:ag_mapping_message = 0
+let &grepprg = 'ag --nocolor --nogroup --hidden --vimgrep'
+let g:ackprg = 'ag --nocolor --nogroup --hidden --column'
 
-if executable('ag')
-  let &grepprg = 'ag --nocolor --nogroup --hidden --vimgrep'
-  let g:ag_prg = 'ag --nocolor --nogroup --hidden --column'
+noremap <leader>a  :<C-u>Ag<space>
+noremap <leader>a* :<C-u>Ag<CR>
 
-  noremap <leader>a  :<C-u>Ag<space>
-  noremap <leader>a* :<C-u>call SearchWordWithAg()<CR>
-
-  function! SearchWordWithAg()
-    execute 'Ag' expand('<cword>')
-  endfunction
-endif
+cnoreabbrev Ag Ack
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
