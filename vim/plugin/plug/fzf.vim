@@ -31,11 +31,6 @@ nnoremap <silent>[FZF]m     :<C-U>Modified<CR>
 nnoremap <silent>[FZF]ev    :<C-U>VimFiles<CR>
 nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
 
-nnoremap <silent><C-P>      :<C-U>Files<CR>
-nnoremap <silent><leader>gb :<C-U>Buffers<CR>
-nnoremap <silent><leader>gt :<C-U>BTags<CR>
-nnoremap <silent><leader>ev :<C-U>VimFiles<CR>
-
 " Commands
 " -----------------------------------------------------------------------
 command! Plugs call fzf#run(fzf#wrap('Plugs', extend({
