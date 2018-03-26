@@ -14,8 +14,9 @@ set nobackup                 " Don't create annoying backup files
 set noerrorbells
 set novisualbell
 set shell=$SHELL
-set dictionary=/usr/share/dict/words
+set dictionary+=/usr/share/dict/words
 set history=1000
+set spellsuggest=best,10 " Limit suggestions to 10
 
 if !g:nvim
   set ttyfast
