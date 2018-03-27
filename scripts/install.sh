@@ -132,9 +132,6 @@ symlink_files() {
   # ctags
   symlink ctags/ctags          .ctags
 
-  # bookmarks
-  symlink zsh/bookmarks        .config/bookmarks
-
   # bin
   symlink bin                  .local/bin
 
