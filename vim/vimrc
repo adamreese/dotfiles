@@ -67,7 +67,7 @@ Plug 'cespare/vim-toml'
 Plug 'chrisbra/vim-sh-indent'
 Plug 'chrisbra/vim-zsh'
 Plug 'fatih/vim-go'
-Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql',            { 'for': 'graphql' }
 Plug 'kana/vim-gf-user',               { 'for': 'vim' }
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
