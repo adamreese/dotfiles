@@ -12,7 +12,7 @@ scriptencoding utf-8
 " Create global config for cache and data directories
 let g:cache_dir = expand($HOME.'/.cache/vim/')
 let g:data_dir  = expand($HOME.'/.local/share/vim/')
-let g:vim_dir   = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 
 let g:nvim = has('nvim')
 let g:tmux = exists('$TMUX')
@@ -40,7 +40,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
-Plug 'mhinz/vim-sayonara',             { 'on': 'Sayonara' }
 Plug 'mileszs/ack.vim'
 Plug 'osyo-manga/vim-anzu'
 Plug 'romainl/vim-qf'
