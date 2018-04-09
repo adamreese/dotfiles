@@ -48,36 +48,36 @@ let g:deoplete#ignore_sources.gitcommit  = ['neosnippet']
 function! s:deoplete_init() abort
   if get(g:, 'enable_debug', 0)
     let g:deoplete#enable_profile = 1
-    call deoplete#custom#set('deoplete', 'debug_enabled', 1)
-    call deoplete#custom#set('buffer', 'debug_enabled', 1)
-    call deoplete#custom#set('core', 'debug_enabled', 1)
-    call deoplete#custom#set('go', 'debug_enabled', 1)
+    call deoplete#custom#source('deoplete', 'debug_enabled', 1)
+    call deoplete#custom#source('buffer', 'debug_enabled', 1)
+    call deoplete#custom#source('core', 'debug_enabled', 1)
+    call deoplete#custom#source('go', 'debug_enabled', 1)
     call deoplete#enable_logging('DEBUG', g:cache_dir . 'deoplete.log')
   endif
 
-  call deoplete#custom#set('_', 'converters', [
+  call deoplete#custom#source('_', 'converters', [
         \ 'converter_auto_paren',
         \ 'converter_remove_overlap',
         \ 'converter_truncate_abbr',
         \ 'converter_truncate_menu',
         \ ])
 
-  call deoplete#custom#set('_', 'min_pattern_length', 1)
-  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#source('_', 'min_pattern_length', 1)
+  call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
 
-  call deoplete#custom#set('go', 'sorters', [])
+  call deoplete#custom#source('go', 'sorters', [])
 
-  call deoplete#custom#set('buffer', 'mark', 'buffer')
-  call deoplete#custom#set('file',   'mark', 'file')
-  call deoplete#custom#set('go',     'mark', '')
-  call deoplete#custom#set('omni',   'mark', 'omni')
-  call deoplete#custom#set('ternjs', 'mark', 'tern')
+  call deoplete#custom#source('buffer', 'mark', 'buffer')
+  call deoplete#custom#source('file',   'mark', 'file')
+  call deoplete#custom#source('go',     'mark', '')
+  call deoplete#custom#source('omni',   'mark', 'omni')
+  call deoplete#custom#source('ternjs', 'mark', 'tern')
 
-  call deoplete#custom#set('go',     'rank', 9999)
-  call deoplete#custom#set('ternjs', 'rank', 9999)
+  call deoplete#custom#source('go',     'rank', 9999)
+  call deoplete#custom#source('ternjs', 'rank', 9999)
 
-  call deoplete#custom#set('neosnippet', 'disabled_syntaxes', ['goComment'])
-  call deoplete#custom#set('vim',        'disabled_syntaxes', ['Comment'])
+  call deoplete#custom#source('neosnippet', 'disabled_syntaxes', ['goComment'])
+  call deoplete#custom#source('vim',        'disabled_syntaxes', ['Comment'])
 
 endfunction
 
