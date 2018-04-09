@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-item=${1:-deps}
+item=${1:-imports}
 
 package="${PWD#$GOPATH/src/}"
 
