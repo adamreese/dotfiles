@@ -80,6 +80,7 @@ endif
 if has('folding')
   set foldmethod=marker
   set foldtext=folding#text()
+  set foldopen+=jump
 endif
 
 " Directories: {{{1

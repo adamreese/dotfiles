@@ -9,16 +9,16 @@ let g:qf_auto_resize        = 0
 let g:qf_mapping_ack_style  = 1
 let g:qf_resize_min_height  = 4
 
-nmap <leader>tl <Plug>qf_loc_toggle
+nmap <leader>tl <Plug>(qf_loc_toggle)
 
-nmap [l <Plug>qf_loc_previous
-nmap ]l <Plug>qf_loc_next
+nmap [l <Plug>(qf_loc_previous)
+nmap ]l <Plug>(qf_loc_next)
 
-nmap [q <Plug>qf_qf_previous
-nmap ]q <Plug>qf_qf_next
+nmap [q <Plug>(qf_qf_previous)
+nmap ]q <Plug>(qf_qf_next)
 
-nmap [e <Plug>qf_loc_previous
-nmap ]e <Plug>qf_loc_next
+nmap [e <Plug>(qf_loc_previous)
+nmap ]e <Plug>(qf_loc_next)
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
