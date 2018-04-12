@@ -34,15 +34,13 @@ nnoremap <C-l> <C-W>l
 " Split sizing
 nnoremap <C-=> <C-W>=
 
-" Window cycling
-nnoremap <Tab>   <C-w>w
-nnoremap <S-Tab> <C-w>W
+" Previous buffer
+nnoremap  <BS>  <C-^>
 
 " Center screen
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
-nnoremap <BS> {
 nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 
