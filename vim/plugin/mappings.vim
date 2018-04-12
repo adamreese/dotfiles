@@ -44,6 +44,10 @@ nnoremap <C-u> <C-u>zz
 nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 
+" Spelling fix
+nnoremap <C-S> [s1z=<C-O>
+inoremap <C-S> <C-G>u<Esc>[s1z=`]A<C-G>u
+
 " Command mode emacs style bindings
 cnoremap <C-a> <Home>
 cnoremap <C-d> <Del>
