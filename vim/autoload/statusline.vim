@@ -95,10 +95,12 @@ function! statusline#statuslineinfo() abort
     return ''
   endif
 
-  return printf('%3.0f%% %3d:%-2d',
-        \ round((line('.') * 1.0) / line('$') * 100),
-        \ line('.'),
-        \ col('.'))
+  let l:line = line('.')
+  let l:max_line = line('$')
+  let l:col = virtcol('.')
+  let l:percent = round((l:line * 1.0) / l:max_line * 100)
+
+  return printf('%3.0f%% %3d/%d:%-2d', l:percent, l:line, l:max_line, l:col)
 endfunction
 
 function! statusline#lineinfo() abort
