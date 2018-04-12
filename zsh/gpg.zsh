@@ -3,6 +3,10 @@
 
 export GPG_TTY=$(tty)
 
+if [[ -d '/usr/local/MacGPG2/bin' ]]; then
+  path+='/usr/local/MacGPG2/bin'
+fi
+
 if (( ! $+commands[gpg-agent] )); then
   return 1
 fi
