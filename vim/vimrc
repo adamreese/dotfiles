@@ -24,7 +24,6 @@ call ar#ensure_plugin_manager()
 
 call plug#begin(g:vim_dir . '/vendor')
 
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'AndrewRadev/bufferize.vim',      { 'on': [ 'Bufferize' ] }
 Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/echodoc.vim'
@@ -37,6 +36,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc',          { 'on': ['<Plug>(jsdoc)', 'JsDoc'] }
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }

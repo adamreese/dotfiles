@@ -3,11 +3,21 @@
 " =======================================================================
 if !ar#is_loaded('fzf.vim') | finish | endif
 
+let s:cpo_save = &cpoptions
+set cpoptions&vim
+
 " Settings
 " -----------------------------------------------------------------------
 if g:nvim
   let $FZF_DEFAULT_OPTS .= ' --inline-info --bind ctrl-a:select-all '
 endif
+
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-t': 'tabedit',
+      \ 'ctrl-a': 'select-all',
+      \ }
 
 let g:fzf_layout = { 'down': '16' }
 
@@ -33,6 +43,10 @@ nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
 
 " Commands
 " -----------------------------------------------------------------------
+function! s:fzf_preview(bang) abort
+  return a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?')
+endfunction
+
 command! Plugs call fzf#run(fzf#wrap('Plugs', extend({
       \ 'dir':     g:plug_home,
       \ 'source':  sort(keys(g:plugs)),
@@ -58,7 +72,14 @@ command! DotFiles call fzf#run(fzf#wrap('DotFiles',
       \ ))
 
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#files(<q-args>, s:fzf_preview(<bang>0), <bang>0)
+
+command! -bang -nargs=* Agr
+      \ call fzf#vim#ag_raw(<q-args>, s:fzf_preview(<bang>0), <bang>0)
+
+let s:rg_command = 'rg --color=always --column --hidden --line-number --no-heading '
+command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(s:rg_command . shellescape(<q-args>), 1, s:fzf_preview(<bang>0), <bang>0)
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
@@ -74,6 +95,9 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+let &cpoptions = s:cpo_save
+unlet s:cpo_save
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
