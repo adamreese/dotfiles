@@ -3,12 +3,15 @@
 
 # General
 # -----------------------------------------------------------------------------
-setopt BRACE_CCL            # Allow brace character class list expansion.
 setopt COMBINING_CHARS      # Combine zero-length punctuation characters (accents) with the base character.
-setopt RC_QUOTES            # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
-setopt IGNORE_EOF           # Disable '^D' logout keybind
 setopt INTERACTIVE_COMMENTS # allow the use of `# ` in the command line
 setopt NO_MAIL_WARNING      # Don't print a warning message if a mail file has been accessed.
+setopt RC_QUOTES            # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
+
+# IO
+# -----------------------------------------------------------------------------
+setopt IGNORE_EOF           # Disable '^D' logout keybind
+setopt NO_CLOBBER           # Disables overwrite existing files with `>`. Use `> | ` or `>!` instead
 setopt NO_CORRECT           # Disable zsh correct
 
 # Jobs
@@ -19,6 +22,23 @@ setopt NOTIFY               # Report status of background jobs immediately.
 setopt NO_BG_NICE           # Don't run all background jobs at a lower priority.
 setopt NO_HUP               # Don't kill jobs on shell exit.
 setopt NO_CHECK_JOBS        # Don't report on jobs when shell exit.
+
+# Globbing
+# -----------------------------------------------------------------------------
+setopt BRACE_CCL            # Allow brace character class list expansion.
+setopt EXTENDED_GLOB        # Use extended globbing syntax.
+setopt GLOB_DOTS            # Do not require a leading `.' in a filename to be matched explicitly.
+setopt MULTIOS              # Write to multiple descriptors.
+
+# Navigation
+# -----------------------------------------------------------------------------
+setopt AUTO_CD              # Auto changes to a directory without typing cd.
+setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
+setopt CDABLE_VARS          # Change directory to a path stored in a variable.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_MINUS          # Replace 'cd -' with 'cd +'
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
 
 # Less
 # ------------------------------------------------------------------------------
