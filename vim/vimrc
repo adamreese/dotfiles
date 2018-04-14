@@ -25,6 +25,7 @@ call ar#ensure_plugin_manager()
 call plug#begin(g:vim_dir . '/vendor')
 
 Plug 'AndrewRadev/bufferize.vim',      { 'on': [ 'Bufferize' ] }
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/vimproc.vim',             { 'build': 'make' }
