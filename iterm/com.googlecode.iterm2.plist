@@ -9949,7 +9949,7 @@
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/p/dotfiles/ahmedelgabri/iterm2/Library/Preferences</string>
+	<string>~</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -9962,8 +9962,8 @@
 	<false/>
 	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
 	<array>
-		<string>0.000000, 0.000000, 409.000000, 396.000000, NO, NO</string>
-		<string>0.000000, 397.000000, 409.000000, 43.000000, NO, NO</string>
+		<string>0.000000, 0.000000, 408.000000, 440.000000, NO, NO</string>
+		<string>0.000000, 441.000000, 408.000000, 43.000000, NO, NO</string>
 	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
@@ -9994,15 +9994,17 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSColorPanel</key>
-	<string>686 568 409 413 0 0 2560 1417 </string>
+	<string>405 318 408 421 0 0 1680 1027 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>949 33 731 77 0 0 1680 1027 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 477 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>670 492 796 473 0 0 1680 1027 </string>
+	<string>137 578 770 429 0 0 1680 1027 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>127 443 592 584 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 599 570 428 0 0 1680 1027 </string>
+	<string>0 7 1676 1020 0 0 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_B2D08C02-7260-4C2B-8571-6723F5EED51E</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B2D08C02-7260-4C2B-8571-6723F5EED51E_selection</key>
@@ -12515,7 +12517,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>~/.dotfiles/iterm</string>
+	<string>/Users/areese/.dotfiles/iterm</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -12533,11 +12535,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/nightly.xml?shard=50</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=50</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-31T05:39:16Z</date>
+	<date>2018-04-22T21:10:11Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -12578,6 +12580,8 @@
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1519460992</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseAdaptiveFrameRate</key>
@@ -12613,7 +12617,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.20180130-nightly</string>
+	<string>3.1.6beta5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>7</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
