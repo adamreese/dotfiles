@@ -139,6 +139,14 @@ set sidescrolloff=15
 set splitbelow                       " Split horizontal windows below to the current windows
 set splitright                       " Split vertical windows right to the current windows
 
+" Diff: {{{1
+" -----------------------------------------------------------------------
+
+set diffopt=vertical              " Use in vertical diff mode
+set diffopt+=filler               " blank lines to keep sides aligned
+set diffopt+=iwhite               " Ignore whitespace changes
+set diffopt+=foldcolumn:0         " Disable foldcolumn
+
 " UI: {{{1
 " -----------------------------------------------------------------------
 
