@@ -154,7 +154,7 @@ set title                         " Sets the terminal title nicely.
 
 " Disable blinking cursor
 set guicursor&
-set guicursor+=a:blinkon0
+set guicursor=n-v-c:block-blinkon0,i-ci-ve:ver25-blinkon0,r-cr:hor20,o:hor50
 
 set shortmess+=A                  " ignore annoying swapfile messages
 set shortmess+=I                  " no splash screen

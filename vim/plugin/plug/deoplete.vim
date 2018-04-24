@@ -45,7 +45,7 @@ let g:deoplete#ignore_sources.go         = ['buffer', 'dictionary', 'member', 'o
 let g:deoplete#ignore_sources.javascript = ['omni']
 let g:deoplete#ignore_sources.gitcommit  = ['neosnippet']
 
-function! s:deoplete_init() abort
+function! s:init() abort
   if get(g:, 'enable_debug', 0)
     let g:deoplete#enable_profile = 1
     call deoplete#custom#source('deoplete', 'debug_enabled', 1)
@@ -83,7 +83,7 @@ endfunction
 
 augroup vimrc_deoplete
   autocmd!
-  autocmd VimEnter * try | call s:deoplete_init() | catch | endtry
+  autocmd VimEnter * try | call s:init() | catch | endtry
 augroup END
 
 " Modeline {{{1

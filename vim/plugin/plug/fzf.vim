@@ -9,7 +9,7 @@ set cpoptions&vim
 " Settings
 " -----------------------------------------------------------------------
 if g:nvim
-  let $FZF_DEFAULT_OPTS .= ' --inline-info --bind ctrl-a:select-all '
+  let $FZF_DEFAULT_OPTS = ' --inline-info'
 endif
 
 let g:fzf_action = {
@@ -18,13 +18,24 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tabedit',
       \ 'ctrl-a': 'select-all',
       \ }
-
-let g:fzf_layout = { 'down': '16' }
-
-" [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
-
+let g:fzf_layout          = { 'down': '16' }
+let g:fzf_buffers_jump    = 1
 let g:fzf_nvim_statusline = 0
+let g:fzf_colors = {
+      \ 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment']
+      \ }
 
 " Mappings
 " -----------------------------------------------------------------------
@@ -47,11 +58,11 @@ function! s:fzf_preview(bang) abort
   return a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?')
 endfunction
 
-command! Plugs call fzf#run(fzf#wrap('Plugs', extend({
+command! -bang Plugs call fzf#run(fzf#wrap('Plugs', extend({
       \ 'dir':     g:plug_home,
       \ 'source':  sort(keys(g:plugs)),
       \ 'sink':    'tabedit',
-      \ }, g:fzf_layout)))
+      \ }, g:fzf_layout), <bang>0))
 
 command! Modified call fzf#run(fzf#wrap('Modified',
       \   fzf#vim#with_preview(extend({
@@ -80,21 +91,6 @@ command! -bang -nargs=* Agr
 let s:rg_command = 'rg --color=always --column --hidden --line-number --no-heading '
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(s:rg_command . shellescape(<q-args>), 1, s:fzf_preview(<bang>0), <bang>0)
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
