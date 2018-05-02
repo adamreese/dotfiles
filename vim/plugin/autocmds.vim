@@ -26,6 +26,9 @@ augroup vimrc
   autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
   autocmd CursorHold,CursorHoldI,WinEnter   * setlocal cursorline
 
+  " update diff
+  autocmd InsertLeave * if &l:diff | diffupdate | endif
+
   autocmd BufEnter term://* startinsert
 
   " quit if quickfix is the only window
