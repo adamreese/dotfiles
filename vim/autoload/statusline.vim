@@ -69,7 +69,7 @@ function! statusline#git_branch() abort
   if s:is_readonly_filetype()
     return ''
   endif
-  return exists('*fugitive#head') ? fugitive#head() : ''
+  return exists('*fugitive#head') ? fugitive#head(7) : ''
 endfunction
 
 function! statusline#filetype() abort
