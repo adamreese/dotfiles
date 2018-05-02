@@ -177,7 +177,6 @@ if has('linebreak')
   set linebreak
 endif
 
-
 if exists('+termguicolors')
   set t_ut=         " disable background color erase
   set termguicolors " enable true color
@@ -189,18 +188,6 @@ set background=dark
 let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
-
-" Set terminal colors
-let s:num = 0
-for s:color in [
-      \ '#2d3c46', '#a54242', '#8c9440', '#de935f',
-      \ '#5f819d', '#85678f', '#5e8d87', '#6c7a80',
-      \ '#425059', '#cc6666', '#b5bd67', '#f0c674',
-      \ '#81a2be', '#b294ba', '#8abeb7', '#c5c8c6',
-      \ ]
-  let g:terminal_color_{s:num} = s:color
-  let s:num += 1
-endfor
 
 " Enable bash syntax
 " $VIMRUNTIME/syntax/sh.vim

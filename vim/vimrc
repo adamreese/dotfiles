@@ -29,6 +29,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/context_filetype.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/vimproc.vim',             { 'build': 'make' }
+Plug 'adamreese/vim-hybrid'
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
 Plug 'blueyed/vim-qf_resize'
 Plug 'chrisbra/unicode.vim'
@@ -54,7 +55,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/startuptime.vim'
-Plug 'w0ng/vim-hybrid'
 
 " -- Version Control ---------------------------------------------------
 Plug 'airblade/vim-gitgutter'
