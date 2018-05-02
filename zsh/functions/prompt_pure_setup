@@ -24,7 +24,6 @@
 # \e[K  => clears everything after the cursor on the current line
 # \e[2K => clear everything on the current line
 
-
 # turns seconds into human readable time
 # 165392 => 1d 21h 56m 32s
 # https://github.com/sindresorhus/pretty-time-zsh
@@ -53,24 +52,6 @@ prompt_pure_check_cmd_exec_time() {
   fi
 }
 
-prompt_pure_set_title() {
-  # emacs terminal does not support settings the title
-  (( ${+EMACS} )) && return
-
-  # tell the terminal we are setting the title
-  print -n '\e]0;'
-  # show hostname if connected through ssh
-  [[ -n $SSH_CONNECTION ]] && print -Pn '(%m) '
-  case $1 in
-    expand-prompt)
-      print -Pn $2;;
-    ignore-escape)
-      print -rn $2;;
-  esac
-  # end set title
-  print -n '\a'
-}
-
 prompt_pure_preexec() {
   if [[ -n $prompt_pure_git_fetch_pattern ]]; then
     # detect when git is performing pull/fetch (including git aliases).
@@ -83,9 +64,6 @@ prompt_pure_preexec() {
   fi
 
   typeset -g prompt_pure_cmd_timestamp=$EPOCHSECONDS
-
-  # shows the current dir and executed command in the title while a process is active
-  # prompt_pure_set_title 'ignore-escape' "$PWD:t: $2"
 }
 
 prompt_pure_preprompt_render() {
@@ -175,9 +153,6 @@ prompt_pure_precmd() {
   # check exec time and store it in a variable
   prompt_pure_check_cmd_exec_time
   unset prompt_pure_cmd_timestamp
-
-  # shows the full path in the title
-  # prompt_pure_set_title 'expand-prompt' '%~'
 
   # preform async git dirty check and fetch
   prompt_pure_async_tasks
