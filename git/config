@@ -103,6 +103,9 @@
   renames = copies
   tool = vimdiff
 
+[diff "plist"]
+  textconv = plutil -convert xml1 -o -
+
 [difftool "vimdiff"]
   cmd = nvim -d "$LOCAL" "$REMOTE"
 
