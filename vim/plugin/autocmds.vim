@@ -23,8 +23,8 @@ augroup vimrc
   autocmd InsertLeave * setlocal hlsearch
 
   " only show cursorline in current and normal window
-  autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
-  autocmd CursorHold,CursorHoldI,WinEnter   * setlocal cursorline
+  autocmd CursorMoved,CursorMovedI,WinLeave * if ! &l:diff | setlocal nocursorline | endif
+  autocmd CursorHold,CursorHoldI,WinEnter   * if ! &l:diff | setlocal cursorline   | endif
 
   " update diff
   autocmd InsertLeave * if &l:diff | diffupdate | endif
