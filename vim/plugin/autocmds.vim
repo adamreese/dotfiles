@@ -11,7 +11,7 @@ augroup vimrc
   autocmd VimResized * wincmd =
 
   " remove trailing whitespace automatically
-  autocmd BufWritePre * :%s/\s\+$//e
+  autocmd BufWritePre * call whitespace#clean()
 
   " disable paste
   autocmd InsertLeave * set nopaste
