@@ -9,7 +9,7 @@ zmodules=(zshmarks history-substring-search)
 fpath=(${${zmodules}:+${ZDOTDIR}/modules/${^zmodules}/functions(/FN)} ${fpath})
 autoload -Uz ${ZDOTDIR}/modules/${^zmodules}/functions/*(N:t)
 
-autoload -Uz compinit; compinit
+autoload -Uz compinit; compinit -u
 autoload -Uz bashcompinit; bashcompinit
 
 # ------------------------------------------------------------------------------
@@ -31,11 +31,9 @@ unset file
 # ------------------------------------------------------------------------------
 # load prompt
 
-if [[ ! ${TERM} == (linux|*bsd*|dumb) ]]; then
-  autoload -Uz promptinit && promptinit
-  # prompt areese
-  prompt pure
-fi
+autoload -Uz promptinit && promptinit
+# prompt areese
+prompt pure
 
 # ------------------------------------------------------------------------------
 # hash directories
