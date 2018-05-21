@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/tern_for_vim.vim
 " =======================================================================
-if !ar#is_plugged('tern_for_vim') | finish | endif
+if !ar#is_installed('tern_for_vim') | finish | endif
 
 let g:tern#arguments = ['--persistent', '--no-port-file']
 let g:tern#command = ['tern']

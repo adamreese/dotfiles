@@ -22,6 +22,8 @@ let g:tmux = exists('$TMUX')
 " -----------------------------------------------------------------------
 call ar#ensure_plugin_manager()
 
+let g:plug_window = 'tabnew'
+
 call plug#begin(g:vim_dir . '/vendor')
 
 Plug 'AndrewRadev/bufferize.vim',      { 'on': [ 'Bufferize' ] }

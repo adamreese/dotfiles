@@ -72,23 +72,14 @@ function! ar#plug_if(condition, ...) abort
   return a:0 ? extend(l:enabled, a:000[0]) : l:enabled
 endfunction
 
-" Returns true if the plugin {name} is loaded.
-function! ar#is_loaded(name) abort
-  if index(g:plugs_order, a:name) < 0
-    return 0
-  endif
-
-  let l:plug_dir = g:plugs[a:name].dir
-  if empty(l:plug_dir)  || !isdirectory(l:plug_dir)
-    return 0
-  endif
-
-  return empty(l:plug_dir) ? 0 : stridx(&runtimepath, l:plug_dir) > -1
+" Returns true if the plugin {plugin} is loaded.
+function! ar#is_loaded(plugin) abort
+  return has_key(g:plugs, a:plugin) && stridx(&rtp, g:plugs[a:plugin].dir) >= 0
 endfunction
 
-" Returns true if the plugin {name} is installed.
-function! ar#is_plugged(name) abort
-    return index(g:plugs_order, a:name) > -1
+" Returns true if the plugin {plugin} is installed.
+function! ar#is_installed(plugin) abort
+    return has_key(g:plugs, a:plugin) && isdirectory(g:plugs[a:plugin].dir)
 endfunction
 
 " -----------------------------------------------------------------------

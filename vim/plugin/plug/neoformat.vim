@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/neoformat.vim
 " =======================================================================
-if !ar#is_plugged('neoformat') | finish | endif
+if !ar#is_installed('neoformat') | finish | endif
 
 noremap <silent><leader>f :Neoformat<CR>
 

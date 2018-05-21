@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/vim-qf.vim
 " =======================================================================
-if !ar#is_plugged('vim-qf') | finish | endif
+if !ar#is_installed('vim-qf') | finish | endif
 
 let g:qf_auto_open_loclist  = 0
 let g:qf_auto_open_quickfix = 0
