@@ -140,10 +140,31 @@ function! s:neomake_count(group) abort
   return l:g > 0 ? printf('%s:%d', a:group, l:g) : ''
 endfunction
 
-autocmd vimrc User NeomakeCountsChanged call lightline#update()
-
 function! statusline#tagbar_status(current, sort, fname, ...) abort
   return lightline#statusline(0)
+endfunction
+
+function! statusline#gitgutter() abort
+    if !exists('*GitGutterGetHunkSummary')
+    return ''
+  endif
+
+  let l:symbols = ['+', '-', '~']
+  let [l:added, l:modified, l:removed] = GitGutterGetHunkSummary()
+  let l:stats = [l:added, l:removed, l:modified]  " reorder
+  let l:hunkline = ''
+
+  for l:i in range(3)
+    if l:stats[l:i] > 0
+      let l:hunkline .= printf('%s%s ', l:symbols[l:i], l:stats[l:i])
+    endif
+  endfor
+
+  if !empty(l:hunkline)
+    let l:hunkline = printf('[%s]', l:hunkline[:-2])
+  endif
+
+  return l:hunkline
 endfunction
 
 " -----------------------------------------------------------------------

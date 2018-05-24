@@ -12,7 +12,7 @@ let g:lightline_no_filename_filetypes   = ['fzf', 'nerdtree', 'tagbar', 'qf']
 let g:lightline = {
       \ 'active': {
       \   'left':  [
-      \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename' ],
+      \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename', 'gitgutter' ],
       \   ],
       \   'right': [
       \     [ 'lint_error', 'lint_warning', 'lint_info', 'lineinfo' ], [ 'filetype' ], [ 'search', 'go' ],
@@ -28,6 +28,7 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'git_branch':    'statusline#git_branch',
+      \   'gitgutter':     'statusline#gitgutter',
       \   'filename':      'statusline#filename',
       \   'filetype':      'statusline#filetype',
       \   'mode':          'statusline#mode',
