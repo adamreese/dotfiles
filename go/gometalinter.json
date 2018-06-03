@@ -9,7 +9,6 @@
   "WarnUnmatchedDirective": true,
   "Enable": [
     "deadcode",
-    "goconst",
     "goimports",
     "ineffassign",
     "interfacer",
