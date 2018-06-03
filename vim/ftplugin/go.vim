@@ -10,7 +10,7 @@ setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal noexpandtab
 setlocal autoindent
-setlocal listchars=tab:\ \ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·
+setlocal listchars+=tab:\ \ ,
 
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
