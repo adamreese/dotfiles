@@ -1,4 +1,5 @@
 *.zwc
+*.zwc.old
 git/config.local
 vim/.netrwhist
 vim/autoload/plug.vim
