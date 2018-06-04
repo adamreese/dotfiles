@@ -135,6 +135,9 @@ symlink_files() {
   # bin
   symlink bin                  .local/bin
 
+  # ranger
+  symlink ranger               .config/ranger
+
   print_success "Completed symlinks"
 }
 
