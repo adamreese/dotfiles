@@ -1,18 +1,14 @@
 " =======================================================================
-" plugin/commands.vim
+" plugin/plug/vim-plug.vim
 " =======================================================================
 
-" Common typos
-command! W w
-command! Q q
-command! WQ wq
-command! Wq wq
+let g:plug_url_format = 'git://github.com/%s'
+let g:plug_window     = 'tabnew'
 
-" Profile
-command! Profile call ar#profile()
+" Plug Upgrade and Update
+command! PU PlugUpgrade | PlugUpdate
 
-" ReloadSyntax
-command! ReloadSyntax call ar#reload_syntax()
-
+" Modeline {{{1
 " -----------------------------------------------------------------------
-" vim:foldmethod=marker
+" vim: foldmethod=marker
+
