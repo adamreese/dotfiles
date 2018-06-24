@@ -3,9 +3,9 @@
 
 # WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # default
 #
-# Remove the dash, period, equals, and slash.
+# Remove the period, equals, and slash.
 #
-WORDCHARS='*?_[]~&;!#$%^(){}<>'
+WORDCHARS='*?_-[]~&;!#$%^(){}<>'
 
 # Options
 # ------------------------------------------------------------------------------
