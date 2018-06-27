@@ -23,5 +23,7 @@ alias bubua='brew update && brew upgrade --fetch-HEAD && brew cleanup'
 # Flush dns cache
 alias flush='sudo killall -HUP mDNSResponder'
 
+alias video-reset='sudo killall AppleCameraAssistant;sudo killall VDCAssistant'
+
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
