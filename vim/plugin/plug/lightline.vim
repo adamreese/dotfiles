@@ -26,6 +26,19 @@ let g:lightline = {
       \     [ 'lineinfo' ], [ 'filetype' ],
       \   ]
       \ },
+      \ 'mode_map': {
+      \   'n':      ' N ',
+      \   'i':      ' I ',
+      \   'c':      ' C ',
+      \   'R':      ' R ',
+      \   's':      ' S ',
+      \   'S':      'S-L',
+      \   '\<C-s>': 'S-B',
+      \   't':      ' T ',
+      \   'v':      ' V ',
+      \   'V':      'V-L',
+      \   '\<C-v>': 'V-B',
+      \ },
       \ 'component_function': {
       \   'git_branch':    'statusline#git_branch',
       \   'gitgutter':     'statusline#gitgutter',
