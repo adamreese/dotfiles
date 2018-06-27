@@ -12,7 +12,7 @@ let &showbreak='↳ '
 " Highlights:
 " -----------------------------------------------------------------------
 highlight! clear QuickFixLine
-highlight! QuickFixLine cterm=underline gui=underline guibg=none
+highlight! QuickFixLine cterm=underline gui=underline guibg=NONE
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
