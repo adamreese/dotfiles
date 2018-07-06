@@ -51,7 +51,8 @@ setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
 # X = suppress alternate screen
 export LESS='iFKMRSX'
 # disable less history
-export LESSHISTFILE=-
+export LESSHISTFILE=${XDG_CACHE_HOME}/lesshistory
+export LESSKEY=${XDG_CONFIG_HOME}/less/less
 
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
