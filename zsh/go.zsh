@@ -28,5 +28,11 @@ alias gml="gometalinter --config=${XDG_CONFIG_HOME}/gometalinter.json"
 # Depends on github.com/maruel/panicparse
 alias -g PP='|& pp'
 
+# https://github.com/y0ssar1an/q
+qq() {
+  rm -f "$TMPDIR/q"
+  "${GOPATH}/src/github.com/y0ssar1an/q/q.sh"
+}
+
 # -----------------------------------------------------------------------------
 # vim: ft=zsh :

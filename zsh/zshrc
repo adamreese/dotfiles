@@ -5,25 +5,36 @@
 # Zsh functions to load (man zshcontrib).
 autoload -Uz zmv
 
-zmodules=(zshmarks history-substring-search)
-fpath=(${${zmodules}:+${ZDOTDIR}/modules/${^zmodules}/functions(/FN)} ${fpath})
-autoload -Uz ${ZDOTDIR}/modules/${^zmodules}/functions/*(N:t)
+# ------------------------------------------------------------------------------
+# zplugin
+
+local -A ZPLGM
+ZPLGM[HOME_DIR]="${XDG_CONFIG_HOME}/zplugin"
+if [[ ! -f ${ZPLGM[HOME_DIR]}/bin/zplugin.zsh ]]; then
+    git clone https://github.com/zdharma/zplugin.git ${ZPLGM[HOME_DIR]}/bin
+fi
+
+source ${ZPLGM[HOME_DIR]}/bin/zplugin.zsh
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+
+# zplugin light "zdharma/zui"
+# zplugin light "zdharma/zplugin-crasis"
+
+zplugin light "zsh-users/zsh-completions"
+zplugin light "zsh-users/zsh-history-substring-search"
+zplugin light "jocelynmallon/zshmarks"
 
 autoload -Uz compinit; compinit -u
 autoload -Uz bashcompinit; bashcompinit
+
+# run compdefs provided by plugins
+zplugin cdreplay -q
 
 # ------------------------------------------------------------------------------
 # source configuration files
 
 for file (${ZDOTDIR}/*.zsh(N-.)); do
-  source $file
-done
-unset file
-
-# ------------------------------------------------------------------------------
-# load plugins
-
-for file (${ZDOTDIR}/modules/${^zmodules}/init.zsh(N-.)); do
   source $file
 done
 unset file
@@ -55,6 +66,6 @@ path=(
 )
 
 # ------------------------------------------------------------------------------
-(( ${+ZSH_DEBUG} )) && zprof | less
+(( ${+ZSH_DEBUG} )) && zprof | less && exit
 # ------------------------------------------------------------------------------
 # vi:ft=zsh

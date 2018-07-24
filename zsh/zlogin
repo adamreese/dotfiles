@@ -28,13 +28,7 @@
     zrecompile -pq ${file}
   done
 
-  # zcompile all modules
-  for file in ${ZDOTDIR}/modules/**/*.zsh(.); do
-    zrecompile -pq ${file}
-  done
-
 ) &!
-
 
 # ------------------------------------------------------------------------------
 # vi:ft=zsh

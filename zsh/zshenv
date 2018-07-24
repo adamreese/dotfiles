@@ -41,13 +41,11 @@ fpath=(
   ${ZDOTDIR}/{completion,functions}(N-/)
   ${ZDOTDIR}/modules/*/{completion,functions}(N-/)
   /usr/local/share/zsh/site-functions(N-/)
-  /usr/local/share/zsh-completions(N-/)
   ${fpath}
 )
 autoload -Uz ${ZDOTDIR}/functions/*(N:t)
 
 path=(
-  ${HOME}/.dotfiles/bin(N-/)
   ${HOME}/.local/bin(N-/)
 
   # GNU Coreutils
@@ -59,6 +57,10 @@ path=(
 manpath=(
   # GNU Coreutils
   /usr/local/opt/coreutils/libexec/gnuman(N-/)
+  /usr/local/share/man(N-/)
+  /usr/local/MacGPG2/share/man(N-/)
+  /opt/X11/share/man(N-/)
+  /usr/share/man(N-/)
   ${manpath}
 )
 
