@@ -137,10 +137,11 @@ function! s:neomake_count(group) abort
   endif
   let l:counts = neomake#statusline#LoclistCounts()
   let l:g = get(l:counts, a:group, 0)
-  return l:g > 0 ? printf('%s:%d', a:group, l:g) : ''
+  return l:g > 0 ? l:g : ''
 endfunction
 
 function! statusline#tagbar_status(current, sort, fname, ...) abort
+  let g:lightline.fname = a:fname
   return lightline#statusline(0)
 endfunction
 
