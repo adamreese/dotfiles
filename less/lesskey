@@ -3,3 +3,4 @@
 # syntax: <string> <action> [extra-string] <newline>
 
 D noaction j/\^((diff|commit|Date|From) )|((added|deleted|modified): )\n\eu
+C noaction j/\^commit \n\eu
