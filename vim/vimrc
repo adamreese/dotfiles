@@ -10,8 +10,8 @@ scriptencoding utf-8
 " -----------------------------------------------------------------------
 
 " Create global config for cache and data directories
-let g:cache_dir = expand($HOME.'/.cache/vim/')
-let g:data_dir  = expand($HOME.'/.local/share/vim/')
+let g:cache_dir = expand('$HOME/.cache/vim/')
+let g:data_dir  = expand('$HOME/.local/share/vim/')
 let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 
 let g:nvim = has('nvim')
@@ -74,6 +74,7 @@ Plug 'kana/vim-gf-user',               { 'for': 'vim' }
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
+Plug 'rust-lang/rust.vim'
 Plug 'sebdah/vim-delve',               { 'for': 'go' }
 Plug 'sgur/vim-gf-autoload',           { 'for': 'vim' }
 Plug 'tbastos/vim-lua'
