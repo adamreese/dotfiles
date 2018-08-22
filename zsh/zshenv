@@ -24,9 +24,9 @@ ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 : ${GLIDE_HOME:=${XDG_CACHE_HOME}/glide}
 : ${GNUPGHOME:=${XDG_CONFIG_HOME}/gnupg}
 : ${HELM_HOME:=${XDG_CONFIG_HOME}/helm}
-: ${IRBRC:=${XDG_CONFIG_HOME}/irb/irbrc}
-: ${PRYRC:=${XDG_CONFIG_HOME}/pry/pryrc}
-: ${PSQLRC:=${XDG_CONFIG_HOME}/pg/psqlrc}
+: ${IRBRC:=${DOTFILES}/ruby/irbrc}
+: ${PRYRC:=${DOTFILES}/ruby/pryrc}
+: ${PSQLRC:=${DOTFILES}/pg/psqlrc}
 : ${PSQL_HISTORY:=$XDG_CACHE_HOME/pg/psql_history}
 
 typeset -gx GLIDE_HOME GNUPGHOME HELM_HOME PSQLRC PSQL_HISTORY BOOKMARKS_FILE IRBRC PRYRC
