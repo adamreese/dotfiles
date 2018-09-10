@@ -47,6 +47,14 @@ alias tfl='tail -Fn30 log/*.log'
 # github.com/jocelynmallon/zshmarks
 alias j='jump'
 
+# bundle
+alias   be='bundle-exec-hack'
+alias   bi='bundle-hack install'
+alias   br='bundle-exec-hack rspec'
+alias  beg='bundle-exec-hack guard'
+alias  bil='bundle install --local'
+alias brff='bundle-exec-hack rspec --fail-fast'
+
 # aliases inside tmux session
 if [[ $TERM == *tmux* ]]; then
   alias :sp='tmux split-window'
