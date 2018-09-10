@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+((${TRACE-})) && set -x
+
+rule() {
+  local cols=80 char=$'\u2500'
+  printf '%*s\n' "${cols}" '' | tr ' ' "${char}"
+}
+
+# -----------------------------------------------------------------------------
+# Print step header text in a consistent way
+stepheader() {
+  # If called with no args, assume the key is the caller's function name
+  local msg="$*"
+
+  rule
+  printf '\033[0;32m%s\033[0;m\n' "$msg"
+  rule
+}
+
+is_git_repo() {
+  git rev-parse --git-dir &>/dev/null
+}
+
+is_repo_dirty() {
+  test -n "$(git status --porcelain --ignore-submodules -unormal)"
+}
+
+sync_repo() {
+  is_git_repo || {
+    echo "${repo} is not a git repo"
+    return
+  }
+
+  is_repo_dirty && {
+    echo "${repo} has uncommited changes"
+    return
+  }
+
+  git remote update -p &>/dev/null
+
+  if is_repo_outdated; then
+    stepheader "Updating repo ${repo}"
+
+    git pull >/dev/null
+    git --no-pager log --no-merges --stat --color ORIG_HEAD..
+  fi
+}
+
+is_repo_outdated() {
+  (($(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0))
+}
+
+main() {
+  export GHQ_ROOT="${PWD}"
+
+  while read -r repo; do
+    (
+      cd "${repo}"
+      sync_repo
+    )
+  done < <(ghq list) | less
+}
+
+main "$@"
