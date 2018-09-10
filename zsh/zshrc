@@ -18,12 +18,12 @@ source ${ZPLGM[HOME_DIR]}/bin/zplugin.zsh
 autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 
-# zplugin light "zdharma/zui"
-# zplugin light "zdharma/zplugin-crasis"
-
 zplugin light "zsh-users/zsh-completions"
 zplugin light "zsh-users/zsh-history-substring-search"
 zplugin light "jocelynmallon/zshmarks"
+
+zplugin ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
+zplugin light direnv/direnv
 
 autoload -Uz compinit; compinit -u
 autoload -Uz bashcompinit; bashcompinit
