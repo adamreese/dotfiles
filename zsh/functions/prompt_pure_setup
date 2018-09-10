@@ -137,7 +137,7 @@ prompt_pure_preprompt_render() {
 
   PROMPT="${(j..)ps1}"
 
-  # Expand the prompt for future comparision.
+  # Expand the prompt for future comparison.
   local expanded_prompt
   expanded_prompt="${(S%%)PROMPT}"
 

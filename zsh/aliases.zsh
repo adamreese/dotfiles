@@ -48,7 +48,7 @@ alias tfl='tail -Fn30 log/*.log'
 alias j='jump'
 
 # aliases inside tmux session
-if [[ $TERM == *"tmux"* ]]; then
+if [[ $TERM == *tmux* ]]; then
   alias :sp='tmux split-window'
   alias :vs='tmux split-window -h'
 fi

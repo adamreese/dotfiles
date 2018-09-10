@@ -10,6 +10,8 @@ fi
 typeset -gx FZF_DEFAULT_OPTS='--color=fg:15,bg:-1,bg+:-1,pointer:1,info:7,hl+:4,hl:4 --multi --bind=ctrl-u:page-up,ctrl-d:page-down'
 typeset -gx FZF_CTRL_T_OPTS='--select-1 --exit-0 --preview "(highlight -O ansi -l {} || cat {} || tree -C {}) 2> /dev/null | head -200" --bind "?:toggle-preview"'
 
+export FZF_COMPLETION_TRIGGER='``'
+
 # CTRL-T - Paste the selected file path(s) into the command line
 fzf-sel() {
   setopt localoptions pipefail 2> /dev/null

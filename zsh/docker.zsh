@@ -52,7 +52,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
   }
 
   docker-screen() {
-    screen -D -R -S moby ${HOME}/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
+    screen -DRS moby ${HOME}/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty $@
   }
 fi
 

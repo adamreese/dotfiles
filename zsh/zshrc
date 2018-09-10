@@ -52,6 +52,7 @@ prompt pure
 hash -d --     docs=${HOME}/Documents
 hash -d -- dotfiles=${HOME}/.dotfiles
 hash -d --    gosrc=${GOPATH}/src
+hash -d --   goroot=$(go env GOROOT)
 hash -d --   cellar=/usr/local/Cellar
 
 # ------------------------------------------------------------------------------
