@@ -90,9 +90,10 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
 
 Plug 'Shougo/deoplete.nvim',           ar#plug_if(g:nvim, { 'do': ':UpdateRemotePlugins' })
+Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim',                ar#plug_if(g:nvim, { 'for': 'vim' })
 Plug 'carlitux/deoplete-ternjs',       ar#plug_if(g:nvim, { 'do': ':UpdateRemotePlugins' })
-Plug 'mhartington/nvim-typescript',    ar#plug_if(g:nvim, { 'do': ':UpdateRemotePlugins' })
+Plug 'mhartington/nvim-typescript',    ar#plug_if(g:nvim, { 'do': './install.sh' })
 Plug 'zchee/deoplete-go',              ar#plug_if(g:nvim, { 'for': 'go', 'do': 'make'})
 Plug 'zchee/deoplete-zsh',             ar#plug_if(g:nvim)
 
