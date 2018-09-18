@@ -178,7 +178,6 @@ if has('linebreak')
 endif
 
 if exists('+termguicolors')
-  set t_ut=         " disable background color erase
   set termguicolors " enable true color
 endif
 
