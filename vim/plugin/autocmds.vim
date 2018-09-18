@@ -14,10 +14,10 @@ augroup vimrc
   autocmd BufWritePre * call whitespace#clean()
 
   " disable paste
-  autocmd InsertLeave * set nopaste
+  autocmd InsertLeave * if &paste | set nopaste | echo 'nopaste' | endif
 
   " check timestamp more for 'autoread'
-  autocmd WinEnter * checktime
+  autocmd WinEnter,FocusGained,BufEnter,TabEnter * if &autoread | silent checktime | endif
 
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
@@ -36,6 +36,8 @@ augroup vimrc
   autocmd WinEnter * if winnr('$') == 1 && &buftype == 'quickfix' | quit | endif
 
   autocmd BufRead,BufNewFile * call ar#source_project_config()
+
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 
 " Modeline {{{1
