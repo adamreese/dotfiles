@@ -1,12 +1,5 @@
-apidoc
-babel-eslint
-coffee-script
 coffeelint
-eslint
-eslint-plugin-import
 js-beautify
-jscpd
-jscs
 jsctags
 jshint
 jsinspect
@@ -28,5 +21,4 @@ typescript
 typescript-formatter
 vimlint
 write-good
-xo
 yo
