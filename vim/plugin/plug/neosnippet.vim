@@ -24,6 +24,14 @@ imap <special> <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <special> <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <special> <C-k> <Plug>(neosnippet_expand_target)
 
+" Autocmds
+" -----------------------------------------------------------------------
+augroup neosnippet
+  autocmd!
+  " Remove remaining markers when leaving insert mode
+  autocmd neosnippet InsertLeave * NeoSnippetClearMarkers
+augroup END
+
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
 
