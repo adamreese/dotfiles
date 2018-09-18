@@ -535,7 +535,7 @@ prompt_pure_setup() {
     prompt    '%F{242}>%f '
   )
   # Combine the parts with conditional logic. First the `:+` operator is
-  # used to replace `compare` either with `main` or an ampty string. Then
+  # used to replace `compare` either with `main` or an empty string. Then
   # the `:-` operator is used so that if `compare` becomes an empty
   # string, it is replaced with `secondary`.
   local ps4_symbols='${${'${ps4_parts[compare]}':+"'${ps4_parts[main]}'"}:-"'${ps4_parts[secondary]}'"}'

@@ -34,7 +34,7 @@ sync_repo() {
   }
 
   is_repo_dirty && {
-    echo "${repo} has uncommited changes"
+    echo "${repo} has uncommitted changes"
     return
   }
 

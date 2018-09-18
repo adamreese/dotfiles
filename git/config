@@ -34,7 +34,7 @@
   new  = log --no-merges --oneline ORIG_HEAD..
   news = log --no-merges --stat ORIG_HEAD..
 
-  fork = clone --origin upsteam
+  fork = clone --origin upstream
 
 [user]
   name  = Adam Reese
