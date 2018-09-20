@@ -3,11 +3,27 @@
 " =======================================================================
 if !ar#is_loaded('lightline.vim') | finish | endif
 
+scriptencoding utf-8
+
 let g:lightline_readonly_filetypes      = ['help', 'man', 'nerdtree', 'qf', 'tagbar']
 let g:lightline_mode_filetypes          = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
 let g:lightline_no_lineinfo_filetypes   = ['fzf', 'tagbar']
 let g:lightline_no_fileformat_filetypes = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
 let g:lightline_no_filename_filetypes   = ['fzf', 'nerdtree', 'tagbar', 'qf']
+
+let s:short_modes = {
+      \   'n':      ' ɴ ',
+      \   'i':      ' ɪ ',
+      \   'c':      ' ᴄ ',
+      \   'R':      ' ʀ ',
+      \   's':      ' s ',
+      \   'S':      's·ʟ',
+      \   '\<C-s>': 's·ʙ',
+      \   't':      ' ᴛ ',
+      \   'v':      ' ᴠ ',
+      \   'V':      'ᴠ·ʟ',
+      \   '\<C-v>': 'ᴠ·ʙ',
+      \ }
 
 let g:lightline = {
       \ 'active': {
@@ -19,26 +35,10 @@ let g:lightline = {
       \   ]
       \ },
       \ 'inactive': {
-      \   'left': [
-      \     [ 'filename' ],
-      \   ],
-      \   'right': [
-      \     [ 'lineinfo' ], [ 'filetype' ],
-      \   ]
+      \   'left':  [ [ 'filename' ] ],
+      \   'right': [ [ 'lineinfo' ], [ 'filetype' ] ],
       \ },
-      \ 'mode_map': {
-      \   'n':      ' N ',
-      \   'i':      ' I ',
-      \   'c':      ' C ',
-      \   'R':      ' R ',
-      \   's':      ' S ',
-      \   'S':      'S-L',
-      \   '\<C-s>': 'S-B',
-      \   't':      ' T ',
-      \   'v':      ' V ',
-      \   'V':      'V-L',
-      \   '\<C-v>': 'V-B',
-      \ },
+      \ 'mode_map': s:short_modes,
       \ 'component_function': {
       \   'git_branch':    'statusline#git_branch',
       \   'gitgutter':     'statusline#gitgutter',
@@ -59,7 +59,6 @@ let g:lightline = {
       \   'lint_warning': 'warning',
       \   'lint_info':    'warning',
       \ },
-      \ 'subseparator': { 'left': '|', 'right': '|' },
       \ }
 
 let g:tagbar_status_func = 'statusline#tagbar_status'

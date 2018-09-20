@@ -43,7 +43,10 @@ function! s:filename(fmt) abort
     return s:filename('%:t')
   endif
 
-  if len(expand(a:fmt)) > 0
+  let l:l = len(expand(a:fmt))
+  if l:l > 80
+    return pathshorten(expand(a:fmt))
+  elseif l:l > 0
     return expand(a:fmt)
   endif
 
@@ -62,7 +65,7 @@ function! s:modified() abort
 endfunction
 
 function! statusline#filename() abort
-  return s:filename('%:.') . s:modified() . s:readonly()
+  return s:filename('%:~:.') . s:modified() . s:readonly()
 endfunction
 
 function! statusline#git_branch() abort
@@ -73,13 +76,15 @@ function! statusline#git_branch() abort
 endfunction
 
 function! statusline#filetype() abort
-  if winwidth(0) < 70 || s:is_no_fileformat_filetype()
+  if s:minwidth() || s:is_no_fileformat_filetype()
     return ''
   endif
   return strlen(&filetype) ? &filetype : 'no ft'
 endfunction
 
 function! statusline#mode() abort
+  let fname = expand('%:t')
+  return get(s:filename_modes, fname, get(s:filetype_modes, &filetype, lightline#mode()))
   if s:is_mode_filetype()
     return toupper(&filetype)
   endif
@@ -87,7 +92,7 @@ function! statusline#mode() abort
 endfunction
 
 function! statusline#statuslineinfo() abort
-  if winwidth(0) < 70
+  if s:minwidth()
     return ''
   elseif s:is_no_lineinfo_filetype()
     return ''
@@ -166,6 +171,32 @@ function! statusline#gitgutter() abort
   endif
 
   return l:hunkline
+endfunction
+
+let s:filename_modes = {
+      \ '__Tagbar__':           'Tagbar',
+      \ 'NERD_tree':            'NERDTree',
+      \ 'NERD_tree_1':          'NERDTree',
+      \ '[Command Line]':       'Command Line',
+      \ '[Plugins]':            'Plugins',
+      \ '__committia_status__': 'Committia Status',
+      \ '__committia_diff__':   'Committia Diff',
+      \ }
+
+let s:filetype_modes = {
+      \ 'fzf':           'FZF',
+      \ 'nerdtree':      'NERDTree',
+      \ 'vim-plug':      'Plug',
+      \ 'help':          'Help',
+      \ 'qf':            'Quickfix',
+      \ 'godoc':         'GoDoc',
+      \ 'gitcommit':     'Commit Message',
+      \ 'fugitiveblame': 'FugitiveBlame',
+      \ 'tagbar':        'Tagbar',
+      \ }
+
+function! s:minwidth() abort
+  return winwidth(0) < 70
 endfunction
 
 " -----------------------------------------------------------------------
