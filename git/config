@@ -79,13 +79,9 @@
   enabled = true
 
 [interactive]
-  ; diffFilter = diff-so-fancy --patch-mode | less --tabs=4 -RFX
   diffFilter = diff-highlight
 
 [pager]
-  log  = diff-highlight | ${GIT_PAGER:-less -RFX}
-  ; show = diff-highlight | ${GIT_PAGER:-less -FX}
-  ; diff = diff-highlight | ${GIT_PAGER:-less -FX}
   show = diff-so-fancy | less --tabs=4 -RFX
   diff = diff-so-fancy | less --tabs=4 -RFX
 
@@ -110,11 +106,11 @@
   cmd = nvim -d "$LOCAL" "$REMOTE"
 
 [color "diff"]
-  meta       = yellow
-  frag       = magenta
-  old        = red strike
-  new        = green italic
-  whitespace = red reverse
+  meta         = yellow
+  frag         = magenta
+  old          = red strike
+  new          = green italic
+  whitespace   = red reverse
 
 [color "diff-highlight"]
   oldNormal    = red strike
@@ -123,10 +119,10 @@
   newHighlight = green 22 italic
 
 [color "status"]
-  added     = green
-  changed   = yellow
-  deleted   = red
-  untracked = red
+  added        = green
+  changed      = yellow
+  deleted      = red
+  untracked    = red
 
 [include]
   path = "~/.config/git/config.local"
