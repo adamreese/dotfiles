@@ -14,8 +14,10 @@
 
 typeset -gxm 'XDG_*'
 
-: ${DOTFILES:=${HOME}/.dotfiles}
-: ${ZDOTDIR:=${HOME}/.dotfiles/zsh}
+ZDOTDIR="${${(%):-%N}:A:h}"
+
+: ${DOTFILES:=${ZDOTDIR:h}}
+typeset -gx DOTFILES
 
 ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 [[ ! -d ${ZSH_CACHE_DIR} ]] || mkdir -p "${ZSH_CACHE_DIR}"
@@ -23,14 +25,15 @@ ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 # application specific xdg
 : ${BOOKMARKS_FILE:=${ZDOTDIR}/bookmarks}
 : ${GLIDE_HOME:=${XDG_CACHE_HOME}/glide}
-: ${GNUPGHOME:=${XDG_CONFIG_HOME}/gnupg}
 : ${HELM_HOME:=${XDG_CONFIG_HOME}/helm}
 : ${IRBRC:=${DOTFILES}/ruby/irbrc}
 : ${PRYRC:=${DOTFILES}/ruby/pryrc}
 : ${PSQLRC:=${DOTFILES}/pg/psqlrc}
 : ${PSQL_HISTORY:=$XDG_CACHE_HOME/pg/psql_history}
+: ${RIPGREP_CONFIG_PATH:=${DOTFILES}/ripgrep/config}
+: ${SCREENRC:=${XDG_CONFIG_HOME}/screen/screenrc}
 
-typeset -gx GLIDE_HOME GNUPGHOME HELM_HOME PSQLRC PSQL_HISTORY BOOKMARKS_FILE IRBRC PRYRC
+typeset -gx GLIDE_HOME HELM_HOME PSQLRC PSQL_HISTORY BOOKMARKS_FILE IRBRC PRYRC SCREENRC
 
 export YARN_CACHE_FOLDER="${XDG_CACHE_HOME}/yarn"
 

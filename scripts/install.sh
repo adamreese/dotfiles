@@ -48,32 +48,31 @@ print_success() {
 # symlink
 # -----------------------------------------------------------------------------
 symlink() {
-  local sourcepath="${DOTFILES}/${1}"
-  local targetpath="${2}"
-  local fulltargetpath="${HOME}/${targetpath}"
+  local source="${DOTFILES}/${1}"
+  local target="${HOME}/${2}"
 
   # ensure the source exists
-  [[ -e "${sourcepath}" ]] || die "${sourcepath} does not exist"
+  [[ -e "${source}" ]] || die "${source} does not exist"
 
-  if [[ -e "$fulltargetpath" ]]; then
+  if [[ -e "$target" ]]; then
     local rp
-    rp=$(realpath "${fulltargetpath}")
-    if [[ "$rp" == "${sourcepath}" ]]; then
+    rp=$(realpath "${target}")
+    if [[ "$rp" == "${source}" ]]; then
       return
     fi
 
-    echo "    ${targetpath} exists"
+    echo "    ${target} exists"
     read -p "          Overwrite? [y/N] " -r
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-      echo "    Skipped ${targetpath}"
+      echo "    Skipped ${target}"
       return
     fi
   fi
 
-  echo -e "    Symlinking ${targetpath} \u279E ${sourcepath}"
+  echo -e "    Symlinking ${target} \u279E ${source}"
 
-  mkdir -p "$(dirname "${fulltargetpath}")"
-  ln -fns "${sourcepath}" "${fulltargetpath}"
+  mkdir -p "$(dirname "${target}")"
+  ln -fns "${source}" "${target}"
 }
 
 # install brew
@@ -112,7 +111,7 @@ symlink_files() {
   symlink tmux/tmux.conf       .tmux.conf
 
   # screen
-  symlink screen/screenrc      .screenrc
+  symlink screen               .config/screen
 
   # database
   symlink sqlite/sqliterc      .sqliterc

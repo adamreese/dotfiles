@@ -18,7 +18,7 @@ gpg-refresh-agent() {
 gpgconf --launch gpg-agent
 
 # Set SSH to use gpg-agent if it is configured to do so
-if grep -q '^enable-ssh-support' "${GNUPGHOME}/gpg-agent.conf" /dev/null 2>&1; then
+if grep -q '^enable-ssh-support' "${GNUPGHOME:-${HOME}/.gnupg}/gpg-agent.conf" /dev/null 2>&1; then
   unset SSH_AGENT_PID
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi

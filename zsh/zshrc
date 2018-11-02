@@ -49,11 +49,14 @@ prompt pure
 # ------------------------------------------------------------------------------
 # hash directories
 
+hash -d --        p=${HOME}/p
+hash -d --       dl=${HOME}/Downloads
 hash -d --     docs=${HOME}/Documents
-hash -d -- dotfiles=${HOME}/.dotfiles
 hash -d --    gosrc=${GOPATH}/src
-hash -d --   goroot=$(go env GOROOT)
 hash -d --   cellar=/usr/local/Cellar
+hash -d --   goroot=$(go env GOROOT)
+hash -d -- dotfiles=${HOME}/.dotfiles
+
 
 # ------------------------------------------------------------------------------
 # path hack
