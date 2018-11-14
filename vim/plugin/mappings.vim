@@ -6,7 +6,8 @@
 inoremap jj <ESC>
 
 " map Q for formatting rather than Ex mode
-noremap Q gq
+nnoremap Q m`gqap``
+vnoremap Q gq
 
 " disable ex mode
 nnoremap gQ <Nop>
