@@ -1,6 +1,7 @@
-neovim
 neovim-remote
 proselint
+pyaml
 pygments
+pynvim
 vim-vint
 yamllint
