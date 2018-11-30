@@ -52,6 +52,33 @@ prompt_pure_check_cmd_exec_time() {
   fi
 }
 
+prompt_pure_set_title() {
+  setopt localoptions noshwordsplit
+
+  case $TTY in
+    # Don't set title over serial console.
+    /dev/ttyS[0-9]*) return;;
+  esac
+
+  # Show hostname if connected via ssh.
+  local hostname=
+  if [[ -n $prompt_pure_state[username] ]]; then
+    # Expand in-place in case ignore-escape is used.
+    hostname="${(%):-(%m) }"
+  fi
+
+  local -a opts
+  case $1 in
+    expand-prompt) opts=(-P);;
+    ignore-escape) opts=(-r);;
+  esac
+
+  # Set title atomically in one print statement so that it works
+  # when XTRACE is enabled.
+  print -n $opts $'\e]0;'${hostname}${2}$'\a'
+}
+
+
 prompt_pure_preexec() {
   if [[ -n $prompt_pure_git_fetch_pattern ]]; then
     # detect when git is performing pull/fetch (including git aliases).
@@ -64,6 +91,9 @@ prompt_pure_preexec() {
   fi
 
   typeset -g prompt_pure_cmd_timestamp=$EPOCHSECONDS
+
+  # shows the current dir and executed command in the title while a process is active
+  prompt_pure_set_title 'ignore-escape' "$2"
 }
 
 prompt_pure_preprompt_render() {
@@ -73,7 +103,7 @@ prompt_pure_preprompt_render() {
   local -a preprompt_parts
 
   # Username and machine, if applicable.
-  [[ -n $prompt_pure_username ]] && preprompt_parts+=('$prompt_pure_username')
+  [[ -n $prompt_pure_state[username] ]] && preprompt_parts+=('${prompt_pure_state[username]}')
 
   # Set color for git branch/dirty status, change color if dirty checking has
   # been delayed.
@@ -129,10 +159,10 @@ prompt_pure_preprompt_render() {
   # Construct the new prompt with a clean preprompt.
   local -ah ps1
   ps1=(
-  $prompt_newline           # Initial newline, for spaciousness.
-  ${(j. .)preprompt_parts}  # Join parts, space separated.
-  $prompt_newline           # Separate preprompt and prompt.
-  $cleaned_ps1
+    $prompt_newline           # Initial newline, for spaciousness.
+    ${(j. .)preprompt_parts}  # Join parts, space separated.
+    $prompt_newline           # Separate preprompt and prompt.
+    $cleaned_ps1
   )
 
   PROMPT="${(j..)ps1}"
@@ -141,7 +171,7 @@ prompt_pure_preprompt_render() {
   local expanded_prompt
   expanded_prompt="${(S%%)PROMPT}"
 
-  if [[ $1 != precmd ]] && [[ $prompt_pure_last_prompt != $expanded_prompt ]]; then
+  if [[ $prompt_pure_last_prompt != $expanded_prompt ]]; then
     # Redraw the prompt.
     zle && zle .reset-prompt
   fi
@@ -153,6 +183,9 @@ prompt_pure_precmd() {
   # check exec time and store it in a variable
   prompt_pure_check_cmd_exec_time
   unset prompt_pure_cmd_timestamp
+
+  # shows the full path in the title
+  prompt_pure_set_title 'expand-prompt' '%~'
 
   # preform async git dirty check and fetch
   prompt_pure_async_tasks
@@ -170,7 +203,7 @@ prompt_pure_async_git_aliases() {
   for line in $gitalias; do
     parts=(${(@)=line})           # split line on spaces
     aliasname=${parts[1]#alias.}  # grab the name (alias.[name])
-    shift parts                   # remove aliasname
+    shift parts                   # remove alias name
 
     # check alias for pull or fetch (must be exact match).
     if [[ $parts =~ ^(.*\ )?(pull|fetch)(\ .*)?$ ]]; then
@@ -192,7 +225,7 @@ prompt_pure_async_vcs_info() {
   zstyle ':vcs_info:*' max-exports 2
   # export branch (%b) and git toplevel (%R)
   zstyle ':vcs_info:git*' formats '%b' '%R'
-  zstyle ':vcs_info:git*' actionformats '%F{red}%a%f%  → %F{blue}%b%f' '%R'
+  zstyle ':vcs_info:git*' actionformats '%F{red}%a%f% → %F{blue}%b%f' '%R'
 
   vcs_info
 
@@ -505,11 +538,7 @@ prompt_pure_setup() {
   add-zsh-hook precmd prompt_pure_precmd
   add-zsh-hook preexec prompt_pure_preexec
 
-  # show username@host if logged in through SSH
-  # [[ "$SSH_CONNECTION" != '' ]] && prompt_pure_username='%F{242}[%n@%m]%f'
-
-  # show username@host if root, with username in white
-  # [[ $UID -eq 0 ]] && prompt_pure_username='%F{white}[%n%f%F{242}@%m]%f'
+  # prompt_pure_state_setup
 
   # if a virtualenv is activated, display it in grey
   PROMPT='%(12V.%F{242}%12v%f .)'

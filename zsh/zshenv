@@ -44,7 +44,6 @@ typeset -gU cdpath fpath manpath path
 # load completion functions
 fpath=(
   ${ZDOTDIR}/{completion,functions}(N-/)
-  ${ZDOTDIR}/modules/*/{completion,functions}(N-/)
   /usr/local/share/zsh/site-functions(N-/)
   ${fpath}
 )

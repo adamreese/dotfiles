@@ -7,6 +7,7 @@ alias  e='exit'
 alias  q='exit'
 alias :q='exit'
 
+# Switch to the previous directory
 alias -- -='cd -'
 
 # Allow aliases to be with sudo
