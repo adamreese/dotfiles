@@ -6,26 +6,31 @@
   setopt LOCAL_OPTIONS EXTENDED_GLOB
   autoload -U zrecompile
 
+  # until I figure out how to handle *.zwc.old files...
+  zrecomp() {
+    zrecompile -pq ${1} && command rm -f ${1}.zwc.old
+  }
+
   # Function to determine the need of a zcompile. If the .zwc file
   # does not exist, or the base file is newer, we need to compile.
   # These jobs are asynchronous, and will not impact the interactive shell
 
   # zcompile the completion cache; significant speedup.
   for file in ${ZDOTDIR}/.zcomp^(*.zwc)(.); do
-    zrecompile -pq ${file}
+    zrecomp ${file}
   done
 
   # zcompile .zshrc
-  zrecompile -pq ${ZDOTDIR}/.zshrc
+  zrecomp ${ZDOTDIR}/.zshrc
 
   # zcompile all .zsh files in the custom module
   for file in ${ZDOTDIR}/*.zsh(.); do
-    zrecompile -pq ${file}
+    zrecomp ${file}
   done
 
   # zcompile all autoloaded functions
   for file in ${ZDOTDIR}/{completion,functions}/^(*.zwc)(.); do
-    zrecompile -pq ${file}
+    zrecomp ${file}
   done
 
 ) &!
