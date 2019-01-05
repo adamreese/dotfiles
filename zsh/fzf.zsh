@@ -18,7 +18,7 @@ fzf-sel() {
   local opts="--height 40% --reverse ${FZF_DEFAULT_OPTS} ${FZF_CTRL_T_OPTS}"
   while read item; do
     echo -n "${(q)item} "
-  done < <("${=FZF_DEFAULT_COMMAND} | fzf ${opts} $@")
+  done < <(eval "${FZF_DEFAULT_COMMAND} | fzf ${opts} $@")
   local ret=$?
   echo
   return $ret
