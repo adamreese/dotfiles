@@ -7,7 +7,8 @@ vim/autoload/plug.vim.old
 vim/tmp
 vim/vendor
 vim/vimrc.local
+zsh/.zcompdump
 zsh/cache
+zsh/completion/_rustup
 zsh/configs/local.zsh
 zsh/local.zsh
-zsh/.zcompdump
