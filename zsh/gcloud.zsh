@@ -1,25 +1,11 @@
 # zsh gcloud
 # -----------------------------------------------------------------------------
-(( ${+commands[gcloud]} )) || return
 
-gcloud_path="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+: ${GCLOUD_SDK_ROOT:=/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk}
 
-# Completion
-# -----------------------------------------------------------------------------
-autoload -Uz zrecompile
+[[ -e $GCLOUD_SDK_ROOT ]] || return
 
-typeset gcache=${ZSH_CACHE_DIR}/gcloud.zsh
-
-if [[ ! -s ${gcache} || ${commands[gcloud]} -nt ${gcache} ]]; then
-  egrep -v 'compinit' ${gcloud_path}/completion.zsh.inc >| ${gcache}
-fi
-
-zrecompile -p "${gcache}" && command rm -f "${gcache}.zwc.old"
-[[ -s "${gcache}.zwc" ]] || zcompile ${gcache}
-
-emulate bash -c 'source "${gcache}"'
-
-unset gcache gcloud_path
+path[1,0]=${GCLOUD_SDK_ROOT}/bin
 
 # -----------------------------------------------------------------------------
 # vim: ft=zsh :
