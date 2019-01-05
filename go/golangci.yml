@@ -1,0 +1,35 @@
+---
+
+#
+# Global config for golangci-linter
+#
+
+run:
+  concurrency: 4
+  deadline: 2m
+
+output:
+  print-issued-lines: false
+  format: line-number
+
+linters-settings:
+  misspell:
+    locale: US
+
+linters:
+  disable-all: true
+  enable:
+    - deadcode
+    - gocritic
+    - goimports
+    - govet
+    - ineffassign
+    - interfacer
+    - megacheck
+    - misspell
+    - prealloc
+    - scopelint
+    - structcheck
+    - unconvert
+    - unparam
+    - varcheck

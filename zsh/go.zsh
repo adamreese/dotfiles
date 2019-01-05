@@ -17,6 +17,7 @@ gocover() {
 }
 
 alias gml="gometalinter --config=${XDG_CONFIG_HOME}/gometalinter.json"
+alias glci="golangci-lint run --config=${DOTFILES}/go/golangci.yml"
 
 # -----------------------------------------------------------------------------
 # Global alias pipe to panicparse.
@@ -30,8 +31,20 @@ alias -g PP='|& pp'
 
 # https://github.com/y0ssar1an/q
 qq() {
+  emulate -L zsh
+  clear
+
+  local logpath="$TMPDIR/q"
+  if [[ ! -f "$logpath" ]]; then
+    echo 'Q LOG' > "$logpath"
+  fi
+
+  tail -100f -- "$logpath"
+}
+
+rmqq() {
   rm -f "$TMPDIR/q"
-  "${GOPATH}/src/github.com/y0ssar1an/q/q.sh"
+  qq
 }
 
 # -----------------------------------------------------------------------------
