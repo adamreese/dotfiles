@@ -7,8 +7,6 @@
 
 alias k=kubectl
 
-zcompcobra kubectl
-
 # Helm
 # -----------------------------------------------------------------------------
 
@@ -20,11 +18,11 @@ path[1,0]=${GOPATH}/src/k8s.io/helm/bin
 # example: `helm get HL`
 alias -g HL='$(helm last)'
 
-# disable for now
-# zcompcobra helm
-if [[ -s "${ZSH_CACHE_DIR}/helm.zsh" ]]; then
-  emulate bash -c 'source "${ZSH_CACHE_DIR}/helm.zsh"'
-fi
+helm() {
+  unfunction "$0"
+  source <(command helm completion zsh)
+  $0 "$@"
+}
 
 # Brigade
 # -----------------------------------------------------------------------------
