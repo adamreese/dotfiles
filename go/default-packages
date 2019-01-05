@@ -3,6 +3,7 @@ github.com/KyleBanks/depth/cmd/depth
 github.com/Masterminds/glide
 github.com/alecthomas/gocyclo
 github.com/alecthomas/gometalinter
+github.com/alexkohler/prealloc
 github.com/client9/misspell/cmd/misspell
 github.com/cweill/gotests/...
 github.com/davidrjenni/reftools/cmd/fillstruct
@@ -10,8 +11,8 @@ github.com/fatih/gomodifytags
 github.com/fatih/motion
 github.com/fzipp/gocyclo
 github.com/golang/dep/cmd/dep
-github.com/golang/lint/golint
 github.com/golang/protobuf/protoc-gen-go
+github.com/golangci/golangci-lint/cmd/golangci-lint
 github.com/gordonklaus/ineffassign
 github.com/haya14busa/goverage
 github.com/jgautheron/goconst/cmd/goconst
@@ -33,12 +34,15 @@ github.com/opennota/check/cmd/structcheck
 github.com/opennota/check/cmd/varcheck
 github.com/rogpeppe/godef
 github.com/shurcooL/git-branches
+github.com/sourcegraph/go-langserver
 github.com/sqs/goreturns
 github.com/stripe/safesql
 github.com/tools/godep
 github.com/tsenart/deadcode
 github.com/walle/lll/cmd/lll
+github.com/y0ssar1an/q
 github.com/zmb3/gogetdoc
+golang.org/x/lint/golint
 golang.org/x/tools/...
 honnef.co/go/tools/cmd/gosimple
 honnef.co/go/tools/cmd/keyify
