@@ -147,6 +147,10 @@ set diffopt+=filler               " blank lines to keep sides aligned
 set diffopt+=iwhite               " Ignore whitespace changes
 set diffopt+=foldcolumn:0         " Disable foldcolumn
 
+if has('patch-8.1.0360')
+  set diffopt=internal,algorithm:patience,indent-heuristic
+endif
+
 " UI: {{{1
 " -----------------------------------------------------------------------
 
