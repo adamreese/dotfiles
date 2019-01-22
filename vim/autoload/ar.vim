@@ -26,22 +26,6 @@ function! ar#reload_syntax() abort
   redraw!
 endfunction
 
-" Detect project root directory
-function! ar#project_root() abort
-  if exists('b:git_dir') && !empty(b:git_dir)
-    return fnamemodify(b:git_dir, ':h')
-  endif
-  return getcwd()
-endfunction
-
-" Find and source project-specific Vim configs
-function! ar#source_project_config() abort
-  let l:projectfile = findfile('.vimrc.local', expand('%:p').';')
-  if filereadable(l:projectfile)
-    execute 'source' l:projectfile
-  endif
-endfunction
-
 " -----------------------------------------------------------------------
 " Plugins
 " -----------------------------------------------------------------------
@@ -74,7 +58,7 @@ endfunction
 
 " Returns true if the plugin {plugin} is loaded.
 function! ar#is_loaded(plugin) abort
-  return has_key(g:plugs, a:plugin) && stridx(&rtp, g:plugs[a:plugin].dir) >= 0
+  return has_key(g:plugs, a:plugin) && stridx(&runtimepath, g:plugs[a:plugin].dir) >= 0
 endfunction
 
 " Returns true if the plugin {plugin} is installed.

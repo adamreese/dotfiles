@@ -22,6 +22,8 @@ augroup vimrc
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
 
+  autocmd BufRead,BufNewFile * call project#source_config()
+
   " only show cursorline in current and normal window
   autocmd CursorMoved,CursorMovedI,WinLeave * if ! &l:diff | setlocal nocursorline | endif
   autocmd CursorHold,CursorHoldI,WinEnter   * if ! &l:diff | setlocal cursorline   | endif

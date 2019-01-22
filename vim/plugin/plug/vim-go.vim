@@ -8,7 +8,6 @@ if !ar#is_loaded('vim-go') | finish | endif
 
 let g:go_decls_mode            = 'fzf'
 let g:go_def_mode              = 'godef'
-let g:go_echo_command_info     = 0
 let g:go_fmt_command           = 'goimports'
 let g:go_fmt_fail_silently     = 1
 let g:go_gocode_propose_source = 1
@@ -18,7 +17,7 @@ let g:go_term_mode             = 'split'
 
 let g:go_gocode_unimported_packages = 1  " Include suggestions for unimported packages.
 
-let s:pkgroot = substitute(ar#project_root(), expand('$GOPATH/src/'), '', '')
+let s:pkgroot = substitute(project#root(), expand('$GOPATH/src/'), '', '')
 if !empty(s:pkgroot)
   let g:go_fmt_options = { 'goimports': '-local ' . s:pkgroot }
 endif
