@@ -15,6 +15,14 @@ if executable('/usr/local/bin/python3')
   let g:python3_host_prog = '/usr/local/bin/python3'
 endif
 
+if executable('/usr/local/bin/neovim-node-host')
+  let g:node_host_prog = '/usr/local/bin/neovim-node-host'
+endif
+
+if executable('/usr/local/bin/neovim-ruby-host')
+  let g:ruby_host_prog = exepath('neovim-ruby-host')
+endif
+
 " -----------------------------------------------------------------------
 " Vim Configuration
 " -----------------------------------------------------------------------
