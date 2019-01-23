@@ -6,7 +6,7 @@ let g:plug_pwindow = 'vertical rightbelow new'
 let g:plug_window  = 'tabnew'
 
 " Plug Upgrade and Update
-command! PU PlugUpgrade | PlugUpdate
+command! PU source $MYVIMRC | PlugUpgrade | PlugUpdate
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
