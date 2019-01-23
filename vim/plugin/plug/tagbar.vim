@@ -3,7 +3,9 @@
 " =======================================================================
 if !ar#is_installed('tagbar') | finish | endif
 
-noremap <leader>tt :<C-u>TagbarToggle<CR>
+let g:tagbar_silent = v:true
+
+noremap <silent><leader>tt :<C-u>TagbarToggle<CR>
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
