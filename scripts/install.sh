@@ -92,7 +92,6 @@ symlink_files() {
   # vim
   symlink vim                  .vim
   symlink vim                  .config/nvim
-  symlink vim/gvimrc           .gvimrc
 
   # ruby
   symlink ruby/gemrc           .gemrc
