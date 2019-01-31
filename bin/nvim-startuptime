@@ -1,5 +1,5 @@
-#!/bin/bash
-set -ex
+#!/usr/bin/env bash
+set -euo pipefail
 
 DATE=$(command date +%F-%H%M%S)
 STARTUPTIME_PATH=~/.local/share/nvim/profile/startuptime

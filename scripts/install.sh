@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-
-# Bash 'Strict Mode'
-# http://redsymbol.net/articles/unofficial-bash-strict-mode
 set -euo pipefail
-IFS=$'\n\t'
 
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
 [[ -e "${DOTFILES}" ]] || die "${DOTFILES} directory does not exist"
