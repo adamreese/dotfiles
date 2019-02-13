@@ -16,7 +16,7 @@ exit $?
 # encoding: utf-8
 
 require 'json'
-FILE = '~/Library/Application Support/Google/Chrome/Profile 1/Bookmarks'
+FILE = '~/Library/Application Support/Google/Chrome/Profile 2/Bookmarks'
 CJK  = /\p{Han}|\p{Katakana}|\p{Hiragana}|\p{Hangul}/
 
 def build parent, json
