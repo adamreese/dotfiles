@@ -9,3 +9,4 @@ vendor/
 tags
 
 *.pb.go
+*.lock
