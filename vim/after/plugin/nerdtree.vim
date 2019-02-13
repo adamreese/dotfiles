@@ -5,7 +5,7 @@
 " let g:NERDTreeAutoDeleteBuffer=1
 let g:NERDTreeAutoDeleteBuffer    = 1
 let g:NERDTreeHighlightCursorline = 0
-let g:NERDTreeIgnore              = ['^\.git$', '\.zwc$', '\.pyc$', '^BUILD$', '^tags$', '\.old$']
+let g:NERDTreeIgnore              = ['^\.git$', '\.zwc$', '\.pyc$', '^BUILD$[[file]]', '^tags$[[file]]', '\.old$']
 let g:NERDTreeMapJumpNextSibling  = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling  = '<Nop>'
 let g:NERDTreeMinimalUI           = 1
