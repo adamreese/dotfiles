@@ -22,6 +22,13 @@ let g:gitgutter_sign_removed_first_line = '﹉'
 
 nnoremap <leader>tgg :<C-u>GitGutterToggle<CR>
 
+" Highlights
+" -----------------------------------------------------------------------
+
+highlight! link GitGutterDelete diffRemoved
+highlight! link GitGutterAdd    diffAdded
+highlight! link GitGutterChange diffLine
+
 " Modeline {{{1
 " -----------------------------------------------------------------------
 " vim: foldmethod=marker
