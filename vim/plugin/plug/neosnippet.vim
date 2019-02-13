@@ -26,10 +26,10 @@ xmap <special> <C-k> <Plug>(neosnippet_expand_target)
 
 " Autocmds
 " -----------------------------------------------------------------------
-augroup neosnippet
+augroup ar_neosnippet
   autocmd!
   " Remove remaining markers when leaving insert mode
-  autocmd neosnippet InsertLeave * NeoSnippetClearMarkers
+  autocmd InsertLeave * NeoSnippetClearMarkers
 augroup END
 
 let &cpoptions = s:cpo_save

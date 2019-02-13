@@ -24,10 +24,9 @@ function! s:neomake_run() abort
   Neomake
 endfunction
 
-augroup vimrc_neomake
+augroup ar_neomake
   autocmd!
   autocmd BufWritePost * call <SID>neomake_run()
-  autocmd VimLeave * let g:neomake_verbose = 0
 augroup END
 
 " Modeline {{{1

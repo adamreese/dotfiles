@@ -63,9 +63,11 @@ let g:lightline = {
 
 let g:tagbar_status_func = 'statusline#tagbar_status'
 
-augroup lightline_neovim
+augroup ar_lightline
   autocmd!
-  autocmd User NeomakeCountsChanged call lightline#update()
+  autocmd User NeomakeJobFinished call lightline#update()
+  autocmd User NeomakeJobInit     call lightline#update()
+  autocmd User FzfStatusLine      call lightline#update_once()
 augroup END
 
 " Modeline {{{1
