@@ -42,6 +42,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'lvht/tagbar-markdown'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
 Plug 'mileszs/ack.vim'
 Plug 'osyo-manga/vim-anzu'
