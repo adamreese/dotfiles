@@ -67,7 +67,6 @@ zstyle ':completion:*:functions'       ignored-patterns '(_*|pre(cmd|exec))' 'pr
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # directories
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
