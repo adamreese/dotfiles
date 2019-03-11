@@ -3,23 +3,30 @@
 " =======================================================================
 if !ar#is_loaded('deoplete.nvim') | finish | endif
 
-let g:echodoc_enable_at_startup = 1
+let g:echodoc_enable_at_startup  = 1
+let g:deoplete#enable_at_startup = 1
+let s:deoplete_custom_option = {
+      \ 'auto_complete_delay': 5,
+      \ 'auto_refresh_delay': 30,
+      \ 'ignore_sources': {
+      \   '_': ['around', 'dictionary', 'omni', 'tag'],
+      \   'go': ['around', 'dictionary', 'omni', 'tag', 'buffer', 'member'],
+      \   'sh': ['around', 'dictionary', 'omni', 'tag'],
+      \   'yaml': ['around', 'dictionary', 'omni', 'tag', 'neosnippet'],
+      \   'zsh': ['around', 'dictionary', 'omni', 'tag'],
+      \ },
+      \ 'num_processes': 6,
+      \ 'ignore_case': v:true,
+      \ 'smart_case': v:true,
+      \ }
 
-let g:deoplete#auto_complete_delay        = 0
-let g:deoplete#auto_refresh_delay         = 100
-let g:deoplete#enable_at_startup          = 1
-let g:deoplete#file#enable_buffer_path    = 1
-let g:deoplete#max_abbr_width             = 0
-let g:deoplete#max_menu_width             = 0
-
-" go
-let g:deoplete#sources#go#align_class    = 1
-let g:deoplete#sources#go#gocode_binary  = $GOPATH.'/bin/gocode'
-let g:deoplete#sources#go#json_directory = g:cache_dir . 'deoplete/go/darwin_amd64'
-let g:deoplete#sources#go#package_dot    = 1
-let g:deoplete#sources#go#pointer        = 1
-let g:deoplete#sources#go#sort_class     = ['func', 'type', 'var', 'const', 'package']
-let g:deoplete#sources#go#use_cache      = 0
+" deoplete-go
+let g:deoplete#sources#go#gocode_binary       = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#package_dot         = 1
+let g:deoplete#sources#go#pointer             = 1
+let g:deoplete#sources#go#sort_class          = ['func', 'type', 'var', 'const', 'package']
+let g:deoplete#sources#go#builtin_objects     = 1
+let g:deoplete#sources#go#auto_goos           = 1
 
 " ternjs
 let g:deoplete#sources#ternjs#types            = 1
@@ -39,52 +46,43 @@ let g:deoplete#sources#ternjs#filetypes = [
 let g:necovim#complete_functions     = get(g:, 'necovim#complete_functions', {})
 let g:necovim#complete_functions.Ref = 'ref#complete'
 
-let g:deoplete#ignore_sources            = get(g:, 'deoplete#ignore_sources', {})
-let g:deoplete#ignore_sources._          = ['around']
-let g:deoplete#ignore_sources.go         = ['buffer', 'dictionary', 'member', 'omni', 'tag', 'syntax', 'around']
-let g:deoplete#ignore_sources.javascript = ['omni']
-let g:deoplete#ignore_sources.gitcommit  = ['neosnippet']
+call deoplete#custom#option(s:deoplete_custom_option)
 
-function! s:init() abort
-  if get(g:, 'enable_debug', 0)
-    let g:deoplete#enable_profile = 1
-    call deoplete#custom#source('deoplete', 'debug_enabled', 1)
-    call deoplete#custom#source('buffer', 'debug_enabled', 1)
-    call deoplete#custom#source('core', 'debug_enabled', 1)
-    call deoplete#custom#source('go', 'debug_enabled', 1)
-    call deoplete#enable_logging('DEBUG', g:cache_dir . 'deoplete.log')
-  endif
+call deoplete#custom#source('_', 'converters', [
+      \ 'converter_auto_paren',
+      \ 'converter_remove_overlap',
+      \ 'converter_truncate_abbr',
+      \ 'converter_truncate_menu',
+      \ ])
 
-  call deoplete#custom#source('_', 'converters', [
-        \ 'converter_auto_paren',
-        \ 'converter_remove_overlap',
-        \ 'converter_truncate_abbr',
-        \ 'converter_truncate_menu',
-        \ ])
+call deoplete#custom#source('omni', 'functions', { 'sh': 'LanguageClient#complete'})
 
-  call deoplete#custom#source('_', 'min_pattern_length', 1)
-  call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
+call deoplete#custom#source('go', 'sorters', [])
 
-  call deoplete#custom#source('go', 'sorters', [])
+call deoplete#custom#source('buffer', 'mark', 'buffer')
+call deoplete#custom#source('file',   'mark', 'file')
+call deoplete#custom#source('go',     'mark', '')
+call deoplete#custom#source('omni',   'mark', 'omni')
+call deoplete#custom#source('ternjs', 'mark', 'tern')
 
-  call deoplete#custom#source('buffer', 'mark', 'buffer')
-  call deoplete#custom#source('file',   'mark', 'file')
-  call deoplete#custom#source('go',     'mark', '')
-  call deoplete#custom#source('omni',   'mark', 'omni')
-  call deoplete#custom#source('ternjs', 'mark', 'tern')
+call deoplete#custom#source('go',         'rank', 9999)
+call deoplete#custom#source('ternjs',     'rank', 9999)
+call deoplete#custom#source('buffer',     'rank', 0)
+call deoplete#custom#source('neosnippet', 'rank', 0)
 
-  call deoplete#custom#source('go',     'rank', 9999)
-  call deoplete#custom#source('ternjs', 'rank', 9999)
+call deoplete#custom#source('neosnippet', 'disabled_syntaxes', ['goComment'])
+call deoplete#custom#source('vim',        'disabled_syntaxes', ['Comment'])
 
-  call deoplete#custom#source('neosnippet', 'disabled_syntaxes', ['goComment'])
-  call deoplete#custom#source('vim',        'disabled_syntaxes', ['Comment'])
+if get(g:, 'enable_debug', 0)
+  let g:deoplete#enable_profile = 1
+  call deoplete#custom#source('deoplete', 'debug_enabled', 1)
+  call deoplete#custom#source('buffer', 'debug_enabled', 1)
+  call deoplete#custom#source('core', 'debug_enabled', 1)
+  call deoplete#custom#source('go', 'debug_enabled', 1)
+  call deoplete#enable_logging('DEBUG', g:cache_dir . 'deoplete.log')
+endif
 
-endfunction
-
-augroup vimrc_deoplete
-  autocmd!
-  autocmd VimEnter * try | call s:init() | catch | endtry
-augroup END
+inoremap <expr><C-g> deoplete#refresh()
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
