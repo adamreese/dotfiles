@@ -12,7 +12,7 @@ alias k=kubectl
 
 # export HELM_HOST=:44134
 
-path[1,0]=${GOPATH}/src/k8s.io/helm/bin
+path[1,0]=${GOPATH}/src/helm.sh/helm/bin
 
 # HL global alias
 # example: `helm get HL`

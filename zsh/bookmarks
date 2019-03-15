@@ -1,7 +1,7 @@
 $(go env GOROOT)/src|gosrc
 $GOPATH/src/github.com/Azure/brigade|brigade
 $GOPATH/src/github.com|go
-$GOPATH/src/k8s.io/helm|helm
+$GOPATH/src/helm.sh/helm|helm
 $GOPATH/src/k8s.io/kubernetes|kube
 $HOME/.dotfiles|dotfiles
 /usr/local/Cellar|cellar
