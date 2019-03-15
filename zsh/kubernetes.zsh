@@ -14,9 +14,12 @@ alias k=kubectl
 
 path[1,0]=${GOPATH}/src/helm.sh/helm/bin
 
+alias helm2="${GOPATH}/src/k8s.io/helm/bin/helm"
+
 # HL global alias
 # example: `helm get HL`
 alias -g HL='$(helm last)'
+
 
 helm() {
   unfunction "$0"
