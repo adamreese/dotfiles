@@ -18,7 +18,7 @@ alias apt-get='sudo apt-get'
 alias grep='grep -i --color=auto'
 
 # ag
-alias agp='ag --pager="less -iFMRSX"'
+alias agp='ag --hidden --pager="less -iFMRSX"'
 alias agh='ag --hidden'
 
 # Git
