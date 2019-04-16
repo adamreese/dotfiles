@@ -14,21 +14,8 @@ let g:neomake_info_sign    = { 'text': '❯', 'texthl': 'NeomakeInfoSign' }
 
 let g:neomake_virtualtext_current_error = 0
 
-let g:neomake_go_gometalinter_args = ['--config='.$HOME.'/.config/gometalinter.json']
 let g:neomake_go_enabled_makers = ['go', 'govet']
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_go_golangcilint_maker = {
-  \   'exe': 'golangci-lint',
-  \   'append_file': 0,
-  \   'cwd': '%:h',
-  \   'errorformat':
-  \     '%f:%l:%c: %m,' .
-  \     '%f:%l:: %m',
-  \   'args': [
-  \     'run',
-  \     '--config='.$HOME.'/.dotfiles/go/golangci.yml',
-  \   ],
-  \ }
 
 function! s:neomake_run() abort
   if &buftype ==# 'nofile'    | return | endif
