@@ -47,11 +47,10 @@ setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
 # K = exit on CTRL-C
 # M = verbose prompt
 # R = ANSI color support
-# S = chop long lines (rather than wrap them onto next line)
 # X = suppress alternate screen
-export LESS='iFKMRSX'
+export LESS='iFKMRX'
 # disable less history
-export LESSHISTFILE=${XDG_CACHE_HOME}/lesshistory
+export LESSHISTFILE=${XDG_DATA_HOME}/less/history
 export LESSKEY=${XDG_CONFIG_HOME}/less/less
 
 if (( $#commands[(i)lesspipe(|.sh)] )); then
