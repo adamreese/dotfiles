@@ -138,6 +138,7 @@ set sidescroll=1
 set sidescrolloff=15
 set splitbelow                       " Split horizontal windows below to the current windows
 set splitright                       " Split vertical windows right to the current windows
+set virtualedit=block                " Allow virtual editing in Visual block mode
 
 " Diff: {{{1
 " -----------------------------------------------------------------------
