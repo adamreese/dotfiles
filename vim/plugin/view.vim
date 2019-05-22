@@ -7,7 +7,7 @@ scriptencoding utf-8
 " -----------------------------------------------------------------------
 let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
 let &fillchars='diff:⣿,vert:│,fold: '
-if g:nvim
+if has('nvim')
   let &fillchars='eob: '
 endif
 let &showbreak='↳ '
