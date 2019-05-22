@@ -14,9 +14,6 @@ let g:cache_dir = expand('$HOME/.cache/vim')
 let g:data_dir  = expand('$HOME/.local/share/vim')
 let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 
-let g:nvim = has('nvim')
-let g:tmux = exists('$TMUX')
-
 " -----------------------------------------------------------------------
 " Plug: {{{1
 " -----------------------------------------------------------------------
@@ -33,7 +30,7 @@ Plug 'adamreese/vim-hybrid'
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
 Plug 'blueyed/vim-qf_resize'
 Plug 'chrisbra/unicode.vim'
-Plug 'christoomey/vim-tmux-navigator', ar#plug_if(g:tmux)
+Plug 'christoomey/vim-tmux-navigator', ar#plug_if(exists('$TMUX'))
 Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'heavenshell/vim-jsdoc',          { 'on': ['<Plug>(jsdoc)', 'JsDoc'] }
@@ -87,18 +84,31 @@ Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
 
 " -- Completion ---------------------------------------------------------
+let g:ar_use_coc = v:true
+
+function! WithCoc(...) abort
+  return call('ar#plug_if', [ has('nvim') && g:ar_use_coc ] + a:000)
+endfunction
+
+function! WithDeoplete(...) abort
+  return call('ar#plug_if', [ has('nvim') && !g:ar_use_coc ] + a:000)
+endfunction
+
+Plug 'neoclide/coc.nvim', WithCoc({'do': 'yarn install --frozen-lockfile'})
+Plug 'neoclide/coc-neco', WithCoc()
+
+Plug 'Shougo/deoplete.nvim',           WithDeoplete({ 'do': ':UpdateRemotePlugins' })
+Plug 'carlitux/deoplete-ternjs',       WithDeoplete({ 'do': ':UpdateRemotePlugins' })
+Plug 'deoplete-plugins/deoplete-zsh',  WithDeoplete()
+Plug 'deoplete-plugins/deoplete-go',   WithDeoplete({ 'for': 'go', 'do': 'make'})
+
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
-
-Plug 'Shougo/deoplete.nvim',           ar#plug_if(g:nvim, { 'do': ':UpdateRemotePlugins' })
 Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim',                ar#plug_if(g:nvim, { 'for': 'vim' })
-Plug 'carlitux/deoplete-ternjs',       ar#plug_if(g:nvim, { 'do': ':UpdateRemotePlugins' })
-Plug 'mhartington/nvim-typescript',    ar#plug_if(g:nvim, { 'do': './install.sh' })
-Plug 'zchee/deoplete-go',              ar#plug_if(g:nvim, { 'for': 'go', 'do': 'make'})
-Plug 'zchee/deoplete-zsh',             ar#plug_if(g:nvim)
+Plug 'Shougo/neco-vim',                ar#plug_if(has('nvim'), { 'for': 'vim' })
+" Plug 'mhartington/nvim-typescript',    ar#plug_if(has('nvim') { 'do': './install.sh' })
 
 call plug#end()
 
