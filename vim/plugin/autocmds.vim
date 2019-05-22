@@ -14,7 +14,8 @@ augroup ar_vimrc
   autocmd BufWritePre * call whitespace#clean()
 
   " disable paste
-  autocmd InsertLeave * if &paste | set nopaste | echo 'nopaste' | endif
+  " https://github.com/neovim/neovim/issues/7994
+  autocmd InsertLeave * set nopaste
 
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
@@ -31,8 +32,11 @@ augroup END
 augroup ar_cursorline
   autocmd!
   " only show cursorline in current and normal window
-  autocmd CursorMoved,CursorMovedI,WinLeave * if ! &l:diff | setlocal nocursorline | endif
-  autocmd CursorHold,CursorHoldI,WinEnter   * if ! &l:diff | setlocal cursorline   | endif
+  autocmd WinLeave,InsertEnter * setlocal nocursorline
+  autocmd WinEnter,InsertLeave *
+        \ if &filetype !=# 'qf' && &buftype !=# 'terminal' && !&diff |
+        \   setlocal cursorline |
+        \ endif
 augroup END
 
 augroup ar_diff
@@ -48,18 +52,15 @@ augroup ar_autoread
   " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
   " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
   autocmd BufEnter,CursorMoved,CursorMovedI,CursorHold,CursorHoldI * if mode() != 'c' | silent! checktime | endif
-
-  " Notification after file change
-  " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
-  autocmd FileChangedShellPost *
-        \ echohl WarningMsg | echo 'File changed on disk. Buffer reloaded.' | echohl None
 augroup END
 
-augroup ar_terminal
-  autocmd!
-  autocmd TermOpen * startinsert!
-  autocmd TermClose term://* stopinsert
-augroup END
+if has('nvim')
+  augroup ar_terminal
+    autocmd!
+    autocmd TermOpen * startinsert!
+    autocmd TermClose term://* stopinsert
+  augroup END
+endif
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
