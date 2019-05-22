@@ -8,16 +8,11 @@ set cpoptions&vim
 
 " Settings
 " -----------------------------------------------------------------------
-if g:nvim
-  let $FZF_DEFAULT_OPTS = ' --inline-info'
+if has('nvim')
+  let $FZF_DEFAULT_OPTS = ' --inline-info --bind ctrl-a:select-all,ctrl-d:deselect-all'
 endif
 
-let g:fzf_action = {
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit',
-      \ 'ctrl-t': 'tabedit',
-      \ 'ctrl-a': 'select-all',
-      \ }
+
 let g:fzf_layout          = { 'down': '16' }
 let g:fzf_buffers_jump    = 1
 let g:fzf_nvim_statusline = 0
@@ -51,6 +46,21 @@ nnoremap <silent>[FZF]T     :<C-U>Tags<CR>
 nnoremap <silent>[FZF]m     :<C-U>Modified<CR>
 nnoremap <silent>[FZF]ev    :<C-U>VimFiles<CR>
 nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
+
+" -----------------------------------------------------------------------
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-t': 'tabedit',
+      \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ }
 
 " Commands
 " -----------------------------------------------------------------------
@@ -88,7 +98,7 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=* Agr
       \ call fzf#vim#ag_raw(<q-args>, s:fzf_preview(<bang>0), <bang>0)
 
-let s:rg_command = 'rg --color=always --column --hidden --line-number --no-heading '
+let s:rg_command = 'rg --color=always --column --hidden --line-number --no-heading --ignore-file ~/.agignore '
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(s:rg_command . shellescape(<q-args>), 1, s:fzf_preview(<bang>0), <bang>0)
 
