@@ -26,6 +26,12 @@ vnoremap . :norm.<CR>
 noremap j gj
 noremap k gk
 
+" Remap H and L (top, bottom of screen to left and right end of line).
+nnoremap H g^
+nnoremap L g$
+vnoremap H g^
+vnoremap L g_
+
 " Better split switching
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
