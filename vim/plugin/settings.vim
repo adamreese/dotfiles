@@ -154,6 +154,8 @@ endif
 " UI: {{{1
 " -----------------------------------------------------------------------
 
+set concealcursor=niv
+set conceallevel=2
 set display=lastline
 set laststatus=2
 set list                          " Display tabs and trailing spaces visually
