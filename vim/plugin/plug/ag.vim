@@ -3,7 +3,7 @@
 " =======================================================================
 if !executable('ag') | finish | end
 
-let &grepprg = 'ag --nocolor --nogroup --hidden --vimgrep'
+let &grepprg = 'ag --nocolor --nogroup --hidden --column'
 let g:ackprg = 'ag --nocolor --nogroup --hidden --column'
 
 noremap <leader>a  :<C-u>Ack<space>
