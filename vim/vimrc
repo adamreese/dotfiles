@@ -76,7 +76,6 @@ Plug 'mhinz/vim-lookup'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
-Plug 'sebdah/vim-delve',               { 'for': 'go' }
 Plug 'tbastos/vim-lua'
 Plug 'ternjs/tern_for_vim',            { 'do': 'yarn install' }
 Plug 'tmux-plugins/vim-tmux'
