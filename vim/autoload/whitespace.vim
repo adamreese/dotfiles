@@ -11,7 +11,6 @@ function! whitespace#clean() abort
   execute '%s/\s\+$//e'
 
   let @/=l:search
-  nohlsearch
   call winrestview(l:pos)
 endfunction
 
