@@ -11,23 +11,16 @@ scriptencoding utf-8
 let g:gitgutter_enabled = get(g:, 'gitgutter_enabled', 0)
 
 let g:gitgutter_diff_args               = '--ignore-all-space'
-let g:gitgutter_sign_added              = '┃'
-let g:gitgutter_sign_modified           = '┃'
-let g:gitgutter_sign_modified_removed   = '┃'
-let g:gitgutter_sign_removed            = '﹍'
-let g:gitgutter_sign_removed_first_line = '﹉'
+let g:gitgutter_sign_added              = '│'
+let g:gitgutter_sign_modified           = '│'
+let g:gitgutter_sign_modified_removed   = '│'
+let g:gitgutter_sign_removed            = '│'
+let g:gitgutter_sign_removed_first_line = '│'
 
 " Mappings
 " -----------------------------------------------------------------------
 
 nnoremap <leader>tgg :<C-u>GitGutterToggle<CR>
-
-" Highlights
-" -----------------------------------------------------------------------
-
-highlight! link GitGutterDelete diffRemoved
-highlight! link GitGutterAdd    diffAdded
-highlight! link GitGutterChange diffLine
 
 " Modeline {{{1
 " -----------------------------------------------------------------------
