@@ -28,6 +28,8 @@ endfunction
 augroup ar_neomake
   autocmd!
   autocmd BufWritePost * call <SID>neomake_run()
+  autocmd User NeomakeJobFinished call lightline#update()
+  autocmd User NeomakeJobInit     call lightline#update()
 augroup END
 
 " Modeline {{{1
