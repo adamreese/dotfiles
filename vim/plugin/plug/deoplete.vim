@@ -79,7 +79,7 @@ if get(g:, 'enable_debug', 0)
   call deoplete#custom#source('buffer', 'debug_enabled', 1)
   call deoplete#custom#source('core', 'debug_enabled', 1)
   call deoplete#custom#source('go', 'debug_enabled', 1)
-  call deoplete#enable_logging('DEBUG', g:cache_dir . 'deoplete.log')
+  call deoplete#enable_logging('DEBUG', g:cache_dir . '/deoplete.log')
 endif
 
 inoremap <expr><C-g> deoplete#refresh()
