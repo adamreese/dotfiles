@@ -69,6 +69,7 @@ nnoremap <leader>sv :<C-u>source $MYVIMRC<CR>
 " Fast saving
 nnoremap <silent><leader>w :<C-u>write!<CR>
 nnoremap <silent><leader>q :<C-u>quit!<CR>
+nnoremap <silent><leader>Q :<C-u>qall!<CR>
 
 " Close quickfix/location window
 nnoremap <leader>c :<C-u>cclose<bar>lclose<CR>
