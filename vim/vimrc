@@ -59,7 +59,9 @@ Plug 'tweekmonster/startuptime.vim'
 
 " -- Version Control ---------------------------------------------------
 Plug 'airblade/vim-gitgutter'
+Plug 'hotwatermorning/auto-git-diff'
 Plug 'rhysd/committia.vim'
+Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
