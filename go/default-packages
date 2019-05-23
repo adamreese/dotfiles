@@ -2,7 +2,6 @@ github.com/GoASTScanner/gas
 github.com/KyleBanks/depth/cmd/depth
 github.com/Masterminds/glide
 github.com/alecthomas/gocyclo
-github.com/alecthomas/gometalinter
 github.com/alexkohler/prealloc
 github.com/client9/misspell/cmd/misspell
 github.com/cweill/gotests/...

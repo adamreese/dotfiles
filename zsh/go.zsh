@@ -16,7 +16,6 @@ gocover() {
   go test -coverprofile "${coverprofile}" "$@" && go tool cover -html "${coverprofile}"
 }
 
-alias gml="gometalinter --config=${XDG_CONFIG_HOME}/gometalinter.json"
 alias glci="golangci-lint run --config=${DOTFILES}/go/golangci.yml"
 
 # -----------------------------------------------------------------------------

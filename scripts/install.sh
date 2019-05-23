@@ -96,9 +96,6 @@ symlink_files() {
   # git
   symlink git                  .config/git
 
-  # go
-  symlink go/gometalinter.json .config/gometalinter.json
-
   # javascript
   symlink node/tern-config     .tern-config
 
