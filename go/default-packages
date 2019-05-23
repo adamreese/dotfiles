@@ -35,7 +35,6 @@ github.com/opennota/check/cmd/structcheck
 github.com/opennota/check/cmd/varcheck
 github.com/rogpeppe/godef
 github.com/shurcooL/git-branches
-github.com/sourcegraph/go-langserver
 github.com/sqs/goreturns
 github.com/stripe/safesql
 github.com/tools/godep
