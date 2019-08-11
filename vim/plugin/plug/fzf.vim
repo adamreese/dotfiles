@@ -12,10 +12,9 @@ if has('nvim')
   let $FZF_DEFAULT_OPTS = ' --inline-info --bind ctrl-a:select-all,ctrl-d:deselect-all'
 endif
 
-
 let g:fzf_layout          = { 'down': '16' }
 let g:fzf_buffers_jump    = 1
-let g:fzf_nvim_statusline = 0
+let g:fzf_history_dir     = g:data_dir . '/fzf-history'
 let g:fzf_colors = {
       \ 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
@@ -43,7 +42,7 @@ nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
 nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
 nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
 nnoremap <silent>[FZF]T     :<C-U>Tags<CR>
-nnoremap <silent>[FZF]m     :<C-U>Modified<CR>
+nnoremap <silent>[FZF]m     :<C-U>GFiles?<CR>
 nnoremap <silent>[FZF]ev    :<C-U>VimFiles<CR>
 nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
 
@@ -74,12 +73,6 @@ command! -bang Plugs call fzf#run(fzf#wrap('Plugs', extend({
       \ 'sink':    'tabedit',
       \ }, g:fzf_layout), <bang>0))
 
-command! Modified call fzf#run(fzf#wrap('Modified',
-      \   fzf#vim#with_preview(extend({
-      \     'source': 'git ls-files --exclude-standard --others --modified',
-      \   }, g:fzf_layout), 'right:50%')
-      \ ))
-
 command! VimFiles call fzf#run(fzf#wrap('VimFiles',
       \   fzf#vim#with_preview(extend({
       \     'dir': g:vim_dir,
@@ -101,6 +94,11 @@ command! -bang -nargs=* Agr
 let s:rg_command = 'rg --color=always --column --hidden --line-number --no-heading --ignore-file ~/.agignore '
 command! -bang -nargs=* Rg
       \ call fzf#vim#grep(s:rg_command . shellescape(<q-args>), 1, s:fzf_preview(<bang>0), <bang>0)
+
+augroup ar_fzf
+  autocmd!
+  autocmd User FzfStatusLine silent
+augroup END
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
