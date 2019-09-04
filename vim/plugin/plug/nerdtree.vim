@@ -1,8 +1,9 @@
 " =======================================================================
-" plugin/plug-nerdtree.vim
+" plugin/plug/nerdtree.vim
 " =======================================================================
+scriptencoding utf-8
 
-" let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeStatusline          = -1
 let g:NERDTreeAutoDeleteBuffer    = 1
 let g:NERDTreeHighlightCursorline = 0
 let g:NERDTreeIgnore              = ['^\.git$', '\.zwc$', '\.pyc$', '^BUILD$[[file]]', '^tags$[[file]]', '\.old$']
