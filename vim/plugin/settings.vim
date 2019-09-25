@@ -160,6 +160,8 @@ set splitbelow                       " Split horizontal windows below to the cur
 set splitright                       " Split vertical windows right to the current windows
 set virtualedit=block                " Allow virtual editing in Visual block mode
 
+set tags^=./.git/tags;
+
 " Diff: {{{1
 " -----------------------------------------------------------------------
 
