@@ -56,6 +56,9 @@ alias  beg='bundle-exec-hack guard'
 alias  bil='bundle install --local'
 alias brff='bundle-exec-hack rspec --fail-fast'
 
+# ssh
+alias sshtmp='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
 # aliases inside tmux session
 if [[ $TERM == *tmux* ]]; then
   alias :sp='tmux split-window'
