@@ -79,17 +79,11 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-# [S]plit comma or colin separated data onto separate lines
-alias -g S="| tr ',:' '\n'"
-
-alias -g H='| head'
-alias -g T='| tail'
 alias -g G='| grep'
-alias -g L='| less'
+alias -g H='| head'
 alias -g J='| jq .'
-
-# [D]iff-so-fancy
-alias -g D='| diff-so-fancy | less --tabs=4 -RFX'
+alias -g L='| less'
+alias -g T='| tail'
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
