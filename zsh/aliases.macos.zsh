@@ -9,8 +9,8 @@ alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
 
 # Update and cleanup brew
-alias     bubu='brew update && brew upgrade && brew cleanup'
-alias    bubua='brew update && brew upgrade --fetch-HEAD && brew cleanup'
+alias     bubu='brew update && brew upgrade && brew cleanup -s'
+alias    bubua='brew update && brew upgrade --fetch-HEAD && brew cleanup -s'
 alias services='brew services'
 
 # Flush dns cache
