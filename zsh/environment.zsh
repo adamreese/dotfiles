@@ -63,6 +63,8 @@ if [[ -d /usr/local/share/zsh/help ]]; then
   HELPDIR=/usr/local/share/zsh/help
 fi
 
+export MANWIDTH=${MANWIDTH:-120}
+
 # Editor
 # -----------------------------------------------------------------------------
 export EDITOR=vim
