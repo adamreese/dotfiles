@@ -7,13 +7,11 @@ path+=${HOME}/.cargo/bin
 
 (( ${+commands[rustup]} )) || return
 
-() {
-  local cache=${ZDOTDIR:?}/completion/_rustup
-
-  if [[ ! -s $cache || ${commands[rustup]} -nt $cache ]]; then
-    rustup completions zsh >| $cache
-  fi
-} || echo 'Failed to write rustup completion' >&2
+rustup() {
+  unfunction "$0"
+  source <(command rustup completions zsh)
+  $0 "$@"
+}
 
 # -----------------------------------------------------------------------------
 # vim: ft=zsh :
