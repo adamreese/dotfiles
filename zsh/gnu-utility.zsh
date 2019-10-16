@@ -1,8 +1,9 @@
 # zsh gnu untility
 # -----------------------------------------------------------------------------
+(( ${+commands[gwhoami]} )) || return
 
-if (( $+commands[gwhoami] )); then
-  _gnu_utility_cmds=(
+function {
+  local _gnu_utility_cmds=(
     # Coreutils
     'base64' 'basename' 'chcon' 'chgrp' 'chmod' 'chown'
     'chroot' 'cksum' 'comm' 'cp' 'csplit' 'cut' 'date' 'dd' 'df'
@@ -36,18 +37,18 @@ if (( $+commands[gwhoami] )); then
 
   # Wrap GNU utilities in functions.
   for _gnu_utility_cmd in "${_gnu_utility_cmds[@]}"; do
-    _gnu_utility_pcmd="g${_gnu_utility_cmd}"
-    if (( ${+commands[${_gnu_utility_pcmd}]} )); then
-      eval "
-        function ${_gnu_utility_cmd} {
-          '${commands[${_gnu_utility_pcmd}]}' \"\$@\"
-        }
-      "
+    if (( ! $+builtins[${_gnu_utility_cmd}] )); then
+      _gnu_utility_pcmd="g${_gnu_utility_cmd}"
+      if (( ${+commands[${_gnu_utility_pcmd}]} )); then
+        eval "
+          function ${_gnu_utility_cmd} {
+            '${commands[${_gnu_utility_pcmd}]}' \"\$@\"
+          }
+        "
+      fi
     fi
   done
-
-  unset _gnu_utility_{cmds,cmd,pcmd}
-fi
+}
 
 # -----------------------------------------------------------------------------
 # vim:ft=zsh
