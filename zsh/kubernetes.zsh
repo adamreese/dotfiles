@@ -41,6 +41,3 @@ path[1,0]=${GOPATH}/src/github.com/Azure/brigade/bin
 mkenv() {
   source <(minikube docker-env "$@")
 }
-
-# -----------------------------------------------------------------------------
-# vim: ft=zsh :

@@ -31,6 +31,3 @@ function! folding#text() abort
 
   return l:left . l:fill . l:right . repeat(' ', 100)
 endfunction
-
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

@@ -124,6 +124,3 @@ zle-line-finish() {
 }
 zle -N zle-line-init
 zle -N zle-line-finish
-
-# -----------------------------------------------------------------------------
-# vim:ft=zsh

@@ -19,6 +19,3 @@ fi
 if (( ${+commands[journalctl]} )); then
   alias jj='journalctl'
 fi
-
-# -----------------------------------------------------------------------------
-# vim:ft=zsh

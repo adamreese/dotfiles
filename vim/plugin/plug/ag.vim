@@ -10,7 +10,3 @@ set grepformat^=%f:%l:%c:%m
 
 noremap <leader>a  :<C-u>Ack<space>
 noremap <leader>a* :<C-u>Ack<CR>
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

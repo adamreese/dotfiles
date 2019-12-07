@@ -83,8 +83,3 @@ if get(g:, 'enable_debug', 0)
 endif
 
 inoremap <expr><C-g> deoplete#refresh()
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker
-

@@ -7,7 +7,3 @@ setlocal colorcolumn=+1
 setlocal complete+=kspell
 setlocal spell
 setlocal textwidth=72
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

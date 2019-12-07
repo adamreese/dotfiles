@@ -17,7 +17,3 @@ let g:tagbar_type_proto = {
     \ 'sro' : '.',
     \ 'sort' : 0,
 \}
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

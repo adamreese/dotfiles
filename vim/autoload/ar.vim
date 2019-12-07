@@ -65,6 +65,3 @@ endfunction
 function! ar#is_installed(plugin) abort
     return has_key(g:plugs, a:plugin) && isdirectory(g:plugs[a:plugin].dir)
 endfunction
-
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

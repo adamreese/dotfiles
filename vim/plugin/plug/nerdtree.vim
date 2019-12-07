@@ -26,6 +26,3 @@ function! NERDTreeFindOrClose() abort
     NERDTreeFind
   endif
 endfunction
-
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

@@ -61,7 +61,3 @@ if has('nvim')
     autocmd TermClose term://* stopinsert
   augroup END
 endif
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

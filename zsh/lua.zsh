@@ -11,6 +11,3 @@ luarocks() {
 }
 
 alias luarocks='luarocks --lua-dir="$luadir"'
-
-# -----------------------------------------------------------------------------
-# vim:ft=zsh

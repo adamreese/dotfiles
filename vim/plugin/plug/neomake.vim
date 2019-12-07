@@ -28,7 +28,3 @@ augroup ar_neomake
   autocmd User NeomakeJobFinished call lightline#update()
   autocmd User NeomakeJobInit     call lightline#update()
 augroup END
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

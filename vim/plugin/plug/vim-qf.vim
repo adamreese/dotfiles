@@ -19,8 +19,3 @@ nmap ]q <Plug>(qf_qf_next)
 
 nmap [e <Plug>(qf_loc_previous)
 nmap ]e <Plug>(qf_loc_next)
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker
-

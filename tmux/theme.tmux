@@ -50,4 +50,4 @@ set-window-option -g window-status-separator ' '
 set-option -g status-right '#[fg=colour3]#S#[fg=default] [ #[fg=colour243]#I:#P#[fg=default] ]'
 
 # -----------------------------------------------------------------------------
-# vim:ft=tmux fen fdl=0 fdm=marker
+# vim:ft=tmux

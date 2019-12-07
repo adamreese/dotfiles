@@ -17,6 +17,3 @@ alias services='brew services'
 alias flush='sudo killall -HUP mDNSResponder'
 
 alias video-reset='sudo killall AppleCameraAssistant;sudo killall VDCAssistant'
-
-# -----------------------------------------------------------------------------
-# vim:ft=zsh

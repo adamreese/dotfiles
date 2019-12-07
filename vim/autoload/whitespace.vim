@@ -13,6 +13,3 @@ function! whitespace#clean() abort
   let @/=l:search
   call winrestview(l:pos)
 endfunction
-
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

@@ -5,6 +5,3 @@
 setlocal formatoptions+=cr
 setlocal noexpandtab
 setlocal omnifunc=
-
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

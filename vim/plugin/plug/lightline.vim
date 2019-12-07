@@ -67,7 +67,3 @@ augroup ar_lightline
   autocmd!
   autocmd User FzfStatusLine      call lightline#update_once()
 augroup END
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

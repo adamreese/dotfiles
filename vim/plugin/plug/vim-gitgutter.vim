@@ -21,7 +21,3 @@ let g:gitgutter_sign_removed_first_line = '│'
 " -----------------------------------------------------------------------
 
 nnoremap <leader>tgg :<C-u>GitGutterToggle<CR>
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

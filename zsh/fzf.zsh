@@ -46,6 +46,3 @@ bindkey '^B' widget-fzf-branch
 if [[ -s "/usr/local/opt/fzf/shell/completion.zsh" ]]; then
   source "/usr/local/opt/fzf/shell/completion.zsh"
 fi
-
-# ------------------------------------------------------------------------------
-# vim:ft=zsh

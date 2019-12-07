@@ -21,6 +21,3 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion
 setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits
 setopt SHARE_HISTORY             # Share history between all sessions
-
-# -----------------------------------------------------------------------------
-# vim:ft=zsh

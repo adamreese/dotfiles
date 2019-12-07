@@ -52,9 +52,6 @@ let g:tagbar_type_typescript = {
     \ }
     \ }
 
-" Modeline {{{1
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

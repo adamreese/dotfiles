@@ -13,6 +13,3 @@ command! Profile call ar#profile()
 
 " ReloadSyntax
 command! ReloadSyntax call ar#reload_syntax()
-
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

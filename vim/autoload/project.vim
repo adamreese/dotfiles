@@ -19,6 +19,3 @@ function! project#source_config() abort
     execute 'source' l:projectfile
   endif
 endfunction
-
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

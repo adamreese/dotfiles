@@ -12,6 +12,3 @@ endif
 
 silent! iunmap <buffer><C-a>
 silent! cunmap <buffer><C-a>
-
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

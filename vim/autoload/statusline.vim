@@ -198,6 +198,3 @@ let s:filetype_modes = {
 function! s:minwidth() abort
   return winwidth(0) < 70
 endfunction
-
-" -----------------------------------------------------------------------
-" vim:foldmethod=marker

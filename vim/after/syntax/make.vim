@@ -4,6 +4,3 @@
 
 syn match makeIdent	"^\s*[^:#= \t]*\s*[:+?!*]="me=e-2
 syn match makeIdent	"^\s*[^:#= \t]*\s*="me=e-1
-
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

@@ -33,7 +33,3 @@ let g:markdown_fenced_languages = [
       \ 'zsh=sh',
       \ ]
 
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker
-

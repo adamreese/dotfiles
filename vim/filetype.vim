@@ -14,6 +14,3 @@ augroup filetypedetect
   autocmd! BufNewFile,BufRead go.mod          setfiletype gomod
   autocmd! BufNewFile,BufRead go.sum          setfiletype text
 augroup END
-
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker

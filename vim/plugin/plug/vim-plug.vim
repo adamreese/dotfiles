@@ -7,8 +7,3 @@ let g:plug_window  = 'tabnew'
 
 " Plug Upgrade and Update
 command! PU source $MYVIMRC | PlugUpgrade | PlugUpdate
-
-" Modeline {{{1
-" -----------------------------------------------------------------------
-" vim: foldmethod=marker
-
