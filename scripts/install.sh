@@ -108,8 +108,8 @@ symlink_files() {
   # database
   symlink sqlite/sqliterc      .sqliterc
 
-  # slate
-  symlink slate/slate          .slate
+  # hammerspoon
+  symlink hammerspoon          .hammerspoon
 
   # shell
   symlink zsh/zshenv           .zshenv
