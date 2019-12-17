@@ -2,23 +2,7 @@
 " autoload/ar.vim
 " =======================================================================
 if exists('g:loaded_ar') | finish | endif
-let g:loaded_ar = 1
-
-let s:profile_enabled = 0
-let s:profile_log     = '/tmp/vim_profile.log'
-
-" Toggle vim profiling
-function! ar#profile() abort
-  if s:profile_enabled
-    profile pause
-    noautocmd qall
-  else
-    let s:profile_enabled = 1
-    profile start s:profile_log
-    profile func *
-    profile file *
-  endif
-endfunction
+let g:loaded_ar = v:true
 
 " Reload and sync syntax.
 function! ar#reload_syntax() abort

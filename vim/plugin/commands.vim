@@ -9,7 +9,7 @@ command! WQ wq
 command! Wq wq
 
 " Profile
-command! Profile call ar#profile()
+command! -bang Profile call profile#(<bang>v:false)
 
 " ReloadSyntax
 command! ReloadSyntax call ar#reload_syntax()
