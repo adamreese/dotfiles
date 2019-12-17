@@ -4,6 +4,7 @@
 
 augroup ar_vimrc
   autocmd!
+
   " save files when vim loses focus
   autocmd FocusLost * silent! wall
 
@@ -15,7 +16,9 @@ augroup ar_vimrc
 
   " disable paste
   " https://github.com/neovim/neovim/issues/7994
-  autocmd InsertLeave * set nopaste
+  if !has('nvim-0.4')
+    autocmd InsertLeave * set nopaste
+  endif
 
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
@@ -32,8 +35,8 @@ augroup END
 augroup ar_cursorline
   autocmd!
   " only show cursorline in current and normal window
-  autocmd WinLeave,InsertEnter * setlocal nocursorline
-  autocmd WinEnter,InsertLeave *
+  autocmd CursorMoved,CursorMovedI,WinLeave,InsertEnter * setlocal nocursorline
+  autocmd CursorHold,CursorHoldI,WinEnter,InsertLeave *
         \ if &filetype !=# 'qf' && &buftype !=# 'terminal' && !&diff |
         \   setlocal cursorline |
         \ endif
