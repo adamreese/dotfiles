@@ -213,13 +213,21 @@ endif
 syntax enable
 set background=dark
 
-let g:hybrid_custom_term_colors = 1
+let g:hybrid_custom_term_colors = v:true
 silent! colorscheme hybrid
 
 " Enable bash syntax
 " $VIMRUNTIME/syntax/sh.vim
-let g:is_bash = 1
-let g:vimsyn_noopererror = 1
+let g:is_bash = v:true
+let g:vimsyn_noopererror = v:true
 
 " Disable menu
-let g:did_install_default_menus = 1
+let g:did_install_default_menus = v:true
+
+" Disable builtin plugins
+let g:loaded_netrwPlugin = v:true
+let g:loaded_netrwFileHandlers = v:true
+let g:loaded_netrwSettings = v:true
+let g:loaded_2html_plugin = v:true
+let g:loaded_vimballPlugin = v:true
+let g:loaded_tutor_mode_plugin = v:true
