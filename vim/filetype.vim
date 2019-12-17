@@ -8,6 +8,9 @@ augroup filetypedetect
 
   autocmd! BufNewFile,BufRead *zsh/*          setfiletype zsh
   autocmd! BufNewFile,BufRead .envrc          setfiletype sh
+  autocmd! BufNewFile,BufRead .luacheckrc     setfiletype lua
+
+  autocmd! BufNewFile,BufRead tsconfig.json   setfiletype jsonc
 
   autocmd! BufNewFile,BufRead Gopkg.lock      setfiletype toml
   autocmd! BufNewFile,BufRead glide.lock      setfiletype yaml
