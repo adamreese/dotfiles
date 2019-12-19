@@ -56,9 +56,6 @@ Install:andUse('KSheet', {
 
 -- http://www.hammerspoon.org/Spoons/WindowHalfsAndThirds.html
 Install:andUse("WindowHalfsAndThirds", {
-    config = {
-      use_frame_correctness = true
-    },
     hotkeys = {
       left_half    = { {"ctrl", "cmd"}, "Left" },
       right_half   = { {"ctrl", "cmd"}, "Right" },
