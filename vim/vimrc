@@ -70,45 +70,27 @@ Plug 'chrisbra/vim-sh-indent'
 Plug 'chrisbra/vim-zsh'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
-Plug 'jparise/vim-graphql',            { 'for': 'graphql' }
+Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
-Plug 'mhinz/vim-lookup'
 Plug 'neoclide/jsonc.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', PlugIf(v:false)
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
 Plug 'tbastos/vim-lua'
-Plug 'ternjs/tern_for_vim',            { 'do': 'yarn install' }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
 
 " -- Completion ---------------------------------------------------------
-let g:ar_use_coc = v:true
+Plug 'neoclide/coc.nvim', PlugIf(has('nvim'), {'do': 'yarn install --frozen-lockfile'})
+Plug 'neoclide/coc-neco', PlugIf(has('nvim'))
+Plug 'tjdevries/coc-zsh', PlugIf(has('nvim'))
 
-function! WithCoc(...) abort
-  return call('ar#plug_if', [ has('nvim') && g:ar_use_coc ] + a:000)
-endfunction
-
-function! WithDeoplete(...) abort
-  return call('ar#plug_if', [ has('nvim') && !g:ar_use_coc ] + a:000)
-endfunction
-
-Plug 'neoclide/coc.nvim', WithCoc({'do': 'yarn install --frozen-lockfile'})
-Plug 'neoclide/coc-neco', WithCoc()
-
-Plug 'Shougo/deoplete.nvim',           WithDeoplete({ 'do': ':UpdateRemotePlugins' })
-Plug 'carlitux/deoplete-ternjs',       WithDeoplete({ 'do': ':UpdateRemotePlugins' })
-Plug 'deoplete-plugins/deoplete-zsh',  WithDeoplete()
-Plug 'deoplete-plugins/deoplete-go',   WithDeoplete({ 'for': 'go', 'do': 'make'})
-
-Plug 'Raimondi/delimitMate'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim',                ar#plug_if(has('nvim'), { 'for': 'vim' })
-" Plug 'mhartington/nvim-typescript',    ar#plug_if(has('nvim') { 'do': './install.sh' })
+Plug 'Shougo/neco-vim',            PlugIf(has('nvim'), { 'for': 'vim' })
 
 call plug#end()
 
