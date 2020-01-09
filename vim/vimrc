@@ -20,33 +20,46 @@ let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 " -----------------------------------------------------------------------
 call ar#ensure_plugin_manager()
 
+" Conditionally load plugins.
+" https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
+function! PlugIf(condition, ...) abort
+  let l:options = a:condition ? {} : { 'on': [], 'for': [] }
+  return a:0 ? extend(l:options, a:000[0]) : l:options
+endfunction
+
 call plug#begin(g:vim_dir . '/vendor')
 
+let g:bufferize_command = 'tabnew'
 Plug 'AndrewRadev/bufferize.vim',      { 'on': [ 'Bufferize' ] }
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Shougo/context_filetype.vim'
+
+let g:echodoc_enable_at_startup  = 1
+let g:echodoc#type = 'virtual'
 Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/vimproc.vim',             { 'build': 'make' }
 Plug 'adamreese/vim-hybrid'
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
 Plug 'blueyed/vim-qf_resize'
 Plug 'chrisbra/unicode.vim'
-Plug 'christoomey/vim-tmux-navigator', ar#plug_if(exists('$TMUX'))
+Plug 'christoomey/vim-tmux-navigator', PlugIf(exists('$TMUX'))
 Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
-Plug 'heavenshell/vim-jsdoc',          { 'on': ['<Plug>(jsdoc)', 'JsDoc'] }
 Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'liuchengxu/vim-clap'
+Plug 'liuchengxu/vista.vim',           { 'on': ['Vista', 'Vista!!'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'lvht/tagbar-markdown'
 Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
 Plug 'mileszs/ack.vim'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'osyo-manga/vim-anzu'
 Plug 'romainl/vim-qf'
 Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
 Plug 'scrooloose/nerdtree'
+Plug 'towolf/vim-helm'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -55,11 +68,15 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/startuptime.vim'
 
+let g:colorswatch_exclusion_pattern = 'LightLine.\+'
+Plug 'cocopon/colorswatch.vim',     { 'on': ['ColorSwatchGenerate', 'Inspecthi'] }
+
+nnoremap <silent> zs :<C-U>Inspecthi<CR>
+Plug 'cocopon/inspecthi.vim', { 'on': [ 'Inspecthi' ] }
+
 " -- Version Control ---------------------------------------------------
 Plug 'airblade/vim-gitgutter'
-Plug 'hotwatermorning/auto-git-diff'
 Plug 'rhysd/committia.vim'
-Plug 'rhysd/git-messenger.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
