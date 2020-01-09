@@ -6,16 +6,15 @@ if !ar#is_loaded('vim-go') | finish | endif
 " Settings
 " -----------------------------------------------------------------------
 
-let g:go_decls_mode            = 'fzf'
-let g:go_def_mode              = 'godef'
-let g:go_fmt_command           = 'goimports'
-let g:go_fmt_fail_silently     = 1
-let g:go_gocode_propose_source = 1
-let g:go_snippet_engine        = 'neosnippet'
-let g:go_term_enabled          = 1
-let g:go_term_mode             = 'split'
-
-let g:go_gocode_unimported_packages = 1  " Include suggestions for unimported packages.
+let g:go_code_completion_enabled = v:false
+let g:go_decls_mode              = 'fzf'
+let g:go_def_mode                = 'godef'
+let g:go_doc_keywordprg_enabled  = v:false
+let g:go_fmt_command             = 'goimports'
+let g:go_fmt_fail_silently       = v:true
+let g:go_snippet_engine          = 'ultisnips'
+let g:go_term_mode               = 'split'
+let g:go_statusline_duration     = 50
 
 let s:pkgroot = substitute(project#root(), expand('$GOPATH/src/'), '', '')
 if !empty(s:pkgroot)
@@ -23,5 +22,5 @@ if !empty(s:pkgroot)
 endif
 
 " Extra highlights
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_error = 1
+let g:go_highlight_build_constraints = v:true
+let g:go_highlight_error = v:true

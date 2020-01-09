@@ -3,13 +3,10 @@
 " =======================================================================
 if !ar#is_installed('vim-qf') | finish | endif
 
-let g:qf_auto_open_loclist  = 0
-let g:qf_auto_open_quickfix = 0
-let g:qf_auto_resize        = 0
-let g:qf_mapping_ack_style  = 1
-let g:qf_resize_min_height  = 4
-
-nmap <leader>tl <Plug>(qf_loc_toggle)
+let g:qf_auto_open_loclist  = v:false
+let g:qf_auto_open_quickfix = v:false
+let g:qf_auto_resize        = v:false
+let g:qf_mapping_ack_style  = v:true
 
 nmap [l <Plug>(qf_loc_previous)
 nmap ]l <Plug>(qf_loc_next)

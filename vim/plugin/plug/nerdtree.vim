@@ -3,15 +3,13 @@
 " =======================================================================
 scriptencoding utf-8
 
-let g:NERDTreeStatusline          = -1
-let g:NERDTreeAutoDeleteBuffer    = 1
-let g:NERDTreeHighlightCursorline = 0
+let g:NERDTreeAutoDeleteBuffer    = v:true
 let g:NERDTreeIgnore              = ['^\.git$', '\.zwc$', '\.pyc$', '^BUILD$[[file]]', '^tags$[[file]]', '\.old$']
 let g:NERDTreeMapJumpNextSibling  = '<Nop>'
 let g:NERDTreeMapJumpPrevSibling  = '<Nop>'
-let g:NERDTreeMinimalUI           = 1
-let g:NERDTreeRespectWildIgnore   = 1
-let g:NERDTreeShowHidden          = 1
+let g:NERDTreeMinimalUI           = v:true
+let g:NERDTreeRespectWildIgnore   = v:true
+let g:NERDTreeShowHidden          = v:true
 
 noremap <silent><leader>e :NERDTreeFind<CR>
 noremap <silent><leader>n :call NERDTreeFindOrClose()<CR>
