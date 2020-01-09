@@ -33,19 +33,27 @@ function! ar#plug_install() abort
   augroup END
 endfunction
 
-" Conditionally load plugins.
-" https://github.com/junegunn/vim-plug/wiki/faq
-function! ar#plug_if(condition, ...) abort
-  let l:enabled = a:condition ? {} : { 'on': [], 'for': [] }
-  return a:0 ? extend(l:enabled, a:000[0]) : l:enabled
-endfunction
-
 " Returns true if the plugin {plugin} is loaded.
 function! ar#is_loaded(plugin) abort
-  return has_key(g:plugs, a:plugin) && stridx(&runtimepath, g:plugs[a:plugin].dir) >= 0
+  let l:plug_dir = s:plug_dir(a:plugin)
+  if empty(l:plug_dir)  || !isdirectory(l:plug_dir)
+    return 0
+  endif
+
+  return stridx(&runtimepath, l:plug_dir) >= 0
 endfunction
 
 " Returns true if the plugin {plugin} is installed.
 function! ar#is_installed(plugin) abort
     return has_key(g:plugs, a:plugin) && isdirectory(g:plugs[a:plugin].dir)
+endfunction
+
+function! ar#plug_exists(name) abort
+  return index(get(g:, 'plugs_order', []), a:name) > -1
+endfunction
+
+function! s:plug_dir(name) abort
+  let l:dir = ar#plug_exists(a:name) ? g:plugs[a:name].dir : ''
+  let l:dir = substitute(l:dir, '/$', '', '')
+  return l:dir
 endfunction
