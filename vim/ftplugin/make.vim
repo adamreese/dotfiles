@@ -12,4 +12,3 @@ let g:tagbar_type_make = {
         \ 't:targets'
         \ ]
     \}
-

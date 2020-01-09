@@ -17,6 +17,7 @@ let g:markdown_fenced_languages = [
       \ 'bash=sh',
       \ 'css',
       \ 'erb=eruby',
+      \ 'help',
       \ 'html',
       \ 'javascript',
       \ 'js=javascript',
@@ -32,4 +33,3 @@ let g:markdown_fenced_languages = [
       \ 'xml',
       \ 'zsh=sh',
       \ ]
-
