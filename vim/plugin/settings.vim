@@ -65,47 +65,30 @@ set expandtab                " Use spaces instead of tabs
 " Wildmenu: {{{1
 " -----------------------------------------------------------------------
 
-if has('nvim')
-  " Display candidates by popup menu (requires NeoVim 0.4.x or later)
-  set wildmenu
-  set wildmode=full
-  set wildoptions=pum,tagfile
-else
-  " Display candidates by list
-  set nowildmenu
-  set wildmode=list:longest,full
-  set wildoptions=tagfile
-endif
-
 if has('wildmenu')
+  set wildmenu
   set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
   set wildignore+=*.pyc,*.spl,*.o,*.out,*~,#*#,%*
   set wildignorecase
-  set wildoptions=tagfile
 
-  if has('nvim-0.4.0')
-    set wildoptions+=pum
-  else
-    set wildmode=list:longest,full
-  endif
+  set wildmode=longest:list,full        " Complete files using a menu AND list
 endif
 
 " Folding: {{{1
 " -----------------------------------------------------------------------
 
 if has('folding')
-  set foldmethod=marker
   set foldtext=folding#text()
   set foldopen+=jump
+  set foldlevelstart=4
 endif
 
 " Directories: {{{1
 " -----------------------------------------------------------------------
 
+execute 'set spellfile=' . g:vim_dir  . '/spell/en.utf-8.add'
 execute 'set directory=' . g:data_dir . '/swap//'
 execute 'set backupdir=' . g:data_dir . '/backup/'
-execute 'set spellfile=' . g:vim_dir  . '/spell/en.utf-8.add'
-
 if has('mksession')
   execute 'set viewdir=' . g:data_dir . '/view/'
   set viewoptions=cursor,folds " save/restore just these (with `:{mk,load}view`)
@@ -126,7 +109,10 @@ endif
 
 " Don't create root-owned files
 if exists('$SUDO_USER')
+  set nobackup
+  set noswapfile
   set noundofile
+  set nowritebackup
 
   if has('nvim')
     set shada=
@@ -136,19 +122,24 @@ if exists('$SUDO_USER')
 endif
 
 for s:dir in [&backupdir, &directory, &undodir, &viewdir]
-  call mkdir(s:dir, 'p')
+  silent call mkdir(s:dir, 'p')
 endfor
 
 " Behavior: {{{1
 " -----------------------------------------------------------------------
 
 set backspace=indent,eol,start
-set complete=.                       " Default: .,w,b,u,t
 
-set completeopt+=menu                " Show possible completions in a popup
+" default: .,w,b,u,t
+set complete-=i                      " Don't scan included files
+set complete-=t                      " Avoid tag completion by default
+
+" default: 'menu,preview'
+set completeopt=
 set completeopt+=menuone             " Show the popup if only one completion
 set completeopt+=noinsert            " Don't insert text for a match unless selected
 set completeopt+=noselect            " Don't auto-select the first match
+set completeopt+=longest
 set completeopt-=preview             " Don't show extra info about the current completion
 
 set isfname-==                       " Don't consider = symbol as part filename. Helps for deoplete file source.
@@ -201,6 +192,12 @@ set shortmess+=W                  " don't echo "[w]"/"[written]" when writing
 set shortmess+=a                  " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
 set shortmess+=o                  " overwrite file-written messages
 set shortmess+=t                  " truncate file messages at start
+set shortmess+=c                  " Disable 'Pattern not found' messages
+
+" resize to accommodate multiple signs
+if exists('+signcolumn')
+  let &signcolumn = has('nvim-0.4') ? 'auto:3' : 'yes'
+endif
 
 if has('linebreak')
   set linebreak
