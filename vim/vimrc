@@ -10,8 +10,9 @@ scriptencoding utf-8
 " -----------------------------------------------------------------------
 
 " Create global config for cache and data directories
-let g:cache_dir = expand('$HOME/.cache/vim')
-let g:data_dir  = expand('$HOME/.local/share/vim')
+let s:editor    = has('nvim') ? 'nvim' : 'vim'
+let g:cache_dir = expand('$HOME/.cache/' . s:editor)
+let g:data_dir  = expand('$HOME/.local/share/' . s:editor)
 let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 
 " -----------------------------------------------------------------------
