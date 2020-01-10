@@ -14,33 +14,49 @@ is_repo_outdated() {
   )
 }
 
+is_repo_dirty() {
+  test -n "$(git status --porcelain --ignore-submodules -unormal)"
+}
+
 update() {
   local pkg="${1}"
-  local dir="${GOPATH}/src/${pkg%...}"
-  if [[ ! -d "${dir}" ]] || is_repo_outdated "${dir}"; then
-    echo "${pkg}"
-    go get -u "${pkg}"
+
+  if [[ "$pkg" =~ @ ]]; then
+    echo ":: Upgrading module ${pkg}"
+    GO111MODULE=on go get -v "$pkg"
+  else
+    local dir="${GOPATH}/src/${pkg%...}"
+    if ((rebuild)) || is_repo_outdated "${dir}"; then
+
+      echo ":: Upgrading ${pkg}"
+      cd "${dir}"
+
+      if is_repo_dirty; then
+        git -C "${dir}" reset --hard
+        echo "[skipping] ${pkg} has uncommitted changes"
+      else
+        git pull >/dev/null
+        go install ./...
+      fi
+    fi
   fi
 }
 
 rebuild=0
-while (($# > 0)); do
+while (($#)); do
   case "$1" in
-    -r,--rebuild)
-      rebuild=1
-      ;;
-    *)
-      break # end of options, just arguments left
-      ;;
+  -r | --rebuild)
+    rebuild=1
+    ;;
+  *)
+    break # end of options, just arguments left
+    ;;
   esac
   shift
 done
 
 echo "Installing default go packages"
+
 while read -r pkg; do
-  if ((rebuild)); then
-    go get -u -a "${pkg}"
-  else
-    update "${pkg}"
-  fi
+  update "${pkg}"
 done <"${DOTFILES}/go/default-packages"
