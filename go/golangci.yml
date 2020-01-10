@@ -1,5 +1,4 @@
 ---
-
 #
 # Global config for golangci-linter
 #
@@ -13,23 +12,39 @@ output:
   format: line-number
 
 linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+  golint:
+    min-confidence: 0.3
+
+  gofmt:
+    simplify: true
+
   misspell:
     locale: US
 
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+      - experimental
+    settings:
+      captLocal:
+        paramsOnly: true
+
 linters:
-  disable-all: true
-  enable:
-    - deadcode
-    - gocritic
-    - goimports
-    - govet
-    - ineffassign
-    - interfacer
-    - megacheck
-    - misspell
-    - prealloc
-    - scopelint
-    - structcheck
-    - unconvert
-    - unparam
-    - varcheck
+  enable-all: true
+  disable:
+    - dupl
+    - funlen
+    - gochecknoglobals
+    - gochecknoinits
+    - goconst
+    - gocyclo
+    - gosec
+    - lll
+    - typecheck
+    - wsl
