@@ -11,8 +11,8 @@ let g:NERDTreeMinimalUI           = v:true
 let g:NERDTreeRespectWildIgnore   = v:true
 let g:NERDTreeShowHidden          = v:true
 
-noremap <silent><leader>e :NERDTreeFind<CR>
-noremap <silent><leader>n :call NERDTreeFindOrClose()<CR>
+nnoremap <silent><leader>e :NERDTreeFind<CR>
+nnoremap <silent><leader>n :call NERDTreeFindOrClose()<CR>
 
 " Run NERDTreeFind or Toggle based on current buffer
 function! NERDTreeFindOrClose() abort

@@ -8,5 +8,5 @@ let g:ackprg = &grepprg
 
 set grepformat^=%f:%l:%c:%m
 
-noremap <leader>a  :<C-u>Ack<space>
-noremap <leader>a* :<C-u>Ack<CR>
+nnoremap <leader>a  :<C-u>Ack<space>
+nnoremap <leader>a* :<C-u>Ack<CR>
