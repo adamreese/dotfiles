@@ -42,9 +42,12 @@
   ignored = ls-files --others -i --exclude-standard
 
 [user]
-  name  = Adam Reese
+  name = Adam Reese
   email = adam@reese.io
   signingkey = 7F8A9958
+
+[github]
+  user = adamreese
 
 [core]
   editor = $EDITOR
@@ -72,14 +75,6 @@
   clean  = git-media-clean %f
   smudge = git-media-smudge %f
 
-[github]
-  user = adamreese
-
-[filter "lfs"]
-  clean    = git-lfs clean %f
-  smudge   = git-lfs smudge %f
-  required = true
-
 [rerere]
   enabled = true
 
@@ -92,6 +87,7 @@
 
 [difftool]
   prompt = false
+  trustExitCode = true
 
 [diff]
   algorithm = patience
@@ -110,24 +106,35 @@
 [difftool "vimdiff"]
   cmd = nvim -d "$LOCAL" "$REMOTE"
 
+[diff-so-fancy]
+  markEmptyLines = false
+
 [color "diff"]
   meta         = yellow
-  frag         = magenta
-  old          = red strike
-  new          = green italic
+  frag         = magenta dim
+  old          = red
+  new          = green
   whitespace   = red reverse
 
 [color "diff-highlight"]
-  oldNormal    = red strike
-  oldHighlight = red 52 strike
-  newNormal    = green italic
-  newHighlight = green 22 italic
+  oldNormal    = red
+  oldHighlight = red 52
+  newNormal    = green
+  newHighlight = green 22
 
 [color "status"]
+  branch       = yellow
   added        = green
   changed      = yellow
   deleted      = red
-  untracked    = red
+  untracked    = blue
+
+[filter "lfs"]
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
 
 [include]
   path = "~/.config/git/config.local"
+
