@@ -2,14 +2,12 @@
 " autoload/project.vim
 " =======================================================================
 if exists('g:loaded_project') | finish | endif
-let g:loaded_project = 1
+let g:loaded_project = v:true
 
 " Detect project root directory
 function! project#root() abort
-  if exists('b:git_dir') && !empty(b:git_dir)
-    return fnamemodify(b:git_dir, ':h')
-  endif
-  return getcwd()
+  let l:dir = get(b:, 'git_dir', '')
+  return l:dir ? fnamemodify(l:dir, ':h') : getcwd()
 endfunction
 
 " Find and source project-specific Vim configs
