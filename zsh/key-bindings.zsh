@@ -14,6 +14,7 @@ key_info=(
   'ControlRight' '\e[1;5C \e[5C \e\e[C \eOc \eOC'
   'Escape'       '\e'
   'Meta'         '\M-'
+  'Space'        ' '
   'Backspace'    ${terminfo[kbs]}
   'ShiftTab'     ${terminfo[kcbt]}
   'Left'         ${terminfo[kcub1]}
@@ -40,36 +41,47 @@ key_info=(
   'PageUp'       ${terminfo[kpp]}
 )
 
-bindkey -e                                            # Use emacs key bindings
+# Use emacs key bindings
+bindkey -e
 
-bindkey '\ew' kill-region                             # [Esc-w] - Kill from the cursor to the mark
-bindkey "$key_info[Control]R" history-incremental-search-backward     # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
+# [Esc-w] - Kill from the cursor to the mark
+bindkey '\ew' kill-region
+
+# [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
+bindkey "$key_info[Control]R" history-incremental-search-backward
 
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ -n $key_info[Up] ]]; then
-  autoload -U             up-line-or-beginning-search
-  zle      -N             up-line-or-beginning-search
-  bindkey  "${key_info[Up]}"   up-line-or-beginning-search
+  autoload -U                up-line-or-beginning-search
+  zle      -N                up-line-or-beginning-search
+  bindkey  "${key_info[Up]}" up-line-or-beginning-search
 fi
 # start typing + [Down-Arrow] - fuzzy find history backward
 if [[ -n "${key_info[Down]}" ]]; then
-  autoload -U             down-line-or-beginning-search
-  zle      -N             down-line-or-beginning-search
+  autoload -U                  down-line-or-beginning-search
+  zle      -N                  down-line-or-beginning-search
   bindkey  "${key_info[Down]}" down-line-or-beginning-search
 fi
 
-bindkey ' '       magic-space                         # [Space] - do history expansion
+# [Space] - do history expansion
+# bindkey ' '       magic-space
 
-bindkey '^[[1;5C' forward-word                        # [Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5D' backward-word                       # [Ctrl-LeftArrow] - move backward one word
+# [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5C' forward-word
+# [Ctrl-LeftArrow] - move backward one word
+bindkey '^[[1;5D' backward-word
 
+# [Shift-Tab] - move through the completion menu backwards
 if [[ -n "${key_info[ShiftTab]}" ]]; then
-  bindkey "${key_info[ShiftTab]}" reverse-menu-complete    # [Shift-Tab] - move through the completion menu backwards
+  bindkey "${key_info[ShiftTab]}" reverse-menu-complete
 fi
 
-bindkey '^?' backward-delete-char                     # [Backspace] - delete backward
+# [Backspace] - delete backward
+bindkey '^?' backward-delete-char
+
+# [Delete] - delete forward
 if [[ -n "${key_info[Delete]}" ]]; then
-  bindkey "${key_info[Delete]}" delete-char                # [Delete] - delete forward
+  bindkey "${key_info[Delete]}" delete-char
 else
   bindkey "^[[3~"  delete-char
   bindkey "^[3;5~" delete-char
@@ -84,43 +96,29 @@ bindkey  "$key_info[Control]X$key_info[Control]E" edit-command-line
 # file rename magick
 bindkey  '^[m'      copy-prev-shell-word
 
-# Redisplay after completing, and avoid blank prompt after <Tab><Tab><Ctrl-C>
-expand-or-complete-with-redisplay() {
-  print -Pn '⋯'
-  zle expand-or-complete
-  zle redisplay
-}
-zle -N expand-or-complete-with-redisplay
-bindkey "${key_info[Control]}I" expand-or-complete-with-redisplay
-
-# ------------------------------------------------------------------------------
-# zsh-history-substring-search
-
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
-
-# bind UP and DOWN keys
-bindkey "$key_info[Up]" history-substring-search-up
-bindkey "$key_info[Down]" history-substring-search-down
-
-zle-line-init zle-keymap-select() {
-   VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-   zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 export KEYTIMEOUT=1
 
 # Put into application mode and validate ${terminfo}
-zle-line-init() {
-  (( ${+terminfo[smkx]} )) && echoti smkx
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+  zle-line-init () {
+    printf '%s' "${terminfo[smkx]}"
+  }
+  zle-line-finish () {
+    printf '%s' "${terminfo[rmkx]}"
+  }
+  zle -N zle-line-init
+  zle -N zle-line-finish
+fi
+
+# -----------------------------------------------------------------------------
+# expand aliases
+
+expand-aliases() {
+   zle _expand_alias
+   zle expand-word
+   zle self-insert
 }
-zle-line-finish() {
-  (( ${+terminfo[rmkx]} )) && echoti rmkx
-}
-zle -N zle-line-init
-zle -N zle-line-finish
+zle -N expand-aliases
+
+# [Control-x-Space] - do global alias expansion
+bindkey "$key_info[Control]X$key_info[Space]" expand-aliases
