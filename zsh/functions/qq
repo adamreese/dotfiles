@@ -1,0 +1,27 @@
+# qq
+# -----------------------------------------------------------------------------
+#
+# https://github.com/y0ssar1an/q
+#
+
+emulate -L zsh
+clear
+
+local flush
+
+while getopts "r" opt; do
+  case $opt in
+    (r) flush=1
+	;;
+    (*) return 1
+	;;
+  esac
+done
+(( OPTIND > 1 )) && shift $(( OPTIND - 1 ))
+
+local logpath="$TMPDIR/q"
+if ((flush)) || [[ ! -f "$logpath" ]]; then
+  echo 'Q LOG' > "$logpath"
+fi
+
+tail -100f -- "$logpath"

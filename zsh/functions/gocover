@@ -1,0 +1,8 @@
+# gocover
+# -----------------------------------------------------------------------------
+#
+# Run test coverage on a package and open the results in a browser.
+#
+
+local coverprofile=$(mktemp coverage.XXXXXX)
+go test -coverprofile "${coverprofile}" "$@" && go tool cover -html "${coverprofile}"
