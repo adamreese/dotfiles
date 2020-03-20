@@ -1,6 +1,9 @@
 # zsh aliases
 # -----------------------------------------------------------------------------
 
+# zinitup updates zinit and zsh plugins
+alias zinitup='zinit self-update && zinit update --all --reset'
+
 # Shortcuts
 alias  c='clear'
 alias  e='exit'
