@@ -35,6 +35,10 @@ alias pr='hub pull-request'
 # ghq
 alias get='ghq get --update'
 
+if (( $+commands[bat] )); then
+  alias cat='bat'
+fi
+
 # IP addresses
 alias pubip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias localip='ipconfig getifaddr en1'
