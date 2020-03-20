@@ -47,7 +47,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # Enhanced WHOIS lookups
 alias whois='whois -h whois-servers.net'
 
-alias dig='dig +nocmd any +multiline +noall +answer'
+alias diga='dig +nocmd any +multiline +noall +answer'
 
 # [t]ail [f]ollow [l]ogs
 alias tfl='tail -Fn30 log/*.log'
