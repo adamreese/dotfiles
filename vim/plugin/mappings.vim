@@ -56,8 +56,12 @@ nnoremap <C-S> [s1z=<C-O>
 inoremap <C-S> <C-G>u<Esc>[s1z=`]A<C-G>u
 
 " Command mode emacs style bindings
-cnoremap <C-a> <Home>
-cnoremap <C-d> <Del>
+cnoremap <C-A> <Home>
+cnoremap <C-B> <Left>
+cnoremap <C-D> <Del>
+cnoremap <C-F> <Right>
+cnoremap <C-N> <Down>
+cnoremap <C-P> <Up>
 
 " -----------------------------------------------------------------------
 " Mapping: Leader
