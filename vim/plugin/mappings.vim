@@ -81,7 +81,7 @@ nnoremap <leader>pr :<C-u>source %<CR>
 nnoremap <leader>= ggVG=<CR>
 
 " Toggle spell checking
-nnoremap <leader>ss :<C-u>setlocal spell! spell?<CR>
+nnoremap <silent><leader>ss :<C-u>setlocal spell!<CR>
 
 " Toggle wrapping
 nnoremap <leader>tw :<C-u>setlocal wrap! breakindent! wrap?<CR>
