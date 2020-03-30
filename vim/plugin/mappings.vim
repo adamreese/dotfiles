@@ -2,15 +2,15 @@
 " plugin/mappings.vim
 " =======================================================================
 
-" Exit insert mode
-inoremap jj <ESC>
-
 " map Q for formatting rather than Ex mode
 nnoremap Q m`gqap``
 vnoremap Q gq
 
 " disable ex mode
 nnoremap gQ <Nop>
+
+" disable sleep mapping
+noremap gs <NOP>
 
 " disable q window
 noremap q: :q
@@ -41,15 +41,9 @@ nnoremap <C-l> <C-W>l
 " Split sizing
 nnoremap <C-=> <C-W>=
 
-" Previous buffer
-nnoremap  <BS>  <C-^>
-
 " Center screen
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
-
-nnoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
-onoremap <expr> <CR> empty(&buftype) ? '}' : '<CR>'
 
 " Spelling fix
 nnoremap <C-S> [s1z=<C-O>
@@ -76,10 +70,7 @@ nnoremap <silent><leader>q :<C-u>quit!<CR>
 nnoremap <silent><leader>Q :<C-u>qall!<CR>
 
 " Close quickfix/location window
-nnoremap <leader>c :<C-u>cclose<bar>lclose<CR>
-
-" Source the current Vim file
-nnoremap <leader>pr :<C-u>source %<CR>
+nnoremap <silent><leader>c :<C-u>cclose<bar>lclose<CR>
 
 " Format buffer
 nnoremap <leader>= ggVG=<CR>
@@ -92,12 +83,6 @@ nnoremap <leader>tw :<C-u>setlocal wrap! breakindent! wrap?<CR>
 
 " Sorting
 vnoremap <leader>srt :<C-u>sort<CR>
-
-if g:nvim
-  " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
-  " the top again
-  tnoremap <leader>q <C-\><C-n>gg<CR>
-endif
 
 " -----------------------------------------------------------------------
 " Mapping: Copy & Paste
