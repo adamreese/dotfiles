@@ -15,7 +15,6 @@ alias -- -='cd -'
 
 # Allow aliases to be with sudo
 alias sudo='sudo '
-alias apt-get='sudo apt-get'
 
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
@@ -40,13 +39,7 @@ alias pubip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias localip='ipconfig getifaddr en1'
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-# Enhanced WHOIS lookups
-alias whois='whois -h whois-servers.net'
-
 alias diga='dig +nocmd any +multiline +noall +answer'
-
-# [t]ail [f]ollow [l]ogs
-alias tfl='tail -Fn30 log/*.log'
 
 # github.com/jocelynmallon/zshmarks
 alias j='jump'
@@ -61,12 +54,6 @@ alias brff='bundle-exec-hack rspec --fail-fast'
 
 # ssh
 alias sshtmp='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-
-# aliases inside tmux session
-if [[ $TERM == *tmux* ]]; then
-  alias :sp='tmux split-window'
-  alias :vs='tmux split-window -h'
-fi
 
 # fun
 alias lod='echo "ಠ_ಠ"'
