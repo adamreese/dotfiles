@@ -34,24 +34,32 @@ let g:fzf_colors = {
 " Mappings
 " -----------------------------------------------------------------------
 nnoremap [FZF]   <Nop>
-nmap     <space> [FZF]
+nmap     <Space> [FZF]
 
-nnoremap <silent>[FZF]f     :<C-U>Files<CR>
-nnoremap <silent>[FZF]p     :<C-U>Plugs<CR>
-nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
-nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
-nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
+nnoremap <silent>[FZF]/     :<C-U>History/<CR>
+nnoremap <silent>[FZF]:     :<C-U>History:<CR>
 nnoremap <silent>[FZF]T     :<C-U>Tags<CR>
+nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
+nnoremap <silent>[FZF]f     :<C-U>Files<CR>
+nnoremap <silent>[FZF]g     :<C-U>RG<Space>
+nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
 nnoremap <silent>[FZF]m     :<C-U>GFiles?<CR>
-nnoremap <silent>[FZF]ev    :<C-U>VimFiles<CR>
-nnoremap <silent>[FZF]ed    :<C-U>DotFiles<CR>
+nnoremap <silent>[FZF]p     :<C-U>Plugs<CR>
+nnoremap <silent>[FZF]r     :<C-U>History<CR>
+nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
 
 " -----------------------------------------------------------------------
 
 function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  call setqflist(map(copy(a:lines), {_, v -> {'filename': v} }), 'a')
   copen
   cc
+endfunction
+
+function! s:build_location_list(lines)
+  call setloclist(0, map(copy(a:lines), {_, v -> {'filename': v} }), 'a')
+  lopen
+  ll
 endfunction
 
 let g:fzf_action = {
@@ -59,46 +67,25 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-t': 'tabedit',
       \ 'ctrl-q': function('s:build_quickfix_list'),
+      \ 'ctrl-l': function('s:build_location_list'),
       \ }
 
 " Commands
 " -----------------------------------------------------------------------
-function! s:fzf_preview(bang) abort
-  return a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?')
-endfunction
+command! -bang -nargs=0 Plugs        call ar#fzf#plugs(<bang>0)
+command! -bang -nargs=* RG           call ar#fzf#rg(<q-args>, <bang>0)
 
-command! -bang Plugs call fzf#run(fzf#wrap('Plugs', extend({
-      \ 'dir':     g:plug_home,
-      \ 'source':  sort(keys(g:plugs)),
-      \ 'sink':    'tabedit',
-      \ }, g:fzf_layout), <bang>0))
+command! -bang -nargs=? -complete=dir Files call ar#fzf#files(<q-args>, <bang>0)
 
-command! VimFiles call fzf#run(fzf#wrap('VimFiles',
-      \   fzf#vim#with_preview(extend({
-      \     'dir': g:vim_dir,
-      \   }, g:fzf_layout), 'right:50%')
-      \ ))
 
-command! DotFiles call fzf#run(fzf#wrap('DotFiles',
-      \   fzf#vim#with_preview(extend({
-      \     'dir': '~/.dotfiles',
-      \   }, g:fzf_layout), 'right:50%')
-      \ ))
+" -----------------------------------------------------------------------
 
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, s:fzf_preview(<bang>0), <bang>0)
+" Enable Floating FZF for NeoVim 0.4.0+ or Vim 8.0+
+let s:has_float = has('nvim-0.4.0') || v:version >= 800
 
-command! -bang -nargs=* Agr
-      \ call fzf#vim#ag_raw(<q-args>, s:fzf_preview(<bang>0), <bang>0)
-
-let s:rg_command = 'rg --color=always --column --hidden --line-number --no-heading --ignore-file ~/.agignore '
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(s:rg_command . shellescape(<q-args>), 1, s:fzf_preview(<bang>0), <bang>0)
-
-augroup ar_fzf
-  autocmd!
-  autocmd User FzfStatusLine silent
-augroup END
+if s:has_float
+  let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6, 'border': 'rounded' } }
+endif
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
