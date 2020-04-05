@@ -5,9 +5,6 @@
 augroup ar_vimrc
   autocmd!
 
-  " save files when vim loses focus
-  autocmd FocusLost * silent! wall
-
   " automatically resize panes on resize
   autocmd VimResized * wincmd =
 
@@ -23,13 +20,7 @@ augroup ar_vimrc
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
 
-  " quit if quickfix is the only window
-  " from https://github.com/now/vim-quit-if-only-quickfix-buffer-left/blob/master/plugin/now/quit-if-only-quickfix-buffer-left.vim
-  autocmd WinEnter * if winnr('$') == 1 && &buftype == 'quickfix' | quit | endif
-
   autocmd BufRead,BufNewFile * call project#source_config()
-
-  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 
 augroup ar_cursorline
@@ -38,7 +29,7 @@ augroup ar_cursorline
   autocmd CursorMoved,CursorMovedI,WinLeave,InsertEnter * setlocal nocursorline
   autocmd CursorHold,CursorHoldI,WinEnter,InsertLeave *
         \ if &filetype !=# 'qf' && &buftype !=# 'terminal' && !&diff |
-        \   setlocal cursorline |
+        \   set cursorline |
         \ endif
 augroup END
 
@@ -54,13 +45,24 @@ augroup ar_autoread
   " Triger `autoread` when files changes on disk
   " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
   " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-  autocmd BufEnter,CursorMoved,CursorMovedI,CursorHold,CursorHoldI * if mode() != 'c' | silent! checktime | endif
+  autocmd BufEnter,CursorHold * if mode() != 'c' | checktime | endif
+
+  " Notification after file change
+  " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+  autocmd FileChangedShellPost *
+        \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
 augroup END
+
+function! s:OnTermOpen() abort
+    setlocal nolist nonumber sidescrolloff=0 nocursorline
+    startinsert!
+endfunction
 
 if has('nvim')
   augroup ar_terminal
     autocmd!
-    autocmd TermOpen * startinsert!
-    autocmd TermClose term://* stopinsert
+    autocmd TermOpen * call s:OnTermOpen()
+    autocmd BufLeave term://* stopinsert
   augroup END
 endif
