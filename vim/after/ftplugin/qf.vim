@@ -12,5 +12,5 @@ setlocal foldlevel=99
 " Make quickfix buffer hidden.
 setlocal nobuflisted
 
-nnoremap <buffer> <leader>k  :Keep<space>
-nnoremap <buffer> <leader>r  :Reject<space>
+nnoremap <silent> <buffer> <leader>k  :Keep<space>
+nnoremap <silent> <buffer> <leader>r  :Reject<space>
