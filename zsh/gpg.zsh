@@ -1,7 +1,7 @@
 # zsh gpg
 # -----------------------------------------------------------------------------
 
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 
 if [[ -d '/usr/local/MacGPG2/bin' ]]; then
   path+='/usr/local/MacGPG2/bin'
