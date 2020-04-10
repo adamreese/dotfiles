@@ -19,7 +19,7 @@ Procfile-development
 .env-development
 
 # Project specific vim configuration
-.vimrc.local
+.vim/local.vim
 
 # ternjs
 .tern-port

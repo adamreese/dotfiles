@@ -12,7 +12,7 @@ endfunction
 
 " Find and source project-specific Vim configs
 function! project#source_config() abort
-  let l:projectfile = findfile('.vimrc.local', expand('%:p').';')
+  let l:projectfile = findfile('.vim/local.vim', expand('%:p').';')
   if filereadable(l:projectfile)
     execute 'source' l:projectfile
   endif
