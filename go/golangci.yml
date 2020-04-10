@@ -35,16 +35,24 @@ linters-settings:
       captLocal:
         paramsOnly: true
 
+  unused:
+    check-exported: false
+
 linters:
   enable-all: true
   disable:
+    - depguard
     - dupl
     - funlen
     - gochecknoglobals
     - gochecknoinits
     - goconst
     - gocyclo
+    - godox
+    - gomnd
     - gosec
     - lll
+    - maligned
+    - rowserrcheck
     - typecheck
     - wsl
