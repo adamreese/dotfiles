@@ -23,8 +23,8 @@ call ar#ensure_plugin_manager()
 " Conditionally load plugins.
 " https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation
 function! PlugIf(condition, ...) abort
-  let l:options = a:condition ? {} : { 'on': [], 'for': [] }
-  return a:0 ? extend(l:options, a:000[0]) : l:options
+  let l:opts = get(a:000, 0, {})
+  return a:condition ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
 endfunction
 
 call plug#begin(g:vim_dir . '/vendor')
@@ -39,7 +39,7 @@ Plug 'Shougo/echodoc.vim'
 Plug 'adamreese/vim-hybrid'
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
 Plug 'blueyed/vim-qf_resize'
-Plug 'chrisbra/unicode.vim'
+Plug 'chrisbra/unicode.vim',           {'on': ['UnicodeName', 'UnicodeTable']}
 Plug 'christoomey/vim-tmux-navigator', PlugIf(exists('$TMUX'))
 Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
@@ -48,7 +48,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'liuchengxu/vim-clap'
 Plug 'liuchengxu/vista.vim',           { 'on': ['Vista', 'Vista!!'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'lvht/tagbar-markdown'
@@ -58,7 +57,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'osyo-manga/vim-anzu'
 Plug 'romainl/vim-qf'
 Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'towolf/vim-helm'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -91,9 +90,9 @@ Plug 'fatih/vim-go'
 Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/jsonc.vim'
-Plug 'pangloss/vim-javascript', PlugIf(v:false)
-Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
+Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript', PlugIf(v:false)
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
 Plug 'tbastos/vim-lua'
