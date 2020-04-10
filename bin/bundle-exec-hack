@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-bundler check 1>/dev/null || bundler install --local --jobs 5 || bundler install --jobs 5
-
-bundler exec "$@"
