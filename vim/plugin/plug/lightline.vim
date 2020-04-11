@@ -5,65 +5,90 @@ if !ar#is_loaded('lightline.vim') | finish | endif
 
 scriptencoding utf-8
 
-let g:lightline_readonly_filetypes      = ['help', 'man', 'nerdtree', 'qf', 'tagbar']
-let g:lightline_mode_filetypes          = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
-let g:lightline_no_lineinfo_filetypes   = ['fzf', 'tagbar']
-let g:lightline_no_fileformat_filetypes = ['fzf', 'help', 'man', 'nerdtree', 'tagbar', 'qf']
-let g:lightline_no_filename_filetypes   = ['fzf', 'nerdtree', 'tagbar', 'qf']
-
-let s:short_modes = {
-      \   'n':      ' ɴ ',
-      \   'i':      ' ɪ ',
-      \   'c':      ' ᴄ ',
-      \   'R':      ' ʀ ',
-      \   's':      ' s ',
-      \   'S':      's·ʟ',
-      \   '\<C-s>': 's·ʙ',
-      \   't':      ' ᴛ ',
-      \   'v':      ' ᴠ ',
-      \   'V':      'ᴠ·ʟ',
-      \   '\<C-v>': 'ᴠ·ʙ',
-      \ }
+" set showtabline=2
 
 let g:lightline = {
-      \ 'active': {
-      \   'left':  [
-      \     [ 'mode', 'paste' ], [ 'git_branch' ], [ 'filename', 'gitgutter' ],
-      \   ],
-      \   'right': [
-      \     [ 'lint_error', 'lint_warning', 'lint_info', 'lineinfo' ], [ 'filetype' ], [ 'search', 'go' ],
-      \   ]
-      \ },
-      \ 'inactive': {
-      \   'left':  [ [ 'filename' ] ],
-      \   'right': [ [ 'lineinfo' ], [ 'filetype' ] ],
-      \ },
-      \ 'mode_map': s:short_modes,
-      \ 'component_function': {
-      \   'git_branch':    'statusline#git_branch',
-      \   'gitgutter':     'statusline#gitgutter',
-      \   'filename':      'statusline#filename',
-      \   'filetype':      'statusline#filetype',
-      \   'mode':          'statusline#mode',
-      \   'search':        'statusline#search',
-      \   'go':            'statusline#go',
-      \ },
-      \ 'component_expand': {
-      \   'lint_error':   'statusline#neomake_error',
-      \   'lint_warning': 'statusline#neomake_warning',
-      \   'lint_info':    'statusline#neomake_info',
-      \   'lineinfo':     'statusline#lineinfo',
-      \ },
+      \ 'colorscheme': 'ar',
+      \   'active': {
+      \     'left':  [
+      \       ['mode', 'paste'],
+      \       ['filename', 'readonly', 'modified'],
+      \     ],
+      \     'right': [
+      \       ['gitbranch'],
+      \       ['lineinfo', 'percent', 'filetype'],
+      \       ['search', 'lsp', 'go', 'spell'],
+      \       ['lint_running', 'lint_error', 'lint_warning', 'lint_info', 'trails'],
+      \     ],
+      \   },
+      \   'inactive': {
+      \     'left':  [ ['mode'], [], ['filename', 'modified'] ],
+      \     'right': [ ['lineinfo'], ['filetype'] ],
+      \   },
+      \   'tabline': {
+      \     'left':  [['tabs']],
+      \     'right': [['cwd']],
+      \   },
+      \   'tab': {
+      \     'active': ['tabnum',],
+      \     'inactive': ['tabnum'],
+      \   },
+      \   'mode_map': {
+      \       'n':      'ɴ',
+      \       'i':      'ɪ',
+      \       'c':      'ᴄᴏᴍᴍᴀɴᴅ',
+      \       'R':      'ʀ',
+      \       's':      's',
+      \       'S':      's',
+      \       '\<C-s>': 's',
+      \       't':      'ᴛᴇʀᴍɪɴᴀʟ',
+      \       'v':      'ᴠ',
+      \       'V':      'ᴠ',
+      \       "\<C-v>": 'ᴠ',
+      \   },
+      \   'component_function': {
+      \     'cwd':            'status#Directory',
+      \     'filename':       'status#Filename',
+      \     'filetype':       'status#Filetype',
+      \     'gitbranch':      'status#GitBranch',
+      \     'go':             'status#Go',
+      \     'lint_running':   'status#LintRunning',
+      \     'lsp':            'status#CocStatus',
+      \     'mode':           'status#Mode',
+      \     'modified':       'status#Modified',
+      \     'readonly':       'status#Readonly',
+      \     'search':         'status#Search',
+      \     'percent':        'status#Percent',
+      \     'paste':          'status#Paste',
+      \   },
+      \   'component_expand': {
+      \     'lint_error':   'status#LintError',
+      \     'lint_warning': 'status#LintWarning',
+      \     'lint_info':    'status#LintInfo',
+      \     'lineinfo':     'status#Lineinfo',
+      \     'trails':       'status#Whitespace',
+      \   },
       \   'component_type': {
-      \   'lint_error':   'error',
-      \   'lint_warning': 'warning',
-      \   'lint_info':    'warning',
-      \ },
+      \     'lint_error':   'error',
+      \     'lint_warning': 'warning',
+      \     'lint_info':    'info',
+      \     'lint_running': 'warning',
+      \     'trails':       'error',
+      \   },
+      \   'separator': { 'left': '', 'right': '' },
+      \   'subseparator': { 'left': '', 'right': '' },
       \ }
 
-let g:tagbar_status_func = 'statusline#tagbar_status'
+function! s:lightline_reload() abort
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
+
+command! LightlineReload call <SID>lightline_reload()
 
 augroup ar_lightline
   autocmd!
-  autocmd User FzfStatusLine      call lightline#update_once()
+  autocmd ColorScheme * call <SID>lightline_reload()
+  autocmd User FzfStatusLine call lightline#update()
 augroup END
