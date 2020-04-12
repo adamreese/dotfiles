@@ -143,27 +143,23 @@ endfunction
 
 function! status#LintError() abort
   return s:concat([
-        \ s:coc_diagnostic('error'),
+        \ s:coc_count('error'),
         \ s:neomake_count('E'),
         \ ])
 endfunction
 
 function! status#LintWarning() abort
   return s:concat([
-        \ s:coc_diagnostic('warning'),
+        \ s:coc_count('warning'),
         \ s:neomake_count('W'),
         \ ])
 endfunction
 
 function! status#LintInfo() abort
   return s:concat([
-        \ s:coc_diagnostic('information'),
+        \ s:coc_count('information'),
         \ s:neomake_count('I'),
         \ ])
-endfunction
-
-function! status#LintOk() abort
-  return s:coc_count('error') + s:coc_count('warning') == 0
 endfunction
 
 function! status#LintRunning() abort
@@ -188,18 +184,13 @@ function! status#CocStatus() abort
   return get(g:, 'coc_status', '')
 endfunction
 
-function! s:coc_count(level) abort
-  return get(get(b:, 'coc_diagnostic_info', {}), a:level)
-endfunction
-
 " kind: error, warning, information, hints
-function! s:coc_diagnostic(kind) abort
+function! s:coc_count(kind) abort
   if !get(g:, 'coc_enabled') | return '' | endif
 
-  let l:count = s:coc_count(a:kind)
+  let l:count = get(get(b:, 'coc_diagnostic_info', {}), a:kind)
   return l:count ? printf('ʟs(%d)', l:count) : ''
 endfunction
-
 
 " -----------------------------------------------------------------------
 " Tagbar {{{1

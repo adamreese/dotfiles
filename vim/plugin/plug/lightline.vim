@@ -34,17 +34,17 @@ let g:lightline = {
       \     'inactive': ['tabnum'],
       \   },
       \   'mode_map': {
-      \       'n':      'ɴ',
-      \       'i':      'ɪ',
-      \       'c':      'ᴄᴏᴍᴍᴀɴᴅ',
-      \       'R':      'ʀ',
-      \       's':      's',
-      \       'S':      's',
-      \       '\<C-s>': 's',
-      \       't':      'ᴛᴇʀᴍɪɴᴀʟ',
-      \       'v':      'ᴠ',
-      \       'V':      'ᴠ',
-      \       "\<C-v>": 'ᴠ',
+      \     'n':      'ɴ',
+      \     'i':      'ɪ',
+      \     'c':      'ᴄᴏᴍᴍᴀɴᴅ',
+      \     'R':      'ʀ',
+      \     's':      's',
+      \     'S':      's',
+      \     '\<C-s>': 's',
+      \     't':      'ᴛᴇʀᴍɪɴᴀʟ',
+      \     'v':      'ᴠ',
+      \     'V':      'ᴠ',
+      \     "\<C-v>": 'ᴠ',
       \   },
       \   'component_function': {
       \     'cwd':            'status#Directory',
@@ -52,32 +52,32 @@ let g:lightline = {
       \     'filetype':       'status#Filetype',
       \     'gitbranch':      'status#GitBranch',
       \     'go':             'status#Go',
+      \     'lineinfo':       'status#Lineinfo',
       \     'lint_running':   'status#LintRunning',
       \     'lsp':            'status#CocStatus',
       \     'mode':           'status#Mode',
       \     'modified':       'status#Modified',
+      \     'paste':          'status#Paste',
+      \     'percent':        'status#Percent',
       \     'readonly':       'status#Readonly',
       \     'search':         'status#Search',
-      \     'percent':        'status#Percent',
-      \     'paste':          'status#Paste',
+      \     'spell':          'status#Spell',
+      \     'trails':         'status#Whitespace',
       \   },
       \   'component_expand': {
       \     'lint_error':   'status#LintError',
       \     'lint_warning': 'status#LintWarning',
       \     'lint_info':    'status#LintInfo',
-      \     'lineinfo':     'status#Lineinfo',
-      \     'trails':       'status#Whitespace',
       \   },
       \   'component_type': {
       \     'lint_error':   'error',
       \     'lint_warning': 'warning',
       \     'lint_info':    'info',
-      \     'lint_running': 'warning',
-      \     'trails':       'error',
       \   },
       \   'separator': { 'left': '', 'right': '' },
       \   'subseparator': { 'left': '', 'right': '' },
       \ }
+
 
 function! s:lightline_reload() abort
   call lightline#init()
@@ -89,6 +89,5 @@ command! LightlineReload call <SID>lightline_reload()
 
 augroup ar_lightline
   autocmd!
-  autocmd ColorScheme * call <SID>lightline_reload()
   autocmd User FzfStatusLine call lightline#update()
 augroup END
