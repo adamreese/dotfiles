@@ -8,15 +8,16 @@ if !ar#is_loaded('coc.nvim') | finish | endif
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
-
 let g:coc_node_path           = exepath('node')
 let g:coc_status_warning_sign = '  '
 let g:coc_status_error_sign   = '  '
 
 let g:coc_global_extensions   = [
+      \ 'coc-diagnostic',
+      \ 'coc-dictionary',
       \ 'coc-json',
       \ 'coc-lists',
+      \ 'coc-rls',
       \ 'coc-snippets',
       \ 'coc-tslint',
       \ 'coc-tsserver',
@@ -33,27 +34,27 @@ function! s:ShowDocumentation() abort
 endfunction
 
 silent! nunmap gd
+silent! nunmap gs
 silent! nunmap K
 
-nnoremap gd        <Plug>(coc-definition)
-nnoremap <silent>K :<C-U>call <SID>ShowDocumentation()<CR>
+nmap <silent>gd :call CocAction('jumpDefinition', 'edit')<CR>
+nmap <silent>gs :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent>K  :<C-U>call <SID>ShowDocumentation()<CR>
 
-nmap <silent><leader>gi <Plug>(coc-implementation)
-nmap <silent><leader>gr <Plug>(coc-references)
-
-" nmap     <leader>ac <Plug>(coc-codeaction)
-" nmap     <leader>gi <Plug>(coc-implementation)
-nmap     <Leader>=  <Plug>(coc-format-selected)
-vmap     <Leader>=  <Plug>(coc-format-selected)
+nmap <silent><Leader>gi <Plug>(coc-implementation)
+nmap <silent><Leader>gr <Plug>(coc-references)
+nmap <silent><Leader>gt <Plug>(coc-type-definition)
+nmap <silent><Leader>=  <Plug>(coc-format-selected)
+vmap <silent><Leader>=  <Plug>(coc-format-selected)
 
 " Use `:Format` for format current buffer
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format call CocAction('format')
 
 " Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! -nargs=? Fold call CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR call CocAction('runCommand', 'editor.action.organizeImport')
 
 " -----------------------------------------------------------------------
 
@@ -89,46 +90,12 @@ endfunction
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 
-"
-" ---- coc-git
-"
-" navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
-" show chunk diff at current position
-" nmap gs <Plug>(coc-git-chunkinfo)
-" show commit ad current position
-" nmap gc <Plug>(coc-git-commit)
-" nnoremap <Leader>tgg :<C-u>CocCommand git.toggleGutters<CR>
-
-"
-" ---- coc-yank
-"
-" nnoremap <space>y  :<C-u>CocList -A --normal yank<cr>
-
-
-" -----------------------------------------------------------------------
-
-" highlight! link CocErrorSign   ErrorMsg
-" highlight! link CocWarningSign WarningMsg
-" highlight! link CocInfoSign    Type
-
 " -----------------------------------------------------------------------
 
 augroup ar_coc
   autocmd!
-  autocmd User CocJumpPlaceholder  call CocActionAsync('showSignatureHelp')
-  autocmd User CocStatusChange     call lightline#update()
-  autocmd User CocDiagnosticChange call lightline#update()
-
-  " Restart Coc when settings are updated
+  autocmd User CocDiagnosticChange,CocStatusChange call lightline#update()
   autocmd BufWritePost coc-settings.json CocRestart
-
-  " Auto-close preview window when completion is done.
-  autocmd CompleteDone * pclose
-
-
-  " autocmd CursorHoldI * call CocActionAsync('showSignatureHelp')
 augroup END
 
 " -----------------------------------------------------------------------

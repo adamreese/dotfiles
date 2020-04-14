@@ -2,8 +2,16 @@
 " plugin/autocmds.vim
 " =======================================================================
 
+function! s:OnWinEnter() abort
+  if &previewwindow
+    setlocal nospell concealcursor=nv nocursorline colorcolumn=
+  endif
+endfunction
+
 augroup ar_vimrc
   autocmd!
+
+  autocmd WinEnter * call s:OnWinEnter()
 
   " automatically resize panes on resize
   autocmd VimResized * wincmd =

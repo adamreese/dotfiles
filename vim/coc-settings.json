@@ -1,28 +1,36 @@
 {
+  "coc.preferences.formatOnSaveFiletypes": [ "typescript", "rust" ],
   "coc.preferences.jumpCommand": "split",
-  "coc.preferences.formatOnSaveFiletypes": [
-    "typescript",
-    "rust",
-  ],
+  "coc.preferences.previewAutoClose": true,
+  "coc.preferences.hoverTarget": "preview",
 
-  "coc.source.around.enable": false,
+  "coc.source.around.priority": 8,
+  "coc.source.buffer.priority": 6,
+  "coc.source.dictionary.enable": true,
+  "coc.source.dictionary.filetypes": ["markdown", "gitcommit"],
+  "coc.source.dictionary.priority": 5,
+  "coc.source.file.ignoreHidden": false,
+  "coc.source.file.priority": 7,
   "coc.source.neco.enable": false,
-  "coc.source.buffer.disableSyntaxes": ["go"],
 
   "diagnostic.enable": true,
-  "diagnostic.errorSign": "×",
+  "diagnostic.errorSign": "⨉",
   "diagnostic.warningSign": "●",
+  "diagnostic.infoSign": "●",
+  "diagnostic.hintSign": "○",
   "diagnostic.refreshAfterSave": true,
 
   "session.directory": "~/.cache/vim/sessions",
 
   "suggest.detailField": "abbr",
-  "suggest.enablePreview": true,
-  "suggest.noselect": true,
+  "suggest.detailMaxLength": 30,
   "suggest.echodocSupport": true,
-  "suggest.preferCompleteThanJumpPlaceholder": true,
+  "suggest.enablePreview": true,
+  "suggest.maxCompleteItemCount": 50,
+  "suggest.maxPreviewWidth": 60,
+  "suggest.noselect": true,
   "suggest.snippetIndicator": " [S]",
-  "suggest.timeout": 5000,
+  "suggest.timeout": 15000,
   "suggest.triggerAfterInsertEnter": true,
   "suggest.completionItemKindLabels": {
     "function": "\uf794",
@@ -66,7 +74,7 @@
       "settings": {
         "gopls": {
           "usePlaceholders": true,
-          "completeUnimported": true,
+          // "completeUnimported": true,
           "hoverKind": "FullDocumentation"
         }
       }
@@ -77,11 +85,6 @@
       "filetypes": ["sh", "bash"],
       "ignoredRootPaths": ["~"]
     },
-    // "rust": {
-    //   "command": "ra_lsp_server",
-    //   "filetypes": ["rust"],
-    //   "rootPatterns": ["Cargo.toml"]
-    // },
     "lua": {
       "command": "lua-lsp",
       "filetypes": ["lua"]
@@ -91,27 +94,10 @@
   "rust-client.revealOutputChannelOn": "warn",
   "rust-client.disableRustup": true,
 
-  // "snippets.ultisnips.enable": false,
   "snippets.autoTrigger": false,
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
 
-  // "git.enableGutters": false,
-  // "git.addedSign.hlGroup": "GitGutterAdd",
-  // "git.changedSign.hlGroup": "GitGutterChange",
-  // "git.removedSign.hlGroup": "GitGutterDelete",
-  // "git.topRemovedSign.hlGroup": "GitGutterDelete",
-  // "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-  // "git.addedSign.text": "▎",
-  // "git.changedSign.text": "▎",
-  // "git.removedSign.text": "◢",
-  // "git.topRemovedSign.text": "◥",
-  // "git.changeRemovedSign.text": "◢",
-  // "git.branchCharacter": "",
-
-  // "highlight.colors.enable": false,
-
   "vimlsp.suggest.fromRuntimepath": true,
-
-  "rust-client.disableRustup": true
-
 }
+
+// vim:ft=jsonc commentstring=//\ %s
