@@ -126,7 +126,6 @@
   branch       = yellow
   added        = green
   changed      = yellow
-  deleted      = red
   untracked    = blue
 
 [filter "lfs"]
@@ -137,4 +136,3 @@
 
 [include]
   path = "~/.config/git/config.local"
-
