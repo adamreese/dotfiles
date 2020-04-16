@@ -37,7 +37,6 @@ let s:p.inactive.right  = [[s:base04, s:base01]]
 let s:p.normal.error    = [[s:base0A, s:base08]]
 let s:p.normal.warning  = [[s:base08, s:base0A]]
 let s:p.normal.info     = [[s:base01, s:base0D]]
-let s:p.normal.info     = [[s:base0D, s:base01]]
 
 let s:p.tabline.left    = [[s:base05, s:base02]]
 let s:p.tabline.middle  = [[s:base05, s:base01]]
