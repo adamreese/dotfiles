@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/vim-go.vim
 " =======================================================================
-if !ar#is_loaded('vim-go') | finish | endif
+if !ar#IsLoaded('vim-go') | finish | endif
 
 " Settings
 " -----------------------------------------------------------------------
@@ -15,7 +15,7 @@ let g:go_fmt_command             = 'goimports'
 let g:go_fmt_fail_silently       = v:true
 let g:go_gopls_enabled           = v:false
 
-let s:pkgroot = substitute(project#root(), expand('$GOPATH/src/'), '', '')
+let s:pkgroot = substitute(project#Root(), expand('$GOPATH/src/'), '', '')
 if !empty(s:pkgroot)
   let g:go_fmt_options = { 'goimports': '-local ' . s:pkgroot }
 endif

@@ -1,14 +1,14 @@
 " =======================================================================
 " plugin/plug/vim-gitgutter.vim
 " =======================================================================
-if !ar#is_loaded('vim-gitgutter') | finish | endif
+if !ar#IsLoaded('vim-gitgutter') | finish | endif
 
 scriptencoding utf-8
 
 " Settings
 " -----------------------------------------------------------------------
 
-let g:gitgutter_enabled = get(g:, 'gitgutter_enabled', 0)
+let g:gitgutter_enabled = get(g:, 'gitgutter_enabled')
 
 let g:gitgutter_diff_args               = '--ignore-all-space'
 let g:gitgutter_sign_added              = '│'

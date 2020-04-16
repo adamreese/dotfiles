@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/lightline.vim
 " =======================================================================
-if !ar#is_loaded('lightline.vim') | finish | endif
+if !ar#IsLoaded('lightline.vim') | finish | endif
 
 scriptencoding utf-8
 
@@ -79,13 +79,13 @@ let g:lightline = {
       \ }
 
 
-function! s:lightline_reload() abort
+function! s:LightlineReload() abort
   call lightline#init()
   call lightline#colorscheme()
   call lightline#update()
 endfunction
 
-command! LightlineReload call <SID>lightline_reload()
+command! LightlineReload call <SID>LightlineReload()
 
 augroup ar_lightline
   autocmd!

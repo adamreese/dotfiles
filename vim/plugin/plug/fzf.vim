@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/fzf.vim
 " =======================================================================
-if !ar#is_loaded('fzf.vim') | finish | endif
+if !ar#IsLoaded('fzf.vim') | finish | endif
 
 let s:cpo_save = &cpoptions
 set cpoptions&vim
@@ -50,13 +50,13 @@ nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
 
 " -----------------------------------------------------------------------
 
-function! s:build_quickfix_list(lines)
+function! s:BuildQuickfixList(lines)
   call setqflist(map(copy(a:lines), {_, v -> {'filename': v} }), 'a')
   copen
   cc
 endfunction
 
-function! s:build_location_list(lines)
+function! s:BuildLocationList(lines)
   call setloclist(0, map(copy(a:lines), {_, v -> {'filename': v} }), 'a')
   lopen
   ll
@@ -66,17 +66,16 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-t': 'tabedit',
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-l': function('s:build_location_list'),
+      \ 'ctrl-q': function('s:BuildQuickfixList'),
+      \ 'ctrl-l': function('s:BuildLocationList'),
       \ }
 
 " Commands
 " -----------------------------------------------------------------------
-command! -bang -nargs=0 Plugs        call ar#fzf#plugs(<bang>0)
-command! -bang -nargs=* RG           call ar#fzf#rg(<q-args>, <bang>0)
+command! -bang -nargs=0 Plugs        call ar#fzf#Plugs(<bang>0)
+command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
 
-command! -bang -nargs=? -complete=dir Files call ar#fzf#files(<q-args>, <bang>0)
-
+command! -bang -nargs=? -complete=dir Files call ar#fzf#Files(<q-args>, <bang>0)
 
 " -----------------------------------------------------------------------
 

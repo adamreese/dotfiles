@@ -3,7 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#is_installed('neomake') | finish | endif
+if !ar#IsInstalled('neomake') | finish | endif
 
 let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'NeomakeWarningSign' }
 let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'NeomakeErrorSign' }
@@ -15,7 +15,7 @@ let g:neomake_virtualtext_current_error = v:false
 let g:neomake_go_enabled_makers = ['go', 'govet']
 let g:neomake_javascript_enabled_makers = ['eslint']
 
-function! s:neomake_run() abort
+function! s:Run() abort
   if &buftype ==# 'nofile'    | return | endif
   if empty(glob(expand('%'))) | return | endif
 
@@ -24,7 +24,7 @@ endfunction
 
 augroup ar_neomake
   autocmd!
-  autocmd BufWritePost * call <SID>neomake_run()
+  autocmd BufWritePost * call <SID>Run()
   autocmd User NeomakeJobFinished call lightline#update()
   autocmd User NeomakeJobInit     call lightline#update()
 augroup END

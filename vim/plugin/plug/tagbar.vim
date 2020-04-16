@@ -1,8 +1,9 @@
 " =======================================================================
 " plugin/plug/tagbar.vim
 " =======================================================================
-if !ar#is_installed('tagbar') | finish | endif
+if !ar#IsInstalled('tagbar') | finish | endif
 
-let g:tagbar_silent = v:true
+let g:tagbar_silent      = v:true
+let g:tagbar_status_func = 'status#TagbarStatus'
 
 nnoremap <silent><leader>tt :<C-u>TagbarToggle<CR>

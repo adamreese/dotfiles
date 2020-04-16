@@ -3,7 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#is_installed('vista.vim') | finish | endif
+if !ar#IsInstalled('vista.vim') | finish | endif
 
 nmap <leader>v :Vista!!<CR>
 

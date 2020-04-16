@@ -3,12 +3,8 @@
 " =======================================================================
 scriptencoding utf-8
 
-" -----------------------------------------------------------------------
-" folding#text
-" -----------------------------------------------------------------------
-
-function! folding#text() abort
-  let l:linelen = winwidth( 0 ) - (&number ? &numberwidth : 0) - &foldcolumn - 3
+function! folding#Text() abort
+  let l:linelen = winwidth(0) - (&number ? &numberwidth : 0) - &foldcolumn - 3
 
   let l:marker  = strpart(&foldmarker, 0, stridx(&foldmarker, ',')) . '\d*'
   let l:range   = foldclosedend(v:foldstart) - foldclosed(v:foldstart) + 1

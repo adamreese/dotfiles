@@ -12,4 +12,4 @@ command! Wq wq
 command! Profile call profile#()
 
 " ReloadSyntax
-command! ReloadSyntax call ar#reload_syntax()
+command! ReloadSyntax call ar#ReloadSyntax()

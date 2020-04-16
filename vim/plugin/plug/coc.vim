@@ -3,7 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#is_loaded('coc.nvim') | finish | endif
+if !ar#IsLoaded('coc.nvim') | finish | endif
 
 let s:cpo_save = &cpoptions
 set cpoptions&vim
@@ -79,10 +79,10 @@ imap <C-k> <Plug>(coc-snippets-expand-jump)
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>CheckBackSpace() ? "\<TAB>" :
       \ coc#refresh()
 
-function! s:check_back_space() abort
+function! s:CheckBackSpace() abort
   let l:col = col('.') - 1
   return !l:col || getline('.')[l:col - 1]  =~# '\s'
 endfunction

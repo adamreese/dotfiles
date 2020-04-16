@@ -1,9 +1,9 @@
 " =======================================================================
 " plugin/plug/neoformat.vim
 " =======================================================================
-if !ar#is_installed('neoformat') | finish | endif
+if !ar#IsInstalled('neoformat') | finish | endif
 
 let g:neoformat_enabled_json = ['prettier', 'jq']
 let g:neoformat_enabled_yaml = ['prettier']
 
-noremap <silent><leader>f :Neoformat<CR>
+nnoremap <silent><leader>f :Neoformat<CR>

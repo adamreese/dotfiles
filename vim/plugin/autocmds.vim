@@ -28,7 +28,7 @@ augroup ar_vimrc
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
 
-  autocmd BufRead,BufNewFile * call project#source_config()
+  autocmd BufRead,BufNewFile * call project#SourceConfig()
 augroup END
 
 augroup ar_cursorline

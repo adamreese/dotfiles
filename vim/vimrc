@@ -18,7 +18,7 @@ let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 " -----------------------------------------------------------------------
 " Plug: {{{1
 " -----------------------------------------------------------------------
-call ar#ensure_plugin_manager()
+call ar#EnsurePluginManager()
 
 " Conditionally load plugins.
 " https://github.com/junegunn/vim-plug/wiki/tips#conditional-activation

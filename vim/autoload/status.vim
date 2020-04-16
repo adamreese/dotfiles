@@ -37,7 +37,7 @@ let s:symbol = {
 " Get the symbol for a given component
 function! s:symbol.for(name, ...) dict abort
   let l:sym = get(l:self, a:name, a:name)
-  return s:concat(extend([l:sym], a:000))
+  return s:Concat(extend([l:sym], a:000))
 endfunction
 
 " -----------------------------------------------------------------------
@@ -45,14 +45,14 @@ endfunction
 
 function! status#Filename() abort
   let l:bufname = bufname('%')
-  let l:ft = s:buffer_type()
+  let l:ft = s:BufferType()
 
   if &previewwindow
     return '[Preview]'
   elseif l:ft ==# 'fzf'
     return ''
   elseif l:ft ==# 'qf'
-    return s:quickfix_text()
+    return s:QuickfixText()
   elseif l:ft ==# 'tagbar'
     return get(s:, 'tagbar_fname', '')
   elseif l:ft ==# 'list'
@@ -65,16 +65,16 @@ function! status#Filename() abort
     return ''
   endif
 
-  if s:is_custom_mode() | return '' | endif
+  if s:IsCustomMode() | return '' | endif
 
   let l:path = expand('%:~:.')
   if strlen(l:path) == 0
     return s:symbol.for('unnamed')
   endif
-  return s:format_path(l:path)
+  return s:FormatPath(l:path)
 endfunction
 
-function! s:format_path(path) abort
+function! s:FormatPath(path) abort
   if strlen(a:path) < 50
     return a:path
   endif
@@ -89,7 +89,7 @@ function! s:format_path(path) abort
   return join([l:parts[0], '⋯'] + l:parts[ -l:max : ], '/')
 endfunction
 
-function! s:quickfix_text() abort
+function! s:QuickfixText() abort
   let l:title = get(w:, 'quickfix_title', '')
   return trim(substitute(l:title, &grepprg, 'grep', ''))
 endfunction
@@ -98,7 +98,7 @@ endfunction
 " Filetype {{{1
 
 function! status#Filetype() abort
-  if s:is_custom_mode() | return '' | endif
+  if s:IsCustomMode() | return '' | endif
   return strlen(&filetype) ? &filetype : s:symbol.for('no ft')
 endfunction
 
@@ -106,7 +106,7 @@ endfunction
 " Mode {{{1
 
 function! status#Mode() abort
-  let l:mode = s:custom_mode()
+  let l:mode = s:CustomMode()
   return strlen(l:mode) ? l:mode : lightline#mode()
 endfunction
 
@@ -114,7 +114,7 @@ endfunction
 " Git {{{1
 
 function! status#GitBranch() abort
-  return s:is_custom_mode() ? '' : FugitiveHead(7)
+  return s:IsCustomMode() ? '' : FugitiveHead(7)
 endfunction
 
 " -----------------------------------------------------------------------
@@ -142,23 +142,23 @@ function! status#Whitespace() abort
 endfunction
 
 function! status#LintError() abort
-  return s:concat([
-        \ s:coc_count('error'),
-        \ s:neomake_count('E'),
+  return s:Concat([
+        \ s:CocCount('error'),
+        \ s:NeomakeCount('E'),
         \ ])
 endfunction
 
 function! status#LintWarning() abort
-  return s:concat([
-        \ s:coc_count('warning'),
-        \ s:neomake_count('W'),
+  return s:Concat([
+        \ s:CocCount('warning'),
+        \ s:NeomakeCount('W'),
         \ ])
 endfunction
 
 function! status#LintInfo() abort
-  return s:concat([
-        \ s:coc_count('information'),
-        \ s:neomake_count('I'),
+  return s:Concat([
+        \ s:CocCount('information'),
+        \ s:NeomakeCount('I'),
         \ ])
 endfunction
 
@@ -169,7 +169,7 @@ function! status#LintRunning() abort
   return ''
 endfunction
 
-function! s:neomake_count(group) abort
+function! s:NeomakeCount(group) abort
   if !exists('g:loaded_neomake') | return '' | endif
 
   let l:counts = neomake#statusline#LoclistCounts()
@@ -185,7 +185,7 @@ function! status#CocStatus() abort
 endfunction
 
 " kind: error, warning, information, hints
-function! s:coc_count(kind) abort
+function! s:CocCount(kind) abort
   if !get(g:, 'coc_enabled') | return '' | endif
 
   let l:count = get(get(b:, 'coc_diagnostic_info', {}), a:kind)
@@ -243,20 +243,19 @@ endfun
 
 " -----------------------------------------------------------------------
 
-function! s:concat(list) abort
-  return join(s:compact(a:list), ' ')
+function! s:Concat(list) abort
+  return join(s:Compact(a:list), ' ')
 endfunction
 
-function! s:compact(list) abort
+function! s:Compact(list) abort
   return filter(copy(a:list), {_, v -> !empty(v)})
 endfunction
 
-function! s:is_custom_mode() abort
+function! s:IsCustomMode() abort
   return has_key(s:filetype_modes, &filetype)
 endfunction
 
-
-function! s:custom_mode() abort
+function! s:CustomMode() abort
   if &filetype ==# 'qf'
     return s:symbol.for('list', get(b:, 'qf_isLoc') ? 'LocationList' : 'Quickfix')
   endif
@@ -264,7 +263,7 @@ function! s:custom_mode() abort
   return get(s:filetype_modes, &filetype, '')
 endfunction
 
-function! s:buffer_type() abort
+function! s:BufferType() abort
   return strlen(&filetype) ? &filetype : &buftype
 endfunction
 

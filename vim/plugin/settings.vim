@@ -78,7 +78,7 @@ endif
 " -----------------------------------------------------------------------
 
 if has('folding')
-  set foldtext=folding#text()
+  set foldtext=folding#Text()
   set foldopen+=jump
   set foldlevelstart=4
 endif
