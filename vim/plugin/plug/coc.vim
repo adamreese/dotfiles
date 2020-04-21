@@ -33,17 +33,19 @@ function! s:ShowDocumentation() abort
   endif
 endfunction
 
+" monastery mappings
 silent! nunmap gd
 silent! nunmap gs
 silent! nunmap K
 
-nmap <silent>gd :call CocAction('jumpDefinition', 'edit')<CR>
-nmap <silent>gs :call CocAction('jumpDefinition', 'split')<CR>
-nmap <silent>K  :<C-U>call <SID>ShowDocumentation()<CR>
+nmap <silent>gd  :<C-u>call CocActionAsync('jumpDefinition', 'edit')<CR>
+nmap <silent>gdt <Plug>(coc-type-definition)
+nmap <silent>gs  :<C-u>call CocActionAsync('jumpDefinition', 'split')<CR>
+nmap <silent>K   :<C-u>call <SID>ShowDocumentation()<CR>
 
 nmap <silent><Leader>gi <Plug>(coc-implementation)
 nmap <silent><Leader>gr <Plug>(coc-references)
-nmap <silent><Leader>gt <Plug>(coc-type-definition)
+nmap <silent><Leader>r  <Plug>(coc-refactor)
 nmap <silent><Leader>=  <Plug>(coc-format-selected)
 vmap <silent><Leader>=  <Plug>(coc-format-selected)
 
