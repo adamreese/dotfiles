@@ -49,6 +49,9 @@ nnoremap <C-u> <C-u>zz
 nnoremap <C-S> [s1z=<C-O>
 inoremap <C-S> <C-G>u<Esc>[s1z=`]A<C-G>u
 
+" Get more information from ctrl-g
+nnoremap <c-g> 2<c-g>
+
 " Command mode emacs style bindings
 cnoremap <C-A> <Home>
 cnoremap <C-B> <Left>
