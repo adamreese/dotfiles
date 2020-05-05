@@ -6,9 +6,7 @@ set -euxo pipefail
 
 # minikube-darwin-amd64
 
-echo
-echo "ᴍɪɴɪᴋᴜʙᴇ :: installing latest minikube"
-echo
+: Installing latest minikube
 
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
 chmod +x minikube
@@ -19,9 +17,7 @@ minikube version
 # Download Docker Machine Hyperkit Driver
 # docker-machine-driver-hyperkit
 
-echo
-echo "ᴍɪɴɪᴋᴜʙᴇ :: installing hyperkit driver"
-echo
+: Installing hyperkit driver
 
 curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit
 chmod +x docker-machine-driver-hyperkit
