@@ -12,6 +12,8 @@ augroup filetypedetect
 
   autocmd! BufNewFile,BufRead tsconfig.json   setfiletype jsonc
 
+  autocmd! BufNewFile,BufRead Brewfile        setfiletype ruby
+
   autocmd! BufNewFile,BufRead Gopkg.lock      setfiletype toml
   autocmd! BufNewFile,BufRead glide.lock      setfiletype yaml
   autocmd! BufNewFile,BufRead go.mod          setfiletype gomod
