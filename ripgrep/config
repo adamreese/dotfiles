@@ -2,3 +2,15 @@
 --ignore-file=/Users/areese/.agignore
 --smart-case
 --no-messages
+
+--type-add
+vim:vimrc
+
+--colors=line:fg:yellow
+--colors=line:style:bold
+--colors=match:fg:red
+--colors=match:style:underline
+--colors=path:fg:green
+--colors=path:style:bold
+
+# vim:ft=conf
