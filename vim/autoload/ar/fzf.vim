@@ -20,11 +20,18 @@ function! ar#fzf#Plugs(fullscreen) abort
 endfunction
 
 function! ar#fzf#Rg(query, fullscreen) abort
-  let l:command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-  let l:initial_command = printf(l:command_fmt, shellescape(a:query))
-  let l:reload_command = printf(l:command_fmt, '{q}')
-  let l:spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.l:reload_command]}
-  call fzf#vim#grep(l:initial_command, 1, fzf#vim#with_preview(l:spec), a:fullscreen)
+  let l:cmd_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+
+  let l:initial_cmd = printf(l:cmd_fmt, shellescape(a:query))
+  let l:reload_cmd = printf('change:reload:'.l:cmd_fmt, '{q}')
+
+  let l:spec = {'options': [
+        \ '--phony',
+        \ '--query', a:query,
+        \ '--bind', l:reload_cmd,
+        \ ]}
+
+  call fzf#vim#grep(l:initial_cmd, 1, fzf#vim#with_preview(l:spec), a:fullscreen)
 endfunction
 
 function! ar#fzf#Files(dir, fullscreen) abort
@@ -32,5 +39,6 @@ function! ar#fzf#Files(dir, fullscreen) abort
 endfunction
 
 function! s:FzfPreview(fullscreen) abort
-  return a:fullscreen ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?')
+  let l:p = a:fullscreen ? 'up:60%' : 'right:50%:hidden'
+  return fzf#vim#with_preview(l:p, '?')
 endfunction
