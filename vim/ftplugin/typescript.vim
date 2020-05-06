@@ -26,8 +26,8 @@ let g:tagbar_type_typescript = {
       \     'v:variables',
       \     'z:parameters',
       \   ],
-      \ 'sro' : '.',
-      \ 'sort' : 0,
+      \   'sro' : '.',
+      \   'sort' : 0,
       \   'kind2scope' : {
       \     'g' : 'enums',
       \     'c' : 'classes',
