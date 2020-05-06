@@ -42,7 +42,7 @@ set lazyredraw               " only redraw when needed
 set ttimeout
 set ttimeoutlen=10
 set timeout
-set timeoutlen=1000
+set timeoutlen=750
 set updatetime=300
 
 " Don't try to highlight long lines.
@@ -142,11 +142,12 @@ set completeopt+=noselect            " Don't auto-select the first match
 set completeopt+=longest
 set completeopt-=preview             " Don't show extra info about the current completion
 
-set isfname-==                       " Don't consider = symbol as part filename. Helps for deoplete file source.
+set isfname-==                       " Don't consider = symbol as part filename
 set pumheight=30                     " Pop-up menu's line height
 set scrolloff=8                      " Start scrolling when we're 8 lines away from margins
 set sidescroll=1
 set sidescrolloff=15
+set scrolljump=3
 set splitbelow                       " Split horizontal windows below to the current windows
 set splitright                       " Split vertical windows right to the current windows
 set virtualedit=block                " Allow virtual editing in Visual block mode
@@ -170,12 +171,11 @@ endif
 
 set concealcursor=niv
 set conceallevel=2
-set display=lastline
-set laststatus=2
 set list                          " Display tabs and trailing spaces visually
 set nocursorcolumn                " speed up syntax highlighting
 set nocursorline
-set noshowmode                    " Don't need to show mode since we have lightline
+set noshowcmd                     " No to showing command in bottom-right corner
+set noshowmode                    " No to showing mode in bottom-left corner
 set number                        " Show line numbers
 set textwidth=78
 set title                         " Sets the terminal title nicely.
