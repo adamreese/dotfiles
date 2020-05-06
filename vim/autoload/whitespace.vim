@@ -5,7 +5,7 @@ if exists('g:loaded_whitespace') | finish | endif
 let g:loaded_whitespace = v:true
 
 function! whitespace#Clean() abort
-  if empty(&buftype) | return | end
+  if !empty(&buftype) | return | end
 
   if get(g:, 'whitespace_enable', v:true)
     let l:pos = winsaveview()
