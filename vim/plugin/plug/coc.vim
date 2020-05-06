@@ -43,20 +43,26 @@ nmap <silent>gdt <Plug>(coc-type-definition)
 nmap <silent>gs  :<C-u>call CocActionAsync('jumpDefinition', 'split')<CR>
 nmap <silent>K   :<C-u>call <SID>ShowDocumentation()<CR>
 
-nmap <silent><Leader>gi <Plug>(coc-implementation)
-nmap <silent><Leader>gr <Plug>(coc-references)
-nmap <silent><Leader>r  <Plug>(coc-refactor)
-nmap <silent><Leader>=  <Plug>(coc-format-selected)
-vmap <silent><Leader>=  <Plug>(coc-format-selected)
+nmap <silent><Leader>gi     <Plug>(coc-implementation)
+nmap <silent><Leader>gr     <Plug>(coc-references)
+nmap <silent><Leader>r      <Plug>(coc-refactor)
+nmap <silent><Leader>=      <Plug>(coc-format-selected)
+vmap <silent><Leader>=      <Plug>(coc-format-selected)
+nmap <silent><Leader>ca     <Plug>(coc-codeaction)
 
-" Use `:Format` for format current buffer
-command! -nargs=0 Format call CocAction('format')
+" Diagnostics
+nmap <silent><Leader>d      <Plug>(coc-diagnostic-info)
+nmap <silent> ]d            <Plug>(coc-diagnostic-next)
+nmap <silent> [d            <Plug>(coc-diagnostic-prev)
 
-" Use `:Fold` for fold current buffer
-command! -nargs=? Fold call CocAction('fold', <f-args>)
+" Use `:CocFormat` for format current buffer
+command! -nargs=0 CocFormat call CocAction('format')
 
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR call CocAction('runCommand', 'editor.action.organizeImport')
+" Use `:CocFold` for fold current buffer
+command! -nargs=? CocFold call CocAction('fold', <f-args>)
+
+" use `:CocOR` for organize import of current buffer
+command! -nargs=0 CocOR call CocAction('runCommand', 'editor.action.organizeImport')
 
 " -----------------------------------------------------------------------
 
