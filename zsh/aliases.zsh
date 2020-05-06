@@ -23,6 +23,9 @@ alias grep='grep -i --color=auto'
 alias agp='ag --hidden --pager="less -iFMRSX"'
 alias agh='ag --hidden'
 
+# fd
+alias fd="fd --hidden --ignore-file=${HOME}/.agignore "
+
 # Git
 alias   g='git'
 alias glg='git log --stat'
