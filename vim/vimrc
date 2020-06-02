@@ -43,6 +43,7 @@ Plug 'chrisbra/unicode.vim',           {'on': ['UnicodeName', 'UnicodeTable']}
 Plug 'christoomey/vim-tmux-navigator', PlugIf(exists('$TMUX'))
 Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf'
@@ -55,9 +56,9 @@ Plug 'majutsushi/tagbar',              { 'on': 'TagbarToggle' }
 Plug 'mileszs/ack.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'osyo-manga/vim-anzu'
+Plug 'preservim/nerdtree'
 Plug 'romainl/vim-qf'
 Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
-Plug 'preservim/nerdtree'
 Plug 'towolf/vim-helm'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
