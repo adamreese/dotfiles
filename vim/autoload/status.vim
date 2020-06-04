@@ -114,7 +114,11 @@ endfunction
 " Git {{{1
 
 function! status#GitBranch() abort
-  return s:IsCustomMode() ? '' : FugitiveHead(7)
+  if winwidth(0) < 100 || s:IsCustomMode()
+    return ''
+  endif
+
+  return FugitiveHead(7)
 endfunction
 
 " -----------------------------------------------------------------------
