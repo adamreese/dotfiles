@@ -3,20 +3,6 @@
 " =======================================================================
 scriptencoding utf-8
 
-let s:filetype_modes = {
-      \ 'fugitiveblame': 'Blame',
-      \ 'fzf':           'FZF',
-      \ 'gitcommit':     'Commit Message',
-      \ 'godoc':         'GoDoc',
-      \ 'help':          'Help',
-      \ 'nerdtree':      'NERDTree',
-      \ 'qf':            s:symbol.for('list', 'Quickfix'),
-      \ 'tagbar':        'Tagbar',
-      \ 'vim-plug':      'Plugin',
-      \ 'list':          'List',
-      \ 'vista':         'Vista',
-      \ }
-
 " -----------------------------------------------------------------------
 " Symbol {{{1
 
@@ -39,6 +25,22 @@ function! s:symbol.for(name, ...) dict abort
   let l:sym = get(l:self, a:name, a:name)
   return s:Concat(extend([l:sym], a:000))
 endfunction
+
+" -----------------------------------------------------------------------
+
+let s:filetype_modes = {
+      \ 'fugitiveblame': 'Blame',
+      \ 'fzf':           'FZF',
+      \ 'gitcommit':     'Commit Message',
+      \ 'godoc':         'GoDoc',
+      \ 'help':          'Help',
+      \ 'nerdtree':      'NERDTree',
+      \ 'qf':            s:symbol.for('list', 'Quickfix'),
+      \ 'tagbar':        'Tagbar',
+      \ 'vim-plug':      'Plugin',
+      \ 'list':          'List',
+      \ 'vista':         'Vista',
+      \ }
 
 " -----------------------------------------------------------------------
 " Filename {{{1
