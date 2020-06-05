@@ -66,6 +66,7 @@ hash -d -- dotfiles=${HOME}/.dotfiles
 path=(
   _scratch/bin
   .git/safe/../../bin
+
   ${path}
 )
 
