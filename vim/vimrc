@@ -118,3 +118,6 @@ call plug#end()
 
 let g:mapleader = ','
 let g:maplocalleader = ','
+
+" Find and source project-specific config
+call project#SourceConfig()
