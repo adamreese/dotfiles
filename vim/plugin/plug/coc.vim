@@ -15,6 +15,7 @@ let g:coc_status_error_sign   = '  '
 let g:coc_global_extensions   = [
       \ 'coc-diagnostic',
       \ 'coc-dictionary',
+      \ 'coc-git',
       \ 'coc-json',
       \ 'coc-lists',
       \ 'coc-rls',
@@ -97,6 +98,19 @@ endfunction
 
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
+
+if !ar#IsLoaded('vim-gitgutter')
+
+  " Navigate chunks of current buffer
+  nmap [g <Plug>(coc-git-prevchunk)
+  nmap ]g <Plug>(coc-git-nextchunk)
+
+  " Create text object for git chunks
+  omap ig <Plug>(coc-git-chunk-inner)
+  xmap ig <Plug>(coc-git-chunk-inner)
+  omap ag <Plug>(coc-git-chunk-outer)
+  xmap ag <Plug>(coc-git-chunk-outer)
+endif
 
 " -----------------------------------------------------------------------
 

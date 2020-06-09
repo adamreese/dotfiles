@@ -98,6 +98,19 @@
   "snippets.ultisnips.directories": ["UltiSnips", "gosnippets/UltiSnips"],
 
   "vimlsp.suggest.fromRuntimepath": true,
+
+  "git.enableGutters": true,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.addedSign.text": "┃",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+  "git.changeRemovedSign.text": "╏",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.changedSign.text": "╏",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.removedSign.text": "┇",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.text": "┇",
+  "git.branchCharacter": "",
 }
 
 // vim:ft=jsonc commentstring=//\ %s
