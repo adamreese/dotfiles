@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Fetch current brush fires from Ventura County Fire Department
+
+curl -sS http://fireline.ventura.org/data/fireline.json | \
+  jq '.[] | select(.IncidentType == "Brush Fire")'
