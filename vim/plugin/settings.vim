@@ -1,6 +1,7 @@
 " =======================================================================
 " plugin/settings.vim
 " =======================================================================
+scriptencoding utf-8
 
 " General: {{{1
 " -----------------------------------------------------------------------
@@ -169,6 +170,13 @@ endif
 " UI: {{{1
 " -----------------------------------------------------------------------
 
+let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
+let &fillchars='diff:·,vert:│,fold: '
+if has('nvim')
+  let &fillchars.=',eob: '
+endif
+let &showbreak='↳ '
+
 set concealcursor=niv
 set conceallevel=2
 set list                          " Display tabs and trailing spaces visually
@@ -212,6 +220,14 @@ set background=dark
 
 let g:hybrid_custom_term_colors = v:true
 silent! colorscheme hybrid
+
+" Highlights:
+" -----------------------------------------------------------------------
+highlight! clear QuickFixLine
+highlight! QuickFixLine cterm=underline gui=underline guibg=NONE
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Enable bash syntax
 " $VIMRUNTIME/syntax/sh.vim
