@@ -6,30 +6,57 @@
 autoload -Uz zmv
 
 # ------------------------------------------------------------------------------
-# zplugin
+# zinit
 
-local -A ZPLGM
-ZPLGM[HOME_DIR]="${XDG_CONFIG_HOME}/zplugin"
-if [[ ! -f ${ZPLGM[HOME_DIR]}/bin/zplugin.zsh ]]; then
-    git clone https://github.com/zdharma/zplugin.git ${ZPLGM[HOME_DIR]}/bin
+local -A ZINIT
+ZINIT[HOME_DIR]="${XDG_DATA_HOME}/zinit"
+if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
+    git clone https://github.com/zdharma/zinit.git ${ZINIT[HOME_DIR]}/bin
 fi
 
-source ${ZPLGM[HOME_DIR]}/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
+if [[ -f ${ZINIT[HOME_DIR]}/bin/zmodules/Src/zdharma/zplugin.so ]]; then
+  module_path+=( ${ZINIT[HOME_DIR]}/bin/zmodules/Src )
+  zmodload zdharma/zplugin
+fi
 
-zplugin light "zsh-users/zsh-completions"
-zplugin light "zsh-users/zsh-history-substring-search"
-zplugin light "jocelynmallon/zshmarks"
+source ${ZINIT[HOME_DIR]}/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-zplugin ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
-zplugin light direnv/direnv
+BOOKMARKS_FILE=${ZDOTDIR}/bookmarks
+zinit load 'jocelynmallon/zshmarks'
 
-autoload -Uz compinit; compinit -u
-autoload -Uz bashcompinit; bashcompinit
+zinit lucid wait from'gh-r' as'program' mv'direnv* -> direnv' \
+  atclone'./direnv hook zsh >! zhook.zsh' atpull'%atclone' \
+  pick'direnv' src='zhook.zsh' for \
+  direnv/direnv
 
-# run compdefs provided by plugins
-zplugin cdreplay -q
+zinit lucid wait blockf \
+  atpull'zinit creinstall -q .' for \
+  'zsh-users/zsh-completions'
+
+__bind_history_keys() {
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,bold'
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
+  HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
+
+  bindkey "$terminfo[kcuu1]" history-substring-search-up
+  bindkey "$terminfo[kcud1]" history-substring-search-down
+}
+zinit lucid wait atload'__bind_history_keys' for \
+  'zsh-users/zsh-history-substring-search'
+
+
+PURE_PROMPT_VICMD_SYMBOL=':'
+zstyle ':prompt:pure:git:stash'      show  yes
+zstyle ':prompt:pure:git:dirty'      color white
+zstyle ':prompt:pure:git:stash'      color blue
+zstyle ':prompt:pure:git:arrow'      color white
+zstyle ':prompt:pure:path'           color green
+zstyle ':prompt:pure:prompt:success' color yellow
+
+zinit lucid pick'async.zsh' src'pure.zsh' for \
+  'sindresorhus/pure'
 
 # ------------------------------------------------------------------------------
 # source configuration files
@@ -40,11 +67,14 @@ done
 unset file
 
 # ------------------------------------------------------------------------------
-# load prompt
+# load completion
 
-autoload -Uz promptinit && promptinit
-# prompt areese
-prompt pure
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(Nm-20) ]]; then
+  compinit -C
+else
+  compinit
+fi
 
 # ------------------------------------------------------------------------------
 # hash directories
