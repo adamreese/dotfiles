@@ -46,11 +46,9 @@ autoload -Uz ${ZDOTDIR}/functions/*(N:t)
 
 path=(
   ${HOME}/.local/bin(N-/)
-  /usr/local/{bin,sbin}
-
-  # brew ruby
+  ${HOME}/.cargo/bin(N-/)
+  /usr/local/{bin,sbin}(N-/)
   /usr/local/opt/ruby/bin(N-/)
-
   ${path}
 )
 
