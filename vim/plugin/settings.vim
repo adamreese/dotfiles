@@ -218,17 +218,6 @@ endif
 syntax enable
 set background=dark
 
-let g:hybrid_custom_term_colors = v:true
-silent! colorscheme hybrid
-
-" Highlights:
-" -----------------------------------------------------------------------
-highlight! clear QuickFixLine
-highlight! QuickFixLine cterm=underline gui=underline guibg=NONE
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " Enable bash syntax
 " $VIMRUNTIME/syntax/sh.vim
 let g:is_bash = v:true
