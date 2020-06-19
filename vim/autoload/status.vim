@@ -77,18 +77,12 @@ function! status#Filename() abort
 endfunction
 
 function! s:FormatPath(path) abort
-  if strlen(a:path) < 50
+  let l:max = winwidth(0) * 0.75
+  if strlen(a:path) < l:max
     return a:path
   endif
 
-  let l:parts = split(a:path, '/')
-
-  let l:max = 3
-  if len(l:parts) < l:max
-    return a:path
-  endif
-
-  return join([l:parts[0], '⋯'] + l:parts[ -l:max : ], '/')
+  return pathshorten(a:path)
 endfunction
 
 function! s:QuickfixText() abort
