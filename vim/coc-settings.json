@@ -3,6 +3,7 @@
   "coc.preferences.jumpCommand": "split",
   "coc.preferences.previewAutoClose": true,
   "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
 
   "coc.source.around.priority": 8,
   "coc.source.buffer.priority": 6,

@@ -1,9 +1,9 @@
 " =======================================================================
 " plugin/plug/lightline.vim
 " =======================================================================
-if !ar#IsLoaded('lightline.vim') | finish | endif
-
 scriptencoding utf-8
+
+if !ar#IsLoaded('lightline.vim') | finish | endif
 
 " set showtabline=2
 
@@ -12,18 +12,19 @@ let g:lightline = {
       \   'active': {
       \     'left':  [
       \       ['mode', 'paste'],
-      \       ['filename', 'readonly', 'modified'],
+      \       ['gitbranch'],
+      \       ['modified', 'filename', 'readonly'],
       \     ],
       \     'right': [
-      \       ['gitbranch'],
-      \       ['lineinfo', 'percent', 'filetype'],
-      \       ['search', 'lsp', 'go', 'spell'],
-      \       ['lint_running', 'lint_error', 'lint_warning', 'lint_info', 'trails'],
+      \       ['percent', 'lineinfo'],
+      \       ['filetype'],
+      \       ['lsp', 'go', 'spell', 'current_function', 'search'],
+      \       ['lint_running', 'lint_error', 'lint_warning', 'lint_info'],
       \     ],
       \   },
       \   'inactive': {
-      \     'left':  [ ['mode'], [], ['filename', 'modified'] ],
-      \     'right': [ ['lineinfo'], ['filetype'] ],
+      \     'left':  [['mode'], ['modified', 'filename']],
+      \     'right': [['percent', 'lineinfo'], ['filetype']],
       \   },
       \   'tabline': {
       \     'left':  [['tabs']],
@@ -46,23 +47,23 @@ let g:lightline = {
       \     'V':      'ᴠ',
       \     "\<C-v>": 'ᴠ',
       \   },
+      \   'component': {
+      \     'spell': '%{&spell?"s":""}',
+      \   },
       \   'component_function': {
-      \     'cwd':            'status#Directory',
-      \     'filename':       'status#Filename',
-      \     'filetype':       'status#Filetype',
-      \     'gitbranch':      'status#GitBranch',
-      \     'go':             'status#Go',
-      \     'lineinfo':       'status#Lineinfo',
-      \     'lint_running':   'status#LintRunning',
-      \     'lsp':            'status#CocStatus',
-      \     'mode':           'status#Mode',
-      \     'modified':       'status#Modified',
-      \     'paste':          'status#Paste',
-      \     'percent':        'status#Percent',
-      \     'readonly':       'status#Readonly',
-      \     'search':         'status#Search',
-      \     'spell':          'status#Spell',
-      \     'trails':         'status#Whitespace',
+      \     'cwd':              'status#Directory',
+      \     'filename':         'status#Filename',
+      \     'filetype':         'status#Filetype',
+      \     'gitbranch':        'status#GitBranch',
+      \     'go':               'status#Go',
+      \     'lint_running':     'status#LintRunning',
+      \     'lsp':              'status#CocStatus',
+      \     'mode':             'status#Mode',
+      \     'modified':         'status#Modified',
+      \     'paste':            'status#Paste',
+      \     'readonly':         'status#Readonly',
+      \     'search':           'status#Search',
+      \     'current_function': 'status#CurrentFunction',
       \   },
       \   'component_expand': {
       \     'lint_error':   'status#LintError',

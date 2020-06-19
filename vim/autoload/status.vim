@@ -56,7 +56,7 @@ function! status#Filename() abort
   elseif l:ft ==# 'qf'
     return s:QuickfixText()
   elseif l:ft ==# 'tagbar'
-    return get(s:, 'tagbar_fname', '')
+    return ''
   elseif l:ft ==# 'list'
     return l:bufname
   elseif l:ft ==# 'help'
@@ -116,11 +116,9 @@ endfunction
 " Git {{{1
 
 function! status#GitBranch() abort
-  if winwidth(0) < 100 || s:IsCustomMode()
-    return ''
-  endif
+  if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
 
-  return FugitiveHead(7)
+  return get(g:, 'coc_git_status', '')[:20]
 endfunction
 
 " -----------------------------------------------------------------------
@@ -138,14 +136,16 @@ function! status#Search() abort
 endfunction
 
 " -----------------------------------------------------------------------
-" Linter {{{1
-"
-function! status#Whitespace() abort
-  if empty(&buftype) && ! &readonly && &modifiable && line('$') < 9000
-    return search('\s$', 'nw') == 0 ? '' : s:symbol.for('whitespace', '')
-  endif
-  return ''
+" Function {{{1
+
+function! status#CurrentFunction() abort
+  if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
+
+  return get(b:, 'coc_current_function', '')
 endfunction
+
+" -----------------------------------------------------------------------
+" Linter {{{1
 
 function! status#LintError() abort
   return s:Concat([
@@ -169,10 +169,9 @@ function! status#LintInfo() abort
 endfunction
 
 function! status#LintRunning() abort
-  if exists('g:loaded_neomake') && !empty(neomake#GetJobs())
-    return s:symbol.for('spinner')
-  endif
-  return ''
+  if !exists('g:loaded_neomake') || empty(neomake#GetJobs()) | return '' | endif
+
+  return s:symbol.for('spinner')
 endfunction
 
 function! s:NeomakeCount(group) abort
@@ -228,24 +227,6 @@ endfunction
 function! status#Modified() abort
   return &filetype !=# 'help' && &modified ? s:symbol.for('modified') : ''
 endfunction
-
-function! status#Spell() abort
-  return &spell ? s:symbol.for('spell') : ''
-endfunction
-
-" -----------------------------------------------------------------------
-" Percent {{{1
-
-" Percent was inspired by vim-line-no-indicator plugin.
-function! status#Percent() abort
-    let l:chars = ['꜒', '꜓', '꜔', '꜕', '꜖']
-    " let l:chars = ['˥', '˦', '˧', '˨', '˩']
-    " let l:chars = [' ', '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█']
-    " let l:chars = ['⎺', '⎻', '─', '⎼', '⎽']
-    let l:lines = line('$')
-    let l:idx = float2nr(ceil((line('.') * len(l:chars) * 1.0) / l:lines)) - 1
-    return l:chars[l:idx]
-endfun
 
 " -----------------------------------------------------------------------
 
