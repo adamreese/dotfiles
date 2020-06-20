@@ -10,7 +10,7 @@ def ancestors: while(. | length >= 2; del(.[-1,-2])); . as $in | paths(.url?) as
 
 mark=$(jq -r "${jq_script}" < "${bookmarks_path}" \
   | sed -E $'s/(.*)\t(.*)/\\1\t\x1b[36m\\2\x1b[m/g' \
-  | fzf --ansi \
+  | fzf --ansi --query "${1:-}" \
   | cut -d$'\t' -f2)
 
 if [[ -n ${mark:-} ]]; then
