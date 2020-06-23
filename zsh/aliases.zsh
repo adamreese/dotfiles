@@ -10,6 +10,8 @@ alias  e='exit'
 alias  q='exit'
 alias :q='exit'
 
+alias b='browser-bookmarks'
+
 # Switch to the previous directory
 alias -- -='cd -'
 
