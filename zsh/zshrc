@@ -97,6 +97,10 @@ path=(
   _scratch/bin
   .git/safe/../../bin
 
+  ${HOME}/.local/bin(N-/)
+
+  /usr/local/opt/ruby/bin(N-/)
+  ${HOME}/.cargo/bin(N-/)
   ${path}
 )
 
