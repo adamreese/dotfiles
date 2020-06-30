@@ -14,13 +14,12 @@ setopt AUTO_LIST              # Automatically list choices on ambiguous completi
 setopt AUTO_MENU              # Show completion menu on a successive tab press.
 setopt AUTO_PARAM_SLASH       # If completed parameter is a directory, add a trailing slash.
 setopt COMPLETE_IN_WORD       # Complete from both ends of a word.
-setopt PATH_DIRS              # Perform path search even on command names with slashes.
-setopt NO_CASE_GLOB           # Make globbing (filename generation) sensitive to case.
 setopt NO_MENU_COMPLETE       # Do not autoselect the first completion entry.
-setopt NO_FLOW_CONTROL        # Disable start/stop characters in shell editor.
 
 # Styles
 # ------------------------------------------------------------------------------
+
+zmodload -i zsh/complist
 
 # enable caching
 zstyle ':completion::complete:*'       use-cache on
@@ -28,11 +27,16 @@ zstyle ':completion::complete:*'       cache-path "${ZSH_CACHE_DIR}"
 
 # group matches and describe.
 zstyle ':completion:*'                 accept-exact '*(N)'
-zstyle ':completion:*'                 matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*'                 menu select=2
 zstyle ':completion:*'                 rehash true
 zstyle ':completion:*:options'         auto-description '%d'
 zstyle ':completion:*:options'         description 'yes'
+
+# 1) smart-case completion
+# 2) case-insensitive completion
+# 3) partial-word completion
+# 4) substring completion
+zstyle ':completion:*'                 matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zstyle ':completion:*'                 format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*:corrections'     format ' %F{green}-- %d (errors: %e) --%f'
@@ -53,9 +57,6 @@ zstyle ':completion:*:-command-:*:'    verbose false
 zstyle ':completion:*'                 completer _complete _match _approximate _ignored
 zstyle ':completion:*:match:*'         original only
 zstyle ':completion:*:approximate:*'   max-errors 1 numeric
-
-# Increase the number of errors based on the length of the typed word.
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
 # Ignore file patterns
 zstyle ':completion:*:*files'          ignored-patterns '*?.zwc'
