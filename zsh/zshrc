@@ -11,13 +11,11 @@ autoload -Uz zmv
 local -A ZINIT
 ZINIT[HOME_DIR]="${XDG_DATA_HOME}/zinit"
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
-    git clone https://github.com/zdharma/zinit.git ${ZINIT[HOME_DIR]}/bin
+  git clone https://github.com/zdharma/zinit.git ${ZINIT[HOME_DIR]}/bin
 fi
 
-if [[ -f ${ZINIT[HOME_DIR]}/bin/zmodules/Src/zdharma/zplugin.so ]]; then
-  module_path+=( ${ZINIT[HOME_DIR]}/bin/zmodules/Src )
-  zmodload zdharma/zplugin
-fi
+module_path+=( ${ZINIT[HOME_DIR]}/bin/zmodules/Src )
+zmodload zdharma/zplugin || echo 'zdharma/zplugin is not installed'
 
 source ${ZINIT[HOME_DIR]}/bin/zinit.zsh
 autoload -Uz _zinit
@@ -31,9 +29,10 @@ zinit lucid wait from'gh-r' as'program' mv'direnv* -> direnv' \
   pick'direnv' src='zhook.zsh' for \
   direnv/direnv
 
-zinit lucid wait blockf \
-  atpull'zinit creinstall -q .' for \
-  'zsh-users/zsh-completions'
+zinit lucid wait from'gh-r' as'program' mv'zoxide* -> zoxide' \
+  atclone'./zoxide init zsh --hook pwd >! zhook.zsh' atpull'%atclone' \
+  src'zhook.zsh' for \
+  'ajeetdsouza/zoxide'
 
 __bind_history_keys() {
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,bold'
@@ -43,9 +42,9 @@ __bind_history_keys() {
   bindkey "$terminfo[kcuu1]" history-substring-search-up
   bindkey "$terminfo[kcud1]" history-substring-search-down
 }
+
 zinit lucid wait atload'__bind_history_keys' for \
   'zsh-users/zsh-history-substring-search'
-
 
 PURE_PROMPT_VICMD_SYMBOL=':'
 zstyle ':prompt:pure:git:stash'      show  yes
@@ -55,16 +54,16 @@ zstyle ':prompt:pure:git:arrow'      color white
 zstyle ':prompt:pure:path'           color green
 zstyle ':prompt:pure:prompt:success' color yellow
 
-zinit lucid pick'async.zsh' src'pure.zsh' for \
+zinit lucid compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh' for \
   'sindresorhus/pure'
 
-# ------------------------------------------------------------------------------
-# source configuration files
+zinit lucid wait blockf atpull'zinit creinstall -q .' for \
+    'zsh-users/zsh-completions'
 
-for file (${ZDOTDIR}/*.zsh(N-.)); do
-  source $file
-done
-unset file
+# Add local completions. This one is to be ran just once, in interactive session.
+#
+#     zinit creinstall $HOME/.dotfiles/zsh/completion
+#
 
 # ------------------------------------------------------------------------------
 # load completion
@@ -75,6 +74,14 @@ if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(Nm-20) ]]; then
 else
   compinit
 fi
+
+# ------------------------------------------------------------------------------
+# source configuration files
+
+for file (${ZDOTDIR}/*.zsh(N-.)); do
+  source $file
+done
+unset file
 
 # ------------------------------------------------------------------------------
 # hash directories
