@@ -19,6 +19,9 @@ function {
   typeset -gx FZF_DEFAULT_OPTS="${(f)_opts}"
 }
 
+# Use ',' as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER=','
+
 # ------------------------------------------------------------------------------
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
@@ -37,3 +40,9 @@ _fzf_compgen_dir() {
 if [[ -s "/usr/local/opt/fzf/shell/completion.zsh" ]]; then
   source "/usr/local/opt/fzf/shell/completion.zsh"
 fi
+
+zle -N fzf-history-widget
+
+# [Ctrl-X /] fzf history
+bindkey -M viins '^X/'  fzf-history-widget
+bindkey -M emacs '^X/'  fzf-history-widget

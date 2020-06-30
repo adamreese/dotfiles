@@ -39,8 +39,11 @@ __bind_history_keys() {
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
   HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
 
-  bindkey "$terminfo[kcuu1]" history-substring-search-up
-  bindkey "$terminfo[kcud1]" history-substring-search-down
+  bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+  bindkey -M emacs "$terminfo[kcuu1]" history-substring-search-up
+
+  bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+  bindkey -M emacs "$terminfo[kcud1]" history-substring-search-down
 }
 
 zinit lucid wait atload'__bind_history_keys' for \

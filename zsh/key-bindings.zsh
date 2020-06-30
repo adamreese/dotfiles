@@ -1,47 +1,54 @@
-# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html
-# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Zle-Builtins
-# http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
+# zsh key bindings
+# -----------------------------------------------------------------------------
+[[ ${TERM} != 'dumb' ]] || return
 
-if [[ ${TERM} == 'dumb' ]]; then
-  return
-fi
+# Vim mode
+bindkey -v
 
-# Use emacs key bindings
-bindkey -e
+# Time the shell waits for another key to be pressed
+export KEYTIMEOUT=1
 
-# [Esc-w] - Kill from the cursor to the mark
+zmodload -i zsh/complist
+
+# [Ctrl-A] and [Ctrl-E] Move to beginning/end of line
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+
+# [Ctrl-P] and [Ctrl-N] Navigate history
+bindkey '^P' up-line-or-history
+bindkey '^N' down-line-or-history
+
+# [Esc-W] Kill from the cursor to the mark
 bindkey '\ew' kill-region
 
-# [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
-bindkey '^[R' history-incremental-search-backward
+# [Ctrl-R] Search backward incrementally for a specified string
+bindkey '^R' history-incremental-pattern-search-backward
 
-# [Space] - do history expansion
+# [Space] History expansion
 bindkey ' ' magic-space
 
-# [Backspace] - delete backward
+# [Backspace] Delete backward
 bindkey '^?' backward-delete-char
 
-# Edit the current command line in $EDITOR
+# [Ctrl-X-E] Edit the current command line in $EDITOR
 autoload -U     edit-command-line
 zle      -N     edit-command-line
 bindkey  '^X^E' edit-command-line
 
-zmodload -i zsh/complist
-
-# [Shift-Tab] - move through the completion menu backwards
+# [Shift-Tab] Move through the completion menu backwards
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
-# [Ctrl-C] - exit menu
+# [Ctrl-C] Exit menu
 bindkey -M menuselect '^C' reset-prompt
-
-export KEYTIMEOUT=1
 
 # Put into application mode and validate ${terminfo}
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle-line-init () {
+    emulate -L zsh
     printf '%s' "${terminfo[smkx]}"
   }
   zle-line-finish () {
+    emulate -L zsh
     printf '%s' "${terminfo[rmkx]}"
   }
   zle -N zle-line-init
@@ -52,11 +59,15 @@ fi
 # expand aliases
 
 expand-aliases() {
-   zle _expand_alias
-   zle expand-word
-   zle self-insert
+  zle _expand_alias
+  zle expand-word
+  zle self-insert
 }
 zle -N expand-aliases
 
-# [Control-x-Space] - do global alias expansion
-bindkey '^X^ ' expand-aliases
+# [Control-x-Space] Global alias expansion
+bindkey -M emacs '^x '  expand-aliases
+bindkey -M emacs '^x^ ' expand-aliases
+
+bindkey -M viins '^x '  expand-aliases
+bindkey -M viins '^x^ ' expand-aliases
