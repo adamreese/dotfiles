@@ -8,10 +8,7 @@ rule() {
   printf '%*s\n' "${cols}" '' | tr ' ' "${char}"
 }
 
-# -----------------------------------------------------------------------------
-# Print step header text in a consistent way
-stepheader() {
-  # If called with no args, assume the key is the caller's function name
+header() {
   local msg="$*"
 
   rule
@@ -19,37 +16,32 @@ stepheader() {
   rule
 }
 
-is_git_repo() {
-  git rev-parse --git-dir &>/dev/null
-}
-
-is_repo_dirty() {
-  test -n "$(git status --porcelain --ignore-submodules -unormal)"
-}
-
 sync_repo() {
-  is_git_repo || {
+  local repo="${1:-.}"
+
+  if ! git rev-parse --git-dir > /dev/null 2>&1; then
     echo "${repo} is not a git repo"
     return
-  }
+  fi
 
-  is_repo_dirty && {
+  if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
     echo "${repo} has uncommitted changes"
     return
-  }
-
-  git remote update -p &>/dev/null
-
-  if is_repo_outdated; then
-    stepheader "Updating repo ${repo}"
-
-    git pull >/dev/null
-    git --no-pager log --no-merges --stat --color ORIG_HEAD..
   fi
-}
 
-is_repo_outdated() {
-  (($(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0))
+  git -c gc.auto=0 fetch --quiet --no-tags --recurse-submodules=no >/dev/null 2>&1
+
+  local behind
+  behind=$(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
+  if (( behind )); then
+    header "Updating repo ${repo}"
+
+    git --no-pager log --no-merges --stat --color HEAD...@'{u}'
+
+    git pull --quiet
+    git submodule sync --quiet
+    git submodule update --init --quiet
+  fi
 }
 
 main() {
@@ -58,7 +50,7 @@ main() {
   while read -r repo; do
     (
       cd "${repo}"
-      sync_repo
+      sync_repo "${repo}"
     )
   done < <(ghq list) | less
 }
