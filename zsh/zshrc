@@ -57,7 +57,7 @@ zstyle ':prompt:pure:git:arrow'      color white
 zstyle ':prompt:pure:path'           color green
 zstyle ':prompt:pure:prompt:success' color yellow
 
-zinit lucid compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh' for \
+zinit lucid pick'async.zsh' src'pure.zsh' for \
   'sindresorhus/pure'
 
 zinit lucid wait blockf atpull'zinit creinstall -q .' for \
