@@ -71,3 +71,13 @@ bindkey -M emacs '^x^ ' expand-aliases
 
 bindkey -M viins '^x '  expand-aliases
 bindkey -M viins '^x^ ' expand-aliases
+
+# -----------------------------------------------------------------------------
+
+# automatically escape URLs
+autoload -Uz bracketed-paste-url-magic
+zle -N bracketed-paste bracketed-paste-url-magic
+
+# automatically quote URLs
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
