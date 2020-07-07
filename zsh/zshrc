@@ -91,6 +91,7 @@ unset file
 
 hash -d --        p=${HOME}/p
 hash -d --       dl=${HOME}/Downloads
+hash -d --      tmp=${TMPDIR:a}
 hash -d --     docs=${HOME}/Documents
 hash -d --    gosrc=${GOPATH}/src
 hash -d --   cellar=/usr/local/Cellar
