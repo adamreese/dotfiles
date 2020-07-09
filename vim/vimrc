@@ -36,7 +36,6 @@ Plug 'Shougo/context_filetype.vim'
 let g:echodoc_enable_at_startup  = 1
 let g:echodoc#type = 'virtual'
 Plug 'Shougo/echodoc.vim'
-Plug 'adamreese/vim-hybrid'
 Plug 'benekastah/neomake',             { 'on': 'Neomake' }
 Plug 'blueyed/vim-qf_resize'
 Plug 'chrisbra/unicode.vim',           {'on': ['UnicodeName', 'UnicodeTable']}
