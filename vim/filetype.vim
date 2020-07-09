@@ -6,7 +6,7 @@ if exists('did_load_filetypes') | finish | endif
 augroup filetypedetect
   autocmd! BufNewFile,BufRead *[Dd]ockerfile\(.vim\)\@!* setfiletype dockerfile
 
-  autocmd! BufNewFile,BufRead *zsh/*          setfiletype zsh
+  autocmd! BufNewFile,BufRead *zsh/*          setfiletype FALLBACK zsh
   autocmd! BufNewFile,BufRead .envrc          setfiletype sh
   autocmd! BufNewFile,BufRead .luacheckrc     setfiletype lua
 
