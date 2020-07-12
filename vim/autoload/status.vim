@@ -126,7 +126,7 @@ endfunction
 " Search {{{1
 
 function! status#Search() abort
-  if winwidth(0) < 100 | return '' | endif
+  if winwidth(0) < 80 | return '' | endif
 
   return exists('g:loaded_anzu') ? anzu#search_status() : ''
 endfunction
@@ -135,7 +135,7 @@ endfunction
 " Function {{{1
 
 function! status#CurrentFunction() abort
-  if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
+  if winwidth(0) < 80 || s:IsCustomMode() | return '' | endif
 
   return get(b:, 'coc_current_function', '')
 endfunction
