@@ -126,7 +126,7 @@ endfunction
 " Search {{{1
 
 function! status#Search() abort
-  if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
+  if winwidth(0) < 100 | return '' | endif
 
   return exists('g:loaded_anzu') ? anzu#search_status() : ''
 endfunction
