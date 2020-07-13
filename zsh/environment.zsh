@@ -74,3 +74,11 @@ if (( $+commands[nvim] )); then
 fi
 
 export VISUAL=${EDITOR}
+
+# -----------------------------------------------------------------------------
+
+unalias run-help >/dev/null 2>&1
+
+autoload -Uz run-help \
+             run-help-git \
+             run-help-sudo
