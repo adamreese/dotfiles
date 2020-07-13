@@ -18,6 +18,12 @@ bindkey '^E' end-of-line
 bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
 
+# [Ctrl-U] Kill line backwards
+bindkey '^U' backward-kill-line
+
+# [Ctrl-W] Kill word backwards
+bindkey '^W' backward-kill-word
+
 # [Esc-W] Kill from the cursor to the mark
 bindkey '\ew' kill-region
 
