@@ -49,6 +49,7 @@ let g:lightline = {
       \   },
       \   'component': {
       \     'spell': '%{&spell?"s":""}',
+      \     'paste': '%{&paste?"ᴘ":""}',
       \   },
       \   'component_function': {
       \     'cwd':              'status#Directory',
@@ -60,7 +61,6 @@ let g:lightline = {
       \     'lsp':              'status#CocStatus',
       \     'mode':             'status#Mode',
       \     'modified':         'status#Modified',
-      \     'paste':            'status#Paste',
       \     'readonly':         'status#Readonly',
       \     'search':           'status#Search',
       \     'current_function': 'status#CurrentFunction',
@@ -78,7 +78,6 @@ let g:lightline = {
       \   'separator': { 'left': '', 'right': '' },
       \   'subseparator': { 'left': '', 'right': '' },
       \ }
-
 
 function! s:LightlineReload() abort
   call lightline#init()

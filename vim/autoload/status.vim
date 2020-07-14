@@ -212,10 +212,6 @@ endfunction
 " -----------------------------------------------------------------------
 " Flags {{{1
 
-function! status#Paste() abort
-  return &paste ? s:symbol.for('paste') : ''
-endfunction
-
 function! status#Readonly() abort
   return &filetype !~? 'help\|nerdtree' && &readonly ? s:symbol.for('readonly') : ''
 endfunction
