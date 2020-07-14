@@ -10,6 +10,7 @@ alias  e='exit'
 alias  q='exit'
 alias :q='exit'
 
+# FZF for browser bookmarks
 alias b='browser-bookmarks'
 
 # Switch to the previous directory
@@ -33,7 +34,6 @@ alias   g='git'
 alias glg='git log --stat'
 
 # github
-alias gh='hub browse'
 alias pr='hub pull-request'
 
 # ghq
@@ -49,34 +49,22 @@ alias diga='dig +nocmd any +multiline +noall +answer'
 # github.com/jocelynmallon/zshmarks
 alias j='jump'
 
-# bundle
-alias   be='bundle-exec-hack'
-alias   bi='bundle-hack install'
-alias   br='bundle-exec-hack rspec'
-alias  beg='bundle-exec-hack guard'
-alias  bil='bundle install --local'
-alias brff='bundle-exec-hack rspec --fail-fast'
-
 # ssh
 alias sshtmp='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 # fun
-alias lod='echo "ಠ_ಠ"'
-alias idk='echo "¯\_(ツ)_/¯"'
-alias wtf='echo "❨╯°□°❩╯︵┻━┻"'
-alias wat='echo "⚆_⚆"'
+alias lod='echo -n "ಠ_ಠ"'
+alias idk='echo -n "¯\_(ツ)_/¯"'
+alias wtf='echo -n "❨╯°□°❩╯︵┻━┻"'
+alias wat='echo -n "⚆_⚆"'
 
 # Global Aliases
 # -----------------------------------------------------------------------------
 
 alias -g ...='../..'
 alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
 
 alias -g G='| grep'
-alias -g H='| head'
-alias -g J='| jq .'
 alias -g L='| less'
 alias -g S='| sort'
-alias -g T='| tail'
+alias -g V='| nvim -'
