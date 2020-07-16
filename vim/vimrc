@@ -75,7 +75,6 @@ nnoremap <silent> zs :<C-U>Inspecthi<CR>
 Plug 'cocopon/inspecthi.vim', { 'on': [ 'Inspecthi' ] }
 
 " -- Version Control ---------------------------------------------------
-Plug 'airblade/vim-gitgutter', PlugIf(v:false)
 Plug 'rhysd/committia.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'

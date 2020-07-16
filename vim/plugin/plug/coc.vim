@@ -9,8 +9,8 @@ let s:cpo_save = &cpoptions
 set cpoptions&vim
 
 let g:coc_node_path           = exepath('node')
-let g:coc_status_warning_sign = '  '
-let g:coc_status_error_sign   = '  '
+let g:coc_status_error_sign   = '⨉'
+let g:coc_status_warning_sign = ''
 
 let g:coc_global_extensions   = [
       \ 'coc-diagnostic',
@@ -27,12 +27,15 @@ let g:coc_global_extensions   = [
       \ ]
 
 function! s:ShowDocumentation() abort
-  if (index(['vim','help'], &filetype) >= 0)
+  if index(['vim','help'], &filetype) >= 0
     execute 'help ' . expand('<cword>')
   else
     call CocActionAsync('doHover')
   endif
 endfunction
+
+" -----------------------------------------------------------------------
+" Mappings
 
 " monastery mappings
 silent! nunmap gd
@@ -56,6 +59,9 @@ nmap <silent><Leader>d      <Plug>(coc-diagnostic-info)
 nmap <silent> ]d            <Plug>(coc-diagnostic-next)
 nmap <silent> [d            <Plug>(coc-diagnostic-prev)
 
+" -----------------------------------------------------------------------
+" Commands
+
 " Use `:CocFormat` for format current buffer
 command! -nargs=0 CocFormat call CocAction('format')
 
@@ -66,10 +72,8 @@ command! -nargs=? CocFold call CocAction('fold', <f-args>)
 command! -nargs=0 CocOR call CocAction('runCommand', 'editor.action.organizeImport')
 
 " -----------------------------------------------------------------------
+" Snippets
 
-"
-" ---- coc-snippets
-"
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 
@@ -99,18 +103,18 @@ endfunction
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 
-if !ar#IsLoaded('vim-gitgutter')
+" -----------------------------------------------------------------------
+" Git
 
-  " Navigate chunks of current buffer
-  nmap [g <Plug>(coc-git-prevchunk)
-  nmap ]g <Plug>(coc-git-nextchunk)
+" Navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
 
-  " Create text object for git chunks
-  omap ig <Plug>(coc-git-chunk-inner)
-  xmap ig <Plug>(coc-git-chunk-inner)
-  omap ag <Plug>(coc-git-chunk-outer)
-  xmap ag <Plug>(coc-git-chunk-outer)
-endif
+" Create text object for git chunks
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
 
 " -----------------------------------------------------------------------
 
