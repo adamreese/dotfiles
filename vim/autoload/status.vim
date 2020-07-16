@@ -39,7 +39,6 @@ let s:filetype_modes = {
       \ 'tagbar':        'Tagbar',
       \ 'vim-plug':      'Plugin',
       \ 'list':          'List',
-      \ 'vista':         'Vista',
       \ }
 
 " -----------------------------------------------------------------------
