@@ -126,6 +126,9 @@ symlink_files() {
   # ranger
   symlink ranger               .config/ranger
 
+  # yamllint
+  symlink yamllint             .config/yamllint
+
   print_success "Completed symlinks"
 }
 
