@@ -129,6 +129,9 @@ symlink_files() {
   # yamllint
   symlink yamllint             .config/yamllint
 
+  # bat
+  symlink bat                  .config/bat
+
   print_success "Completed symlinks"
 }
 
