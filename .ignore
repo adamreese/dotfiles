@@ -1,0 +1,11 @@
+!_scratch
+*.zwc
+.git/
+hammerspoon/Spoons
+karabiner/automatic_backups
+tmux/plugins/
+vim/.netrwhist
+vim/autoload/plug.vim.old
+vim/vendor
+zsh/.zcompcache
+zsh/.zcompdump
