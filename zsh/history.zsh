@@ -2,7 +2,7 @@
 # -----------------------------------------------------------------------------
 
 # Command history configuration
-HISTFILE="${XDG_DATA_HOME}/zsh/history"
+HISTFILE="${XDG_DATA_HOME}/zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 

@@ -53,12 +53,14 @@ setopt   COMBINING_CHARS       # Combine zero-length punctuation characters (acc
 #            │││││┌─ X: suppress alternate screen
 export LESS='iFKMRX'
 # disable less history
-export LESSHISTFILE=${XDG_DATA_HOME}/less/history
+export LESSHISTFILE=${XDG_DATA_HOME}/less_history
 export LESSKEY=${XDG_CONFIG_HOME}/less/less
 
 if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
+
+export PAGER=less
 
 # Editor
 # -----------------------------------------------------------------------------
