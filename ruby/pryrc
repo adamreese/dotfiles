@@ -1,5 +1,5 @@
 # == Use the same histroy file as irb
-Pry.config.history.file = File.join(ENV["XDG_DATA_HOME"], "irb", "history")
+Pry.config.history.file = File.join(ENV["XDG_DATA_HOME"], "irb_history")
 
 # == Pry-Nav - Using pry as a debugger ==
 Pry.commands.alias_command 'c', 'continue' rescue nil
