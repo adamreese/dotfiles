@@ -3,7 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#IsLoaded('coc.nvim') | finish | endif
+if !ar#plug#IsLoaded('coc.nvim') | finish | endif
 
 let s:cpo_save = &cpoptions
 set cpoptions&vim

@@ -3,7 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#IsLoaded('lightline.vim') | finish | endif
+if !ar#plug#IsLoaded('lightline.vim') | finish | endif
 
 " set showtabline=2
 

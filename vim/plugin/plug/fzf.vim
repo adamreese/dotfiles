@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/fzf.vim
 " =======================================================================
-if !ar#IsLoaded('fzf.vim') | finish | endif
+if !ar#plug#IsLoaded('fzf.vim') | finish | endif
 
 let s:cpo_save = &cpoptions
 set cpoptions&vim

@@ -1,7 +1,7 @@
 " =======================================================================
 " plugin/plug/incsearch.vim
 " =======================================================================
-if !ar#IsLoaded('incsearch.vim') | finish | endif
+if !ar#plug#IsLoaded('incsearch.vim') | finish | endif
 
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)

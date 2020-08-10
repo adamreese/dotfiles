@@ -3,7 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#IsInstalled('neomake') | finish | endif
+if !ar#plug#IsInstalled('neomake') | finish | endif
 
 let g:neomake_warning_sign = { 'text': '❯', 'texthl': 'NeomakeWarningSign' }
 let g:neomake_error_sign   = { 'text': '❯', 'texthl': 'NeomakeErrorSign' }
