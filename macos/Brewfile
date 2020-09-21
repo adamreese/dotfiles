@@ -84,22 +84,16 @@ brew "editorconfig"
 brew "emojify"
 # Run arbitrary commands when files change
 brew "entr"
-# Key value store for shared configuration and service discovery
-brew "etcd"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
-# User-friendly command-line shell for UNIX-like operating systems
-brew "fish"
 # Command-line outline and bitmap font editor/converter
 brew "fontforge"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# Fast, simple fuzzy text selector with an advanced scoring algorithm
-brew "fzy"
 # GNU awk utility
 brew "gawk"
 # GitHub command-line tool
@@ -156,8 +150,6 @@ brew "hugo"
 brew "icdiff"
 # C library for encoding, decoding, and manipulating JSON
 brew "jansson"
-# Json incremental digger
-brew "jid"
 # Regular expressions library
 brew "oniguruma"
 # Lightweight and flexible command-line JSON processor
@@ -204,8 +196,6 @@ brew "mercurial"
 brew "mkcert"
 # Collection of tools that nobody wrote when UNIX was young
 brew "moreutils"
-# Multiple Repository management tool
-brew "mr"
 # 'traceroute' and 'ping' in a single tool
 brew "mtr"
 # Protocol buffers (Google's data interchange format)
@@ -214,14 +204,10 @@ brew "protobuf"
 brew "mysql"
 # Fast, highly customisable system info script
 brew "neofetch"
-# E-mail reader with support for Notmuch, NNTP and much more
-brew "neomutt"
 # Clean C library for processing UTF-8 Unicode data
 brew "utf8proc"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
-# RSS/Atom feed reader for text terminals
-brew "newsboat"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Small build system for use with gyp or CMake
