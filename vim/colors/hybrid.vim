@@ -338,7 +338,7 @@ execute 'hi! Conceal'         .s:fg_red        .s:bg_none       .s:fmt_none
 "   CursorIM"
 execute 'hi! CursorLine'      .s:fg_none       .s:bg_line       .s:fmt_none
 execute 'hi! Directory'       .s:fg_blue       .s:bg_none       .s:fmt_none
-execute 'hi! DiffAdd'         .s:fg_none       .s:bg_addbg      .s:fmt_none
+execute 'hi! DiffAdd'         .s:fg_addfg      .s:bg_addbg      .s:fmt_none
 execute 'hi! DiffChange'      .s:fg_changefg   .s:bg_changebg   .s:fmt_none
 execute 'hi! DiffDelete'      .s:fg_background .s:bg_delbg      .s:fmt_none
 execute 'hi! DiffText'        .s:fg_background .s:bg_blue       .s:fmt_none
