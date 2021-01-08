@@ -65,7 +65,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/startuptime.vim'
-Plug 'sainnhe/gruvbox-material'
 
 let g:colorswatch_exclusion_pattern = 'LightLine.\+'
 Plug 'cocopon/colorswatch.vim',     { 'on': ['ColorSwatchGenerate', 'Inspecthi'] }
