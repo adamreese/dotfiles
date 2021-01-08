@@ -202,9 +202,9 @@ set shortmess+=o                  " overwrite file-written messages
 set shortmess+=t                  " truncate file messages at start
 set shortmess+=c                  " Disable 'Pattern not found' messages
 
-" resize to accommodate multiple signs
-if exists('+signcolumn')
-  let &signcolumn = has('nvim-0.4') ? 'auto:3' : 'yes'
+" Display signs in the 'number' column
+if has('patch-8.1.1564')
+  set signcolumn=number
 endif
 
 if has('linebreak')
@@ -227,9 +227,12 @@ let g:vimsyn_noopererror = v:true
 let g:did_install_default_menus = v:true
 
 " Disable builtin plugins
-let g:loaded_netrwPlugin = v:true
+let g:loaded_2html_plugin      = v:true
+let g:loaded_getscriptPlugin   = v:true
+let g:loaded_logiPat           = v:true
 let g:loaded_netrwFileHandlers = v:true
-let g:loaded_netrwSettings = v:true
-let g:loaded_2html_plugin = v:true
-let g:loaded_vimballPlugin = v:true
+let g:loaded_netrwPlugin       = v:true
+let g:loaded_netrwSettings     = v:true
 let g:loaded_tutor_mode_plugin = v:true
+let g:loaded_vimball           = v:true
+let g:loaded_vimballPlugin     = v:true
