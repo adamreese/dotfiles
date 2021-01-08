@@ -173,7 +173,7 @@ endif
 let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
 let &fillchars='diff:·,vert:│,fold: '
 if has('nvim')
-  let &fillchars.=',eob: '
+  let &fillchars='diff:·,vert:│,fold: ,eob: ,msgsep:‾'
 endif
 let &showbreak='↳ '
 
