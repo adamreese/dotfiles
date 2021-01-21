@@ -9,6 +9,7 @@ scriptencoding utf-8
 setlocal tabstop=4
 setlocal shiftwidth=4
 setlocal listchars+=tab:\ \ ,
+setlocal formatoptions+=r
 
 " -----------------------------------------------------------------------
 
