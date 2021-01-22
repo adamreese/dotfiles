@@ -14,10 +14,8 @@
   dc    = diff --cached
   fa    = fetch --all --tags
   l     = log --decorate --oneline --graph
-  ll    = log
   pf    = push --force-with-lease
   pl    = pull --rebase
-  plum  = pull upstream master
   ra    = rebase --abort
   rc    = rebase --continue
   ri    = rebase --interactive
