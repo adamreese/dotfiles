@@ -43,6 +43,7 @@ linters:
   disable:
     - depguard
     - dupl
+    - exhaustivestruct
     - funlen
     - gochecknoglobals
     - gochecknoinits
