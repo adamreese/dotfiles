@@ -42,6 +42,11 @@ hs.hotkey.bind({'cmd', 'ctrl'}, 'V', function()
   hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
+-- toggle dark mode
+hs.hotkey.bind(hyper, 'D', function()
+  hs.osascript.applescript('tell application "System Events" to tell appearance preferences to set dark mode to not dark mode')
+end)
+
 --------------------------------------------------------------------------------
 -- Spoon Configuration
 --------------------------------------------------------------------------------
