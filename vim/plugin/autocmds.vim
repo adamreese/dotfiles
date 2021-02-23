@@ -51,10 +51,8 @@ augroup END
 augroup ar_autoread
   autocmd!
 
-  " Triger `autoread` when files changes on disk
-  " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
-  " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
-  autocmd BufEnter,CursorHold * if mode() != 'c' | checktime | endif
+  " automatically check if file was changed on disk. skipping the command line
+  autocmd BufEnter,CursorHold * if getcmdwintype() == '' | checktime | endif
 
   " Notification after file change
   " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
