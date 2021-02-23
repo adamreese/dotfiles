@@ -37,6 +37,11 @@ for key, id in pairs(focusKeys) do
   hs.hotkey.bind(hyper, key, hs.fnutils.partial(hs.application.launchOrFocusByBundleID, id))
 end
 
+-- use key strokes for paste
+hs.hotkey.bind({'cmd', 'ctrl'}, 'V', function()
+  hs.eventtap.keyStrokes(hs.pasteboard.getContents())
+end)
+
 --------------------------------------------------------------------------------
 -- Spoon Configuration
 --------------------------------------------------------------------------------
