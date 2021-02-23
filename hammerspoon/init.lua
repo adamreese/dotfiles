@@ -54,11 +54,6 @@ end)
 hs.loadSpoon('SpoonInstall')
 local Install = spoon.SpoonInstall
 
--- http://www.hammerspoon.org/Spoons/KSheet.html
-Install:andUse('KSheet', {
-    hotkeys = { toggle = {hyper, 'K'} }
-})
-
 -- http://www.hammerspoon.org/Spoons/WindowHalfsAndThirds.html
 Install:andUse('WindowHalfsAndThirds', {
     hotkeys = {
