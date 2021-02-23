@@ -56,30 +56,30 @@ local Install = spoon.SpoonInstall
 
 -- http://www.hammerspoon.org/Spoons/WindowHalfsAndThirds.html
 Install:andUse('WindowHalfsAndThirds', {
-    hotkeys = {
-      top_left     = { hyper, '1' },
-      top_right    = { hyper, '2' },
-      bottom_left  = { hyper, '3' },
-      bottom_right = { hyper, '4' },
-      max          = { hyper, '5' },
-      max_toggle   = { hyper, 'f' },
+  hotkeys = {
+    top_left     = { hyper, '1' },
+    top_right    = { hyper, '2' },
+    bottom_left  = { hyper, '3' },
+    bottom_right = { hyper, '4' },
+    max          = { hyper, '5' },
+    max_toggle   = { hyper, 'f' },
 
-      left_half    = { {'ctrl', 'cmd'}, 'Left' },
-      right_half   = { {'ctrl', 'cmd'}, 'Right' },
-      top_half     = { {'ctrl', 'cmd'}, 'Up' },
-      bottom_half  = { {'ctrl', 'cmd'}, 'Down' },
-      undo         = { {'ctrl', 'cmd'}, 'z' },
-      center       = { {'ctrl', 'cmd'}, 'c' },
-    }
-  })
+    left_half    = { {'ctrl', 'cmd'}, 'Left' },
+    right_half   = { {'ctrl', 'cmd'}, 'Right' },
+    top_half     = { {'ctrl', 'cmd'}, 'Up' },
+    bottom_half  = { {'ctrl', 'cmd'}, 'Down' },
+    undo         = { {'ctrl', 'cmd'}, 'z' },
+    center       = { {'ctrl', 'cmd'}, 'c' },
+  }
+})
 
 -- http://www.hammerspoon.org/Spoons/WindowScreenLeftAndRight.html
 Install:andUse('WindowScreenLeftAndRight', {
-    hotkeys = {
-      screen_left = { hyper, 'Left' },
-      screen_right= { hyper, 'Right' },
-    }
-  })
+  hotkeys = {
+    screen_left = { hyper, 'Left' },
+    screen_right= { hyper, 'Right' },
+  }
+})
 
 -- http://www.hammerspoon.org/Spoons/ReloadConfiguration.html
 Install:andUse('ReloadConfiguration', {
