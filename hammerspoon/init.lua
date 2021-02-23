@@ -26,7 +26,7 @@ local hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 hs.hotkey.bind(hyper, 'c', hs.toggleConsole)
 
 local focusKeys = {
-  b      = 'com.google.chrome',
+  b      = 'com.brave.Browser',
   m      = 'com.apple.MobileSMS',
   s      = 'com.tinyspeck.slackmacgap',
   z      = 'us.zoom.xos',
