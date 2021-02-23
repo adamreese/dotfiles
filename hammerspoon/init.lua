@@ -27,7 +27,7 @@ hs.hotkey.bind(hyper, 'c', hs.toggleConsole)
 
 local focusKeys = {
   b      = 'com.google.chrome',
-  m      = 'com.apple.iChat',
+  m      = 'com.apple.MobileSMS',
   s      = 'com.tinyspeck.slackmacgap',
   z      = 'us.zoom.xos',
   Return = 'com.googlecode.iterm2',
