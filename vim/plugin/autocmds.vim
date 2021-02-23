@@ -35,8 +35,8 @@ augroup END
 augroup ar_cursorline
   autocmd!
   " only show cursorline in current and normal window
-  autocmd CursorMoved,CursorMovedI,WinLeave,InsertEnter * setlocal nocursorline
-  autocmd CursorHold,WinEnter,InsertLeave *
+  autocmd CursorMoved,WinLeave,InsertEnter * setlocal nocursorline
+  autocmd CursorHold,WinEnter *
         \ if empty(&buftype) | setlocal cursorline | endif
 augroup END
 
