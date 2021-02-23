@@ -29,9 +29,7 @@ augroup ar_vimrc
   autocmd InsertLeave * setlocal hlsearch
 
   " Find and source project-specific config
-  if exists('##DirChanged')
-    autocmd DirChanged,VimEnter * call project#SourceConfig()
-  endif
+  autocmd VimEnter * call project#SourceConfig()
 augroup END
 
 augroup ar_cursorline
