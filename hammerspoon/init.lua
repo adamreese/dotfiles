@@ -86,6 +86,14 @@ Install:andUse('ReloadConfiguration', {
   start   = true,
 })
 
+-- http://www.hammerspoon.org/Spoons/Caffeine.html
+Install:andUse('Caffeine', {
+  hotkeys = {
+    toggle = { hyper, 'a' }
+  },
+  start = true
+})
+
 --------------------------------------------------------------------------------
 
 hs.alert.show('Config loaded')
