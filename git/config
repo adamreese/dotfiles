@@ -48,6 +48,9 @@
 [github]
   user = adamreese
 
+[init]
+  defaultBranch = main
+
 [core]
   editor = $EDITOR
   excludesfile = ~/.config/git/ignore
