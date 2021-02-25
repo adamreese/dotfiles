@@ -14,7 +14,7 @@
   dc    = diff --cached
   fa    = fetch --all --tags
   l     = log --decorate --oneline --graph
-  pf    = push --force-with-lease
+  pf    = push --force-with-lease --force-if-includes
   pl    = pull --rebase
   ra    = rebase --abort
   rc    = rebase --continue
