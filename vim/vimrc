@@ -66,6 +66,10 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/startuptime.vim'
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/playground'
+
 let g:colorswatch_exclusion_pattern = 'LightLine.\+'
 Plug 'cocopon/colorswatch.vim',     { 'on': ['ColorSwatchGenerate', 'Inspecthi'] }
 
