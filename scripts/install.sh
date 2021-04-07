@@ -44,6 +44,8 @@ print_success() {
 # symlink
 # -----------------------------------------------------------------------------
 symlink() {
+  (( $# == 2 )) || die 'symlink() requires 2 arguments'
+
   local source="${DOTFILES}/${1}"
   local target="${HOME}/${2}"
 
@@ -51,9 +53,7 @@ symlink() {
   [[ -e "${source}" ]] || die "${source} does not exist"
 
   if [[ -e "$target" ]]; then
-    local rp
-    rp=$(realpath "${target}")
-    if [[ "$rp" == "${source}" ]]; then
+    if [[ "${target:A}" == "${source:A}" ]]; then
       return
     fi
 
@@ -67,8 +67,8 @@ symlink() {
 
   echo -e "    Symlinking ${target} \u279E ${source}"
 
-  mkdir -p "$(dirname "${target}")"
-  ln -fns "${source}" "${target}"
+  mkdir -p "${target:h}"
+  ln -fns "${source:a}" "${target}"
 }
 
 # install brew
@@ -115,7 +115,7 @@ symlink_files() {
   symlink ag/agignore          .agignore
 
   # ctags
-  symlink ctags/ctags          .ctags
+  symlink ctags                .ctags.d
 
   # bin
   symlink bin                  .local/bin
@@ -132,8 +132,12 @@ symlink_files() {
   print_success "Completed symlinks"
 }
 
+install_macos() {
+  "${DOTFILES}/macos/defaults.sh"
+}
+
 usage() {
-  echo "${0} {brew, symlink}"
+  echo "${0} brew|macos|symlink"
 }
 
 # -----------------------------------------------------------------------------
@@ -145,10 +149,16 @@ usage() {
 # TODO macos defaults
 
 main() {
+  if (( $# < 1 )); then
+    usage
+    exit 1
+  fi
+
   while (($# > 0)); do
     case "$1" in
       brew) install_homebrew ;;
       symlink) symlink_files ;;
+      macos) install_macos ;;
       *) usage ;;
     esac
     shift
