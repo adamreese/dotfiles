@@ -105,9 +105,6 @@ symlink_files() {
   # screen
   symlink screen               .config/screen
 
-  # database
-  symlink sqlite/sqliterc      .sqliterc
-
   # hammerspoon
   symlink hammerspoon          .hammerspoon
 
