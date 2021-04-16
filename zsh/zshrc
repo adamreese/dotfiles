@@ -29,11 +29,6 @@ zinit lucid wait from'gh-r' as'program' mv'direnv* -> direnv' \
   pick'direnv' src='zhook.zsh' for \
   direnv/direnv
 
-zinit lucid wait from'gh-r' as'program' mv'zoxide* -> zoxide' \
-  atclone'./zoxide init zsh --hook pwd >! zhook.zsh' atpull'%atclone' \
-  src'zhook.zsh' for \
-  'ajeetdsouza/zoxide'
-
 __bind_history_keys() {
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,bold'
   HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
