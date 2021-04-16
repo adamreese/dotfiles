@@ -56,22 +56,18 @@ zinit lucid pick'async.zsh' src'pure.zsh' for \
   'sindresorhus/pure'
 
 zinit lucid wait blockf atpull'zinit creinstall -q .' for \
-    'zsh-users/zsh-completions'
+  'zsh-users/zsh-completions'
 
 # Add local completions. This one is to be ran just once, in interactive session.
 #
-#     zinit creinstall $HOME/.dotfiles/zsh/completion
+#     zinit creinstall $DOTFILES/zsh/completion
 #
 
 # ------------------------------------------------------------------------------
 # load completion
 
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(Nm-20) ]]; then
-  compinit -C
-else
-  compinit
-fi
+compinit
 
 # ------------------------------------------------------------------------------
 # source configuration files
