@@ -97,7 +97,6 @@ Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript', PlugIf(v:false)
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim'
-Plug 'tbastos/vim-lua'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
