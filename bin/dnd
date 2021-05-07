@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf -- 'Usage: %s on|off|status\n' "$(basename "$0")"
+  exit 1
+}
+
+nested_plist() {
+  plutil -extract dnd_prefs xml1 -o - "$HOME/Library/Preferences/com.apple.ncprefs.plist" |
+    xmllint --xpath "string(//data)" - | base64 --decode | plutil -convert xml1 - -o -
+}
+
+dnd_status() {
+  status=$(nested_plist |
+    xmllint --xpath 'boolean(//key[text()="userPref"]/following-sibling::dict/key[text()="enabled"])' -)
+  [[ "${status}" == 'true' ]]
+}
+
+enable_dnd() {
+  if dnd_status; then return; fi
+
+  # If the userPref key does not exist, insert it, otherwise replace it
+  enable_flag="-insert"
+  if nested_plist | plutil -extract userPref xml1 - >/dev/null 2>&1; then
+    enable_flag="-replace"
+  fi
+
+  dnd_hex_data=$(nested_plist | plutil $enable_flag userPref -xml "
+    <dict>
+        <key>date</key>
+        <date>$(date -u +"%Y-%m-%dT%H:%M:%SZ")</date>
+        <key>enabled</key>
+        <true/>
+        <key>reason</key>
+        <integer>1</integer>
+    </dict> " - -o - | plutil -convert binary1 - -o - | xxd -p | tr -d '\n')
+  defaults write com.apple.ncprefs dnd_prefs -data "$dnd_hex_data"
+
+  killall usernoted
+  killall ControlCenter
+  killall NotificationCenter
+
+  # quit personal apps
+  osascript -e 'quit app "Calendar"'
+  osascript -e 'quit app "Mail"'
+  osascript -e 'quit app "Messages"'
+}
+
+disable_dnd() {
+  if ! dnd_status; then return; fi
+
+  dnd_hex_data=$(nested_plist |
+    plutil -remove userPref - -o - | plutil -convert binary1 - -o - | xxd -p | tr -d '\n')
+  defaults write com.apple.ncprefs dnd_prefs -data "$dnd_hex_data"
+
+  killall usernoted
+  killall ControlCenter
+  killall NotificationCenter
+}
+
+case "${1:-status}" in
+  '-h' | '--help') usage ;;
+  'on') enable_dnd ;;
+  'off') disable_dnd ;;
+  'status')
+    if dnd_status; then
+      echo "on"
+    else
+      echo "off"
+    fi
+    ;;
+esac
