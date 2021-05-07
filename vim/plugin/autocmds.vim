@@ -17,7 +17,8 @@ augroup ar_vimrc
   autocmd VimResized * wincmd =
 
   " remove trailing whitespace automatically
-  autocmd BufWritePre * call whitespace#Clean()
+  autocmd BufWritePre * call whitespace#TrimTrailingSpace()
+  autocmd BufWritePre * call whitespace#RemoveTrailingLines()
 
   " disable paste
   " https://github.com/neovim/neovim/issues/7994
