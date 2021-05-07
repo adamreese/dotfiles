@@ -28,6 +28,13 @@ vim.lsp.protocol.CompletionItemKind = {
     "♛ [type]"
 }
 
+vim.fn.sign_define({
+  {name = "LspDiagnosticsSignError", text = "❯", texthl = "LspDiagnosticsSignError"},
+  {name = "LspDiagnosticsSignHint", text = "❯", texthl = "LspDiagnosticsSignHint"},
+  {name = "LspDiagnosticsSignWarning", text = "❯", texthl = "LspDiagnosticsSignWarning"},
+  {name = "LspDiagnosticsSignInformation", text = "❯", texthl = "LspDiagnosticsSignInformation"}
+})
+
 -- [ handlers ] ----------------------------------------------------------------
 
 vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
