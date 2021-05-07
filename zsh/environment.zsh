@@ -3,7 +3,6 @@
 
 # Input/Output
 # -----------------------------------------------------------------------------
-unsetopt CLOBBER               # Disables overwrite existing files with `>`. Use `> | ` or `>!` instead
 unsetopt CORRECT               # Disable zsh correct
 unsetopt FLOW_CONTROL          # Disable start/stop characters in shell editor.
 setopt   IGNORE_EOF            # Disable '^D' logout keybind
