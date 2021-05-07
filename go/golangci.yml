@@ -44,6 +44,7 @@ linters:
     - depguard
     - dupl
     - exhaustivestruct
+    - forbidigo
     - funlen
     - gochecknoglobals
     - gochecknoinits
@@ -52,8 +53,12 @@ linters:
     - godox
     - gomnd
     - gosec
+    - interfacer
     - lll
     - maligned
+    - nlreturn
+    - paralleltest
     - rowserrcheck
+    - scopelint
     - typecheck
     - wsl
