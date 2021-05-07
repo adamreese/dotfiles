@@ -110,8 +110,7 @@ endfunction
 
 function! status#GitBranch() abort
   if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
-
-  return get(g:, 'coc_git_status', '')[:20]
+  return FugitiveHead(7)
 endfunction
 
 " -----------------------------------------------------------------------
@@ -131,34 +130,25 @@ function! status#Search() abort
 endfunction
 
 " -----------------------------------------------------------------------
-" Function {{{1
-
-function! status#CurrentFunction() abort
-  if winwidth(0) < 80 || s:IsCustomMode() | return '' | endif
-
-  return get(b:, 'coc_current_function', '')
-endfunction
-
-" -----------------------------------------------------------------------
 " Linter {{{1
 
 function! status#LintError() abort
   return s:Concat([
-        \ s:CocCount('error'),
+        \ s:LspCount('Error'),
         \ s:NeomakeCount('E'),
         \ ])
 endfunction
 
 function! status#LintWarning() abort
   return s:Concat([
-        \ s:CocCount('warning'),
+        \ s:LspCount('Warning'),
         \ s:NeomakeCount('W'),
         \ ])
 endfunction
 
 function! status#LintInfo() abort
   return s:Concat([
-        \ s:CocCount('information'),
+        \ s:LspCount('Information'),
         \ s:NeomakeCount('I'),
         \ ])
 endfunction
@@ -180,15 +170,18 @@ function! s:NeomakeCount(group) abort
   return get(l:counts, a:group, '')
 endfunction
 
-function! status#CocStatus() abort
-  return get(g:, 'coc_status', '')
+function! status#LSPStatus() abort
+  if luaeval('#vim.lsp.buf_get_clients() > 0')
+    return luaeval("require('lsp-status').status()")
+  endif
+  return ''
 endfunction
 
-" kind: error, warning, information, hints
-function! s:CocCount(kind) abort
-  if !get(g:, 'coc_enabled') | return '' | endif
+" kind: 'Error', 'Warning', 'Information', 'Hint'
+function! s:LspCount(kind) abort
+  if !luaeval('#vim.lsp.buf_get_clients() > 0') | return | end
 
-  let l:count = get(get(b:, 'coc_diagnostic_info', {}), a:kind)
+  let l:count = v:lua.vim.lsp.diagnostic.get_count(0, a:kind)
   return l:count ? printf('ʟs(%d)', l:count) : ''
 endfunction
 

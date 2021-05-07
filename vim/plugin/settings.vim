@@ -140,8 +140,6 @@ set completeopt=
 set completeopt+=menuone             " Show the popup if only one completion
 set completeopt+=noinsert            " Don't insert text for a match unless selected
 set completeopt+=noselect            " Don't auto-select the first match
-set completeopt+=longest
-set completeopt-=preview             " Don't show extra info about the current completion
 
 set isfname-==                       " Don't consider = symbol as part filename
 set pumheight=30                     " Pop-up menu's line height

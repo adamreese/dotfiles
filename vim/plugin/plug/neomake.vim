@@ -17,6 +17,8 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 
 function! s:Run() abort
   if &buftype ==# 'nofile'    | return | endif
+  if &filetype ==# 'rust'     | return | endif
+  if &filetype ==# 'lua'      | return | endif
   if empty(glob(expand('%'))) | return | endif
 
   Neomake

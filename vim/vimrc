@@ -95,19 +95,24 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript', PlugIf(v:false)
 Plug 'plasticboy/vim-markdown'
+Plug 'rhysd/vim-wasm'
 Plug 'rust-lang/rust.vim'
+Plug 'simrat39/rust-tools.nvim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
+Plug 'mityu/vim-applescript'
 
-" -- Completion ---------------------------------------------------------
-Plug 'neoclide/coc.nvim', PlugIf(has('nvim'), {'do': 'yarn install --frozen-lockfile'})
-Plug 'neoclide/coc-neco', PlugIf(has('nvim'))
-Plug 'tjdevries/coc-zsh', PlugIf(has('nvim'))
+Plug 'tweekmonster/exception.vim'
+command! WTF call exception#trace()
 
-Plug 'honza/vim-snippets'
-Plug 'Shougo/neco-syntax'
-Plug 'Shougo/neco-vim',            PlugIf(has('nvim'), { 'for': 'vim' })
+" -- LSP ----------------------------------------------------------------
+let g:nvimlsp = exists('$NVIMLSP')
+
+Plug 'neovim/nvim-lspconfig',    PlugIf(g:nvimlsp)
+Plug 'hrsh7th/nvim-compe',       PlugIf(g:nvimlsp)
+Plug 'nvim-lua/lsp-status.nvim', PlugIf(g:nvimlsp)
+Plug 'ojroques/nvim-lspfuzzy',   PlugIf(g:nvimlsp)
 
 call plug#end()
 
