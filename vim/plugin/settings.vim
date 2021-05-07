@@ -234,3 +234,4 @@ let g:loaded_netrwSettings     = v:true
 let g:loaded_tutor_mode_plugin = v:true
 let g:loaded_vimball           = v:true
 let g:loaded_vimballPlugin     = v:true
+let g:vimsyn_embed             = 'l'
