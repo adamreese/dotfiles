@@ -1,5 +1,7 @@
 *.zwc
 *.zwc.old
-.zcompdump
 .zcompcache
+.zcompdump
+completion/_cargo
+completion/_rustup
 local.zsh
