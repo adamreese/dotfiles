@@ -41,6 +41,7 @@ Plug 'blueyed/vim-qf_resize'
 Plug 'chrisbra/unicode.vim',           {'on': ['UnicodeName', 'UnicodeTable']}
 Plug 'christoomey/vim-tmux-navigator', PlugIf(exists('$TMUX'))
 Plug 'editorconfig/editorconfig-vim'
+Plug 'filipekiss/cursed.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'itchyny/lightline.vim'
