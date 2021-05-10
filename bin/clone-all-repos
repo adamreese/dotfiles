@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# clone all of a github org's repositories into the current directory.
+
+org="${1:?org name is required}"
+
+declare -a repos
+mapfile -t repos < <(gh api "orgs/${org}/repos" --jq '.[].name')
+
+for repo in "${repos[@]}"; do
+  [[ -d "${repo}" ]] && continue
+
+  echo ":: Cloning ${org}/${repo}"
+
+  hub clone "${org}/$repo"
+done
