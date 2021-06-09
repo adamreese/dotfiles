@@ -32,6 +32,8 @@ endfunction
 
 lua require('ar.lsp')
 
+nnoremap <silent><leader>f call s:format()
+
 if ar#plug#IsLoaded('nvim-compe')
   lua require('ar.compe')
 endif
