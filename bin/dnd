@@ -37,10 +37,6 @@ enable_dnd() {
     </dict> " - -o - | plutil -convert binary1 - -o - | xxd -p | tr -d '\n')
   defaults write com.apple.ncprefs dnd_prefs -data "$dnd_hex_data"
 
-  killall usernoted
-  killall ControlCenter
-  killall NotificationCenter
-
   # quit personal apps
   osascript -e 'quit app "Calendar"'
   osascript -e 'quit app "Mail"'
@@ -53,10 +49,6 @@ disable_dnd() {
   dnd_hex_data=$(nested_plist |
     plutil -remove userPref - -o - | plutil -convert binary1 - -o - | xxd -p | tr -d '\n')
   defaults write com.apple.ncprefs dnd_prefs -data "$dnd_hex_data"
-
-  killall usernoted
-  killall ControlCenter
-  killall NotificationCenter
 }
 
 case "${1:-status}" in
@@ -71,3 +63,5 @@ case "${1:-status}" in
     fi
     ;;
 esac
+
+killall ControlCenter ControlStrip NotificationCenter usernoted
