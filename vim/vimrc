@@ -112,10 +112,12 @@ command! WTF call exception#trace()
 " -- LSP ----------------------------------------------------------------
 let g:nvimlsp = has('nvim-0.5.0')
 
-Plug 'neovim/nvim-lspconfig',    PlugIf(g:nvimlsp)
-Plug 'hrsh7th/nvim-compe',       PlugIf(g:nvimlsp)
-Plug 'nvim-lua/lsp-status.nvim', PlugIf(g:nvimlsp)
-Plug 'ojroques/nvim-lspfuzzy',   PlugIf(g:nvimlsp)
+Plug 'neovim/nvim-lspconfig',        PlugIf(g:nvimlsp)
+Plug 'hrsh7th/nvim-compe',           PlugIf(g:nvimlsp)
+Plug 'nvim-lua/lsp-status.nvim',     PlugIf(g:nvimlsp)
+Plug 'ojroques/nvim-lspfuzzy',       PlugIf(g:nvimlsp)
+Plug 'hrsh7th/vim-vsnip',            PlugIf(g:nvimlsp)
+Plug 'rafamadriz/friendly-snippets', PlugIf(g:nvimlsp)
 
 call plug#end()
 
