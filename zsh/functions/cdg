@@ -5,7 +5,9 @@
 # Depends on https://github.com/motemen/ghq
 # ------------------------------------------------------------------------------
 
-local dir=$(ghq list ${1-} | fzf --select-1) && cd "${GOPATH}/src/${dir}"
+local dir=$(ghq list ${1-} | fzf --select-1 --prompt='project > ')
+
+[[ -n "${dir}" ]] && cd "${GOPATH}/src/${dir}"
 
 # ------------------------------------------------------------------------------
 # vim:ft=zsh
