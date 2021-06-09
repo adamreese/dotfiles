@@ -11,7 +11,7 @@
 : ${XDG_DATA_HOME:=$HOME/.local/share}
 typeset -gxm 'XDG_*'
 
-# Enviroment
+# Environment
 # ------------------------------------------------------------------------------
 ZDOTDIR="${${(%):-%N}:A:h}"
 export DOTFILES="${ZDOTDIR:h}"
@@ -34,7 +34,7 @@ export YARN_CACHE_FOLDER="${XDG_CACHE_HOME}/yarn"
 
 # Path
 # ------------------------------------------------------------------------------
-typeset -gU cdpath fpath manpath path
+typeset -gU cdpath fpath path
 
 # load completion functions
 fpath=(
@@ -45,19 +45,8 @@ fpath=(
 autoload -Uz ${ZDOTDIR}/functions/*(N:t)
 
 path=(
-  usr/local/MacGPG2/bin(N-/)
   /usr/local/{bin,sbin}(N-/)
   ${path}
-)
-
-manpath=(
-  # GNU Coreutils
-  /usr/local/opt/coreutils/libexec/gnuman(N-/)
-  /usr/local/share/man(N-/)
-  /usr/local/MacGPG2/share/man(N-/)
-  /opt/X11/share/man(N-/)
-  /usr/share/man(N-/)
-  ${manpath}
 )
 
 # https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
