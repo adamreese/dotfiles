@@ -55,6 +55,9 @@ alias j='jump'
 # ssh
 alias sshtmp='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
+# kubectl
+alias k=kubectl
+
 # fun
 alias lod='echo -n "ಠ_ಠ"'
 alias idk='echo -n "¯\_(ツ)_/¯"'

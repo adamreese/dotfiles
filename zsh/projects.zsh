@@ -1,17 +1,8 @@
-# zsh kubernetes
+# zsh projects
 # -----------------------------------------------------------------------------
-(( ${+commands[kubectl]} )) || return
-
-# Kubernetes
-# -----------------------------------------------------------------------------
-
-alias k=kubectl
 
 # Helm
 # -----------------------------------------------------------------------------
-
-# export HELM_HOST=:44134
-
 path[1,0]=${GOPATH}/src/helm.sh/helm/bin
 
 alias helm2="${GOPATH}/src/k8s.io/helm/bin/helm"
@@ -19,7 +10,6 @@ alias helm2="${GOPATH}/src/k8s.io/helm/bin/helm"
 # HL global alias
 # example: `helm get HL`
 alias -g HL='$(helm last)'
-
 
 helm() {
   unfunction "$0"
@@ -29,12 +19,17 @@ helm() {
 
 # Brigade
 # -----------------------------------------------------------------------------
-
 path[1,0]=${GOPATH}/src/github.com/Azure/brigade/bin
 
-# Minikube
+# Wagi
 # -----------------------------------------------------------------------------
+path[1,0]=${HOME}/p/go/src/github.com/deislabs/wagi/target/debug
 
-mkenv() {
-  source <(minikube docker-env "$@")
-}
+# Bindle
+# -----------------------------------------------------------------------------
+path[1,0]=${HOME}/p/go/src/github.com/deislabs/bindle/target/debug
+
+# Hippofactory
+# -----------------------------------------------------------------------------
+path[1,0]=${HOME}/p/go/src/github.com/deislabs/hippofactory/target/debug
+export BINDLE_SERVER_URL='http://127.0.0.1:8080/v1'
