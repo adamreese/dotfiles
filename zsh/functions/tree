@@ -4,11 +4,9 @@
 # Set tree defaults when no options are passed
 # ------------------------------------------------------------------------------
 
-if (( ${#argv} < 1 )) ; then
-  argv=(-L 2)
-fi
+args=(${@:- -L 2})
 
-command tree -aC --dirsfirst -I '.git' $argv
+command tree -aC --dirsfirst -I '.git' $args
 
 # ------------------------------------------------------------------------------
 # vim:ft=zsh
