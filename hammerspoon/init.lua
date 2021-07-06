@@ -23,7 +23,11 @@ hs.console.toolbar(nil)
 
 local hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 
-hs.hotkey.bind(hyper, 'c', hs.toggleConsole)
+hs.hotkey.bind(hyper, 'c', function()
+  hs.toggleConsole()
+  local win = hs.window.frontmostWindow()
+  if win then win:raise():focus() end
+end)
 
 local focusKeys = {
   b      = 'com.brave.Browser',
