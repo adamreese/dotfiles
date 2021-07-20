@@ -179,7 +179,7 @@ endfunction
 
 " kind: 'Error', 'Warning', 'Information', 'Hint'
 function! s:LspCount(kind) abort
-  if !luaeval('#vim.lsp.buf_get_clients() > 0') | return | end
+  if !luaeval('#vim.lsp.buf_get_clients() > 0') | return '' | end
 
   let l:count = v:lua.vim.lsp.diagnostic.get_count(0, a:kind)
   return l:count ? printf('ʟs(%d)', l:count) : ''
