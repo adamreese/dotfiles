@@ -16,6 +16,7 @@ augroup filetypedetect
   autocmd! BufNewFile,BufRead Brewfile        setfiletype ruby
 
   autocmd! BufNewFile,BufRead Gopkg.lock      setfiletype toml
+  autocmd! BufNewFile,BufRead HIPPOFACTS      setfiletype toml
   autocmd! BufNewFile,BufRead glide.lock      setfiletype yaml
   autocmd! BufNewFile,BufRead go.mod          setfiletype gomod
   autocmd! BufNewFile,BufRead go.sum          setfiletype text
