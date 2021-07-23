@@ -129,6 +129,9 @@ symlink_files() {
   # bat
   symlink bat                  .config/bat
 
+  # stylua
+  symlink stylua               .config/stylua
+
   print_success "Completed symlinks"
 }
 

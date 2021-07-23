@@ -8,6 +8,13 @@ let g:neoformat_basic_format_align = 1
 
 let g:neoformat_enabled_json = ['prettier', 'jq']
 let g:neoformat_enabled_yaml = ['prettier']
+let g:neoformat_enabled_lua = ['stylua', 'luafmt']
+
+let g:neoformat_lua_stylua = {
+      \ 'exe': 'stylua',
+      \ 'args': [ '--config-path', '~/.config/stylua/stylua.toml', '-' ],
+      \ 'stdin': 1,
+      \ }
 
 let g:neoformat_lua_luafmt = {
       \ 'exe': 'luafmt',
