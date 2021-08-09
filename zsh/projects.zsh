@@ -23,13 +23,21 @@ path[1,0]=${GOPATH}/src/github.com/brigadecore/brigade/bin
 
 # Wagi
 # -----------------------------------------------------------------------------
-path[1,0]=${HOME}/p/go/src/github.com/deislabs/wagi/target/debug
+path[1,0]=${HOME}/p/go/src/github.com/deislabs/wagi/target/release
 
 # Bindle
 # -----------------------------------------------------------------------------
-path[1,0]=${HOME}/p/go/src/github.com/deislabs/bindle/target/debug
+path[1,0]="${HOME}/p/go/src/github.com/deislabs/bindle/target/debug"
+
+export BINDLE_IP_ADDRESS_PORT='127.0.0.1:8080'
+export BINDLE_URL="http://${BINDLE_IP_ADDRESS_PORT}/v1"
+export BINDLE_DIRECTORY="${XDG_DATA_HOME}/bindle"
+export BINDLE_DIR="${XDG_DATA_HOME}/bindle"
+
+bindle-server() {
+  RUST_LOG=error,warp=info,bindle=debug command bindle-server
+}
 
 # Hippofactory
 # -----------------------------------------------------------------------------
 path[1,0]=${HOME}/p/go/src/github.com/deislabs/hippofactory/target/debug
-export BINDLE_SERVER_URL='http://127.0.0.1:8080/v1'
