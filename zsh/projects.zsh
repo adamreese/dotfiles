@@ -19,7 +19,7 @@ helm() {
 
 # Brigade
 # -----------------------------------------------------------------------------
-path[1,0]=${GOPATH}/src/github.com/Azure/brigade/bin
+path[1,0]=${GOPATH}/src/github.com/brigadecore/brigade/bin
 
 # Wagi
 # -----------------------------------------------------------------------------
