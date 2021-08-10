@@ -41,8 +41,10 @@ if [[ -s "/usr/local/opt/fzf/shell/completion.zsh" ]]; then
   source "/usr/local/opt/fzf/shell/completion.zsh"
 fi
 
-zle -N fzf-history-widget
+zle -N fzf-completion
+bindkey -M viins '^I' fzf-completion
 
 # [Ctrl-X /] fzf history
-bindkey -M viins '^X/'  fzf-history-widget
-bindkey -M emacs '^X/'  fzf-history-widget
+zle -N fzf-history-widget
+bindkey -M viins '^X/' fzf-history-widget
+bindkey -M emacs '^X/' fzf-history-widget
