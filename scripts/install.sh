@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
-[[ -e "${DOTFILES}" ]] || die "${DOTFILES} directory does not exist"
+[[ -e "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
 
 # die
 # -----------------------------------------------------------------------------
@@ -53,10 +55,6 @@ symlink() {
   [[ -e "${source}" ]] || die "${source} does not exist"
 
   if [[ -e "$target" ]]; then
-    if [[ "${target:A}" == "${source:A}" ]]; then
-      return
-    fi
-
     echo "    ${target} exists"
     read -p "          Overwrite? [y/N] " -r
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -67,8 +65,8 @@ symlink() {
 
   echo -e "    Symlinking ${target} \u279E ${source}"
 
-  mkdir -p "${target:h}"
-  ln -fns "${source:a}" "${target}"
+  mkdir -p "$(dirname "${target}")"
+  ln -fns "${source}" "${target}"
 }
 
 # install brew
