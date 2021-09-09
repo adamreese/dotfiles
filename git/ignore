@@ -21,10 +21,6 @@ Procfile-development
 # Project specific vim configuration
 .vim/local.vim
 
-# ternjs
-.tern-port
-.tern-project
-
 # direnv
 .direnv
 .envrc

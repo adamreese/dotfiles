@@ -13,9 +13,6 @@ remark
 remark-cli
 sass-lint
 standard
-tern
-tern-browser-extension
-tern-fetch
 tslint
 typescript
 typescript-formatter

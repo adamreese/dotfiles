@@ -96,9 +96,6 @@ symlink_files() {
   # git
   symlink git                  .config/git
 
-  # javascript
-  symlink node/tern-config     .tern-config
-
   # tmux
   symlink tmux/tmux.conf       .tmux.conf
 
