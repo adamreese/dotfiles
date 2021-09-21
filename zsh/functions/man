@@ -1,13 +1,13 @@
 # vim: ft=zsh :
 
-# 30 – black
-# 31 – red
-# 32 – green
-# 33 – orange
-# 34 – blue
-# 35 – magenta
-# 36 – cyan
-# 37 – white
+# 30 - black
+# 31 - red
+# 32 - green
+# 33 - orange
+# 34 - blue
+# 35 - magenta
+# 36 - cyan
+# 37 - white
 
 # 40 - black
 # 41 - red
@@ -18,11 +18,11 @@
 # 46 - cyan
 # 47 - white
 
-# 0 – reset/normal
-# 1 – bold
-# 3 – italic/reversed
-# 4 – underlined
-# 5 – blink
+#  0 - reset/normal
+#  1 - bold
+#  3 - italic/reversed
+#  4 - underlined
+#  5 - blink
 
 env \
   LESS_TERMCAP_mb=$(printf "\e[1;31m") \

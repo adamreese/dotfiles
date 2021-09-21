@@ -19,7 +19,8 @@ bindkey '^P' up-line-or-history
 bindkey '^N' down-line-or-history
 
 # [Ctrl-U] Kill line backwards
-bindkey '^U' backward-kill-line
+bindkey -M viins '^U' backward-kill-line
+bindkey -M vicmd '^U' backward-kill-line
 
 # [Ctrl-W] Kill word backwards
 bindkey '^W' backward-kill-word

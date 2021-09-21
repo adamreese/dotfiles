@@ -51,7 +51,6 @@ zstyle ':completion:*'                 group-name ''
 
 # provide verbose completion information
 zstyle ':completion:*'                 verbose yes
-zstyle ':completion:*:-command-:*:'    verbose false
 
 # Fuzzy match mistyped completions.
 zstyle ':completion:*'                 completer _complete _match _approximate _ignored
