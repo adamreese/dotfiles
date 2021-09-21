@@ -35,9 +35,9 @@ export BINDLE_DIRECTORY="${XDG_DATA_HOME}/bindle"
 export BINDLE_DIR="${XDG_DATA_HOME}/bindle"
 
 bindle-server() {
-  RUST_LOG=error,warp=info,bindle=debug command bindle-server
+  RUST_LOG=error,warp=info,bindle=debug command bindle-server "$@"
 }
 
-# Hippofactory
+# Hippo
 # -----------------------------------------------------------------------------
-path[1,0]=${HOME}/p/go/src/github.com/deislabs/hippofactory/target/debug
+path[1,0]=${HOME}/p/go/src/github.com/deislabs/hippo-cli/target/debug
