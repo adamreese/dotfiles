@@ -31,6 +31,7 @@ export RIPGREP_CONFIG_PATH="${DOTFILES}/ripgrep/config"
 export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
 export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}/tmux/plugins"
 export YARN_CACHE_FOLDER="${XDG_CACHE_HOME}/yarn"
+export ZK_NOTEBOOK_DIR="${HOME}/notes"
 
 # Path
 # ------------------------------------------------------------------------------
