@@ -123,9 +123,9 @@ local on_attach = function(client, bufnr)
 end
 
 local system_name
-if vim.fn.has('mac') == 1 then
+if vim.fn.has('mac') then
   system_name = 'macOS'
-elseif vim.fn.has('unix') == 1 then
+elseif vim.fn.has('unix') then
   system_name = 'Linux'
 else
   print('Unsupported system for sumneko')
@@ -147,12 +147,10 @@ local function get_lua_runtime()
   return result
 end
 
--- set the path to the sumneko installation
-local sumneko_root_path = vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua')
-local sumneko_binary = sumneko_root_path .. '/bin/' .. system_name .. '/lua-language-server'
+local function install_path(lang)
+  return vim.fn.expand('$XDG_DATA_HOME/lsp/' .. lang)
+end
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
 local servers = {
   bashls = {
     filetypes = { 'bash', 'sh', 'zsh' },
@@ -190,9 +188,9 @@ local servers = {
   },
   sumneko_lua = {
     cmd = {
-      sumneko_binary,
+      install_path('sumneko_lua/bin/' .. system_name .. '/lua-language-server'),
       '-E',
-      sumneko_root_path .. '/main.lua',
+      install_path('sumneko_lua/main.lua'),
     },
     settings = {
       Lua = {
@@ -214,30 +212,55 @@ local servers = {
       },
     },
   },
+  clangd = {},
+  sourcekit = {},
+  omnisharp = {
+    cmd = { install_path('omnisharp/run'),  "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    on_new_config = function(config, root_dir)
+      if root_dir then
+        for _, p in ipairs(vim.fn.glob(util.path.join(root_dir, '*.sln'), true, true)) do
+          if lspconfig.util.path.exists(p) then
+            root_dir = p
+          end
+        end
+        config.cmd = { install_path('omnisharp/run'),  "--languageserver", "--hostPID", tostring(vim.fn.getpid()), "-s", root_dir }
+      end
+    end,
+  },
+  zk = {},
 }
 
 -- [ lsp-status ] --------------------------------------------------------------
 
-local status = require('lsp-status')
-status.config({
-  status_symbol = ' ',
-  indicator_errors = '⨉',
-  indicator_warnings = '',
-  indicator_info = 'ℹ︎',
-  indicator_hint = '○',
-})
-status.register_progress()
+local function setup_servers()
+  local status = require('lsp-status')
+  status.config({
+      status_symbol = ' ',
+      indicator_errors = '⨉',
+      indicator_warnings = '',
+      indicator_info = 'ℹ︎',
+      indicator_hint = '○',
+    })
+  status.register_progress()
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = vim.tbl_extend('keep', capabilities or {}, status.capabilities)
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities = vim.tbl_extend('keep', capabilities, status.capabilities)
 
-for server, config in pairs(servers) do
-  lspconfig[server].setup(vim.tbl_deep_extend('force', {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }, config))
+  for server, config in pairs(servers) do
+    lspconfig[server].setup(vim.tbl_deep_extend('force', {
+          flags = { debounce_text_changes = 500 },
+          on_attach = on_attach,
+          capabilities = capabilities,
+      }, config))
+  end
 end
+
+setup_servers()
 
 -- [ lspfuzzy ] ----------------------------------------------------------------
 
 require('lspfuzzy').setup({})
+
+vim.cmd [[command! -nargs=? ZkNew :lua require'lspconfig'.zk.new(<args>)]]
+vim.cmd([[command! LspLog :lua vim.cmd('tabe ' .. vim.lsp.get_log_path())]])
