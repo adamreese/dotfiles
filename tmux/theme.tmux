@@ -1,9 +1,7 @@
 #!/usr/bin/env tmux
 
 # command/message line
-set-option -g message-fg colour3
-set-option -g message-bg black
-set-option -g message-attr none
+set-option -g message-style fg=colour3,bg=black,none
 
 # amount of time for which status line messages and other indicators
 # are displayed. time is in milliseconds.
@@ -16,11 +14,9 @@ set-option -g pane-border-format '-'
 # set-option -g pane-active-border-bg default
 
 # default statusbar colors
-set-option -g status-fg default
-set-option -g status-bg default
-set-option -g status-attr dim
 set-option -g status-position bottom
 set-option -g status-justify left
+set-option -g status-style fg=default,bg=default,dim
 
 # "I' == current window index
 # 'H' == Hostname
@@ -34,12 +30,10 @@ set-option -g status-justify left
 # number to specify the maximum length, in this line "#10W'.
 
 # default window title colors
-set-window-option -g window-status-fg colour7
-set-window-option -g window-status-format ' #I:#W '
+set-option -g window-status-format ' #[fg=colour7]#I:#W#[fg=default] '
 
 # active window title colors
-set-window-option -g window-status-current-fg colour2
-set-window-option -g window-status-current-format ' #I:#W '
+set-option -g window-status-current-format ' #[fg=colour2]#I:#W#[fg=default] '
 
 # set-option -g status-left '#[fg=colour240][ #[fg=colour7]#S #[fg=colour240]] '
 set-option -g status-left ''
