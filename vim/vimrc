@@ -45,7 +45,7 @@ Plug 'filipekiss/cursed.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align',        { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
@@ -113,11 +113,18 @@ command! WTF call exception#trace()
 let g:nvimlsp = has('nvim-0.5.0')
 
 Plug 'neovim/nvim-lspconfig',        PlugIf(g:nvimlsp)
-Plug 'hrsh7th/nvim-compe',           PlugIf(g:nvimlsp)
 Plug 'nvim-lua/lsp-status.nvim',     PlugIf(g:nvimlsp)
 Plug 'ojroques/nvim-lspfuzzy',       PlugIf(g:nvimlsp)
 Plug 'hrsh7th/vim-vsnip',            PlugIf(g:nvimlsp)
 Plug 'rafamadriz/friendly-snippets', PlugIf(g:nvimlsp)
+
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'f3fora/cmp-spell'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-vsnip'
 
 call plug#end()
 
