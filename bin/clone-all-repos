@@ -3,15 +3,33 @@ set -euo pipefail
 
 # clone all of a github org's repositories into the current directory.
 
-org="${1:?org name is required}"
+list=0
+while (($# > 0)); do
+  case "$1" in
+    -l | --list)
+      list=1
+      ;;
+    *)
+      org="$1"
+      ;;
+  esac
+  shift
+done
+
+: "${org:?org name is required}"
 
 declare -a repos
-mapfile -t repos < <(gh api "orgs/${org}/repos" --jq '.[].name')
+mapfile -t repos < <(gh repo list --source --no-archived --limit 100 "${org}" --json name --jq '.[].name')
 
-for repo in "${repos[@]}"; do
-  [[ -d "${repo}" ]] && continue
-
-  echo ":: Cloning ${org}/${repo}"
-
-  hub clone "${org}/$repo"
-done
+if ((list)); then
+  printf '%s\n' "${repos[@]}"
+else
+  for repo in "${repos[@]}"; do
+    if [[ -d "${repo}" ]]; then
+      echo "-- Skipping ${repo}"
+    else
+      echo ":: Cloning ${org}/${repo}"
+      gh clone "${org}/$repo"
+    fi
+  done
+fi
