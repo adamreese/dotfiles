@@ -8,31 +8,21 @@ if git remote show upstream >/dev/null 2>&1; then
   exit 1
 fi
 
-main() {
-  local stashed url
+if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
+  echo "uncommitted changes" 1>&2
+  exit 1
+fi
 
-  if ! git diff --quiet; then
-    stashed=1
-    git stash
-  fi
+url=$(git remote get-url origin)
+project=${url##*/}
+project=${project%.git}
 
-  git checkout master
+if [[ -z "${project}" ]]; then
+  echo "could not determine project for repo" 1>&2
+  exit 1
+fi
 
-  url=$(git remote get-url origin)
-  project=${url##*/}
-  project=${project%.git}
+git remote rename origin upstream
+git remote add origin "git@github.com:${USERNAME}/${project}.git"
 
-  git remote rename origin upstream
-  git remote add origin "git@github.com:${USERNAME}/${project}.git"
-  git fetch origin
-
-  git checkout -
-
-  if [[ -n "$stashed" ]]; then
-    git stash pop
-  fi
-
-  git remote -v
-}
-
-main "$@"
+git remote -v
