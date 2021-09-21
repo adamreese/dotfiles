@@ -17,6 +17,8 @@ header() {
 }
 
 sync_repo() {
+  trap 'echo "Aborting due to errexit on line $LINENO. Exit code: $?" >&2' ERR
+
   local repo="${1:-.}"
 
   if ! git rev-parse --git-dir > /dev/null 2>&1; then
@@ -24,17 +26,29 @@ sync_repo() {
     return
   fi
 
+  git -c gc.auto=0 fetch --quiet --no-tags --recurse-submodules=no >/dev/null 2>&1
+
   if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
     echo "${repo} has uncommitted changes"
     return
   fi
 
-  git -c gc.auto=0 fetch --quiet --no-tags --recurse-submodules=no >/dev/null 2>&1
+  localbranch=$(git symbolic-ref --short HEAD)
+
+  if ((reset_head)); then
+    defaultbranch=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+
+    if [[ $defaultbranch != "$localbranch" ]]; then
+      header "$repo: $defaultbranch"
+      git remote set-head origin --auto
+      git switch "${defaultbranch}"
+    fi
+  fi
 
   local behind
   behind=$(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
   if (( behind )); then
-    header "Updating repo ${repo}"
+    header "Updating ${repo}:${localbranch}"
 
     git pull --quiet
 
@@ -50,7 +64,20 @@ main() {
       cd "${repo}"
       sync_repo "${repo}"
     )
-  done < <(ghq list) | less
+  done < <(ghq list)
 }
+
+reset_head=0
+while (($#)); do
+  case "$1" in
+  -r | --reset-head)
+    reset_head=1
+    ;;
+  *)
+    break # end of options, just arguments left
+    ;;
+  esac
+  shift
+done
 
 main "$@"
