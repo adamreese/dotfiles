@@ -20,4 +20,10 @@ augroup filetypedetect
   autocmd! BufNewFile,BufRead glide.lock      setfiletype yaml
   autocmd! BufNewFile,BufRead go.mod          setfiletype gomod
   autocmd! BufNewFile,BufRead go.sum          setfiletype text
+
+  autocmd! BufNewFile,BufRead *.nomad         setfiletype hcl
+
+  autocmd! BufRead,BufNewFile *.sln           setfiletype sln
+  autocmd! BufRead,BufNewFile *.cake          setfiletype cs
+  autocmd! BufRead,BufNewFile *.csx           setfiletype cs
 augroup END
