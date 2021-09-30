@@ -68,8 +68,9 @@ set expandtab                " Use spaces instead of tabs
 
 if has('wildmenu')
   set wildmenu
-  set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
-  set wildignore+=*.pyc,*.spl,*.o,*.out,*~,#*#,%*
+  set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png   " images
+  set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+  set wildignore+=*.DS_Store                       " macOS
   set wildignorecase
 
   set wildmode=longest:list,full        " Complete files using a menu AND list
