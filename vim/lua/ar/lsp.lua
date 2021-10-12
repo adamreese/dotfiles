@@ -82,7 +82,7 @@ local on_attach = function(client, bufnr)
   vim.cmd [[command! LspDiagNext lua vim.lsp.diagnostic.goto_next()]]
   vim.cmd [[command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()]]
   vim.cmd [[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]]
-  vim.cmd [[command! LspDocumentSymbol lua vim.lsp.document_symbol()]]
+  vim.cmd [[command! LspDocumentSymbol lua vim.lsp.buf.document_symbol()]]
   vim.cmd [[command! LspWorkspaceSymbol lua vim.lsp.buf.workspace_symbol()]]
 
   -- Mappings.
