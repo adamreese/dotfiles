@@ -28,19 +28,17 @@ local kind_icons = {
   TypeParameter = " type param", -- TypeParameter
 }
 
-local t = function(str)
+local function t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      -- You must install `vim-vsnip` if you use the following as-is.
       vim.fn['vsnip#anonymous'](args.body)
     end,
   },
 
-  -- You can set mapping if you want.
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -53,18 +51,18 @@ cmp.setup({
       select = true,
     }),
     ['<Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t('<C-n>'), 'n')
-      elseif vim.fn['vsnip#available']() == 1 then
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif vim.fn['vsnip#available']() then
         vim.fn.feedkeys(t('<Plug>(vsnip-expand-or-jump)'), '')
       else
         fallback()
       end
     end,
     ['<S-Tab>'] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t('<C-p>'), 'n')
-      elseif vim.fn['vsnip#available']() == 1 then
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif vim.fn['vsnip#available']() then
         vim.fn.feedkeys(t('<Plug>(vsnip-jump-prev)'), '')
       else
         fallback()
@@ -73,7 +71,6 @@ cmp.setup({
 
   },
 
-  -- You should specify your *installed* sources.
   sources = {
     { name = "path" },
     { name = 'nvim_lsp' },
