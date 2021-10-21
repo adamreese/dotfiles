@@ -1,4 +1,3 @@
-tap "buo/cask-upgrade"
 tap "grain-lang/tap"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
@@ -8,10 +7,8 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "michaeleisel/zld"
-tap "omnisharp/omnisharp-roslyn"
 tap "tinygo-org/tools"
 tap "universal-ctags/universal-ctags"
-tap "wasmcloud/wasmcloud"
 # Run your GitHub Actions locally 🚀
 brew "act"
 # GNU database manager
@@ -22,6 +19,8 @@ brew "libyaml"
 brew "readline"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
+# Library for manipulating PNG images
+brew "libpng"
 # Spell checker with better logic than ispell
 brew "aspell"
 # Tool for generating GNU Standards-compliant Makefiles
@@ -42,8 +41,6 @@ brew "bazaar"
 brew "bison"
 # Collection of portable C++ source libraries
 brew "boost"
-# Library for manipulating PNG images
-brew "libpng"
 # Portable Foreign Function Interface library
 brew "libffi"
 # Next-gen compiler infrastructure
@@ -326,18 +323,12 @@ brew "michaeleisel/zld/zld"
 brew "tinygo-org/tools/tinygo"
 # Maintained ctags implementation
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
-# WAsmcloud SHell - A multi-tool for various wasmCloud activities as well as an interactive REPL for a wasmCloud runtime host.
-brew "wasmcloud/wasmcloud/wash"
-# A secure, distributed, WebAssembly actor model runtime for the cloud, edge, and everything in between
-brew "wasmcloud/wasmcloud/wasmcloud"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line helper for the 1Password password manager
 cask "1password-cli"
 # GPU-accelerated terminal emulator
 cask "alacritty"
-# Tool to flash OS images to SD cards & USB drives
-cask "balenaetcher"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Voice and text chat software
@@ -384,21 +375,9 @@ cask "raspberry-pi-imager"
 cask "slack"
 # Music streaming service
 cask "spotify"
-# Development environment
-cask "vagrant"
-# Free and open-source hosted hypervisor for x86 virtualization
-cask "virtualbox"
 # Open-source code editor
 cask "visual-studio-code"
 # Web browser focusing on customization and control
 cask "vivaldi"
 # Video communication and virtual meeting platform
 cask "zoom"
-mas "1Password 7", id: 1333542190
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Microsoft Remote Desktop", id: 1295203466
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "Xcode", id: 497799835
