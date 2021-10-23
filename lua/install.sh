@@ -29,7 +29,7 @@ cd "${build_path}"
 git -c gc.auto=0 fetch --quiet --no-tags --recurse-submodules=no >/dev/null 2>&1
 
 behind=$(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
-if (( behind )); then
+if ((behind)); then
   git pull --quiet
   git submodule update --init --recursive
 

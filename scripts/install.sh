@@ -4,7 +4,10 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
-[[ -e "${DOTFILES}" ]] || { echo "${DOTFILES} directory does not exist"; exit 1; }
+[[ -e "${DOTFILES}" ]] || {
+  echo "${DOTFILES} directory does not exist"
+  exit 1
+}
 
 # die
 # -----------------------------------------------------------------------------
@@ -46,7 +49,7 @@ print_success() {
 # symlink
 # -----------------------------------------------------------------------------
 symlink() {
-  (( $# == 2 )) || die 'symlink() requires 2 arguments'
+  (($# == 2)) || die 'symlink() requires 2 arguments'
 
   local source="${DOTFILES}/${1}"
   local target="${HOME}/${2}"
@@ -110,7 +113,7 @@ symlink_files() {
   symlink ag/agignore          .agignore
 
   # ctags
-  symlink ctags                .ctags.d
+  symlink ctags                .config/ctags
 
   # bin
   symlink bin                  .local/bin
@@ -147,7 +150,7 @@ usage() {
 # TODO macos defaults
 
 main() {
-  if (( $# < 1 )); then
+  if (($# < 1)); then
     usage
     exit 1
   fi

@@ -21,7 +21,7 @@ sync_repo() {
 
   local repo="${1:-.}"
 
-  if ! git rev-parse --git-dir > /dev/null 2>&1; then
+  if ! git rev-parse --git-dir >/dev/null 2>&1; then
     echo "${repo} is not a git repo"
     return
   fi
@@ -47,7 +47,7 @@ sync_repo() {
 
   local behind
   behind=$(git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null)
-  if (( behind )); then
+  if ((behind)); then
     header "Updating ${repo}:${localbranch}"
 
     git pull --quiet
