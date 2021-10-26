@@ -113,7 +113,7 @@
 
 [color "diff"]
   meta         = yellow
-  frag         = magenta dim
+  frag         = magenta
   old          = red
   new          = green
   whitespace   = red reverse
