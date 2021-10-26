@@ -37,20 +37,6 @@ vim.fn.sign_define({
 
 -- [ handlers ] ----------------------------------------------------------------
 
--- vim.lsp.handlers["textDocument/formatting"] = function(err, result, ctx)
---   if err ~= nil or result == nil then
---     return
---   end
---   if not vim.api.nvim_buf_get_option(ctx.bufnr, 'modified') then
---     local view = vim.fn.winsaveview()
---     vim.lsp.util.apply_text_edits(result, ctx.bufnr)
---     vim.fn.winrestview(view)
---     if ctx.bufnr == vim.api.nvim_get_current_buf() then
---       vim.cmd([[noautocmd :update]])
---     end
---   end
--- end
-
 vim.lsp.handlers['textDocument/publishDiagnostics'] = function(...)
   vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
@@ -88,7 +74,7 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   map('n', 'gD',         '<Cmd>lua vim.lsp.buf.declaration()<CR>')
   map('n', 'gd',         '<Cmd>lua vim.lsp.buf.definition()<CR>')
-  map('n', 'gs',         '<Cmd>split | lua vim.lsp.buf.definition()<CR>')
+  map('n', 'gs',         [[<Cmd>lua require('ar.lsp.handlers').definition('split')<CR>]])
   map('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   map('n', '<leader>k',  '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
