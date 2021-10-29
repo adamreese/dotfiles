@@ -100,31 +100,37 @@ Plug 'pangloss/vim-javascript', PlugIf(v:false)
 Plug 'plasticboy/vim-markdown'
 Plug 'rhysd/vim-wasm'
 Plug 'rust-lang/rust.vim'
-Plug 'simrat39/rust-tools.nvim'
 Plug 'tmux-plugins/vim-tmux'
+Plug 'towolf/vim-helm'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
-Plug 'mityu/vim-applescript'
+
+" let g:OmniSharp_server_use_mono = 1
+" let g:OmniSharp_loglevel = 'info'
+Plug 'OmniSharp/omnisharp-vim'
 
 Plug 'tweekmonster/exception.vim'
 command! WTF call exception#trace()
 
 " -- LSP ----------------------------------------------------------------
-let g:nvimlsp = has('nvim-0.5.0')
+if has('nvim-0.5.0')
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/lsp-status.nvim'
+  Plug 'ojroques/nvim-lspfuzzy'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'rafamadriz/friendly-snippets'
+  Plug 'simrat39/rust-tools.nvim'
+  Plug 'folke/lua-dev.nvim'
 
-Plug 'neovim/nvim-lspconfig',        PlugIf(g:nvimlsp)
-Plug 'nvim-lua/lsp-status.nvim',     PlugIf(g:nvimlsp)
-Plug 'ojroques/nvim-lspfuzzy',       PlugIf(g:nvimlsp)
-Plug 'hrsh7th/vim-vsnip',            PlugIf(g:nvimlsp)
-Plug 'rafamadriz/friendly-snippets', PlugIf(g:nvimlsp)
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'f3fora/cmp-spell'
+  Plug 'hrsh7th/cmp-nvim-lua'
+  Plug 'hrsh7th/cmp-vsnip'
+endif
 
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'f3fora/cmp-spell'
-Plug 'hrsh7th/cmp-nvim-lua'
-Plug 'hrsh7th/cmp-vsnip'
 
 call plug#end()
 

@@ -56,20 +56,20 @@ local on_attach = function(client, bufnr)
 
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  vim.cmd [[command! LspDefinition lua vim.lsp.buf.definition()]]
-  vim.cmd [[command! LspDeclaration lua vim.lsp.buf.definition()]]
-  vim.cmd [[command! LspCodeAction lua vim.lsp.buf.code_action()]]
-  vim.cmd [[command! LspHover lua vim.lsp.buf.hover()]]
-  vim.cmd [[command! LspRename lua vim.lsp.buf.rename()]]
-  vim.cmd [[command! LspReferences lua vim.lsp.buf.references()]]
-  vim.cmd [[command! LspTypeDefinition lua vim.lsp.buf.type_definition()]]
-  vim.cmd [[command! LspImplementation lua vim.lsp.buf.implementation()]]
-  vim.cmd [[command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()]]
-  vim.cmd [[command! LspDiagNext lua vim.lsp.diagnostic.goto_next()]]
-  vim.cmd [[command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()]]
-  vim.cmd [[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]]
-  vim.cmd [[command! LspDocumentSymbol lua vim.lsp.buf.document_symbol()]]
-  vim.cmd [[command! LspWorkspaceSymbol lua vim.lsp.buf.workspace_symbol()]]
+  vim.cmd([[command! LspDefinition lua vim.lsp.buf.definition()]])
+  vim.cmd([[command! LspDeclaration lua vim.lsp.buf.definition()]])
+  vim.cmd([[command! LspCodeAction lua vim.lsp.buf.code_action()]])
+  vim.cmd([[command! LspHover lua vim.lsp.buf.hover()]])
+  vim.cmd([[command! LspRename lua vim.lsp.buf.rename()]])
+  vim.cmd([[command! LspReferences lua vim.lsp.buf.references()]])
+  vim.cmd([[command! LspTypeDefinition lua vim.lsp.buf.type_definition()]])
+  vim.cmd([[command! LspImplementation lua vim.lsp.buf.implementation()]])
+  vim.cmd([[command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()]])
+  vim.cmd([[command! LspDiagNext lua vim.lsp.diagnostic.goto_next()]])
+  vim.cmd([[command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()]])
+  vim.cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
+  vim.cmd([[command! LspDocumentSymbol lua vim.lsp.buf.document_symbol()]])
+  vim.cmd([[command! LspWorkspaceSymbol lua vim.lsp.buf.workspace_symbol()]])
 
   -- Mappings.
   map('n', 'gD',         '<Cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -100,41 +100,11 @@ local on_attach = function(client, bufnr)
     vim.b.lsp_formatting = true
     vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting_sync(nil, 1000)' ]])
     vim.api.nvim_command('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
-
   elseif client.resolved_capabilities.document_range_formatting then
     map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>')
   end
 
   require('lsp-status').on_attach(client)
-end
-
-local system_name
-if vim.fn.has('mac') then
-  system_name = 'macOS'
-elseif vim.fn.has('unix') then
-  system_name = 'Linux'
-else
-  print('Unsupported system for sumneko')
-end
-
-local function get_lua_runtime()
-  local result = {}
-  for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
-    local lua_path = path .. '/lua/'
-    if vim.fn.isdirectory(lua_path) then
-      result[lua_path] = true
-    end
-  end
-
-  result[vim.fn.expand('$VIMRUNTIME/lua')] = true
-  result[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-  result[vim.fn.expand('/Applications/Hammerspoon.app/Contents/Resources/extensions/hs')] = true
-
-  return result
-end
-
-local function install_path(lang)
-  return vim.fn.expand('$XDG_DATA_HOME/lsp/' .. lang)
 end
 
 local servers = {
@@ -148,11 +118,6 @@ local servers = {
       json = {
         format = { enable = true },
       },
-    },
-  },
-  rust_analyzer = {
-    settings = {
-      ['rust-analyzer.cargo.allFeatures'] = true,
     },
   },
   tsserver = {},
@@ -172,47 +137,7 @@ local servers = {
       },
     },
   },
-  sumneko_lua = {
-    cmd = {
-      install_path('sumneko_lua/bin/' .. system_name .. '/lua-language-server'),
-      '-E',
-      install_path('sumneko_lua/main.lua'),
-    },
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-          path = vim.split(package.path, ';'),
-        },
-        completion = {
-          keywordSnippet = 'Disable',
-        },
-        diagnostics = {
-          globals = { 'hs', 'vim' },
-        },
-        workspace = {
-          maxPreload = 2000,
-          preloadFileSize = 1000,
-          library = get_lua_runtime(),
-        },
-      },
-    },
-  },
-  clangd = {},
   sourcekit = {},
-  omnisharp = {
-    cmd = { install_path('omnisharp/run'),  "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-    on_new_config = function(config, root_dir)
-      if root_dir then
-        for _, p in ipairs(vim.fn.glob(util.path.join(root_dir, '*.sln'), true, true)) do
-          if lspconfig.util.path.exists(p) then
-            root_dir = p
-          end
-        end
-        config.cmd = { install_path('omnisharp/run'),  "--languageserver", "--hostPID", tostring(vim.fn.getpid()), "-s", root_dir }
-      end
-    end,
-  },
   zk = {},
 }
 
@@ -221,25 +146,76 @@ local servers = {
 local function setup_servers()
   local status = require('lsp-status')
   status.config({
-      status_symbol = ' ',
-      indicator_errors = '⨉',
-      indicator_warnings = '',
-      indicator_info = 'ℹ︎',
-      indicator_hint = '○',
-    })
+    status_symbol = ' ',
+    indicator_errors = '⨉',
+    indicator_warnings = '',
+    indicator_info = 'ℹ︎',
+    indicator_hint = '○',
+  })
   status.register_progress()
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   capabilities = vim.tbl_extend('keep', capabilities, status.capabilities)
 
-  for server, config in pairs(servers) do
-    lspconfig[server].setup(vim.tbl_deep_extend('force', {
-          flags = { debounce_text_changes = 500 },
-          on_attach = on_attach,
-          capabilities = capabilities,
-      }, config))
+  local function with_defaults(opts)
+    opts = opts or {}
+    return vim.tbl_deep_extend('keep', opts, {
+      flags = { debounce_text_changes = 500 },
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
   end
+
+  for server, config in pairs(servers) do
+    lspconfig[server].setup(with_defaults(config))
+  end
+
+  require('rust-tools').setup({
+    tools = {
+      autoSetHints = false,
+    },
+    server = with_defaults({
+      settings = {
+        ['rust-analyzer.cargo.allFeatures'] = true,
+      },
+    }),
+  })
+
+  local system_name
+  if vim.fn.has('mac') then
+    system_name = 'macOS'
+  elseif vim.fn.has('unix') then
+    system_name = 'Linux'
+  else
+    print('Unsupported system for sumneko')
+  end
+
+  local luadev = require('lua-dev').setup({
+    lspconfig = with_defaults({
+      cmd = {
+        vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/bin/' .. system_name .. '/lua-language-server'),
+        '-E',
+        vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/main.lua'),
+      },
+      settings = {
+        Lua = {
+          completion = {
+            keywordSnippet = 'Disable',
+          },
+          diagnostics = {
+            globals = { 'hs', 'vim' },
+          },
+          workspace = {
+            maxPreload = 2000,
+            preloadFileSize = 1000,
+          },
+        },
+      },
+    }),
+  })
+
+  lspconfig.sumneko_lua.setup(luadev)
 end
 
 setup_servers()
@@ -248,5 +224,4 @@ setup_servers()
 
 require('lspfuzzy').setup({})
 
-vim.cmd [[command! -nargs=? ZkNew :lua require'lspconfig'.zk.new(<args>)]]
 vim.cmd([[command! LspLog :lua vim.cmd('tabe ' .. vim.lsp.get_log_path())]])
