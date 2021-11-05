@@ -109,8 +109,6 @@ path=(
 
   /usr/local/opt/ruby/bin(N-/)
   ${HOME}/.cargo/bin(N-/)
-  /usr/local/opt/python@*/bin(N-/)
-  /usr/local/opt/python@3.*/libexec/bin(Nn[-1]-/)
   ${path}
 )
 
