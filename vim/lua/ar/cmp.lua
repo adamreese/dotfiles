@@ -48,7 +48,6 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
     }),
     ['<Tab>'] = function(fallback)
       if cmp.visible() then
@@ -68,7 +67,6 @@ cmp.setup({
         fallback()
       end
     end,
-
   },
 
   sources = {
@@ -90,18 +88,32 @@ cmp.setup({
         spell = '[spell]',
         vsnip = '[vsnip]',
         buffer = '[buf]',
+        cmdline = '[cmd]',
       })[entry.source.name]
       return item
     end,
   },
 })
 
-require('nvim-autopairs').setup({
-    check_ts = true
-  })
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
 
-require('nvim-autopairs.completion.cmp').setup({
-    map_cr = true,
-    map_complete = true,
-    auto_select = false,
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
   })
+})
+
+-- [ nvim-autopairs ] ----------------------------------------------------------
+
+require('nvim-autopairs').setup({
+  check_ts = true
+})
+
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())

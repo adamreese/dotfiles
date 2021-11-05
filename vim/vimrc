@@ -129,6 +129,7 @@ if has('nvim-0.5.0')
   Plug 'f3fora/cmp-spell'
   Plug 'hrsh7th/cmp-nvim-lua'
   Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/cmp-cmdline'
 endif
 
 
