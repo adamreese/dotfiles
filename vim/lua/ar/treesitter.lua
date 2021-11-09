@@ -2,7 +2,7 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = 'maintained',
   highlight = {
     enable = true,
-    disable = { 'bash', 'go', 'rust' },
+    disable = { 'bash', 'go', 'rust', 'vim' },
   },
   textobjects = {
     select = {
@@ -15,6 +15,8 @@ require('nvim-treesitter.configs').setup({
       },
     },
   },
+  autopairs = { enable = true },
+  matchup = { enable = true },
 })
 
 function _G.Type()
