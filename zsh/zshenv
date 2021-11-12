@@ -33,6 +33,15 @@ export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}/tmux/plugins"
 export YARN_CACHE_FOLDER="${XDG_CACHE_HOME}/yarn"
 export ZK_NOTEBOOK_DIR="${HOME}/notes"
 
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  export HOMEBREW_PREFIX='/opt/homebrew'
+  export HOMEBREW_CELLAR='/opt/homebrew/Cellar'
+  export HOMEBREW_REPOSITORY='/opt/homebrew'
+  export HOMEBREW_SHELLENV_PREFIX='/opt/homebrew'
+else
+  export HOMEBREW_PREFIX='/usr/local'
+fi
+
 # Path
 # ------------------------------------------------------------------------------
 typeset -gU cdpath fpath path
@@ -41,12 +50,16 @@ typeset -gU cdpath fpath path
 fpath=(
   ${ZDOTDIR}/functions(N-/)
   /usr/local/share/zsh/site-functions(N-/)
+  ${HOMEBREW_PREFIX}/share/zsh/site-functions(N-/)
   ${fpath}
 )
 autoload -Uz ${ZDOTDIR}/functions/*(N:t)
 
 path=(
   /usr/local/{bin,sbin}(N-/)
+  ${HOMEBREW_PREFIX}/{bin,sbin}(N-/)
+  /usr/local/opt/python@*/bin(N-/)
+  ${HOMEBREW_PREFIX}/opt/python@*/bin(N-/)
   ${path}
 )
 
