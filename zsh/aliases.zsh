@@ -22,19 +22,12 @@ alias sudo='sudo '
 # Perform case insensitive matching
 alias grep='grep -i --color=auto'
 
-# ag
-alias agp='ag --hidden --pager="less -iFMRSX"'
-alias agh='ag --hidden'
-
 # fd
 alias fd="fd --hidden --ignore-file=${HOME}/.agignore "
 
 # Git
 alias   g='git'
 alias glg='git log --stat'
-
-# github
-alias pr='hub pull-request'
 
 # ghq
 alias get='ghq get --update'
@@ -46,8 +39,6 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # listening ports
 alias ports='lsof +c0 -iTCP -sTCP:LISTEN -n -P'
-
-alias diga='dig +nocmd any +multiline +noall +answer'
 
 # github.com/jocelynmallon/zshmarks
 alias j='jump'
