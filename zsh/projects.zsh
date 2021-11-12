@@ -1,11 +1,12 @@
 # zsh projects
 # -----------------------------------------------------------------------------
 
+export PROJECTS="${HOME}/p/src"
 # Helm
 # -----------------------------------------------------------------------------
-path[1,0]=${GOPATH}/src/helm.sh/helm/bin
+path[1,0]=${PROJECTS}/helm.sh/helm/bin
 
-alias helm2="${GOPATH}/src/k8s.io/helm/bin/helm"
+alias helm2="${PROJECTS}/k8s.io/helm/bin/helm"
 
 # HL global alias
 # example: `helm get HL`
@@ -19,15 +20,15 @@ helm() {
 
 # Brigade
 # -----------------------------------------------------------------------------
-path[1,0]=${GOPATH}/src/github.com/brigadecore/brigade/bin
+path[1,0]=${PROJECTS}/github.com/brigadecore/brigade/bin
 
 # Wagi
 # -----------------------------------------------------------------------------
-path[1,0]=${HOME}/p/go/src/github.com/deislabs/wagi/target/release
+path[1,0]=${PROJECTS}/github.com/deislabs/wagi/target/release
 
 # Bindle
 # -----------------------------------------------------------------------------
-path[1,0]="${HOME}/p/go/src/github.com/deislabs/bindle/target/debug"
+path[1,0]="${PROJECTS}/github.com/deislabs/bindle/target/debug"
 
 export BINDLE_IP_ADDRESS_PORT='127.0.0.1:8080'
 export BINDLE_URL="http://${BINDLE_IP_ADDRESS_PORT}/v1"
@@ -40,4 +41,4 @@ bindle-server() {
 
 # Hippo
 # -----------------------------------------------------------------------------
-path[1,0]=${HOME}/p/go/src/github.com/deislabs/hippo-cli/target/debug
+path[1,0]=${PROJECTS}/github.com/deislabs/hippo-cli/target/debug

@@ -1,7 +1,7 @@
 # zsh go
 # -----------------------------------------------------------------------------
 
-typeset -gx GOPATH=${HOME}/p/go
+typeset -gx GOPATH=${HOME}/p
 typeset -gx GOCACHE="${XDG_CACHE_HOME}/go-build"
 path[1,0]=${GOPATH}/bin
 
