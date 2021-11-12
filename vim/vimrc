@@ -110,10 +110,6 @@ Plug 'towolf/vim-helm'
 Plug 'uarun/vim-protobuf'
 Plug 'vim-ruby/vim-ruby'
 
-" let g:OmniSharp_server_use_mono = 1
-" let g:OmniSharp_loglevel = 'info'
-Plug 'OmniSharp/omnisharp-vim'
-
 Plug 'tweekmonster/exception.vim'
 command! WTF call exception#trace()
 
@@ -136,7 +132,6 @@ if has('nvim-0.5.0')
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/cmp-cmdline'
 endif
-
 
 call plug#end()
 

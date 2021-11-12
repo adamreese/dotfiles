@@ -111,6 +111,7 @@ local servers = {
   bashls = {
     filetypes = { 'bash', 'sh', 'zsh' },
   },
+  csharp_ls = {},
   dockerls = {},
   gopls = {},
   jsonls = {
