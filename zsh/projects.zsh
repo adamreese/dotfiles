@@ -36,7 +36,7 @@ export BINDLE_DIRECTORY="${XDG_DATA_HOME}/bindle"
 export BINDLE_DIR="${XDG_DATA_HOME}/bindle"
 
 bindle-server() {
-  RUST_LOG=error,warp=info,bindle=debug command bindle-server "$@"
+  RUST_LOG=error,warp=info,bindle=debug command bindle-server --unauthenticated "$@"
 }
 
 # Hippo
