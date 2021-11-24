@@ -1,5 +1,11 @@
 local lspconfig = require('lspconfig')
 
+-- [ commands ] ----------------------------------------------------------------
+
+vim.cmd([[command! LspLog :lua vim.cmd('tabe ' .. vim.lsp.get_log_path())]])
+
+-- [ style ] -------------------------------------------------------------------
+
 vim.lsp.protocol.CompletionItemKind = {
   ' [text]',
   ' [method]',
@@ -107,6 +113,31 @@ local on_attach = function(client, bufnr)
   require('lsp-status').on_attach(client)
 end
 
+local system_name = jit.os:lower() == 'osx' and 'macOS' or jit.os
+local luadev = require('lua-dev').setup({
+  lspconfig = {
+    cmd = {
+      vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/bin/' .. system_name .. '/lua-language-server'),
+      '-E',
+      vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/main.lua'),
+    },
+    settings = {
+      Lua = {
+        completion = {
+          keywordSnippet = 'Disable',
+        },
+        diagnostics = {
+          globals = { 'hs', 'vim' },
+        },
+        workspace = {
+          maxPreload = 2000,
+          preloadFileSize = 1000,
+        },
+      },
+    },
+  },
+})
+
 local servers = {
   bashls = {
     filetypes = { 'bash', 'sh', 'zsh' },
@@ -121,6 +152,7 @@ local servers = {
       },
     },
   },
+  sumneko_lua = luadev,
   tsserver = {},
   vimls = {},
   yamlls = {
@@ -182,41 +214,6 @@ local function setup_servers()
       },
     }),
   })
-
-  local system_name
-  if vim.fn.has('mac') then
-    system_name = 'macOS'
-  elseif vim.fn.has('unix') then
-    system_name = 'Linux'
-  else
-    print('Unsupported system for sumneko')
-  end
-
-  local luadev = require('lua-dev').setup({
-    lspconfig = with_defaults({
-      cmd = {
-        vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/bin/' .. system_name .. '/lua-language-server'),
-        '-E',
-        vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/main.lua'),
-      },
-      settings = {
-        Lua = {
-          completion = {
-            keywordSnippet = 'Disable',
-          },
-          diagnostics = {
-            globals = { 'hs', 'vim' },
-          },
-          workspace = {
-            maxPreload = 2000,
-            preloadFileSize = 1000,
-          },
-        },
-      },
-    }),
-  })
-
-  lspconfig.sumneko_lua.setup(luadev)
 end
 
 setup_servers()
@@ -224,5 +221,3 @@ setup_servers()
 -- [ lspfuzzy ] ----------------------------------------------------------------
 
 require('lspfuzzy').setup({})
-
-vim.cmd([[command! LspLog :lua vim.cmd('tabe ' .. vim.lsp.get_log_path())]])
