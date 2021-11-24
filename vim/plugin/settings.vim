@@ -142,6 +142,9 @@ set completeopt+=menuone             " Show the popup if only one completion
 set completeopt+=noinsert            " Don't insert text for a match unless selected
 set completeopt+=noselect            " Don't auto-select the first match
 
+set formatoptions+=n                 " Recognize numbered lists
+set formatoptions+=1                 " Don't break lines after a one-letter word
+
 set isfname-==                       " Don't consider = symbol as part filename
 set pumheight=30                     " Pop-up menu's line height
 set scrolloff=8                      " Start scrolling when we're 8 lines away from margins
