@@ -72,18 +72,22 @@ let g:fzf_action = {
 
 " Commands
 " -----------------------------------------------------------------------
-command! -bang -nargs=0 Plugs        call ar#fzf#Plugs(<bang>0)
-command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
+command! -bang -nargs=0 Plugs
+      \ call ar#fzf#Plugs(<bang>0)
 
-command! -bang -nargs=? -complete=dir Files call ar#fzf#Files(<q-args>, <bang>0)
+" command! -bang -nargs=* -complete=dir RG
+"       \ call ar#fzf#Rg(<q-args>, <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+      \ call ar#fzf#Files(<q-args>, <bang>0)
+
+command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
 
 " -----------------------------------------------------------------------
 
 " Enable Floating FZF for NeoVim 0.4.0+ or Vim 8.0+
-let s:has_float = has('nvim-0.4.0') || v:version >= 800
-
-if s:has_float
-  let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.6, 'border': 'rounded' } }
+if has('nvim-0.4.0') || v:version >= 800
+  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 endif
 
 let &cpoptions = s:cpo_save
