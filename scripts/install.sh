@@ -130,6 +130,8 @@ symlink_files() {
   # stylua
   symlink stylua               .config/stylua
 
+  symlink karabiner            .config/karabiner
+
   print_success "Completed symlinks"
 }
 
