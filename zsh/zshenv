@@ -34,13 +34,16 @@ export YARN_CACHE_FOLDER="${XDG_CACHE_HOME}/yarn"
 export ZK_NOTEBOOK_DIR="${HOME}/notes"
 export GEM_HOME="${XDG_DATA_HOME}/gem"
 
+# The variables HOMEBREW_PREFIX, HOMEBREW_CELLAR and HOMEBREW_REPOSITORY are
+# exported to avoid querying them multiple times.
 if [[ -f /opt/homebrew/bin/brew ]]; then
   export HOMEBREW_PREFIX='/opt/homebrew'
   export HOMEBREW_CELLAR='/opt/homebrew/Cellar'
   export HOMEBREW_REPOSITORY='/opt/homebrew'
-  export HOMEBREW_SHELLENV_PREFIX='/opt/homebrew'
 else
   export HOMEBREW_PREFIX='/usr/local'
+  export HOMEBREW_CELLAR='/usr/local/Cellar'
+  export HOMEBREW_REPOSITORY='/usr/local/Homebrew'
 fi
 
 # Path
