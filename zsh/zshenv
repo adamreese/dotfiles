@@ -32,6 +32,7 @@ export SCREENRC="${XDG_CONFIG_HOME}/screen/screenrc"
 export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}/tmux/plugins"
 export YARN_CACHE_FOLDER="${XDG_CACHE_HOME}/yarn"
 export ZK_NOTEBOOK_DIR="${HOME}/notes"
+export GEM_HOME="${XDG_DATA_HOME}/gem"
 
 if [[ -f /opt/homebrew/bin/brew ]]; then
   export HOMEBREW_PREFIX='/opt/homebrew'
@@ -58,8 +59,7 @@ autoload -Uz ${ZDOTDIR}/functions/*(N:t)
 path=(
   /usr/local/{bin,sbin}(N-/)
   ${HOMEBREW_PREFIX}/{bin,sbin}(N-/)
-  /usr/local/opt/python@*/bin(N-/)
-  ${HOMEBREW_PREFIX}/opt/python@*/bin(N-/)
+  ${GEM_HOME}/bin(N-/)
   ${path}
 )
 

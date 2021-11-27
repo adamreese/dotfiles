@@ -110,6 +110,7 @@ path=(
   ${HOMEBREW_PREFIX}/bin(N-/)
 
   /usr/local/opt/ruby/bin(N-/)
+  ${GEM_HOME}/bin(N-/)
   ${HOMEBREW_PREFIX}/opt/ruby/bin(N-/)
   ${HOME}/.cargo/bin(N-/)
   ${path}
