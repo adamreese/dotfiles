@@ -12,4 +12,8 @@ alias services='brew services'
 # Flush dns cache
 alias flush='sudo killall -HUP mDNSResponder'
 
-alias video-reset='sudo killall AppleCameraAssistant;sudo killall VDCAssistant'
+# PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
+alias plistbuddy="/usr/libexec/PlistBuddy"
+
+# Airport CLI alias
+alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
