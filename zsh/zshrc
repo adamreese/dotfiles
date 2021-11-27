@@ -11,11 +11,13 @@ autoload -Uz zmv
 local -A ZINIT
 ZINIT[HOME_DIR]="${XDG_DATA_HOME}/zinit"
 if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
-  git clone https://github.com/zdharma/zinit.git ${ZINIT[HOME_DIR]}/bin
+  git clone https://github.com/zdharma-continuum/zinit.git ${ZINIT[HOME_DIR]}/bin
 fi
 
-module_path+=( ${ZINIT[HOME_DIR]}/bin/zmodules/Src )
-zmodload zdharma/zplugin || echo 'zdharma/zplugin is not installed'
+if [[ -f "${ZINIT[HOME_DIR]}/bin/zmodules/Src/zdharma/zplugin.so" ]]; then
+  module_path+=( ${ZINIT[HOME_DIR]}/bin/zmodules/Src )
+  zmodload zdharma/zplugin
+fi
 
 source ${ZINIT[HOME_DIR]}/bin/zinit.zsh
 autoload -Uz _zinit
@@ -62,7 +64,6 @@ zinit lucid wait blockf \
 zinit as'completion' is-snippet for \
     'https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker' \
     'https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose'
-
 
 # Add local completions. This one is to be ran just once, in interactive session.
 #
