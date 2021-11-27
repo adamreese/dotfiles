@@ -1,5 +1,5 @@
 --hidden
---ignore-file=/Users/areese/.agignore
+--ignore-file=/Users/areese/.dotfiles/rg/ignore
 --smart-case
 --no-messages
 

@@ -23,7 +23,7 @@ alias sudo='sudo '
 alias grep='grep -i --color=auto'
 
 # fd
-alias fd="fd --hidden --ignore-file=${HOME}/.agignore "
+alias fd="fd --hidden --ignore-file=${DOTFILES}/ripgrep/ignore "
 
 # Git
 alias   g='git'

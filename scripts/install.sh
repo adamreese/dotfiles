@@ -110,7 +110,7 @@ symlink_files() {
   symlink zsh/zshenv           .zshenv
 
   # search
-  symlink ag/agignore          .agignore
+  symlink ripgrep/ignore       .ignore
 
   # ctags
   symlink ctags                .config/ctags
