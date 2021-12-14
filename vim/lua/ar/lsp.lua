@@ -144,6 +144,7 @@ local servers = {
   jsonls = {
     settings = {
       json = {
+        schemas = require('schemastore').json.schemas(),
         format = { enable = true },
       },
     },
@@ -154,11 +155,7 @@ local servers = {
   yamlls = {
     settings = {
       yaml = {
-        schemas = {
-          ['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
-          ['http://json.schemastore.org/github-action'] = '.github/action.{yml,yaml}',
-          ['http://json.schemastore.org/circleciconfig'] = '.circleci/**/*.{yml,yaml}',
-        },
+        schemas = require('schemastore').json.schemas(),
         format = { enable = true },
         validate = true,
         hover = true,

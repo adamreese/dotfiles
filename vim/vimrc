@@ -122,6 +122,7 @@ if has('nvim-0.5.0')
   Plug 'rafamadriz/friendly-snippets'
   Plug 'simrat39/rust-tools.nvim'
   Plug 'folke/lua-dev.nvim'
+  Plug 'b0o/SchemaStore.nvim'
 
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-path'
