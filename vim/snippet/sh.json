@@ -1,0 +1,22 @@
+{
+  "bash": {
+    "prefix": [
+      "bash",
+      "#!",
+      "shebang"
+    ],
+    "body": [
+      "#!/usr/bin/env bash",
+      "set -euo pipefail",
+      ""
+    ]
+  },
+  "trap": {
+    "prefix": [
+      "trap"
+    ],
+    "body": [
+      "trap 'echo \"Error on line \\$LINENO: \\\"\\$BASH_COMMAND\\\": Exit code: \\$?\" >&2' ERR"
+    ]
+  }
+}

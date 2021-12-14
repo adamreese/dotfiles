@@ -1,0 +1,7 @@
+{
+  "bang": {
+    "prefix": ["bang"],
+    "body": ["#!/usr/bin/env ${1:sh|zsh|bash|python|node}"],
+    "description": "Shebang!"
+  }
+}

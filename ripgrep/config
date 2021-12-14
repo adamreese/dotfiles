@@ -1,5 +1,5 @@
 --hidden
---ignore-file=/Users/areese/.dotfiles/rg/ignore
+--ignore-file=/Users/areese/.dotfiles/ripgrep/ignore
 --smart-case
 --no-messages
 
