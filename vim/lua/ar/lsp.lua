@@ -35,23 +35,19 @@ vim.lsp.protocol.CompletionItemKind = {
 }
 
 vim.fn.sign_define({
-  { name = 'LspDiagnosticsSignError', text = '❯', texthl = 'LspDiagnosticsSignError' },
-  { name = 'LspDiagnosticsSignHint', text = '❯', texthl = 'LspDiagnosticsSignHint' },
-  { name = 'LspDiagnosticsSignWarning', text = '❯', texthl = 'LspDiagnosticsSignWarning' },
-  { name = 'LspDiagnosticsSignInformation', text = '❯', texthl = 'LspDiagnosticsSignInformation' },
+  { name = 'DiagnosticSignError', text = '❯', texthl = 'DiagnosticSignError' },
+  { name = 'DiagnosticSignHint', text = '❯', texthl = 'DiagnosticSignHint' },
+  { name = 'DiagnosticSignWarn', text = '❯', texthl = 'DiagnosticSignWarn' },
+  { name = 'DiagnosticSignInfo', text = '❯', texthl = 'DiagnosticSignInfo' },
 })
 
--- [ handlers ] ----------------------------------------------------------------
-
-vim.lsp.handlers['textDocument/publishDiagnostics'] = function(...)
-  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
-    signs = true,
-    update_in_insert = false,
-  })(...)
-  pcall(vim.lsp.diagnostic.set_loclist, { open_loclist = false })
-end
+vim.diagnostic.config {
+  underline = true,
+  virtual_text = false,
+  signs = true,
+  update_in_insert = false,
+  severity_sort = true,
+}
 
 -- [ onattach ] ----------------------------------------------------------------
 
@@ -70,9 +66,9 @@ local on_attach = function(client, bufnr)
   vim.cmd([[command! LspReferences lua vim.lsp.buf.references()]])
   vim.cmd([[command! LspTypeDefinition lua vim.lsp.buf.type_definition()]])
   vim.cmd([[command! LspImplementation lua vim.lsp.buf.implementation()]])
-  vim.cmd([[command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()]])
-  vim.cmd([[command! LspDiagNext lua vim.lsp.diagnostic.goto_next()]])
-  vim.cmd([[command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()]])
+  vim.cmd([[command! LspDiagPrev lua vim.diagnostic.goto_prev()]])
+  vim.cmd([[command! LspDiagNext lua vim.diagnostic.goto_next()]])
+  vim.cmd([[command! LspDiagLine lua vim.diagnostic.show_line_diagnostics()]])
   vim.cmd([[command! LspSignatureHelp lua vim.lsp.buf.signature_help()]])
   vim.cmd([[command! LspDocumentSymbol lua vim.lsp.buf.document_symbol()]])
   vim.cmd([[command! LspWorkspaceSymbol lua vim.lsp.buf.workspace_symbol()]])
@@ -87,8 +83,8 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
   map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 
-  map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-  map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+  map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+  map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 
   map('n', '<leader>ls', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
   map('n', '<leader>lS', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
