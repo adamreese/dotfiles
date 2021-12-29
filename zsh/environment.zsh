@@ -51,7 +51,7 @@ setopt   COMBINING_CHARS       # Combine zero-length punctuation characters (acc
 #            ││││┌─ R: ANSI color support
 #            │││││┌─ X: suppress alternate screen
 export LESS='iFKMRX'
-export LESSHISTFILE=${XDG_DATA_HOME}/less_history
+export LESSHISTFILE=${XDG_STATE_HOME}/less_history
 export LESSKEYIN=${DOTFILES}/less/lesskey
 
 if (( $#commands[(i)lesspipe(|.sh)] )); then
