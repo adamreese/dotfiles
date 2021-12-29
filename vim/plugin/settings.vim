@@ -89,10 +89,10 @@ endif
 " -----------------------------------------------------------------------
 
 execute 'set spellfile=' . g:vim_dir  . '/spell/en.utf-8.add'
-execute 'set directory=' . g:data_dir . '/swap//'
-execute 'set backupdir=' . g:data_dir . '/backup/'
+execute 'set directory=' . g:state_dir . '/swap//'
+execute 'set backupdir=' . g:state_dir . '/backup/'
 if has('mksession')
-  execute 'set viewdir=' . g:data_dir . '/view/'
+  execute 'set viewdir=' . g:state_dir . '/view/'
   set viewoptions=cursor,folds " save/restore just these (with `:{mk,load}view`)
 endif
 
@@ -100,13 +100,13 @@ endif
 " Only works all the time.
 if has('persistent_undo')
   set undofile
-  execute 'set undodir=' . g:data_dir . '/undo/'
+  execute 'set undodir=' . g:state_dir . '/undo/'
 endif
 
 if has('nvim')
-  exec 'set shada+=n' . g:data_dir . '/main.shada'
+  exec 'set shada+=n' . g:state_dir . '/shada/main.shada'
 else
-  exec 'set viminfo+=n' . g:data_dir . '/viminfo'
+  exec 'set viminfo+=n' . g:state_dir . '/viminfo'
 endif
 
 " Don't create root-owned files

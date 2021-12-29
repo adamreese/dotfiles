@@ -14,7 +14,7 @@ endif
 
 let g:fzf_layout          = { 'down': '16' }
 let g:fzf_buffers_jump    = 1
-let g:fzf_history_dir     = g:data_dir . '/fzf-history'
+let g:fzf_history_dir     = g:state_dir . '/fzf-history'
 let g:fzf_colors = {
       \ 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
