@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# List calendar today's events.
+#
+# To get calendar UID's run `icalbuddy calendars`
+
+# Current calendars
+# Fermyon: 30B85FD0-6646-40FD-B5EC-14B1C19CF523
+# iCloud:  1A89C98B-4408-4A76-8B82-AF0BD0B8664F
+
+calendars='30B85FD0-6646-40FD-B5EC-14B1C19CF523,1A89C98B-4408-4A76-8B82-AF0BD0B8664F'
+
+if ! hash icalbuddy &>/dev/null; then
+    >&2 echo 'error: icalbuddy not found'
+    >&2 echo 'brew install icalbuddy'
+    exit 1
+fi
+
+rule() {
+  local cols=80 char=$'\u2500'
+  printf '%*s\n' "${cols}" '' | tr ' ' "${char}"
+}
+
+options=(--formatOutput --includeCals "${calendars}")
+options+=(--includeEventProps 'title,location,datetime')
+
+# Today's meatings
+icalbuddy "${options[@]}" --includeOnlyEventsFromNowOn eventsToday
+
+# Current meating
+now=$(icalbuddy "${options[@]}" eventsNow)
+
+if [[ -n "${now}" ]]; then
+  echo
+  rule
+  echo
+  echo "${now}"
+fi
