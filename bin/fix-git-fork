@@ -14,7 +14,17 @@ if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
 fi
 
 url=$(git remote get-url origin)
+if [[ ! "${url}" =~ github ]]; then
+  echo "Not a github remote ${url}" 1>&2
+  exit 1
+fi
+
+# Get tail of url
+# git@github.com:adamreese/dotfiles.git -> dotfiles.git
 project=${url##*/}
+
+# Strip .git off project
+# dotfiles.git -> dotfiles
 project=${project%.git}
 
 if [[ -z "${project}" ]]; then
