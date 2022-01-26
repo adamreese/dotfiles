@@ -25,3 +25,7 @@ nnoremap <silent> <buffer> <Right> :<C-u>call qf#history#Newer()<CR>
 " jump to previous/next file grouping
 nnoremap <silent> <buffer> { :<C-u>call qf#filegroup#PreviousFile()<CR>
 nnoremap <silent> <buffer> } :<C-u>call qf#filegroup#NextFile()<CR>
+
+" not sure what mapping to use for these yet
+nnoremap <Leader>cc :<C-u>call qf#toggle#ToggleQfWindow(v:true)<CR>
+nnoremap <Leader>ll :<C-u>call qf#toggle#ToggleLocWindow(v:true)<CR>
