@@ -164,7 +164,6 @@ local servers = {
     },
   },
   sourcekit = {},
-  zk = {},
 }
 
 -- [ lsp-status ] --------------------------------------------------------------
@@ -196,6 +195,16 @@ local function setup_servers()
   for server, config in pairs(servers) do
     lspconfig[server].setup(with_defaults(config))
   end
+
+  require('zk').setup({
+    picker = 'fzf',
+    lsp = {
+      config = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      },
+    },
+  })
 
   require('rust-tools').setup({
     tools = {
