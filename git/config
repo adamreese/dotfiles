@@ -32,8 +32,6 @@
   new  = log --no-merges --oneline ORIG_HEAD..
   news = log --no-merges --stat ORIG_HEAD..
 
-  fork = clone --origin upstream
-
   snapshot  = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
   snapshots = !git stash list --grep snapshot
 
