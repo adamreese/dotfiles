@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-if git remote | grep upstream >/dev/null; then
-  echo "upstream"
-else
-  echo "origin"
-fi

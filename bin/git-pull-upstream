@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-remote="upstream"
-if ! git remote | grep upstream >/dev/null; then
-  remote="origin"
-fi
-
-git pull "${remote}" "$@"
