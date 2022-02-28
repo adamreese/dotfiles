@@ -72,15 +72,6 @@ symlink() {
   ln -fns "${source}" "${target}"
 }
 
-# install brew
-# -----------------------------------------------------------------------------
-install_homebrew() {
-  if ! command -v brew >/dev/null; then
-    announce_step "Installing Homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-}
-
 # symlink files
 # -----------------------------------------------------------------------------
 symlink_files() {
@@ -136,11 +127,12 @@ symlink_files() {
 }
 
 install_macos() {
+  "${DOTFILES}/macos/install.sh"
   "${DOTFILES}/macos/defaults.sh"
 }
 
 usage() {
-  echo "${0} brew|macos|symlink"
+  echo "${0} macos|symlink"
 }
 
 # -----------------------------------------------------------------------------
@@ -148,7 +140,6 @@ usage() {
 # -----------------------------------------------------------------------------
 
 # TODO terminfo
-# TODO brew
 # TODO macos defaults
 
 main() {
@@ -159,7 +150,6 @@ main() {
 
   while (($# > 0)); do
     case "$1" in
-      brew) install_homebrew ;;
       symlink) symlink_files ;;
       macos) install_macos ;;
       *) usage ;;
