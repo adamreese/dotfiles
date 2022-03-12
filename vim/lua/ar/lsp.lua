@@ -163,6 +163,9 @@ local servers = {
     },
   },
   sourcekit = {},
+  solargraph = {},
+  pylsp = {},
+  taplo = {},
 }
 
 -- [ lsp-status ] --------------------------------------------------------------
