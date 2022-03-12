@@ -109,11 +109,10 @@ local on_attach = function(client, bufnr)
   require('lsp-status').on_attach(client)
 end
 
-local system_name = jit.os:lower() == 'osx' and 'macOS' or jit.os
 local luadev = require('lua-dev').setup({
   lspconfig = {
     cmd = {
-      vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/bin/' .. system_name .. '/lua-language-server'),
+      vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/bin/lua-language-server'),
       '-E',
       vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/main.lua'),
     },
