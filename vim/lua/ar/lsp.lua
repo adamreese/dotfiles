@@ -210,6 +210,7 @@ local function setup_servers()
       autoSetHints = false,
     },
     server = with_defaults({
+      cmd = {vim.fn.expand('$HOME/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer')},
       settings = {
         ['rust-analyzer.cargo.allFeatures'] = true,
       },
