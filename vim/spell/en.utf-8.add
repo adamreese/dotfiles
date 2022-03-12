@@ -85,3 +85,6 @@ SemVer
 Fermyon
 macOS
 WebAssembly
+wasm
+wasi
+Wagi
