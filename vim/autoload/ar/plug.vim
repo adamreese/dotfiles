@@ -8,6 +8,8 @@ let g:loaded_ar_plug = v:true
 " Plugins
 " -----------------------------------------------------------------------
 
+let g:plugs = get(g:, 'plugs', {})
+
 " Auto install plugin manager if not detected
 function! ar#plug#EnsureManager() abort
   if empty(glob(expand(g:vim_dir . '/autoload/plug.vim')))
