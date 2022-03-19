@@ -88,3 +88,5 @@ WebAssembly
 wasm
 wasi
 Wagi
+AssemblyScript
+CGI
