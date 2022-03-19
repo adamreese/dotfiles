@@ -22,17 +22,7 @@ set cpoptions&vim
 "
 " https://github.com/sumneko/lua-language-server
 
-function! s:format() abort
-  if get(b:, 'lsp_formatting')
-    lua vim.lsp.buf.formatting()
-  else
-    Neoformat
-  endif
-endfunction
-
 lua require('ar.lsp')
-
-nnoremap <silent><leader>f call s:format()
 
 if ar#plug#IsLoaded('nvim-cmp')
   lua require('ar.cmp')
