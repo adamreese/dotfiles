@@ -77,6 +77,8 @@ Plug 'dstein64/vim-startuptime'
 Plug 'nvim-treesitter/nvim-treesitter', PlugIf(has('nvim-0.5.0'), {'do': ':TSUpdate'})
 Plug 'nvim-treesitter/nvim-treesitter-textobjects', PlugIf(has('nvim-0.5.0'))
 
+Plug 'lewis6991/impatient.nvim', PlugIf(has('nvim-0.5.0'), {'dir': '~/.local/share/nvim/site/pack/impatient.nvim/start/impatient.nvim'})
+
 let g:colorswatch_exclusion_pattern = 'LightLine.\+'
 Plug 'cocopon/colorswatch.vim',     { 'on': ['ColorSwatchGenerate', 'Inspecthi'] }
 
