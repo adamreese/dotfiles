@@ -87,7 +87,7 @@ command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
 
 " Enable Floating FZF for NeoVim 0.4.0+ or Vim 8.0+
 if has('nvim-0.4.0') || v:version >= 800
-  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 endif
 
 let &cpoptions = s:cpo_save
