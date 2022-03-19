@@ -66,17 +66,16 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'preservim/nerdtree'
 Plug 'romainl/vim-qf'
 Plug 'sbdchd/neoformat',               { 'on': 'Neoformat' }
-Plug 'towolf/vim-helm'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
-Plug 'tweekmonster/startuptime.vim'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" Plug 'tweekmonster/startuptime.vim'
+Plug 'dstein64/vim-startuptime'
+Plug 'nvim-treesitter/nvim-treesitter', PlugIf(has('nvim-0.5.0'), {'do': ':TSUpdate'})
+Plug 'nvim-treesitter/nvim-treesitter-textobjects', PlugIf(has('nvim-0.5.0'))
 
 let g:colorswatch_exclusion_pattern = 'LightLine.\+'
 Plug 'cocopon/colorswatch.vim',     { 'on': ['ColorSwatchGenerate', 'Inspecthi'] }
@@ -92,13 +91,17 @@ Plug 'tpope/vim-rhubarb'
 
 " -- Languages ----------------------------------------------------------
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'adamclerk/vim-razor'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/vim-sh-indent'
 Plug 'chrisbra/vim-zsh'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
+Plug 'hashivim/vim-terraform'
 Plug 'jparise/vim-graphql'
+Plug 'keith/swift.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'mityu/vim-applescript'
 Plug 'neoclide/jsonc.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
@@ -106,6 +109,7 @@ Plug 'pangloss/vim-javascript', PlugIf(v:false)
 Plug 'plasticboy/vim-markdown'
 Plug 'rhysd/vim-wasm'
 Plug 'rust-lang/rust.vim'
+Plug 'teal-language/vim-teal'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'towolf/vim-helm'
 Plug 'uarun/vim-protobuf'
