@@ -17,9 +17,9 @@ header() {
 }
 
 sync_repo() {
-  trap 'echo "Aborting due to errexit on line $LINENO. Exit code: $?" >&2' ERR
-
   local repo="${1:-.}"
+
+  trap 'echo "Failed pulling ${repo}\nAborting due to errexit on line $LINENO. Exit code: $?" >&2' ERR
 
   if ! git rev-parse --git-dir >/dev/null 2>&1; then
     echo "${repo} is not a git repo"
