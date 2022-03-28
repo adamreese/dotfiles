@@ -50,6 +50,7 @@ linters:
     - gochecknoinits
     - goconst
     - gocyclo
+    - godot
     - godox
     - golint
     - gomnd

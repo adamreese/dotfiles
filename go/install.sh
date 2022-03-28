@@ -13,3 +13,7 @@ while read -r pkg; do
   echo ":: ${pkg}"
   GO111MODULE=on go install -v "$pkg"
 done <"${DOTFILES}/go/default-packages"
+
+cd "${GOPATH}/src/github.com/mickael-menu/zk"
+git pull
+make install
