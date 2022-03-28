@@ -1,10 +1,12 @@
 --hidden
---ignore-file=/Users/areese/.dotfiles/ripgrep/ignore
 --smart-case
 --no-messages
 
 --type-add
 vim:vimrc
+
+--type-add
+hcl:*.{hcl,nomad}
 
 --colors=line:fg:yellow
 --colors=line:style:bold
