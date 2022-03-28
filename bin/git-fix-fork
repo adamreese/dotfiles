@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Changes current remote name to upstream
+# Add a new origin remote for forked repo
+
 USERNAME=adamreese
 
 if git remote show upstream >/dev/null 2>&1; then
