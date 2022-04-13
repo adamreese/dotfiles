@@ -2,7 +2,7 @@
 " after/ftplugin/fzf.vim
 " =======================================================================
 
-if has('nvim') || has('terminal')
+if has('terminal')
   tnoremap <nowait><buffer><ESC> <C-g>
 
   " ensure <c-j> and <c-k> work properly within fzf window

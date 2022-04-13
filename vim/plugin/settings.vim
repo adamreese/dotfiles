@@ -17,15 +17,6 @@ set dictionary+=/usr/share/dict/words
 set history=1000
 set spellsuggest=best,10 " Limit suggestions to 10
 
-if !has('nvim')
-  set ttyfast
-  if has('mouse_sgr')
-    set ttymouse=sgr
-  else
-    set ttymouse=xterm2
-  endif
-endif
-
 " Search: {{{1
 " -----------------------------------------------------------------------
 
@@ -103,11 +94,7 @@ if has('persistent_undo')
   execute 'set undodir=' . g:state_dir . '/undo/'
 endif
 
-if has('nvim')
-  exec 'set shada+=n' . g:state_dir . '/shada/main.shada'
-else
-  exec 'set viminfo+=n' . g:state_dir . '/viminfo'
-endif
+exec 'set shada+=n' . g:state_dir . '/shada/main.shada'
 
 " Don't create root-owned files
 if exists('$SUDO_USER')
@@ -115,12 +102,7 @@ if exists('$SUDO_USER')
   set noswapfile
   set noundofile
   set nowritebackup
-
-  if has('nvim')
-    set shada=
-  else
-    set viminfo=
-  endif
+  set shada=
 endif
 
 for s:dir in [&backupdir, &directory, &undodir, &viewdir]
@@ -164,19 +146,13 @@ set diffopt=vertical              " Use in vertical diff mode
 set diffopt+=filler               " blank lines to keep sides aligned
 set diffopt+=iwhite               " Ignore whitespace changes
 set diffopt+=foldcolumn:0         " Disable foldcolumn
-
-if has('patch-8.1.0360') || has('nvim-0.3.2')
-  set diffopt+=internal,algorithm:patience,indent-heuristic
-endif
+set diffopt+=internal,algorithm:histogram,indent-heuristic
 
 " UI: {{{1
 " -----------------------------------------------------------------------
 
 let &listchars='tab:⋮ ,extends:⟫,precedes:⟪,nbsp:␣,trail:·'
-let &fillchars='diff:·,vert:│,fold: '
-if has('nvim')
-  let &fillchars='diff:·,vert:│,fold: ,eob: ,msgsep:‾'
-endif
+let &fillchars='diff:·,vert:│,fold: ,eob: ,msgsep:‾'
 let &showbreak='↳ '
 
 set concealcursor=niv

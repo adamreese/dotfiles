@@ -20,12 +20,6 @@ augroup ar_vimrc
   autocmd BufWritePre * call whitespace#TrimTrailingSpace()
   autocmd BufWritePre * call whitespace#RemoveTrailingLines()
 
-  " disable paste
-  " https://github.com/neovim/neovim/issues/7994
-  if !has('nvim-0.4')
-    autocmd InsertLeave * set nopaste
-  endif
-
   autocmd InsertEnter * setlocal nohlsearch
   autocmd InsertLeave * setlocal hlsearch
 
@@ -64,10 +58,8 @@ function! s:OnTermOpen() abort
     startinsert!
 endfunction
 
-if has('nvim')
-  augroup ar_terminal
-    autocmd!
-    autocmd TermOpen * call s:OnTermOpen()
-    autocmd BufLeave term://* stopinsert
-  augroup END
-endif
+augroup ar_terminal
+  autocmd!
+  autocmd TermOpen * call s:OnTermOpen()
+  autocmd BufLeave term://* stopinsert
+augroup END

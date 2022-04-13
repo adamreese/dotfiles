@@ -8,11 +8,9 @@ set cpoptions&vim
 
 " Settings
 " -----------------------------------------------------------------------
-if has('nvim')
-  let $FZF_DEFAULT_OPTS = ' --inline-info --bind ctrl-a:select-all,ctrl-d:deselect-all'
-endif
+let $FZF_DEFAULT_OPTS = ' --inline-info --bind ctrl-a:select-all,ctrl-d:deselect-all'
 
-let g:fzf_layout          = { 'down': '16' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 let g:fzf_buffers_jump    = 1
 let g:fzf_history_dir     = g:state_dir . '/fzf-history'
 let g:fzf_colors = {
@@ -84,11 +82,6 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
 
 " -----------------------------------------------------------------------
-
-" Enable Floating FZF for NeoVim 0.4.0+ or Vim 8.0+
-if has('nvim-0.4.0') || v:version >= 800
-  let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
-endif
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save

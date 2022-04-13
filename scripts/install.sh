@@ -78,7 +78,6 @@ symlink_files() {
   announce_step "Symlinking dotfiles"
 
   # vim
-  symlink vim                  .vim
   symlink vim                  .config/nvim
 
   # ruby

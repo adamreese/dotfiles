@@ -9,11 +9,8 @@ scriptencoding utf-8
 " Environment: {{{1
 " -----------------------------------------------------------------------
 
-" Create global config for cache and data directories
-let s:editor    = has('nvim') ? 'nvim' : 'vim'
-let g:cache_dir = expand('$HOME/.cache/' . s:editor)
-let g:data_dir  = expand('$HOME/.local/share/' . s:editor)
-let g:state_dir = expand('$HOME/.local/state/' . s:editor)
+" Create global config for directories
+let g:state_dir = expand('$HOME/.local/state/nvim')
 let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 
 " -----------------------------------------------------------------------
@@ -74,10 +71,10 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 " Plug 'tweekmonster/startuptime.vim'
 Plug 'dstein64/vim-startuptime'
-Plug 'nvim-treesitter/nvim-treesitter', PlugIf(has('nvim-0.5.0'), {'do': ':TSUpdate'})
-Plug 'nvim-treesitter/nvim-treesitter-textobjects', PlugIf(has('nvim-0.5.0'))
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
-Plug 'lewis6991/impatient.nvim', PlugIf(has('nvim-0.5.0'), {'dir': '~/.local/share/nvim/site/pack/impatient.nvim/start/impatient.nvim'})
+Plug 'lewis6991/impatient.nvim', {'dir': '~/.local/share/nvim/site/pack/impatient.nvim/start/impatient.nvim'}
 
 let g:colorswatch_exclusion_pattern = 'LightLine.\+'
 Plug 'cocopon/colorswatch.vim',     { 'on': ['ColorSwatchGenerate', 'Inspecthi'] }
@@ -121,26 +118,25 @@ Plug 'tweekmonster/exception.vim'
 command! WTF call exception#trace()
 
 " -- LSP ----------------------------------------------------------------
-if has('nvim-0.5.0')
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-lua/lsp-status.nvim'
-  Plug 'ojroques/nvim-lspfuzzy'
-  Plug 'L3MON4D3/LuaSnip'
-  Plug 'rafamadriz/friendly-snippets'
-  Plug 'simrat39/rust-tools.nvim'
-  Plug 'folke/lua-dev.nvim'
-  Plug 'b0o/SchemaStore.nvim'
-  Plug 'mickael-menu/zk-nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp-status.nvim'
+Plug 'ojroques/nvim-lspfuzzy'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+Plug 'simrat39/rust-tools.nvim'
+Plug 'folke/lua-dev.nvim'
+Plug 'b0o/SchemaStore.nvim'
+Plug 'mickael-menu/zk-nvim'
+Plug 'saecki/crates.nvim'
 
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'f3fora/cmp-spell'
-  Plug 'hrsh7th/cmp-nvim-lua'
-  Plug 'saadparwaiz1/cmp_luasnip'
-  Plug 'hrsh7th/cmp-cmdline'
-endif
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'f3fora/cmp-spell'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-cmdline'
 
 call plug#end()
 
