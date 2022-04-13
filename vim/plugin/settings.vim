@@ -79,7 +79,7 @@ endif
 " Directories: {{{1
 " -----------------------------------------------------------------------
 
-execute 'set spellfile=' . g:vim_dir  . '/spell/en.utf-8.add'
+execute 'set spellfile=' . stdpath('config')  . '/spell/en.utf-8.add'
 execute 'set directory=' . g:state_dir . '/swap//'
 execute 'set backupdir=' . g:state_dir . '/backup/'
 if has('mksession')

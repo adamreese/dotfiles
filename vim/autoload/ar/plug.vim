@@ -12,7 +12,7 @@ let g:plugs = get(g:, 'plugs', {})
 
 " Auto install plugin manager if not detected
 function! ar#plug#EnsureManager() abort
-  if empty(glob(expand(g:vim_dir . '/autoload/plug.vim')))
+  if !filereadable(stdpath('config') . '/autoload/plug.vim')
     call s:InstallManager()
   endif
 endfunction
@@ -20,7 +20,7 @@ endfunction
 " Install plugin manager
 function! s:InstallManager() abort
   execute 'silent !curl --create-dirs -fLo '
-        \  g:vim_dir . '/autoload/plug.vim '
+        \  stdpath('config') . '/autoload/plug.vim '
         \ 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
   augroup ar_plug_install

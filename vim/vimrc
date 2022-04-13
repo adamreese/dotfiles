@@ -11,7 +11,6 @@ scriptencoding utf-8
 
 " Create global config for directories
 let g:state_dir = expand('$HOME/.local/state/nvim')
-let g:vim_dir   = fnamemodify(resolve(expand('<sfile>')), ':p:h')
 
 " -----------------------------------------------------------------------
 " Plug: {{{1
@@ -25,7 +24,7 @@ function! PlugIf(condition, ...) abort
   return a:condition ? l:opts : extend(l:opts, { 'on': [], 'for': [] })
 endfunction
 
-call plug#begin(g:vim_dir . '/vendor')
+call plug#begin(stdpath('config') . '/vendor')
 
 let g:bufferize_command = 'tabnew'
 Plug 'AndrewRadev/bufferize.vim',      { 'on': [ 'Bufferize' ] }
