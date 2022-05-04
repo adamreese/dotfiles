@@ -1,7 +1,6 @@
 " =======================================================================
 " plugin/plug/anzu.vim
 " =======================================================================
-if !ar#plug#IsLoaded('vim-anzu') | finish | endif
 
 " Default "%p(%i/%l)"
 let g:anzu_status_format = '[%i/%l]'

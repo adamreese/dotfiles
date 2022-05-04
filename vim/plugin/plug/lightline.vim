@@ -3,9 +3,7 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#plug#IsLoaded('lightline.vim') | finish | endif
-
-" set showtabline=2
+set showtabline=2
 
 let g:lightline = {
       \ 'colorscheme': 'ar',
@@ -89,4 +87,5 @@ command! LightlineReload call <SID>LightlineReload()
 augroup ar_lightline
   autocmd!
   autocmd User FzfStatusLine call lightline#update()
+  autocmd User LspDiagnosticChange call lightline#update()
 augroup END

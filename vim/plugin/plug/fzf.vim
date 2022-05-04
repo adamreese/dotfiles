@@ -1,8 +1,6 @@
 " =======================================================================
 " plugin/plug/fzf.vim
 " =======================================================================
-if !ar#plug#IsLoaded('fzf.vim') | finish | endif
-
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 

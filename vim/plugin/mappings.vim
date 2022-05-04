@@ -2,6 +2,9 @@
 " plugin/mappings.vim
 " =======================================================================
 
+let g:mapleader = ','
+let g:maplocalleader = ','
+
 " map Q for formatting rather than Ex mode
 nnoremap Q m`gqap``
 vnoremap Q gq

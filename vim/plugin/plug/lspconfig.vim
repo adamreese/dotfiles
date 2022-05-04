@@ -3,8 +3,6 @@
 " =======================================================================
 scriptencoding utf-8
 
-if !ar#plug#IsLoaded('nvim-lspconfig') | finish | endif
-
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
@@ -23,10 +21,7 @@ set cpoptions&vim
 " https://github.com/sumneko/lua-language-server
 
 lua require('ar.lsp')
-
-if ar#plug#IsLoaded('nvim-cmp')
-  lua require('ar.cmp')
-endif
+lua require('ar.cmp')
 
 " -----------------------------------------------------------------------
 let &cpoptions = s:cpo_save
