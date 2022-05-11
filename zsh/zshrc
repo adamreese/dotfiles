@@ -2,6 +2,28 @@
 # zshrc
 # ------------------------------------------------------------------------------
 
+path=(
+  _scratch/bin
+  .git/safe/../../bin
+
+  ${HOME}/.local/bin(N-/)
+
+  /usr/local/opt/ruby/bin(N-/)
+  ${GEM_HOME}/bin(N-/)
+  ${HOMEBREW_PREFIX}/opt/ruby/bin(N-/)
+  ${HOME}/.cargo/bin(N-/)
+
+  ${HOME}/Library/Python/3.*/bin(Nn[-1]-/)
+  ${HOME}/Library/Python/2.*/bin(Nn[-1]-/)
+
+  ${HOMEBREW_PREFIX}/{bin,sbin}(N-/)
+
+  ${path}
+)
+
+# Vim mode
+bindkey -v
+
 # Zsh functions to load (man zshcontrib).
 autoload -Uz zmv
 
@@ -105,14 +127,6 @@ hash -d -- nvimpack=${XDG_DATA_HOME}/nvim/site/pack
 path=(
   _scratch/bin
   .git/safe/../../bin
-
-  ${HOME}/.local/bin(N-/)
-  ${HOMEBREW_PREFIX}/bin(N-/)
-
-  /usr/local/opt/ruby/bin(N-/)
-  ${GEM_HOME}/bin(N-/)
-  ${HOMEBREW_PREFIX}/opt/ruby/bin(N-/)
-  ${HOME}/.cargo/bin(N-/)
   ${path}
 )
 
