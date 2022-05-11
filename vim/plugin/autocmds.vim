@@ -29,7 +29,7 @@ augroup END
 
 augroup ar_cursorline
   autocmd!
-  autocmd WinEnter * if !cursed#is_disabled() | set cursorline | endif
+  autocmd WinEnter * if get(g:, 'loaded_cursed') && !cursed#is_disabled() | set cursorline | endif
   autocmd User CursedStartedMoving :set nocursorline
   autocmd User CursedStoppedMoving :set cursorline
 augroup END
