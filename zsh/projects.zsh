@@ -2,6 +2,7 @@
 # -----------------------------------------------------------------------------
 
 export PROJECTS="${HOME}/p/src"
+
 # Helm
 # -----------------------------------------------------------------------------
 path[1,0]=${PROJECTS}/helm.sh/helm/bin
@@ -33,7 +34,6 @@ path[1,0]="${PROJECTS}/github.com/deislabs/bindle/target/debug"
 export BINDLE_IP_ADDRESS_PORT='127.0.0.1:8080'
 export BINDLE_URL="http://${BINDLE_IP_ADDRESS_PORT}/v1"
 export BINDLE_DIRECTORY="${XDG_DATA_HOME}/bindle"
-export BINDLE_DIR="${XDG_DATA_HOME}/bindle"
 
 bindle-server() {
   RUST_LOG=error,warp=info,bindle=debug command bindle-server --unauthenticated "$@"
@@ -42,3 +42,7 @@ bindle-server() {
 # Hippo
 # -----------------------------------------------------------------------------
 path[1,0]=${PROJECTS}/github.com/deislabs/hippo-cli/target/debug
+
+# Spin
+# -----------------------------------------------------------------------------
+path[1,0]=${PROJECTS}/github.com/fermyon/spin/target/release

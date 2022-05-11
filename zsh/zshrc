@@ -94,8 +94,8 @@ hash -d --     docs=${HOME}/Documents
 hash -d --    gosrc=${GOPATH}/src
 hash -d --   cellar=${HOMEBREW_PREFIX}/Cellar
 hash -d --   goroot=$(go env GOROOT)
-hash -d -- dotfiles=${HOME}/.dotfiles
-
+hash -d -- dotfiles=${DOTFILES}
+hash -d -- nvimpack=${XDG_DATA_HOME}/nvim/site/pack
 
 # ------------------------------------------------------------------------------
 # path hack
