@@ -6,10 +6,10 @@ set -euo pipefail
 #   To get calendar UID's run `icalbuddy calendars`
 #
 #   Current calendar UID's:
-#     Fermyon: 30B85FD0-6646-40FD-B5EC-14B1C19CF523
+#     Fermyon: 9DDBFC5E-0519-4747-9A1D-637357EA8765
 #     iCloud:  1A89C98B-4408-4A76-8B82-AF0BD0B8664F
 
-calendars='30B85FD0-6646-40FD-B5EC-14B1C19CF523,1A89C98B-4408-4A76-8B82-AF0BD0B8664F'
+calendars='30B85FD0-6646-40FD-B5EC-14B1C19CF523,1A89C98B-4408-4A76-8B82-AF0BD0B8664F,9DDBFC5E-0519-4747-9A1D-637357EA8765,'
 
 if ! hash icalbuddy &>/dev/null; then
     >&2 echo 'error: icalbuddy not found.  Install using brew...'
