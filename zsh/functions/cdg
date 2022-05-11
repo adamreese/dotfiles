@@ -5,9 +5,13 @@
 # Depends on https://github.com/motemen/ghq
 # ------------------------------------------------------------------------------
 
-local dir=$(ghq list ${1-} | fzf --select-1 --prompt='project > ')
+local basedir="${GOPATH}/src/"
+# local fzf_preview="eval bat --color=always ${basedir}{}/README.md 2>/dev/null || tree -C ${basedir}{} | head -200"
+local fzf_preview="eval glow -s dark ${basedir}{}/README.md 2>/dev/null || tree -C ${basedir}{} | head -200"
 
-[[ -n "${dir}" ]] && cd "${GOPATH}/src/${dir}"
+local dir=$(ghq list ${1-} | fzf --select-1 --prompt='project > ' --bind='?:toggle-preview' --preview "$fzf_preview")
+
+[[ -n "${dir}" ]] && cd "${basedir}/${dir}"
 
 # ------------------------------------------------------------------------------
 # vim:ft=zsh

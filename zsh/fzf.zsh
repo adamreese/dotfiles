@@ -19,3 +19,8 @@ function {
   )
   typeset -gx FZF_DEFAULT_OPTS="${(f)_opts}"
 }
+
+# fh - repeat history
+fh() {
+  print -z $( (fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
