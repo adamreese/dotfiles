@@ -6,7 +6,7 @@ set cpoptions&vim
 
 " Settings
 " -----------------------------------------------------------------------
-let $FZF_DEFAULT_OPTS = ' --inline-info --bind ctrl-a:select-all,ctrl-d:deselect-all'
+let $FZF_DEFAULT_OPTS = ' --inline-info --bind esc:cancel,ctrl-a:select-all,ctrl-d:deselect-all'
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 let g:fzf_buffers_jump    = 1
@@ -80,6 +80,8 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
 
 " -----------------------------------------------------------------------
+
+" au FileType fzf tunmap <Esc>
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save

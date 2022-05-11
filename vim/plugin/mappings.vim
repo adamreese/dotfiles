@@ -111,7 +111,7 @@ nnoremap <silent> <leader>,p "*p
 " -----------------------------------------------------------------------
 
 " Add neovim terminal escape with ESC mapping
-tnoremap <ESC> <C-\><C-n>
+" tnoremap <ESC> <C-\><C-n>
 
 " Recursive mappings so that the rebound <C-direction> mappings are triggerd
 tmap <C-h> <C-\><C-n><C-h>
