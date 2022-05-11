@@ -6,14 +6,13 @@ let g:loaded_ar_fzf = 1
 
 function! ar#fzf#Plugs(fullscreen) abort
   function! s:plugopen(e) abort
-    let l:path = g:plug_home . '/' . a:e
+    let l:path = v:lua.require('ar.plugins').path(a:e)
     execute 'tabedit' l:path
     execute 'tcd' l:path
   endfunction
 
   call fzf#run(fzf#wrap('Plugs', {
-        \ 'dir':     g:plug_home,
-        \ 'source':  sort(keys(g:plugs)),
+        \ 'source':  luaeval('require("ar.plugins").list()'),
         \ 'sink':    function('s:plugopen'),
         \ 'options': '--prompt='.shellescape('plugs> '),
         \ }, a:fullscreen))

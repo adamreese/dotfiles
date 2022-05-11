@@ -1,16 +1,19 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
-local compile_path = vim.fn.stdpath('cache') .. '/packer/packer_compiled.lua'
+local M = {}
+
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.vim'
 
 if not vim.fn.isdirectory(install_path) then
   vim.cmd('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.cmd [[packadd packer.nvim]]
-
 local packer = require('packer')
 
 packer.init({
-  compile_path = compile_path
+  compile_path = compile_path,
+  display = {
+    open_cmd = 'tabnew',
+  },
 })
 
 packer.startup(function(use)
@@ -18,12 +21,6 @@ packer.startup(function(use)
 
   use 'lewis6991/impatient.nvim'
   use 'nvim-lua/plenary.nvim'
-
-  -- Plug 'Shougo/context_filetype.vim'
-
-  -- let g:echodoc_enable_at_startup  = 1
-  -- let g:echodoc#type = 'virtual'
-  -- Plug 'Shougo/echodoc.vim'
 
   use 'norcalli/nvim-colorizer.lua'
   use 'junegunn/fzf'
@@ -49,30 +46,35 @@ packer.startup(function(use)
     end
   }
   use { 'benekastah/neomake',
-    -- cmd = { 'Neomake' },
+    cmd = 'Neomake',
   }
   use { 'chrisbra/unicode.vim',
-    -- cmd = { 'UnicodeName', 'UnicodeTable' },
+    cmd = { 'UnicodeName', 'UnicodeTable' },
   }
 
-  use 'christoomey/vim-tmux-navigator' -- PlugIf(exists('$TMUX'))
-  use {'editorconfig/editorconfig-vim',
+  use { 'christoomey/vim-tmux-navigator',
+    cond = function()
+      return vim.env.TMUX ~= nil
+    end,
+  }
+  use { 'editorconfig/editorconfig-vim',
     config = function()
-      vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}
+      vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
     end,
   }
   use 'filipekiss/cursed.vim'
   use 'haya14busa/incsearch.vim'
   use 'itchyny/lightline.vim'
-  use 'junegunn/vim-easy-align' -- { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+  use 'junegunn/vim-easy-align'
   use { 'sbdchd/neoformat',
-    -- cmd = 'Neoformat',
+    cmd = 'Neoformat',
   }
 
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
+    config = function() require('ar.treesitter') end,
   }
-  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
 
   use {
     'iamcco/markdown-preview.nvim',
@@ -84,21 +86,29 @@ packer.startup(function(use)
     end,
   }
 
-  use 'lvht/tagbar-markdown'
+  use { 'lvht/tagbar-markdown',
+    config = function()
+      vim.g.vim_markdown_frontmatter = 1
+    end,
+  }
   use { 'majutsushi/tagbar',
-    -- cmd = { 'TagbarToggle' },
+    cmd = { 'TagbarToggle' },
   }
 
   use { 'AndrewRadev/bufferize.vim',
-    -- cmd = { 'Bufferize' },
+    cmd = 'Bufferize',
     config = function()
       vim.g.bufferize_command = 'tabnew'
     end,
   }
 
+  use('nanotee/luv-vimdocs')
+  use('milisims/nvim-luaref')
+
   -- Version Control ---------------------------------------------------
   use {
     'lewis6991/gitsigns.nvim',
+    config = function() require('ar.gitsigns') end,
     requires = { 'nvim-lua/plenary.nvim' },
   }
   use {
@@ -112,10 +122,11 @@ packer.startup(function(use)
   use 'tpope/vim-rhubarb'
 
   -- Quickfix ----------------------------------------------------------
-  use 'kevinhwang91/nvim-bqf'
+  use { 'kevinhwang91/nvim-bqf',
+    config = function() require('ar.bqf') end
+  }
   use 'romainl/vim-qf'
   use 'blueyed/vim-qf_resize'
-
 
   -- Languages ----------------------------------------------------------
   use 'PotatoesMaster/i3-vim-syntax'
@@ -155,30 +166,25 @@ packer.startup(function(use)
   use 'saecki/crates.nvim'
 
   use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-nvim-lsp'
   use 'f3fora/cmp-spell'
   use 'hrsh7th/cmp-nvim-lua'
   use 'saadparwaiz1/cmp_luasnip'
   use 'hrsh7th/cmp-cmdline'
-  use 'petertriho/cmp-git'
-
-  -- Testing -----------------------------------------------------------
-  use 'jbyuki/venn.nvim'
-  use 'simrat39/symbols-outline.nvim'
-  use 'stevearc/aerial.nvim'
-
+  use {
+    'petertriho/cmp-git',
+    requires = { 'nvim-lua/plenary.nvim' },
+  }
 end)
 
-vim.api.nvim_create_augroup('ar_plugins', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = 'plugins.lua',
-  command = 'source <afile> | PackerSync',
-  group = 'ar_plugins',
-})
-vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = 'plugins.lua',
-  command = 'source <afile> | PackerCompile',
-  group = 'ar_plugins',
-})
+function M.list()
+  return vim.tbl_keys(_G.packer_plugins)
+end
+
+function M.path(plug)
+  return _G.packer_plugins[plug].path
+end
+
+return M

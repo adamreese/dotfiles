@@ -19,6 +19,7 @@ local function goto_definition(split_cmd)
   return handler
 end
 
+---
 --- Jumps to the definition of the symbol under the cursor.
 ---
 function M.definition(split_cmd)

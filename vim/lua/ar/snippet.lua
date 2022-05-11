@@ -1,8 +1,8 @@
 local luasnip = require('luasnip')
 
-require('luasnip.loaders.from_vscode').load ({
+require('luasnip.loaders.from_vscode').lazy_load({
   paths = {
-    './vendor/friendly-snippets',
+    -- vim.g.plug_home .. '/friendly-snippets',
     './snippet',
   },
 })

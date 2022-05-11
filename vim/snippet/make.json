@@ -1,0 +1,10 @@
+{
+  ".PHONY:": {
+    "prefix": [
+      ".PHONY:"
+    ],
+    "body": [
+      ".PHONY:"
+    ]
+  }
+}

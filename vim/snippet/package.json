@@ -17,7 +17,13 @@
           "shell",
           "sh"
         ],
-        "path": "./sh.json"
+        "path": "./shell.json"
+      },
+      {
+        "language": [
+          "make"
+        ],
+        "path": "./make.json"
       }
     ]
   }

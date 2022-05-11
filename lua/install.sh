@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-build_path="${XDG_DATA_HOME}/lsp/sumneko_lua"
+build_path="${XDG_DATA_HOME}/nvim/lsp/sumneko_lua"
 
 build_server() {
   echo ':: Building sumneko lua-language-server'

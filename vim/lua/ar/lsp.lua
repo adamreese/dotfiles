@@ -1,5 +1,9 @@
 local lspconfig = require('lspconfig')
 
+local M = {
+  format_on_save = true
+}
+
 -- [ commands ] ----------------------------------------------------------------
 
 vim.cmd([[command! LspLog :lua vim.cmd('tabe ' .. vim.lsp.get_log_path())]])
@@ -34,12 +38,10 @@ vim.lsp.protocol.CompletionItemKind = {
   '♛ [type]',
 }
 
-vim.fn.sign_define({
-  { name = 'DiagnosticSignError', text = '❯', texthl = 'DiagnosticSignError' },
-  { name = 'DiagnosticSignHint', text = '❯', texthl = 'DiagnosticSignHint' },
-  { name = 'DiagnosticSignWarn', text = '❯', texthl = 'DiagnosticSignWarn' },
-  { name = 'DiagnosticSignInfo', text = '❯', texthl = 'DiagnosticSignInfo' },
-})
+vim.fn.sign_define('DiagnosticSignError', { text = '❯', texthl = 'DiagnosticSignError', numhl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '❯', texthl = 'DiagnosticSignHint', numhl = 'DiagnosticSignHint' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = '❯', texthl = 'DiagnosticSignInfo', numhl = 'DiagnosticSignInfo' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '❯', texthl = 'DiagnosticSignWarn', numhl = 'DiagnosticSignWarn' })
 
 vim.diagnostic.config {
   underline = true,
@@ -48,6 +50,18 @@ vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
 }
+
+-- [ format on save ] ----------------------------------------------------------
+
+function M.format_toggle()
+  M.format_on_save = not M.format_on_save
+end
+
+function M.format()
+  if M.format_on_save then
+    vim.lsp.buf.formatting_sync(nil, 10000)
+  end
+end
 
 -- [ onattach ] ----------------------------------------------------------------
 
@@ -74,11 +88,11 @@ local on_attach = function(client, bufnr)
   vim.cmd([[command! LspWorkspaceSymbol lua vim.lsp.buf.workspace_symbol()]])
 
   -- Mappings.
-  map('n', 'gD',         '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-  map('n', 'gd',         '<Cmd>lua vim.lsp.buf.definition()<CR>')
-  map('n', 'gs',         [[<Cmd>lua require('ar.lsp.handlers').definition('split')<CR>]])
+  map('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
+  map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>')
+  map('n', 'gs', [[<Cmd>lua require('ar.lsp.handlers').definition('split')<CR>]])
   map('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  map('n', '<leader>k',  '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  map('n', '<leader>k', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
   map('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
   map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
@@ -92,18 +106,32 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
   map('v', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
-  if vim.api.nvim_buf_get_option(0, 'filetype') ~= 'vim' then
+  if vim.o.filetype ~= 'vim' then
     map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>')
   end
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
     map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-    map('n', '<leader>f',  '<cmd>lua vim.lsp.buf.formatting()<CR>')
-    vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting_sync(nil, 1000)' ]])
-    vim.api.nvim_command('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
+    map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+
+    vim.api.nvim_create_user_command('FormatC', function()
+      vim.lsp.buf.formatting_sync(nil, 1000)
+    end, {})
+
+    map('n', '<leader>tf', [[<cmd>lua require('ar.lsp').format_toggle()<CR>]])
+
+    local augid = vim.api.nvim_create_augroup('lsp_fmt_on_save', { clear = true })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      buffer = bufnr,
+      callback = function()
+        M.format()
+      end,
+      group = augid,
+    })
   elseif client.resolved_capabilities.document_range_formatting then
-    map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>')
+    map('x', '<leader>l=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>')
+    map('x', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>')
   end
 
   require('lsp-status').on_attach(client)
@@ -112,9 +140,9 @@ end
 local luadev = require('lua-dev').setup({
   lspconfig = {
     cmd = {
-      vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/bin/lua-language-server'),
+      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/bin/lua-language-server',
       '-E',
-      vim.fn.expand('$XDG_DATA_HOME/lsp/sumneko_lua/main.lua'),
+      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/main.lua',
     },
     settings = {
       Lua = {
@@ -209,11 +237,8 @@ local function setup_servers()
   })
 
   require('rust-tools').setup({
-    tools = {
-      autoSetHints = false,
-    },
     server = with_defaults({
-      cmd = {vim.fn.expand('$HOME/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer')},
+      cmd = { vim.env.HOME .. '/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer' },
       settings = {
         ['rust-analyzer.cargo.allFeatures'] = true,
       },
@@ -226,3 +251,5 @@ setup_servers()
 -- [ lspfuzzy ] ----------------------------------------------------------------
 
 require('lspfuzzy').setup({})
+
+-- return M
