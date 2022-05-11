@@ -54,6 +54,7 @@ alias lod='echo -n "ಠ_ಠ"'
 alias idk='echo -n "¯\_(ツ)_/¯"'
 alias wtf='echo -n "❨╯°□°❩╯︵┻━┻"'
 alias wat='echo -n "⚆_⚆"'
+alias wftpanda='echo -n "ʕノ•ᴥ•ʔノ ︵"'
 
 # Global Aliases
 # -----------------------------------------------------------------------------
