@@ -9,11 +9,6 @@ end
 -- -----------------------------------------------------------------------
 -- Python Setup
 -- -----------------------------------------------------------------------
-
-if vim.fn.executable('python2') then
-  vim.g.python_host_skip_check = true
-  vim.g.python_host_prog = vim.fn.exepath('python2')
-end
 if vim.fn.executable('python3') then
   vim.g.python3_host_skip_check = true
   vim.g.python3_host_prog = vim.fn.exepath('python3')
