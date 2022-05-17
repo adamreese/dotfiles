@@ -6,7 +6,7 @@ log.i('----------------------------------------')
 
 -- command line interface
 require('hs.ipc')
-hs.ipc.cliInstall()
+hs.ipc.cliInstall('/opt/homebrew')
 
 -- disable animations
 hs.window.animationDuration = 0
@@ -14,14 +14,16 @@ hs.window.animationDuration = 0
 -- lower logging level for hotkeys
 hs.hotkey.setLogLevel('warning')
 
--- no toolbar
+-- console
 hs.console.toolbar(nil)
+hs.console.alpha(1)
+_G.i = hs.inspect
 
 --------------------------------------------------------------------------------
 -- Key Bindings
 --------------------------------------------------------------------------------
 
-local hyper = {'cmd', 'alt', 'ctrl', 'shift'}
+local hyper = { 'cmd', 'alt', 'ctrl', 'shift' }
 
 hs.hotkey.bind(hyper, 'c', function()
   hs.toggleConsole()
@@ -34,6 +36,7 @@ local focusKeys = {
   m      = 'com.apple.MobileSMS',
   s      = 'com.tinyspeck.slackmacgap',
   z      = 'us.zoom.xos',
+  d      = 'com.hnc.Discord',
   Return = 'com.googlecode.iterm2',
 }
 
@@ -42,7 +45,7 @@ for key, id in pairs(focusKeys) do
 end
 
 -- use key strokes for paste
-hs.hotkey.bind({'cmd', 'ctrl'}, 'V', function()
+hs.hotkey.bind({ 'cmd', 'ctrl' }, 'V', function()
   hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
@@ -68,26 +71,18 @@ Install:andUse('WindowHalfsAndThirds', {
     max          = { hyper, '5' },
     max_toggle   = { hyper, 'f' },
 
-    left_half    = { {'ctrl', 'cmd'}, 'Left' },
-    right_half   = { {'ctrl', 'cmd'}, 'Right' },
-    top_half     = { {'ctrl', 'cmd'}, 'Up' },
-    bottom_half  = { {'ctrl', 'cmd'}, 'Down' },
-    undo         = { {'ctrl', 'cmd'}, 'z' },
-    center       = { {'ctrl', 'cmd'}, 'c' },
-  }
-})
-
--- http://www.hammerspoon.org/Spoons/WindowScreenLeftAndRight.html
-Install:andUse('WindowScreenLeftAndRight', {
-  hotkeys = {
-    screen_left = { hyper, 'Left' },
-    screen_right= { hyper, 'Right' },
+    left_half   = { { 'ctrl', 'cmd' }, 'Left' },
+    right_half  = { { 'ctrl', 'cmd' }, 'Right' },
+    top_half    = { { 'ctrl', 'cmd' }, 'Up' },
+    bottom_half = { { 'ctrl', 'cmd' }, 'Down' },
+    undo        = { { 'ctrl', 'cmd' }, 'z' },
+    center      = { { 'ctrl', 'cmd' }, 'c' },
   }
 })
 
 -- http://www.hammerspoon.org/Spoons/ReloadConfiguration.html
 Install:andUse('ReloadConfiguration', {
-  start   = true,
+  start = true,
 })
 
 -- http://www.hammerspoon.org/Spoons/Caffeine.html
