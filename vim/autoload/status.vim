@@ -171,8 +171,9 @@ function! s:NeomakeCount(group) abort
 endfunction
 
 function! status#LSPStatus() abort
+  if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
   if luaeval('#vim.lsp.buf_get_clients() > 0')
-    return luaeval("require('lsp-status').status()")
+    return v:lua.require('lsp-status').status()
   endif
   return ''
 endfunction
