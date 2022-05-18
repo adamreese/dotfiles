@@ -8,7 +8,7 @@ end
 bqf.setup({
   auto_resize_height = true,
   preview = {
-    border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+    border_chars = { '┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█' },
 
     should_preview_cb = function(bufnr)
       -- file size greater than 100kb can't be previewed automatically

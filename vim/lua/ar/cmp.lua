@@ -2,36 +2,36 @@ local cmp = require('cmp')
 local luasnip = require('luasnip')
 
 local kind_icons = {
-  Text = " text", -- Text
-  Method = " method", -- Method
-  Function = "ƒ function", -- Function
-  Constructor = " constructor", -- Constructor
-  Field = "識field", -- Field
-  Variable = " variable", -- Variable
-  Class = " class", -- Class
-  Interface = "ﰮ interface", -- Interface
-  Module = " module", -- Module
-  Property = " property", -- Property
-  Unit = " unit", -- Unit
-  Value = " value", -- Value
-  Enum = "了enum", -- Enum 
-  Keyword = " keyword", -- Keyword
-  Snippet = " snippet", -- Snippet
-  Color = " color", -- Color
-  File = " file", -- File
-  Reference = "渚ref", -- Reference
-  Folder = " folder", -- Folder
-  EnumMember = " enum member", -- EnumMember
-  Constant = " const", -- Constant
-  Struct = " struct", -- Struct
-  Event = "鬒event", -- Event
-  Operator = "\u{03a8} operator", -- Operator
-  TypeParameter = " type param", -- TypeParameter
+  Text = ' text', -- Text
+  Method = ' method', -- Method
+  Function = 'ƒ function', -- Function
+  Constructor = ' constructor', -- Constructor
+  Field = '識field', -- Field
+  Variable = ' variable', -- Variable
+  Class = ' class', -- Class
+  Interface = 'ﰮ interface', -- Interface
+  Module = ' module', -- Module
+  Property = ' property', -- Property
+  Unit = ' unit', -- Unit
+  Value = ' value', -- Value
+  Enum = '了enum', -- Enum 
+  Keyword = ' keyword', -- Keyword
+  Snippet = ' snippet', -- Snippet
+  Color = ' color', -- Color
+  File = ' file', -- File
+  Reference = '渚ref', -- Reference
+  Folder = ' folder', -- Folder
+  EnumMember = ' enum member', -- EnumMember
+  Constant = ' const', -- Constant
+  Struct = ' struct', -- Struct
+  Event = '鬒event', -- Event
+  Operator = '\u{03a8} operator', -- Operator
+  TypeParameter = ' type param', -- TypeParameter
 }
 
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
 cmp.setup({
@@ -77,7 +77,7 @@ cmp.setup({
   },
 
   sources = {
-    { name = "path" },
+    { name = 'path' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'luasnip' },
