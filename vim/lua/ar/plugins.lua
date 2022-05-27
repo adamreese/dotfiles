@@ -179,11 +179,11 @@ packer.startup(function(use)
 end)
 
 function M.list()
-  return vim.tbl_keys(_G.packer_plugins)
+  return vim.tbl_keys(packer_plugins)
 end
 
 function M.path(plug)
-  return _G.packer_plugins[plug].path
+  return packer_plugins[plug].path
 end
 
 return M

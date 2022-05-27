@@ -150,7 +150,7 @@ local luadev = require('lua-dev').setup({
           keywordSnippet = 'Disable',
         },
         diagnostics = {
-          globals = { 'hs', 'vim' },
+          globals = { 'hs', 'packer_plugins', 'spoon', 'vim' },
         },
         workspace = {
           maxPreload = 2000,
