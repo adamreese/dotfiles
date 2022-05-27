@@ -156,7 +156,6 @@ packer.startup(function(use)
   -- LSP ----------------------------------------------------------------
   use 'neovim/nvim-lspconfig'
   use 'nvim-lua/lsp-status.nvim'
-  use 'ojroques/nvim-lspfuzzy'
   use 'L3MON4D3/LuaSnip'
   use 'rafamadriz/friendly-snippets'
   use 'simrat39/rust-tools.nvim'

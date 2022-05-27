@@ -248,8 +248,4 @@ end
 
 setup_servers()
 
--- [ lspfuzzy ] ----------------------------------------------------------------
-
-require('lspfuzzy').setup({})
-
--- return M
+return M
