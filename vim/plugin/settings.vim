@@ -181,9 +181,7 @@ set shortmess+=t                  " truncate file messages at start
 set shortmess+=c                  " Disable 'Pattern not found' messages
 
 " Display signs in the 'number' column
-if has('patch-8.1.1564')
-  set signcolumn=number
-endif
+set signcolumn=number
 
 if has('linebreak')
   set linebreak
