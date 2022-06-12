@@ -78,6 +78,9 @@
 [rerere]
   enabled = true
 
+[merge]
+  conflictStyle = diff3
+
 [interactive]
   diffFilter = diff-highlight
 
