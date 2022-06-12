@@ -1,7 +1,6 @@
 # zsh gpg
 # -----------------------------------------------------------------------------
-
-export GPG_TTY=$TTY
+export GPG_TTY="${TTY}"
 
 if [[ -d '/usr/local/MacGPG2/bin' ]]; then
   path+='/usr/local/MacGPG2/bin'
@@ -13,10 +12,8 @@ gpg-refresh-agent() {
   gpg-connect-agent updatestartuptty /bye >/dev/null
 }
 
-gpgconf --launch gpg-agent
-
 # Set SSH to use gpg-agent if it is configured to do so
-if [[ "$(<~/.gnupg/gpg-agent.conf)" = *enable-ssh-support* ]]; then
+if grep -q '^enable-ssh-support' $HOME/.gnupg/gpg-agent.conf 2>/dev/null; then
   unset SSH_AGENT_PID
   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
