@@ -93,7 +93,7 @@
   trustExitCode = true
 
 [diff]
-  algorithm = patience
+  algorithm = histogram
 
   # Enable an experimental heuristic that shifts the hunk boundary in an
   # attempt to make the resulting patch easier to read.
