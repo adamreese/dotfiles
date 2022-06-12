@@ -3,4 +3,4 @@
 " =======================================================================
 
 setlocal conceallevel=3
-highlight link NERDTreeDirSlash Directory
+highlight link NERDTreeDirSlash NERDTreeDir
