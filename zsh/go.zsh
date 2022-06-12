@@ -1,5 +1,6 @@
 # zsh go
 # -----------------------------------------------------------------------------
+(( ${+commands[go]} )) || return
 
 typeset -gx GOPATH=${HOME}/p
 typeset -gx GOCACHE="${XDG_CACHE_HOME}/go-build"
@@ -17,3 +18,9 @@ alias glci="golangci-lint run --config=${DOTFILES}/go/golangci.yml"
 # Depends on github.com/maruel/panicparse
 
 alias -g PP='|& pp'
+
+# ------------------------------------------------------------------------------
+# hash directories
+
+hash -d -- goroot=$(go env GOROOT)
+hash -d -- gosrc=${GOPATH}/src
