@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Create local aliases to add signoff to commits
+
+# shellcheck disable=2016
+git config --local alias.ammend '!git commit --amend -v --date=$(date +%Y-%m-%dT%H:%M:%S) --signoff'
+git config --local alias.cv 'commit --verbose --signoff'
