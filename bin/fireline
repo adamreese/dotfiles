@@ -5,16 +5,16 @@ set -euo pipefail
 
 endpoint='https://firefeeds.ventura.org/api/incidents'
 
-data="$(curl -sS $endpoint)"
+data="$(curl -sS "${endpoint}")"
 
 case "${1:-}" in
   -a|--all|all)
-    jq <<<"$data"
+    jq <<<"${data}"
     ;;
   --camarillo)
-    jq '.[] | select(.city == "Camarillo")' <<<"$data"
+    jq '.[] | select(.city == "Camarillo")' <<<"${data}"
     ;;
   *)
-    jq '.[] | select(.incidentType == "Brush Fire")' <<<"$data"
+    jq '.[] | select(.incidentType == "Brush Fire")' <<<"${data}"
     ;;
 esac

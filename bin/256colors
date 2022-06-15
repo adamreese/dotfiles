@@ -19,10 +19,10 @@ row() {
     string=$i
 
     # Change background to the correct color.
-    tput setab $i
+    tput setab "${i}"
 
     # Print the cell.
-    printf "%${width}s " "$string"
+    printf "%${width}s " "${string}"
   done
 
   # Clear the coloring to avoid nasty wrapping colors.
@@ -41,20 +41,20 @@ display() {
   echo
 
   # The first sixteen colors.
-  row $eighth 0 7
-  row $eighth 8 15
+  row "${eighth}" 0 7
+  row "${eighth}" 8 15
   echo
 
   # 16-231.
   for ((a = 0; a <= 35; a++)); do
-    row $sixth $((16 + (6 * a))) $((21 + (6 * a)))
+    row "${sixth}" $((16 + (6 * a))) $((21 + (6 * a)))
   done
   echo
 
   # Greyscale.
-  row $twelfth 232 243
+  row "${twelfth}" 232 243
   tput setaf 0
-  row $twelfth 244 255
+  row "${twelfth}" 244 255
 
   # Clear before exiting.
   tput sgr0
