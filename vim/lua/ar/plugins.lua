@@ -62,7 +62,6 @@ packer.startup(function(use)
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
     end,
   }
-  use 'filipekiss/cursed.vim'
   use 'haya14busa/incsearch.vim'
   use 'itchyny/lightline.vim'
   use 'junegunn/vim-easy-align'
