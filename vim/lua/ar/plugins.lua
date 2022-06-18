@@ -120,6 +120,13 @@ packer.startup(function(use)
   use 'tpope/vim-git'
   use 'tpope/vim-rhubarb'
 
+  use({
+    'sindrets/diffview.nvim',
+    config = function()
+      require('diffview').setup()
+    end,
+  })
+
   -- Quickfix ----------------------------------------------------------
   use { 'kevinhwang91/nvim-bqf',
     config = function() require('ar.bqf') end
