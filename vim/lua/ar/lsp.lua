@@ -1,4 +1,5 @@
 local lspconfig = require('lspconfig')
+local handlers = require('ar.lsp.handlers')
 
 local M = {
   format_on_save = true
@@ -49,7 +50,18 @@ vim.diagnostic.config {
   signs = true,
   update_in_insert = false,
   severity_sort = true,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
 }
+
+vim.lsp.handlers["textDocument/hover"] = handlers.hover()
+vim.lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help()
 
 -- [ format on save ] ----------------------------------------------------------
 
@@ -59,13 +71,13 @@ end
 
 function M.format()
   if M.format_on_save then
-    vim.lsp.buf.formatting_sync(nil, 10000)
+    vim.lsp.buf.formatting_sync({}, 10000)
   end
 end
 
 -- [ onattach ] ----------------------------------------------------------------
 
-local on_attach = function(client, bufnr)
+local function on_attach(client, bufnr)
   local function map(mode, key, result)
     vim.api.nvim_buf_set_keymap(bufnr, mode, key, result, { noremap = true, silent = true })
   end
@@ -112,25 +124,22 @@ local on_attach = function(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
-    map('n', '<leader>l=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
     map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 
     vim.api.nvim_create_user_command('FormatC', function()
-      vim.lsp.buf.formatting_sync(nil, 1000)
+      vim.lsp.buf.formatting_sync({}, 1000)
     end, {})
 
     map('n', '<leader>tf', [[<cmd>lua require('ar.lsp').format_toggle()<CR>]])
 
-    local augid = vim.api.nvim_create_augroup('lsp_fmt_on_save', { clear = true })
+    local augid = vim.api.nvim_create_augroup('ar_lsp_format', { clear = true })
     vim.api.nvim_create_autocmd('BufWritePre', {
+      desc = 'Auto format before save',
       buffer = bufnr,
-      callback = function()
-        M.format()
-      end,
+      callback = function() M.format() end,
       group = augid,
     })
   elseif client.resolved_capabilities.document_range_formatting then
-    map('x', '<leader>l=', '<cmd>lua vim.lsp.buf.range_formatting()<CR>')
     map('x', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<CR>')
   end
 
@@ -151,6 +160,7 @@ local luadev = require('lua-dev').setup({
         },
         diagnostics = {
           globals = { 'hs', 'packer_plugins', 'spoon', 'vim' },
+          disable = { 'missing-parameter' },
         },
         workspace = {
           maxPreload = 2000,
