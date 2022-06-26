@@ -8,6 +8,7 @@ local M = {
 -- [ commands ] ----------------------------------------------------------------
 
 vim.cmd([[command! LspLog :lua vim.cmd('tabe ' .. vim.lsp.get_log_path())]])
+vim.cmd([[command! MyLspInfo lua require('ar.lsp.info').show_info()]])
 
 -- [ style ] -------------------------------------------------------------------
 
