@@ -5,6 +5,12 @@
 let g:mapleader = ','
 let g:maplocalleader = ','
 
+" keep focused in center of screen when searching
+nnoremap <expr> n (v:searchforward ? 'nzzzv' : 'Nzzzv')
+nnoremap <expr> N (v:searchforward ? 'Nzzzv' : 'nzzzv')
+vnoremap <expr> n (v:searchforward ? 'nzzzv' : 'Nzzzv')
+vnoremap <expr> N (v:searchforward ? 'Nzzzv' : 'nzzzv')
+
 " map Q for formatting rather than Ex mode
 nnoremap Q m`gqap``
 vnoremap Q gq
@@ -89,6 +95,9 @@ nnoremap <leader>tw :<C-u>setlocal wrap! breakindent! wrap?<CR>
 
 " Sorting
 vnoremap <leader>srt :<C-u>sort<CR>
+
+" Remove search highlight
+nmap <silent><leader><CR> :<C-u>nohlsearch<CR>
 
 " -----------------------------------------------------------------------
 " Mapping: Copy & Paste
