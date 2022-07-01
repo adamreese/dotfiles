@@ -63,7 +63,6 @@ packer.startup(function(use)
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
     end,
   })
-  use('haya14busa/incsearch.vim')
   use('itchyny/lightline.vim')
   use('junegunn/vim-easy-align')
   use({ 'sbdchd/neoformat',
