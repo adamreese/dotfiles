@@ -5,3 +5,4 @@
 completion/_cargo
 completion/_rustup
 local.zsh
+local/
