@@ -238,8 +238,8 @@ function M.show_info()
   vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
   vim.api.nvim_buf_set_option(bufnr, 'filetype', 'lspinfo')
 
-  vim.keymap.set(bufnr, 'n', '<esc>', '<cmd>bd<CR>', { noremap = true })
-  vim.keymap.set(bufnr, 'n', 'q', '<cmd>bd<CR>', { noremap = true })
+  vim.keymap.set('n', '<esc>', '<cmd>bd<CR>', { buffer = bufnr })
+  vim.keymap.set('n', 'q', '<cmd>bd<CR>', { buffer = bufnr })
   vim.api.nvim_command(
     string.format('autocmd BufHidden,BufLeave <buffer> ++once lua pcall(vim.api.nvim_win_close, %d, true)', win_id)
   )
@@ -283,7 +283,7 @@ end
 
 function M.buffer_active_lsp_capabilities()
   for _, lsp in pairs(vim.lsp.buf_get_clients(0)) do
-    dump(lsp.resolved_capabilities)
+    vim.pretty_print(lsp.resolved_capabilities)
   end
 
   local active = vim.tbl_map(function(client)

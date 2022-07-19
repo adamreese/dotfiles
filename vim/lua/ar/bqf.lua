@@ -14,10 +14,7 @@ bqf.setup({
       -- file size greater than 100kb can't be previewed automatically
       local filename = vim.api.nvim_buf_get_name(bufnr)
       local fsize = vim.fn.getfsize(filename)
-      if fsize > 100 * 1024 then
-        return false
-      end
-      return true
+      return fsize < 100 * 1024
     end,
 
   }

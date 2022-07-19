@@ -1,9 +1,5 @@
 local M = {}
 
-function _G.dump(...)
-  vim.pretty_print(...)
-end
-
 if pcall(require, 'plenary') then
   local plenary_reload = require('plenary.reload').reload_module
 
@@ -13,11 +9,6 @@ if pcall(require, 'plenary') then
   end
 end
 
-function M.command(name, rhs, opts)
-  opts = opts or {}
-  vim.api.nvim_create_user_command(name, rhs, opts)
-end
-
-M.command('ReloadModule', function(opts) R(opts.args) end, { nargs = 1 })
+vim.api.nvim_create_user_command('ReloadModule', function(opts) R(opts.args) end, { nargs = 1 })
 
 return M

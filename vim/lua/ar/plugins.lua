@@ -84,12 +84,6 @@ packer.startup(function(use)
     end,
   })
 
-  -- use { 'lvht/tagbar-markdown',
-  --   config = function()
-  --     vim.g.vim_markdown_frontmatter = 1
-  --   end,
-  -- }
-
   use({ 'majutsushi/tagbar',
     cmd = { 'TagbarToggle' },
   })
@@ -170,14 +164,14 @@ packer.startup(function(use)
   use('mickael-menu/zk-nvim')
   use('saecki/crates.nvim')
 
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-buffer'
-  use 'f3fora/cmp-spell'
-  use 'hrsh7th/cmp-nvim-lua'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'hrsh7th/cmp-cmdline'
+  use('hrsh7th/nvim-cmp')
+  use('hrsh7th/cmp-nvim-lsp')
+  use('hrsh7th/cmp-path')
+  use('hrsh7th/cmp-buffer')
+  use('f3fora/cmp-spell')
+  use('hrsh7th/cmp-nvim-lua')
+  use('saadparwaiz1/cmp_luasnip')
+  use('hrsh7th/cmp-cmdline')
   use({
     'petertriho/cmp-git',
     requires = { 'nvim-lua/plenary.nvim' },
