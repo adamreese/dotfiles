@@ -7,7 +7,6 @@ local M = {
 
 -- [ commands ] ----------------------------------------------------------------
 
-vim.api.nvim_create_user_command('LspLog', 'tabe ' .. vim.lsp.get_log_path(), {})
 vim.api.nvim_create_user_command('MyLspInfo', require('ar.lsp.info').show_info, {})
 
 -- [ style ] -------------------------------------------------------------------
