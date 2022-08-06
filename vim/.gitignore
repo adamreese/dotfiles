@@ -1,5 +1,3 @@
 .netrwhist
-autoload/plug.vim
-autoload/plug.vim.old
 local.vim
-vendor
+lua/ar/local/

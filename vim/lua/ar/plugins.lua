@@ -177,6 +177,11 @@ packer.startup(function(use)
     requires = { 'nvim-lua/plenary.nvim' },
   })
 
+  -- load plugins that I am testing
+  pcall(function()
+    require('ar.local').plugins(use)
+  end)
+
 end)
 
 -- list plugin names
