@@ -12,13 +12,15 @@ endfunction
 
 " Find and source project-specific Vim configs
 function! project#SourceConfig() abort
-  let l:projectfile = findfile('.vim/local.vim', expand('%:p').';')
-  if filereadable(l:projectfile)
+  for l:file in ['.vim/local.vim', '.vim/local.lua']
+    let l:projectfile = findfile(l:file, expand('%:p').';')
+    if filereadable(l:projectfile)
 
-    echohl ModeMsg
-    echomsg 'loading '. l:projectfile
-    echohl None
+      echohl ModeMsg
+      echomsg 'loading project file: '. l:projectfile
+      echohl None
 
-    execute 'source ' . l:projectfile
-  endif
+      execute 'source ' . l:projectfile
+    endif
+  endfor
 endfunction
