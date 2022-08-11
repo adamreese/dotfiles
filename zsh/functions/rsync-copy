@@ -1,0 +1,19 @@
+# Stolen from sorin-ionescu/prezto
+
+# Return if rsync is not found.
+(( $+commands[rsync] )) || return 0
+
+autoload -Uz is-at-least
+if is-at-least 3.1 ${"$(rsync --version 2>&1)"[(w)3]}; then
+
+  # ACL and extended attributes support
+  if grep -q 'xattrs' <(rsync --help 2>&1); then
+    opts+=( --acls --xattrs )
+  fi
+
+  if grep -q 'file-flags' <(rsync --help 2>&1); then
+    opts+=(--crtimes --fileflags --force-change)
+  fi
+fi
+
+rsync --progress --human-readable --compress --archive $opts $@
