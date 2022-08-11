@@ -27,5 +27,5 @@ nnoremap <silent> <buffer> { :<C-u>call qf#filegroup#PreviousFile()<CR>
 nnoremap <silent> <buffer> } :<C-u>call qf#filegroup#NextFile()<CR>
 
 " not sure what mapping to use for these yet
-nnoremap <Leader>cc :<C-u>call qf#toggle#ToggleQfWindow(v:true)<CR>
-nnoremap <Leader>ll :<C-u>call qf#toggle#ToggleLocWindow(v:true)<CR>
+nnoremap <Leader>cc :<C-u>call qf#toggle#ToggleQfWindow(v:false)<CR>
+nnoremap <Leader>ll :<C-u>call qf#toggle#ToggleLocWindow(v:false)<CR>
