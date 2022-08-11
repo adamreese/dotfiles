@@ -2,11 +2,17 @@ tap "grain-lang/tap"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "linuxkit/linuxkit"
 tap "michaeleisel/zld"
+tap "osx-cross/arm"
+tap "osx-cross/avr"
+tap "qmk/qmk"
+tap "shipyard-run/repo"
 tap "tinygo-org/tools"
 tap "universal-ctags/universal-ctags"
 # Run your GitHub Actions locally 🚀
@@ -25,6 +31,8 @@ brew "libpng"
 brew "aspell"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
+# Collection of portable C++ source libraries
+brew "boost"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Microsoft Azure CLI 2.0
@@ -35,12 +43,10 @@ brew "bash"
 brew "bashdb"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Friendly powerful distributed version control system
-brew "bazaar"
+# Compiler infrastructure and toolchain library for WebAssembly
+brew "binaryen"
 # Parser generator
 brew "bison"
-# Collection of portable C++ source libraries
-brew "boost"
 # Portable Foreign Function Interface library
 brew "libffi"
 # Next-gen compiler infrastructure
@@ -57,6 +63,8 @@ brew "circleci"
 brew "colordiff"
 # Tool for service discovery, monitoring and configuration
 brew "consul"
+# Generic template rendering and notifications with Consul
+brew "consul-template"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get, unpack, build, and install modules from CPAN
@@ -77,18 +85,14 @@ brew "diffutils"
 brew "dnsmasq"
 # XML vocabulary to create presentation-neutral documents
 brew "docbook-xsl"
-# Asynchronous event library
-brew "libev"
-# .NET Core
-brew "dotnet", link: false
+# Command-line DNS client
+brew "dog"
 # Utility to bundle libraries into executables for macOS
 brew "dylibbundler"
 # Perl compatible regular expressions library with a new API
 brew "pcre2"
 # Maintain consistent coding style between multiple editors
 brew "editorconfig"
-# Platform built on V8 to build network applications
-brew "node"
 # Run arbitrary commands when files change
 brew "entr"
 # Modern replacement for 'ls'
@@ -99,7 +103,9 @@ brew "fabio"
 brew "fd"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
-# Command-line JSON processing tool
+# Command-line outline and bitmap font editor/converter
+brew "fontforge"
+# Terminal JSON viewer
 brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
@@ -121,6 +127,8 @@ brew "git-delta"
 brew "git-extras"
 # Git extension for versioning large files
 brew "git-lfs"
+# Render markdown on the CLI
+brew "glow"
 # Command-line option parsing utility
 brew "gnu-getopt"
 # GNU implementation of the famous stream editor
@@ -135,8 +143,6 @@ brew "gnu-which"
 brew "go"
 # Fast linters runner for Go
 brew "golangci-lint"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # GNU grep, egrep and fgrep
@@ -149,16 +155,22 @@ brew "hadolint"
 brew "lua"
 # Convert source code to formatted text with syntax highlighting
 brew "highlight"
+# Command-line tools for OpenPGP-related operations
+brew "hopenpgp-tools"
 # Improved top (interactive process viewer)
 brew "htop"
 # Add GitHub support to git on the command-line
 brew "hub"
 # Configurable static site generator
 brew "hugo"
+# Command-line benchmarking tool
+brew "hyperfine"
 # Get events and tasks from the macOS calendar database
 brew "ical-buddy"
 # Improved colored diff
 brew "icdiff"
+# CLI for managing resources in InfluxDB v2
+brew "influxdb-cli"
 # C library for encoding, decoding, and manipulating JSON
 brew "jansson"
 # Regular expressions library
@@ -169,6 +181,8 @@ brew "jq"
 brew "just"
 # Run local Kubernetes cluster in Docker
 brew "kind"
+# Network authentication protocol
+brew "krb5"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Tool that can switch between kubectl contexts easily and create aliases
@@ -179,6 +193,8 @@ brew "lego"
 brew "less"
 # Input filter for the pager less
 brew "lesspipe"
+# Asynchronous event library
+brew "libev"
 # C implementation of a Sass compiler
 brew "libsass"
 # Library for processing keyboard entry from the terminal
@@ -187,16 +203,16 @@ brew "libtermkey"
 brew "libyubikey"
 # C library for reading, creating, and modifying zip archives
 brew "libzip"
+# Emulator for x86 and PowerPC
+brew "qemu"
+# Linux virtual machines
+brew "lima"
 # Powerful, lightweight programming language
 brew "lua@5.3"
-# Just-In-Time Compiler (JIT) for the Lua programming language
-brew "luajit", args: ["HEAD"]
 # Package manager for the Lua programming language
 brew "luarocks"
 # Bare libuv bindings for lua
 brew "luv"
-# Asynchronous I/O for Lua
-brew "luvit"
 # Swiss Army Knife for macOS
 brew "m-cli"
 # Utility for directing compilation
@@ -211,10 +227,6 @@ brew "mkcert"
 brew "moreutils"
 # 'traceroute' and 'ping' in a single tool
 brew "mtr"
-# Protocol buffers (Google's data interchange format)
-brew "protobuf"
-# Open source relational database management system
-brew "mysql"
 # Parser generator tool and incremental parsing library
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -225,14 +237,20 @@ brew "nginx"
 brew "ninja"
 # Port scanning utility for large networks
 brew "nmap"
-# Package manager for Microsoft development platform including .NET
-brew "nuget"
+# Platform built on V8 to build network applications
+brew "node"
+# Distributed, Highly Available, Datacenter-Aware Scheduler
+brew "nomad"
 # OCaml package manager
 brew "opam"
 # Generate clients, server & docs from an OpenAPI spec (v2, v3)
 brew "openapi-generator"
-# CLI for Postgres with auto-completion and syntax highlighting
-brew "pgcli"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Tool for creating identical machine images for multiple platforms
+brew "packer"
 # PostgreSQL syntax beautifier
 brew "pgformatter"
 # Display the PID number for a given process name
@@ -247,12 +265,12 @@ brew "postgresql"
 brew "postgresql@12"
 # Monitor data's progress through a pipe
 brew "pv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.8"
 # Cross-platform application and UI framework
 brew "qt"
 # File browser
 brew "ranger"
-# Ruby version manager
-brew "rbenv"
 # Reattach process (e.g., tmux) to background
 brew "reattach-to-user-namespace"
 # Persistent key-value database, with built-in net interface
@@ -261,12 +279,20 @@ brew "redis"
 brew "ripgrep"
 # Utility that provides fast incremental file transfer
 brew "rsync"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
 # Experimental Rust compiler front-end for IDEs
 brew "rust-analyzer"
+# Rust toolchain installer
+brew "rustup-init"
 # Wrapper around libsass that helps to create command-line apps
 brew "sassc"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# HTTP regression testing and benchmarking utility
+brew "siege"
+# SOcket CAT: netcat on steroids
+brew "socat"
 # Source-code syntax highlighter
 brew "source-highlight"
 # Command-line interface for https://speedtest.net bandwidth tests
@@ -275,6 +301,10 @@ brew "speedtest-cli"
 brew "utf8proc"
 # Version control system designed to be a better CVS
 brew "subversion"
+# Formatting tool for reformatting Swift code
+brew "swiftformat"
+# Tool to enforce Swift style and conventions
+brew "swiftlint"
 # Open source continuous file synchronization application
 brew "syncthing"
 # Send macOS User Notifications from the command-line
@@ -303,22 +333,35 @@ brew "vault"
 brew "vim"
 # Web Assembly Binary Toolkit
 brew "wabt"
-# Your favorite rust -> wasm workflow tool!
-brew "wasm-pack"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
 brew "wget"
+# Tool for managing your YubiKey configuration
+brew "ykman"
 # YubiKey personalization library and tool
 brew "ykpers"
 # Process YAML documents from the CLI
 brew "yq"
+# Programming language designed for robustness, optimality, and clarity
+brew "zig"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Nomad
-brew "hashicorp/tap/nomad"
+# Levant
+brew "hashicorp/tap/levant"
+# Nomad Pack
+brew "hashicorp/tap/nomad-pack"
+# Lightweight Linux distribution tool
+brew "linuxkit/linuxkit/linuxkit", args: ["HEAD"]
 # A faster version of ld, Apple's linker
 brew "michaeleisel/zld/zld"
+# Massdrop Firmware Loader
+brew "qmk/qmk/mdloader"
+# Quantum Mechanical Keyboard (QMK) Firmware
+brew "qmk/qmk/qmk"
+brew "shipyard-run/repo/shipyard"
 # TinyGo is a Go compiler for small places. Microcontrollers, WebAssembly, and command-line tools. Based on LLVM.
 brew "tinygo-org/tools/tinygo"
 # Maintained ctags implementation
@@ -337,15 +380,18 @@ cask "discord"
 cask "docker"
 # Developer platform
 cask "dotnet-sdk"
-# Client for the Dropbox cloud storage service
-cask "dropbox"
 # Web browser
 cask "firefox"
 cask "font-dejavu-sans-mono-nerd-font"
 cask "font-fira-code"
 cask "font-hack"
 cask "font-input"
+cask "font-iosevka-nerd-font"
+# Typeface made for developers
+cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
+# Monospaced variant of "San Francisco" by Apple
+cask "font-sf-mono"
 cask "font-source-code-pro"
 # Web browser
 cask "google-chrome"
@@ -358,26 +404,28 @@ cask "grain"
 # Desktop automation application
 cask "hammerspoon"
 # Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2-beta"
+cask "iterm2"
 # Keyboard customizer
 cask "karabiner-elements"
-# End-to-end encryption software
-cask "keybase"
 # GPU-based terminal emulator
 cask "kitty"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
 # Open source implementation of Microsoft's .NET Framework
 cask "mono-mdk"
 # Cloud storage client
 cask "onedrive"
+# Toolbox companion for QMK Firmware
+cask "qmk-toolbox"
 # Imaging utility to install operating systems to a microSD card
 cask "raspberry-pi-imager"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
 cask "spotify"
+# Virtual machines UI using QEMU
+cask "utm"
 # Open-source code editor
 cask "visual-studio-code"
-# Web browser focusing on customization and control
-cask "vivaldi"
 # Video communication and virtual meeting platform
 cask "zoom"
