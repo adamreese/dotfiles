@@ -90,3 +90,5 @@ wasi
 Wagi
 AssemblyScript
 CGI
+routable
+Traefik
