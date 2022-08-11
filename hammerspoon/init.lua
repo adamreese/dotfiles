@@ -4,10 +4,6 @@ local log = hs.logger.new('[init]', 'debug')
 
 log.i('----------------------------------------')
 
--- command line interface
-require('hs.ipc')
-hs.ipc.cliInstall('/opt/homebrew')
-
 -- disable animations
 hs.window.animationDuration = 0
 
