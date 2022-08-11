@@ -3,7 +3,7 @@
 (( ${+commands[fzf]} )) || return
 
 if (( ${+commands[fd]} )); then
-  typeset -gx FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --no-ignore-vcs --exclude .git'
+  typeset -gx FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --no-ignore-vcs --exclude .git --strip-cwd-prefix'
 elif (( ${+commands[rg]} )); then
   typeset -gx FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --no-ignore-vcs --glob ""'
 fi
