@@ -89,6 +89,8 @@ Install:andUse('Caffeine', {
   start = true
 })
 
+pcall(dofile, hs.configdir .. '/local.lua')
+
 --------------------------------------------------------------------------------
 
 hs.alert.show('Config loaded')
