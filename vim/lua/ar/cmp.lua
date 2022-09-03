@@ -127,3 +127,18 @@ local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 require('cmp_git').setup()
+
+-- [ LuaSnip ] -----------------------------------------------------------------
+
+vim.keymap.set({ 's', 'i' }, '<c-k>', function()
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  end
+end, { silent = true, desc = 'luasnip expand or jump' })
+
+require('luasnip.loaders.from_vscode').lazy_load({
+  paths = {
+    -- vim.g.plug_home .. '/friendly-snippets',
+    './snippet',
+  },
+})
