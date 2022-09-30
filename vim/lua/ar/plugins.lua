@@ -73,6 +73,10 @@ packer.startup(function(use)
     config = function() require('ar.treesitter') end,
   })
   use({ 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' })
+  use({
+    'nvim-treesitter/playground',
+    requires = 'nvim-treesitter/nvim-treesitter',
+  })
 
   use({
     'iamcco/markdown-preview.nvim',
@@ -116,6 +120,7 @@ packer.startup(function(use)
 
   use({
     'sindrets/diffview.nvim',
+    cmd = 'DiffviewOpen',
     config = function()
       require('diffview').setup()
     end,
@@ -179,7 +184,7 @@ packer.startup(function(use)
 
   -- load plugins that I am testing
   pcall(function()
-    require('ar.local').plugins(use)
+    require('ar.local.plugins')(use)
   end)
 
 end)
