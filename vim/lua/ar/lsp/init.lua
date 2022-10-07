@@ -44,7 +44,7 @@ vim.fn.sign_define('DiagnosticSignHint', { text = '❯', texthl = 'DiagnosticSig
 vim.fn.sign_define('DiagnosticSignInfo', { text = '❯', texthl = 'DiagnosticSignInfo', numhl = 'DiagnosticSignInfo' })
 vim.fn.sign_define('DiagnosticSignWarn', { text = '❯', texthl = 'DiagnosticSignWarn', numhl = 'DiagnosticSignWarn' })
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   underline = true,
   virtual_text = false,
   signs = true,
@@ -58,7 +58,7 @@ vim.diagnostic.config {
     header = "",
     prefix = "",
   },
-}
+})
 
 vim.lsp.handlers["textDocument/hover"] = handlers.hover()
 vim.lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help()
@@ -118,7 +118,7 @@ local function setup_mappings(client, bufnr)
   end
 
   -- Set some keybinds conditional on server capabilities
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
 
     vim.api.nvim_create_user_command('FormatC', function()
@@ -134,7 +134,7 @@ local function setup_mappings(client, bufnr)
       callback = function() M.format() end,
       group = augid,
     })
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     vim.keymap.set('x', '<leader>f', vim.lsp.buf.range_formatting, bufopts)
   end
 end
@@ -168,6 +168,7 @@ local luadev = require('lua-dev').setup({
         workspace = {
           maxPreload = 2000,
           preloadFileSize = 1000,
+          checkThirdParty = false,
         },
       },
     },
@@ -180,7 +181,18 @@ local servers = {
   },
   csharp_ls = {},
   dockerls = {},
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        analyses = {
+          unusedvariable = true,
+          unusedparams = true,
+          shadow = true,
+        },
+        staticcheck = true,
+      },
+    },
+  },
   jsonls = {
     settings = {
       json = {
@@ -209,12 +221,10 @@ local servers = {
   taplo = {},
 }
 
--- [ lsp-status ] --------------------------------------------------------------
-
 local function setup_servers()
   local status = require('lsp-status')
   status.config({
-    status_symbol = ' ',
+    status_symbol = '',
     indicator_errors = '⨉',
     indicator_warnings = '',
     indicator_info = 'ℹ︎',
@@ -250,8 +260,13 @@ local function setup_servers()
   })
 
   require('rust-tools').setup({
+    tools = {
+      inlay_hints = {
+        highlight = "RustInlay",
+      },
+    },
     server = with_defaults({
-      cmd = { vim.env.HOME .. '/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer' },
+      cmd = { vim.env.XDG_DATA_HOME .. '/rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer' },
       settings = {
         ['rust-analyzer.cargo.allFeatures'] = true,
       },
