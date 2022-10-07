@@ -64,7 +64,7 @@ if has('wildmenu')
   set wildignore+=*.DS_Store                       " macOS
   set wildignorecase
 
-  set wildmode=longest:list,full        " Complete files using a menu AND list
+  set wildmode=longest:full,full        " Complete files using a menu AND list
 endif
 
 " Folding: {{{1
@@ -137,6 +137,8 @@ set splitbelow                       " Split horizontal windows below to the cur
 set splitright                       " Split vertical windows right to the current windows
 set virtualedit=block                " Allow virtual editing in Visual block mode
 
+set mouse=                           " Disable mouse support
+
 set tags^=./.git/tags;
 
 " Diff: {{{1
@@ -176,12 +178,11 @@ set shortmess+=O                  " file-read message overwrites previous
 set shortmess+=T                  " truncate non-file messages in middle
 set shortmess+=W                  " don't echo "[w]"/"[written]" when writing
 set shortmess+=a                  " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+set shortmess+=c                  " Disable 'Pattern not found' messages
 set shortmess+=o                  " overwrite file-written messages
 set shortmess+=t                  " truncate file messages at start
-set shortmess+=c                  " Disable 'Pattern not found' messages
 
-" Display signs in the 'number' column
-set signcolumn=number
+set signcolumn=yes
 
 if has('linebreak')
   set linebreak
@@ -191,7 +192,6 @@ if exists('+termguicolors')
   set termguicolors " enable true color
 endif
 
-syntax enable
 set background=dark
 
 " Enable bash syntax
