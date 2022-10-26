@@ -16,13 +16,13 @@ let g:lightline = {
       \     'right': [
       \       ['percent', 'lineinfo'],
       \       ['filetype'],
-      \       ['lsp', 'go', 'spell', 'search'],
-      \       ['lint_running', 'lint_error', 'lint_warning', 'lint_info'],
+      \       ['go', 'spell', 'search', 'neomake'],
+      \       ['lsp'],
       \     ],
       \   },
       \   'inactive': {
       \     'left':  [['mode'], ['modified', 'filename']],
-      \     'right': [['percent', 'lineinfo'], ['filetype']],
+      \     'right': [['percent', 'lineinfo'], ['filetype'], ['lsp']],
       \   },
       \   'tabline': {
       \     'left':  [['tabs']],
@@ -33,9 +33,9 @@ let g:lightline = {
       \     'inactive': ['tabnum'],
       \   },
       \   'mode_map': {
-      \     'n':      '▪',
+      \     'n':      '◼',
       \     'i':      'ɪ',
-      \     'c':      'ᴄᴍᴅ',
+      \     'c':      '❯',
       \     'R':      'ʀ',
       \     's':      's',
       \     'S':      's',
@@ -55,7 +55,6 @@ let g:lightline = {
       \     'filetype':         'status#Filetype',
       \     'gitbranch':        'status#GitBranch',
       \     'go':               'status#Go',
-      \     'lint_running':     'status#LintRunning',
       \     'lsp':              'status#LSPStatus',
       \     'mode':             'status#Mode',
       \     'modified':         'status#Modified',

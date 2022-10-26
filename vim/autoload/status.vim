@@ -125,65 +125,34 @@ endfunction
 
 function! status#Search() abort
   if winwidth(0) < 80 | return '' | endif
-
-  return exists('g:loaded_anzu') ? anzu#search_status() : ''
+  return v:lua.require('ar.status.search').count()
 endfunction
 
 " -----------------------------------------------------------------------
 " Linter {{{1
 
-function! status#LintError() abort
-  return s:Concat([
-        \ s:LspCount('Error'),
-        \ s:NeomakeCount('E'),
-        \ ])
-endfunction
+function! status#Neomake() abort
+  if !exists('*neomake#statusline#get') | return '' | endif
+  let l:winnr = winnr()
+  let l:bufnr = winbufnr(l:winnr)
 
-function! status#LintWarning() abort
-  return s:Concat([
-        \ s:LspCount('Warning'),
-        \ s:NeomakeCount('W'),
-        \ ])
-endfunction
-
-function! status#LintInfo() abort
-  return s:Concat([
-        \ s:LspCount('Information'),
-        \ s:NeomakeCount('I'),
-        \ ])
-endfunction
-
-function! status#LintRunning() abort
-  if !exists('g:loaded_neomake') || empty(neomake#GetJobs()) | return '' | endif
-
-  return s:symbol.for('spinner')
-endfunction
-
-function! s:NeomakeCount(group) abort
-  if !exists('g:loaded_neomake') | return '' | endif
-
-  let l:counts = neomake#statusline#LoclistCounts()
-  if empty(l:counts)
-    let l:counts = neomake#statusline#QflistCounts()
-  endif
-
-  return get(l:counts, a:group, '')
+  return neomake#statusline#get(l:bufnr, {
+        \   'format_running': s:symbol.for('spinner'),
+        \   'format_loclist_ok': '',
+        \   'format_loclist_unknown': '',
+        \   'format_loclist_issues': '%s',
+        \   'format_loclist_type_E': ' ⨉ {{count}}',
+        \   'format_loclist_type_W': '  {{count}}',
+        \   'format_loclist_type_I': ' ℹ︎ {{count}}',
+        \ })
 endfunction
 
 function! status#LSPStatus() abort
   if winwidth(0) < 100 || s:IsCustomMode() | return '' | endif
-  if luaeval('#vim.lsp.buf_get_clients() > 0')
+  if luaeval('#vim.lsp.get_active_clients() > 0')
     return v:lua.require('lsp-status').status()
   endif
   return ''
-endfunction
-
-" kind: 'Error', 'Warning', 'Information', 'Hint'
-function! s:LspCount(kind) abort
-  if !luaeval('#vim.lsp.buf_get_clients() > 0') | return '' | end
-
-  let l:count = v:lua.vim.diagnostic.get(0, a:kind)
-  return l:count ? printf('ʟs(%d)', l:count) : ''
 endfunction
 
 " -----------------------------------------------------------------------
