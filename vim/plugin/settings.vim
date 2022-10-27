@@ -181,6 +181,7 @@ set shortmess+=a                  " use abbreviations in messages eg. `[RO]` ins
 set shortmess+=c                  " Disable 'Pattern not found' messages
 set shortmess+=o                  " overwrite file-written messages
 set shortmess+=t                  " truncate file messages at start
+set shortmess+=S                  " don't show search count message when searching
 
 set signcolumn=yes
 
