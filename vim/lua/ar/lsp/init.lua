@@ -149,32 +149,6 @@ local function on_attach(client, bufnr)
   require('lsp-status').on_attach(client)
 end
 
-local luadev = require('lua-dev').setup({
-  lspconfig = {
-    cmd = {
-      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/bin/lua-language-server',
-      '-E',
-      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/main.lua',
-    },
-    settings = {
-      Lua = {
-        completion = {
-          keywordSnippet = 'Disable',
-        },
-        diagnostics = {
-          globals = { 'hs', 'packer_plugins', 'spoon', 'vim' },
-          disable = { 'missing-parameter' },
-        },
-        workspace = {
-          maxPreload = 2000,
-          preloadFileSize = 1000,
-          checkThirdParty = false,
-        },
-      },
-    },
-  },
-})
-
 local servers = {
   bashls = {
     filetypes = { 'bash', 'sh', 'zsh' },
@@ -201,7 +175,29 @@ local servers = {
       },
     },
   },
-  sumneko_lua = luadev,
+  sumneko_lua = {
+    cmd = {
+      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/bin/lua-language-server',
+      '-E',
+      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/main.lua',
+    },
+    settings = {
+      Lua = {
+        completion = {
+          keywordSnippet = 'Disable',
+        },
+        diagnostics = {
+          globals = { 'hs', 'packer_plugins', 'spoon', 'vim' },
+          disable = { 'missing-parameter' },
+        },
+        workspace = {
+          maxPreload = 2000,
+          preloadFileSize = 1000,
+          checkThirdParty = false,
+        },
+      },
+    },
+  },
   tsserver = {},
   vimls = {},
   yamlls = {
@@ -273,6 +269,8 @@ local function setup_servers()
     }),
   })
 end
+
+require('neodev').setup({ })
 
 setup_servers()
 
