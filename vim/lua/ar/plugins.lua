@@ -98,6 +98,25 @@ packer.startup(function(use)
     end,
   })
 
+  use({
+    'rcarriga/nvim-notify',
+    config = function()
+      local notify = require('notify')
+      notify.setup({
+        top_down = false,
+        timeout = 3000,
+        max_width = function() return math.floor(vim.o.columns * 0.4) end,
+        max_height = function() return math.floor(vim.o.lines * 0.8) end,
+        render = function(...)
+          local notif = select(2, ...)
+          local style = notif.title[1] == '' and 'minimal' or 'default'
+          require('notify.render')[style](...)
+        end,
+      })
+      vim.notify = notify
+    end
+  })
+
   use('nanotee/luv-vimdocs')
   use('milisims/nvim-luaref')
 
