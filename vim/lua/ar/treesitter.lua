@@ -58,9 +58,5 @@ require('nvim-treesitter.configs').setup({
   matchup = { enable = true },
 })
 
-function _G.Type()
-  print(require('nvim-treesitter.ts_utils').get_node_at_cursor():type())
-end
-
 -- vim.opt.foldmethod = 'expr'
 -- vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
