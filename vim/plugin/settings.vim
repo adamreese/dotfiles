@@ -7,12 +7,6 @@ scriptencoding utf-8
 " -----------------------------------------------------------------------
 
 set autowrite                " Automatically save before :next, :make etc.
-set autoread                 " Set to auto read when a file is changed from the outside
-set hidden
-set magic                    " For regular expressions turn magic on
-set noerrorbells
-set novisualbell
-set shell=$SHELL
 set dictionary+=/usr/share/dict/words
 set history=1000
 set spellsuggest=best,10 " Limit suggestions to 10
@@ -23,17 +17,11 @@ set spellsuggest=best,10 " Limit suggestions to 10
 set ignorecase               " Search case insensitive...
 set smartcase                " ... but not it begins with upper case
 
-if exists('+inccommand')
-  set inccommand=nosplit
-endif
-
 " Performance: {{{1
 " -----------------------------------------------------------------------
 
 set lazyredraw               " only redraw when needed
-set ttimeout
 set ttimeoutlen=10
-set timeout
 set timeoutlen=750
 set updatetime=300
 
@@ -46,9 +34,7 @@ set maxmempattern=2000000
 " Indent: {{{1
 " -----------------------------------------------------------------------
 
-set autoindent
 set smartindent
-set smarttab
 set shiftwidth=2             " 2 spaces per tab
 set softtabstop=2
 set tabstop=2
@@ -111,8 +97,6 @@ endfor
 
 " Behavior: {{{1
 " -----------------------------------------------------------------------
-
-set backspace=indent,eol,start
 
 " default: .,w,b,u,t
 set complete-=i                      " Don't scan included files
@@ -192,8 +176,6 @@ endif
 if exists('+termguicolors')
   set termguicolors " enable true color
 endif
-
-set background=dark
 
 " Enable bash syntax
 " $VIMRUNTIME/syntax/sh.vim
