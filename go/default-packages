@@ -5,12 +5,12 @@ github.com/fatih/gomodifytags@latest
 github.com/fatih/motion@latest
 github.com/go-delve/delve/cmd/dlv@latest
 github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+github.com/hashicorp/hcl/v2/cmd/hclfmt@latest
 github.com/josharian/impl@latest
 github.com/jstemmer/gotags@latest
 github.com/kisielk/errcheck@latest
 github.com/klauspost/asmfmt/cmd/asmfmt@latest
 github.com/koron/iferr@master
-github.com/maruel/panicparse/cmd/pp@latest
 github.com/mgechev/revive@latest
 github.com/rogpeppe/godef@latest
 github.com/zmb3/gogetdoc@master
