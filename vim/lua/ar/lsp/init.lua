@@ -146,7 +146,9 @@ local function on_attach(client, bufnr)
     setup_mappings(client, bufnr)
   end)
 
-  require('lsp-status').on_attach(client)
+  pcall(function()
+    require('nvim-navic').attach(client, bufnr)
+  end)
 end
 
 local servers = {
@@ -218,19 +220,8 @@ local servers = {
 }
 
 local function setup_servers()
-  local status = require('lsp-status')
-  status.config({
-    status_symbol = '',
-    indicator_errors = '⨉',
-    indicator_warnings = '',
-    indicator_info = 'ℹ︎',
-    indicator_hint = '○',
-  })
-  status.register_progress()
-
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  capabilities = vim.tbl_extend('keep', capabilities, status.capabilities)
 
   local function with_defaults(opts)
     opts = opts or {}

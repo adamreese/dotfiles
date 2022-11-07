@@ -3,6 +3,8 @@
 " =======================================================================
 scriptencoding utf-8
 
+finish
+
 set showtabline=2
 
 let g:lightline = {

@@ -61,7 +61,10 @@ packer.startup(function(use)
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
     end,
   })
-  use('itchyny/lightline.vim')
+  use({
+    'itchyny/lightline.vim',
+    opt = true,
+  })
   use('junegunn/vim-easy-align')
   use({ 'sbdchd/neoformat',
     cmd = 'Neoformat',
@@ -116,6 +119,18 @@ packer.startup(function(use)
       vim.notify = notify
     end
   })
+
+  use({
+    'rebelot/heirline.nvim',
+    config = function()
+      require('ar.heirline.statusline')
+    end,
+  })
+  use({
+    'j-hui/fidget.nvim',
+    config = function() require('fidget').setup({}) end
+  })
+  use({ 'SmiteshP/nvim-navic' })
 
   use('nanotee/luv-vimdocs')
   use('milisims/nvim-luaref')
@@ -178,7 +193,6 @@ packer.startup(function(use)
 
   -- LSP ----------------------------------------------------------------
   use('neovim/nvim-lspconfig')
-  use('nvim-lua/lsp-status.nvim')
   use('L3MON4D3/LuaSnip')
   use('rafamadriz/friendly-snippets')
   use('simrat39/rust-tools.nvim')

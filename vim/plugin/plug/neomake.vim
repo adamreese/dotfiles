@@ -39,7 +39,6 @@ function! s:PrintNeomakeResult() abort
 endfunction
 
 function! s:neomake_finished() abort
-  call lightline#update()
   call s:PrintNeomakeResult()
 endfunction
 
@@ -47,5 +46,4 @@ augroup ar_neomake
   autocmd!
   autocmd BufWritePost * call <SID>Run()
   autocmd User NeomakeJobFinished call <SID>neomake_finished()
-  autocmd User NeomakeJobInit     call lightline#update()
 augroup END
