@@ -151,6 +151,7 @@ set noshowmode                    " No to showing mode in bottom-left corner
 set number                        " Show line numbers
 set textwidth=78
 set title                         " Sets the terminal title nicely.
+set showtabline=2
 
 " Disable blinking cursor
 set guicursor&
