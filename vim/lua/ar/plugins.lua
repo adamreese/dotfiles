@@ -130,7 +130,6 @@ packer.startup(function(use)
     'j-hui/fidget.nvim',
     config = function() require('fidget').setup({}) end
   })
-  use({ 'SmiteshP/nvim-navic' })
 
   use('nanotee/luv-vimdocs')
   use('milisims/nvim-luaref')
