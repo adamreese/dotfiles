@@ -13,6 +13,8 @@ local exceptions = {
     qf = '☰ Quickfix',
     tagbar = 'Tagbar',
     list = 'List',
+    Outline = 'Outline',
+    packer = 'Packer',
   },
 }
 
@@ -24,11 +26,6 @@ end
 
 -- Colors {{{
 local colors = {
-  diag_warn = utils.get_highlight('DiagnosticWarn').fg,
-  diag_error = utils.get_highlight('DiagnosticError').fg,
-  diag_hint = utils.get_highlight('DiagnosticHint').fg,
-  diag_info = utils.get_highlight('DiagnosticInfo').fg,
-
   white = '#abb2bf',
   black = '#282c34',
   gray = '#5c6370',
@@ -52,6 +49,10 @@ local colors = {
   purple = '#B293BB',
 }
 
+vim.api.nvim_set_hl(0, 'Statusline', { bg = colors.bg })
+vim.api.nvim_set_hl(0, 'WinBar', {})
+vim.api.nvim_set_hl(0, 'WinBarNC', {})
+
 heirline.load_colors(colors)
 -- }}}
 
@@ -59,6 +60,8 @@ local Space = { provider = ' ' }
 local Align = { provider = '%=' }
 
 -- Statusline
+
+-- Components {{{
 
 -- ViMode {{{
 local ViMode = {
@@ -113,6 +116,12 @@ local FileName = {
     end
     self.fname = vim.fn.fnamemodify(self.filename, ':t')
   end,
+  hl = function()
+    if vim.bo.modified then
+      -- use `force` because we need to override the child's hl foreground
+      return { fg = 'orange', bold = true, force = true }
+    end
+  end,
   {
     condition = function(self)
       return self.path ~= '.' and self.path ~= '~'
@@ -149,17 +158,6 @@ local FileFlags = {
 }
 -- }}}
 
--- FileNameModifer {{{
-local FileNameModifer = {
-  hl = function()
-    if vim.bo.modified then
-      -- use `force` because we need to override the child's hl foreground
-      return { fg = 'green', bold = true, force = true }
-    end
-  end,
-}
--- }}}
-
 -- HelpFileName {{{
 local HelpFileName = {
   condition = function()
@@ -169,7 +167,7 @@ local HelpFileName = {
   {
     provider = function()
       local fname = vim.api.nvim_buf_get_name(0)
-      return vim.fn.fnamemodify(fname, ':t')
+      return vim.fn.fnamemodify(fname, ':t:r')
     end,
     hl = { fg = 'blue', force = true },
   },
@@ -181,7 +179,7 @@ local FileNameBlock = {
   init = function(self)
     self.filename = vim.api.nvim_buf_get_name(0)
   end,
-  utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
+  FileName,
   unpack(FileFlags), -- A small optimisation, since their parent does nothing
   { provider = '%<' }, -- this means that the statusline is cut here when there's not enough space
 }
@@ -201,8 +199,8 @@ local Git = {
 local LSPActive = {
   condition = conditions.lsp_attached,
   update = { 'LspAttach', 'LspDetach' },
-  hl = { bold = true },
-  provider = '  ',
+  hl = { fg = 'green', bold = true },
+  provider = ' ⦾ ',
 }
 -- }}}
 
@@ -238,14 +236,13 @@ local Ruler = {
   -- provider = "%7(%l/%3L%):%2c %P",
 
   -- provider = '%3l:%-2c',
-  provider = ' %7(%l:%L%)  %-3(%c%V%) ',
+  provider = ' %7(%l:%L%)  %-2(%c%V%) ',
 }
 -- }}}
 
 -- ScrollBar  {{{
 local ScrollBar = {
   static = {
-    -- sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' },
     sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
   },
   provider = function(self)
@@ -259,13 +256,14 @@ local ScrollBar = {
 -- }}}
 
 -- Diagnostic {{{
+
 local Diagnostics = {
   condition = conditions.has_diagnostics,
   static = {
-    error_icon = ' ⨉ ',
+    error_icon = '  ',
     warn_icon = '  ',
-    info_icon = ' ℹ︎ ',
-    hint_icon = ' ○ ',
+    info_icon = '  ',
+    hint_icon = '  ',
   },
   init = function(self)
     self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -279,25 +277,24 @@ local Diagnostics = {
     provider = function(self)
       return self.errors > 0 and (self.error_icon .. self.errors .. ' ')
     end,
-    -- hl = { fg = 'diag_error' },
+    hl = { fg = 'red' },
   },
   {
     provider = function(self)
       return self.warnings > 0 and (self.warn_icon .. self.warnings .. ' ')
     end,
-    -- hl = { fg = 'diag_warn' },
+    hl = { fg = 'orange' },
   },
   {
     provider = function(self)
       return self.info > 0 and (self.info_icon .. self.info .. ' ')
     end,
-    -- hl = { fg = 'diag_info' },
+    hl = { fg = 'comment' },
   },
   {
     provider = function(self)
       return self.hints > 0 and (self.hint_icon .. self.hints)
     end,
-    -- hl = { fg = 'diag_hint' },
   },
   Space,
 }
@@ -346,7 +343,7 @@ local QuickfixTitle = {
       local title = vim.w.quickfix_title
       return title:gsub(self.grepprg, 'grep')
     end,
-  }
+  },
 }
 -- }}}
 
@@ -372,6 +369,8 @@ local Neomake = {
   update = { 'User', pattern = 'NeomakeJobFinished' },
   hl = { fg = 'red' },
 }
+-- }}}
+
 -- }}}
 
 -- DefaultStatusline {{{
@@ -444,7 +443,7 @@ local Workdir = {
     local cwd = vim.loop.cwd()
     return cwd and vim.fn.fnamemodify(cwd, ':~')
   end,
-  hl = 'TabLineSel',
+  hl = { bold = true },
 }
 
 local Tabpage = {

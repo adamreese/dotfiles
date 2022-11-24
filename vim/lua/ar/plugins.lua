@@ -61,10 +61,6 @@ packer.startup(function(use)
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
     end,
   })
-  use({
-    'itchyny/lightline.vim',
-    opt = true,
-  })
   use('junegunn/vim-easy-align')
   use({ 'sbdchd/neoformat',
     cmd = 'Neoformat',
@@ -123,7 +119,7 @@ packer.startup(function(use)
   use({
     'rebelot/heirline.nvim',
     config = function()
-      require('ar.heirline.statusline')
+      require('ar.heirline')
     end,
   })
   use({
