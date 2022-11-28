@@ -62,6 +62,7 @@ vim.diagnostic.config({
 
 vim.lsp.handlers["textDocument/hover"] = handlers.hover()
 vim.lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help()
+vim.lsp.handlers['window/showMessage'] = handlers.show_message()
 
 -- [ format on save ] ----------------------------------------------------------
 
@@ -77,7 +78,6 @@ end
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'diagnostic: previous', silent = true })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'diagnostic: next', silent = true })
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = 'diagnostic: set loclist', silent = true })
 
 -- [ onattach ] ----------------------------------------------------------------
 
@@ -95,39 +95,35 @@ local function setup_mappings(client, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'LspWorkspaceSymbol', vim.lsp.buf.workspace_symbol, {})
 
   -- Mappings.
-  local function bufopts(desc)
+  local function opts(desc)
     return { desc = desc, silent = true, buffer = bufnr }
   end
 
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts('lsp: declaration'))
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts('lsp: definition'))
-  vim.keymap.set('n', 'gs', function() require('ar.lsp.handlers').definition('split') end, bufopts('lsp: definition split'))
-  vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, bufopts('lsp: implementation'))
-  vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, bufopts('lsp: signature help'))
-  vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, bufopts('lsp: type declaration'))
-  vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, bufopts('lsp: references'))
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts('lsp: rename'))
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts('lsp: declaration'))
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts('lsp: definition'))
+  vim.keymap.set('n', 'gs', function() require('ar.lsp.handlers').definition('split') end, opts('lsp: definition split'))
+  vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts('lsp: implementation'))
+  vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, opts('lsp: signature help'))
+  vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, opts('lsp: type declaration'))
+  vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts('lsp: references'))
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts('lsp: rename'))
 
-  vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, bufopts('lsp: document symbol'))
-  vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol, bufopts('lsp: workspace symbol'))
+  vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, opts('lsp: document symbol'))
+  vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol, opts('lsp: workspace symbol'))
 
-  vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, bufopts('lsp: code action'))
-  vim.keymap.set('v', '<leader>la', vim.lsp.buf.code_action, bufopts('lsp: code action'))
+  vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts('lsp: code action'))
+  vim.keymap.set('v', '<leader>la', vim.lsp.buf.code_action, opts('lsp: code action'))
 
 
   if vim.o.filetype ~= 'vim' then
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts('lsp: hover'))
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts('lsp: hover'))
   end
 
   -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.document_formatting then
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts('lsp: format'))
+  if client.server_capabilities.documentFormattingProvider then
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts('lsp: format'))
 
-    vim.api.nvim_create_user_command('FormatC', function()
-      vim.lsp.buf.formatting_sync({}, 1000)
-    end, {})
-
-    vim.keymap.set('n', '<leader>tf', function() require('ar.lsp').format_toggle() end, bufopts('lsp: auto format toggle'))
+    vim.keymap.set('n', '<leader>tf', function() require('ar.lsp').format_toggle() end, opts('lsp: auto format toggle'))
 
     local augid = vim.api.nvim_create_augroup('ar_lsp_format', { clear = true })
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -136,8 +132,8 @@ local function setup_mappings(client, bufnr)
       callback = function() M.format() end,
       group = augid,
     })
-  elseif client.server_capabilities.document_range_formatting then
-    vim.keymap.set('x', '<leader>f', vim.lsp.buf.range_formatting, bufopts('lsp: format'))
+  elseif client.server_capabilities.documentRangeFormatting then
+    vim.keymap.set('x', '<leader>f', vim.lsp.buf.range_formatting, opts('lsp: format'))
   end
 end
 
