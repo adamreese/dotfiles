@@ -52,16 +52,16 @@ vim.diagnostic.config({
   severity_sort = true,
   float = {
     focusable = false,
-    style = "minimal",
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
   },
 })
 
-vim.lsp.handlers["textDocument/hover"] = handlers.hover()
-vim.lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help()
+vim.lsp.handlers['textDocument/hover'] = handlers.hover()
+vim.lsp.handlers['textDocument/signatureHelp'] = handlers.signature_help()
 vim.lsp.handlers['window/showMessage'] = handlers.show_message()
 
 -- [ format on save ] ----------------------------------------------------------
@@ -72,7 +72,7 @@ end
 
 function M.format()
   if M.format_on_save then
-    vim.lsp.buf.formatting_sync({}, 10000)
+    vim.lsp.buf.format()
   end
 end
 
@@ -121,7 +121,7 @@ local function setup_mappings(client, bufnr)
 
   -- Set some keybinds conditional on server capabilities
   if client.server_capabilities.documentFormattingProvider then
-    vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, opts('lsp: format'))
+    vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts('lsp: format'))
 
     vim.keymap.set('n', '<leader>tf', function() require('ar.lsp').format_toggle() end, opts('lsp: auto format toggle'))
 
@@ -133,7 +133,7 @@ local function setup_mappings(client, bufnr)
       group = augid,
     })
   elseif client.server_capabilities.documentRangeFormatting then
-    vim.keymap.set('x', '<leader>f', vim.lsp.buf.range_formatting, opts('lsp: format'))
+    vim.keymap.set('x', '<leader>f', vim.lsp.buf.format, opts('lsp: format'))
   end
 end
 
@@ -243,7 +243,7 @@ local function setup_servers()
   require('rust-tools').setup({
     tools = {
       inlay_hints = {
-        highlight = "RustInlay",
+        highlight = 'RustInlay',
       },
     },
     server = with_defaults({
@@ -255,7 +255,7 @@ local function setup_servers()
   })
 end
 
-require('neodev').setup({ })
+require('neodev').setup({})
 
 setup_servers()
 
