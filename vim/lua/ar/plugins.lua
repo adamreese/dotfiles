@@ -14,6 +14,7 @@ packer.init({
   display = {
     open_cmd = 'tabnew',
   },
+  max_jobs = 10,
 })
 
 packer.startup(function(use)
@@ -207,6 +208,11 @@ packer.startup(function(use)
   use({
     'petertriho/cmp-git',
     requires = { 'nvim-lua/plenary.nvim' },
+  })
+
+  use({
+    'SmiteshP/nvim-navic',
+    requires = 'neovim/nvim-lspconfig'
   })
 
   -- load plugins that I am testing

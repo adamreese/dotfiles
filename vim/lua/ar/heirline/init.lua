@@ -68,7 +68,7 @@ local ViMode = {
   init = function(self)
     self.mode = vim.fn.mode(1)
     if not self.once then
-      vim.api.nvim_create_autocmd('ModeChanged', { command = 'redrawstatus' })
+      vim.api.nvim_create_autocmd('ModeChanged', { pattern = '*:*o', command = 'redrawstatus' })
       self.once = true
     end
   end,
@@ -111,7 +111,7 @@ local FileName = {
     end
 
     self.path = vim.fn.fnamemodify(self.filename, ':~:.:h')
-    if not conditions.width_percent_below(#self.path, 0.25) then
+    if not conditions.width_percent_below(#self.path, 0.4) then
       self.path = vim.fn.pathshorten(self.path)
     end
     self.fname = vim.fn.fnamemodify(self.filename, ':t')
@@ -150,7 +150,7 @@ local FileFlags = {
   {
     provider = function()
       if not vim.bo.modifiable or vim.bo.readonly then
-        return ''
+        return ' '
       end
     end,
     hl = { fg = 'orange' },
@@ -180,15 +180,15 @@ local FileNameBlock = {
     self.filename = vim.api.nvim_buf_get_name(0)
   end,
   FileName,
-  unpack(FileFlags), -- A small optimisation, since their parent does nothing
-  { provider = '%<' }, -- this means that the statusline is cut here when there's not enough space
+  FileFlags,
+  { provider = '%<' },
 }
 -- }}}
 
 -- Git {{{
 local Git = {
   condition = conditions.is_git_repo,
-  hl = { fg = colors.white, bold = true },
+  hl = { fg = 'white', bold = true },
   provider = function()
     return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
   end,
@@ -204,13 +204,93 @@ local LSPActive = {
 }
 -- }}}
 
+-- Navic {{{
+local Navic = {
+  condition = require('nvim-navic').is_available,
+  static = {
+    -- create a type highlight map
+    type_hl = {
+      File = 'Directory',
+      Module = '@include',
+      Namespace = '@namespace',
+      Package = '@include',
+      Class = '@structure',
+      Method = '@method',
+      Property = '@property',
+      Field = '@field',
+      Constructor = '@constructor',
+      Enum = '@field',
+      Interface = '@type',
+      Function = '@function',
+      Variable = '@variable',
+      Constant = '@constant',
+      String = '@string',
+      Number = '@number',
+      Boolean = '@boolean',
+      Array = '@field',
+      Object = '@type',
+      Key = '@keyword',
+      Null = '@comment',
+      EnumMember = '@field',
+      Struct = '@structure',
+      Event = '@keyword',
+      Operator = '@operator',
+      TypeParameter = '@type',
+    },
+    max_depth = 3,
+  },
+  flexible = 3,
+  {
+    init = function(self)
+      local data = require('nvim-navic').get_data() or {}
+      local children = {}
+      for i, d in ipairs(data) do
+
+        local child = {
+          {
+            provider = d.icon,
+            hl = self.type_hl[d.type],
+          },
+          {
+            provider = d.name,
+            -- highlight icon only or location name as well
+            -- hl = self.type_hl[d.type],
+            hl = { fg = 'fg3' },
+          },
+        }
+
+        if i > self.max_depth then
+          break
+        elseif #data > 1 and i < self.max_depth then
+          -- add a separator only if needed
+          table.insert(child, {
+            provider = ' > ',
+            hl = { fg = 'fg5' },
+          })
+        end
+        table.insert(children, child)
+      end
+      -- instantiate the new child, overwriting the previous one
+      self.child = self:new(children, 1)
+    end,
+    -- evaluate the children containing navic components
+    provider = function(self)
+      return self.child:eval()
+    end,
+    hl = { fg = 'gray' },
+    update = 'CursorMoved'
+  },
+  { provider = '' }
+}
+-- }}}
+
 -- Spell {{{
 local Spell = {
   condition = function()
     return vim.wo.spell
   end,
   provider = ' s ',
-  hl = { bold = true, fg = colors.orange },
+  hl = { bold = true, fg = 'orange' },
   Space,
 }
 -- }}}
@@ -260,11 +340,12 @@ local ScrollBar = {
 local Diagnostics = {
   condition = conditions.has_diagnostics,
   static = {
-    error_icon = '  ',
+    error_icon = '  ',
     warn_icon = '  ',
     info_icon = '  ',
     hint_icon = '  ',
   },
+
   init = function(self)
     self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -381,6 +462,8 @@ local DefaultStatusline = {
   Space,
   FileNameBlock,
   Align,
+  Navic,
+  Space,
   SearchResults,
   Spell,
   LSPActive,
@@ -446,6 +529,39 @@ local Workdir = {
   hl = { bold = true },
 }
 
+local GitDir = {
+  condition = conditions.is_git_repo,
+  hl = { fg = 'white', bold = true },
+  init = function(self)
+    cwd = vim.fn.getcwd()
+
+    local git_root = vim.b.gitsigns_status_dict.root
+    if #git_root > #cwd and vim.startswith(git_root, cwd) then
+      self.git_root = git_root:sub(#cwd + 1)
+      cwd = cwd:sub(1, #git_root + 1)
+    end
+    self.cwd = vim.fn.fnamemodify(cwd, ':~')
+  end,
+  provider = function(self)
+    return self.cwd
+  end,
+  {
+    condition = function(self)
+      return self.git_root ~= nil
+    end,
+    provider = function(self)
+      return self.git_root
+    end,
+    hl = { fg = 'blue', bold = true },
+  }
+}
+
+local Dir = {
+  fallthrough = false,
+  GitDir,
+  Workdir,
+}
+
 local Tabpage = {
   provider = function(self)
     return '%' .. self.tabnr .. 'T ' .. self.tabnr .. ' %T'
@@ -460,7 +576,7 @@ local Tabline = {
   utils.make_tablist(Tabpage),
   Align,
   Space,
-  Workdir,
+  Dir,
 }
 -- }}}
 
