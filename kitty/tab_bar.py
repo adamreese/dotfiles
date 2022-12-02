@@ -162,6 +162,6 @@ def get_cwd():
     if len(cwd_parts) < 5:
         cwd = "/".join(cwd_parts)
     else:
-        cwd = '/'.join(cwd_parts[:3]) + '…' + '/'.join(cwd_parts[-2:])
+        cwd = '/'.join(cwd_parts[:3]) + '/…/' + '/'.join(cwd_parts[-2:])
 
     return cwd
