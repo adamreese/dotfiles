@@ -160,7 +160,6 @@ packer.startup(function(use)
     config = function() require('ar.bqf') end
   })
   use('romainl/vim-qf')
-  use('blueyed/vim-qf_resize')
 
   -- Languages ----------------------------------------------------------
   use('PotatoesMaster/i3-vim-syntax')
