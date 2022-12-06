@@ -200,13 +200,20 @@ local LSPActive = {
   condition = conditions.lsp_attached,
   update = { 'LspAttach', 'LspDetach' },
   hl = { fg = 'green', bold = true },
-  provider = ' ⦾ ',
+  provider = '⦾',
 }
 -- }}}
 
 -- Navic {{{
 local Navic = {
-  condition = require('nvim-navic').is_available,
+  condition = function(self)
+    if not require('nvim-navic').is_available() then
+      return false
+    end
+
+    self.data = require('nvim-navic').get_data() or {}
+    return not vim.tbl_isempty(self.data)
+  end,
   static = {
     -- create a type highlight map
     type_hl = {
@@ -242,9 +249,8 @@ local Navic = {
   flexible = 3,
   {
     init = function(self)
-      local data = require('nvim-navic').get_data() or {}
       local children = {}
-      for i, d in ipairs(data) do
+      for i, d in ipairs(self.data) do
 
         local child = {
           {
@@ -261,10 +267,15 @@ local Navic = {
 
         if i > self.max_depth then
           break
-        elseif #data > 1 and i < self.max_depth then
+        elseif #self.data > 1 and i < self.max_depth then
           -- add a separator only if needed
           table.insert(child, {
             provider = ' > ',
+            hl = { fg = 'fg5' },
+          })
+        else
+          table.insert(child, {
+            provider = ' > … ',
             hl = { fg = 'fg5' },
           })
         end
@@ -300,10 +311,13 @@ local FileType = {
   condition = function()
     return not exceptions.buffer_matches()
   end,
-  provider = function()
-    return ' ' .. vim.bo.filetype .. ' '
-  end,
-  hl = { bold = true },
+  {
+    provider = function()
+      return ' ' .. vim.bo.filetype .. ' '
+    end,
+    hl = { bold = true },
+  },
+  { provider = '|' },
 }
 -- }}}
 
@@ -340,10 +354,10 @@ local ScrollBar = {
 local Diagnostics = {
   condition = conditions.has_diagnostics,
   static = {
-    error_icon = '  ',
-    warn_icon = '  ',
-    info_icon = '  ',
-    hint_icon = '  ',
+    error_icon = ' ',
+    warn_icon = ' ',
+    info_icon = ' ',
+    hint_icon = ' ',
   },
 
   init = function(self)
@@ -374,10 +388,10 @@ local Diagnostics = {
   },
   {
     provider = function(self)
-      return self.hints > 0 and (self.hint_icon .. self.hints)
+      return self.hints > 0 and (self.hint_icon .. self.hints .. ' ')
     end,
   },
-  Space,
+  { provider = '|' },
 }
 -- }}}
 
@@ -461,11 +475,11 @@ local DefaultStatusline = {
   Git,
   Space,
   FileNameBlock,
+  Spell,
   Align,
   Navic,
   Space,
   SearchResults,
-  Spell,
   LSPActive,
   Diagnostics,
   Neomake,
@@ -508,6 +522,7 @@ local SpecialStatusline = {
   Space,
   FileType,
   Align,
+  SearchResults,
   Ruler,
 }
 -- }}}
