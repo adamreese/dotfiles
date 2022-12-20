@@ -118,11 +118,11 @@ def draw_tab(
     global right_status_length
     if timer_id is None:
         timer_id = add_timer(_redraw_tab_bar, REFRESH_TIME, True)
-    cells = []
-    cells.append((clock_color, get_cwd()))
-    right_status_length = RIGHT_MARGIN
-    for cell in cells:
-        right_status_length += len(str(cell[1]))
+    # cells = []
+    # cells.append((clock_color, get_cwd()))
+    # right_status_length = RIGHT_MARGIN
+    # for cell in cells:
+    # right_status_length += len(str(cell[1]))
 
     _draw_icon(screen, index)
     _draw_left_status(
@@ -135,12 +135,20 @@ def draw_tab(
         is_last,
         extra_data,
     )
-    _draw_right_status(
-        screen,
-        is_last,
-        cells,
-    )
+    # _draw_right_status(
+    # screen,
+    # is_last,
+    # cells,
+    # )
     return screen.cursor.x
+
+
+def shorten_path(path):
+    cwd_parts = list(Path(path).parts)
+    base_dir = cwd_parts.pop()
+    short_path = list(map(lambda p: p[0:2], cwd_parts))
+    short_path.append(base_dir)
+    return "/".join(short_path)
 
 
 def get_cwd():
@@ -162,6 +170,9 @@ def get_cwd():
     if len(cwd_parts) < 5:
         cwd = "/".join(cwd_parts)
     else:
+        # short_path = list(map(lambda p: p[0:2], cwd_parts[0:-1]))
+        # short_path.append(cwd_parts[-1])
+        # cwd = "/".join(short_path)
         cwd = '/'.join(cwd_parts[:3]) + '/…/' + '/'.join(cwd_parts[-2:])
 
     return cwd
