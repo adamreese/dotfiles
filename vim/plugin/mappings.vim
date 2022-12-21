@@ -2,11 +2,6 @@
 " plugin/mappings.vim
 " =======================================================================
 
-" Fast saving
-nnoremap <silent><leader>w :<C-u>write!<CR>
-nnoremap <silent><leader>q :<C-u>quit!<CR>
-nnoremap <silent><leader>Q :<C-u>qall!<CR>
-
 " Close quickfix/location window
 nnoremap <silent><leader>c :<C-u>cclose<bar>lclose<CR>
 
@@ -24,19 +19,6 @@ vnoremap <leader>srt :<C-u>sort<CR>
 
 " Remove search highlight
 nmap <silent><leader><CR> :<C-u>nohlsearch<CR>
-
-" -----------------------------------------------------------------------
-" Mapping: Copy & Paste
-" -----------------------------------------------------------------------
-
-" Copy to system clipboard
-nnoremap <silent> <leader>y "*y
-nnoremap <silent> <leader>Y "*Y
-vnoremap <silent> <leader>y "*y
-vnoremap <silent> <leader>Y "*Y
-
-" Paste from system clipboard
-nnoremap <silent> <leader>,p "*p
 
 " -----------------------------------------------------------------------
 " Mapping: Terminal

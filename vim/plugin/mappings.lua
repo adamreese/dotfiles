@@ -1,6 +1,18 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
+vim.keymap.set('n', 'ZA', '<cmd>quitall!<cr>')
+vim.keymap.set('n', '<leader>Q', '<cmd>quitall!<cr>')
+vim.keymap.set('n', '<leader>q', '<cmd>quit!<cr>')
+vim.keymap.set('n', '<leader>w', '<cmd>write!<cr>')
+
+-- copy to system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"*y')
+vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"*Y')
+
+-- paste from system clipboard
+vim.keymap.set('n', '<leader>p', '"*p')
+
 -- disable ex mode
 vim.keymap.set('n', 'gQ', '<Nop>')
 
