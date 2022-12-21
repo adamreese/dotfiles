@@ -15,42 +15,73 @@ local exceptions = {
     list = 'List',
     Outline = 'Outline',
     packer = 'Packer',
+    ['neo-tree'] = 'Neotree'
   },
+  buftype = { 'nofile' },
 }
 
 function exceptions.buffer_matches()
   return conditions.buffer_matches({
     filetype = vim.tbl_keys(exceptions.filetype),
+    buftype = exceptions.buftype,
   })
 end
 
 -- Colors {{{
 local colors = {
-  white = '#abb2bf',
-  black = '#282c34',
-  gray = '#5c6370',
-  highlight = '#e2be7d',
-  none = 'NONE',
+  white = '#c7b89d',
+  darker_black = '#232323',
+  black = '#282828', --  nvim bg
+  black2 = '#2e2e2e',
+  one_bg = '#353535',
+  one_bg2 = '#3f3f3f',
+  one_bg3 = '#444444',
+  grey = '#46494a',
+  grey_fg = '#5d6061',
+  grey_fg2 = '#5b5e5f',
+  light_grey = '#585b5c',
+  light_grey2 = '#6C7071',
+  red = '#ec6b64',
+  baby_pink = '#ce8196',
+  pink = '#ff75a0',
+  line = '#2c2f30', -- for lines like vertsplit
+  green = '#89b482',
+  vibrant_green = '#a9b665',
+  nord_blue = '#6f8faf',
+  blue = '#6d8dad',
+  yellow = '#d6b676',
+  sun = '#d1b171',
+  purple = '#b4bbc8',
+  dark_purple = '#cc7f94',
+  teal = '#749689',
+  orange = '#e78a4e',
+  cyan = '#82b3a8',
+  statusline_bg = '#2c2c2c',
+  lightbg = '#353535',
+  lightbg2 = '#303030',
+  pmenu_bg = '#89b482',
+  folder_bg = '#6d8dad',
 
-  -- bg = '#1E2022',
-  bg = '#303336',
-  selection = '#383C3F',
-  line = '#26282B',
-  comment = '#858785',
-  fg = '#C4C7C5',
-
-  red = '#CC6465',
-  orange = '#DC925E',
-  yellow = '#F1C673',
-  green = '#B4BC68',
-  cyan = '#8ABDB6',
-
-  blue = '#81A2BD',
-  purple = '#B293BB',
+  base00 = '#222526',
+  base01 = '#2c2f30',
+  base02 = '#36393a',
+  base03 = '#404344',
+  base04 = '#d4be98',
+  base05 = '#c0b196',
+  base06 = '#c3b499',
+  base07 = '#c7b89d',
+  base08 = '#ec6b64',
+  base09 = '#e78a4e',
+  base0A = '#e0c080',
+  base0B = '#a9b665',
+  base0C = '#86b17f',
+  base0D = '#7daea3',
+  base0E = '#d3869b',
+  base0F = '#d65d0e',
 }
 
-vim.api.nvim_set_hl(0, 'Statusline', { bg = colors.bg })
-vim.api.nvim_set_hl(0, 'WinBar', {})
+vim.api.nvim_set_hl(0, 'Statusline', { bg = colors.base02 })
+vim.api.nvim_set_hl(0, 'WinBar', { bg = colors.base02 })
 vim.api.nvim_set_hl(0, 'WinBarNC', {})
 
 heirline.load_colors(colors)
@@ -96,7 +127,7 @@ local ViMode = {
       local mode = self.mode:sub(1, 1) -- get only the first mode character
       return { fg = self.mode_colors[mode] }
     else
-      return { fg = '#626262' }
+      return { fg = 'base05' }
     end
   end,
   update = 'ModeChanged',
@@ -106,10 +137,6 @@ local ViMode = {
 -- FileName {{{
 local FileName = {
   init = function(self)
-    if self.filename == '' then
-      self.filename = 'ɴᴏᴏᴘ'
-    end
-
     self.path = vim.fn.fnamemodify(self.filename, ':~:.:h')
     if not conditions.width_percent_below(#self.path, 0.4) then
       self.path = vim.fn.pathshorten(self.path)
@@ -129,12 +156,16 @@ local FileName = {
     provider = function(self)
       return self.path .. '/'
     end,
-    hl = { fg = '#858785' },
+    hl = { fg = 'base04' },
   },
   {
     provider = function(self)
+      if self.filename == '' then
+        return '[No Name]'
+      end
       return self.fname
     end,
+    hl = { bold = true },
   },
 }
 -- }}}
@@ -143,7 +174,7 @@ local FileName = {
 local FileFlags = {
   {
     provider = function()
-      return vim.bo.modified and ' [+]'
+      return vim.bo.modified and ' '
     end,
     hl = { fg = 'green' },
   },
@@ -163,7 +194,7 @@ local HelpFileName = {
   condition = function()
     return vim.bo.filetype == 'help'
   end,
-  { provider = ' ' },
+  { provider = ' ' },
   {
     provider = function()
       local fname = vim.api.nvim_buf_get_name(0)
@@ -190,7 +221,7 @@ local Git = {
   condition = conditions.is_git_repo,
   hl = { fg = 'white', bold = true },
   provider = function()
-    return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
+    return ' ' .. vim.b.gitsigns_status_dict.head .. '  '
   end,
 }
 -- }}}
@@ -200,7 +231,7 @@ local LSPActive = {
   condition = conditions.lsp_attached,
   update = { 'LspAttach', 'LspDetach' },
   hl = { fg = 'green', bold = true },
-  provider = '⦾',
+  provider = '⦾ ',
 }
 -- }}}
 
@@ -251,7 +282,6 @@ local Navic = {
     init = function(self)
       local children = {}
       for i, d in ipairs(self.data) do
-
         local child = {
           {
             provider = d.icon,
@@ -259,26 +289,18 @@ local Navic = {
           },
           {
             provider = d.name,
-            -- highlight icon only or location name as well
-            -- hl = self.type_hl[d.type],
-            hl = { fg = 'fg3' },
+            hl = { fg = 'base07' },
           },
         }
 
-        if i > self.max_depth then
-          break
-        elseif #self.data > 1 and i < self.max_depth then
-          -- add a separator only if needed
+        -- add a separator only if needed
+        if #self.data > 1 and i < #self.data then
           table.insert(child, {
             provider = ' > ',
-            hl = { fg = 'fg5' },
-          })
-        else
-          table.insert(child, {
-            provider = ' > … ',
-            hl = { fg = 'fg5' },
+            hl = { fg = 'base05' },
           })
         end
+
         table.insert(children, child)
       end
       -- instantiate the new child, overwriting the previous one
@@ -317,7 +339,7 @@ local FileType = {
     end,
     hl = { bold = true },
   },
-  { provider = '|' },
+  { provider = '' },
 }
 -- }}}
 
@@ -330,7 +352,7 @@ local Ruler = {
   -- provider = "%7(%l/%3L%):%2c %P",
 
   -- provider = '%3l:%-2c',
-  provider = ' %7(%l:%L%)  %-2(%c%V%) ',
+  provider = ' %7(%l:%L%)  %-2(%c%) ',
 }
 -- }}}
 
@@ -355,16 +377,16 @@ local Diagnostics = {
   condition = conditions.has_diagnostics,
   static = {
     error_icon = ' ',
-    warn_icon = ' ',
-    info_icon = ' ',
-    hint_icon = ' ',
+    warn_icon = '⚠ ',
+    info_icon = ' ',
+    hint_icon = ' ',
   },
 
   init = function(self)
-    self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    self.errors   = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-    self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-    self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+    self.hints    = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    self.info     = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
   end,
   update = { 'DiagnosticChanged', 'BufEnter' },
   Space,
@@ -384,14 +406,15 @@ local Diagnostics = {
     provider = function(self)
       return self.info > 0 and (self.info_icon .. self.info .. ' ')
     end,
-    hl = { fg = 'comment' },
+    hl = { fg = 'light_grey2' },
   },
   {
     provider = function(self)
       return self.hints > 0 and (self.hint_icon .. self.hints .. ' ')
     end,
+    hl = { fg = 'light_grey2' },
   },
-  { provider = '|' },
+  { provider = '' },
 }
 -- }}}
 
@@ -473,12 +496,11 @@ local DefaultStatusline = {
   ViMode,
   Space,
   Git,
-  Space,
   FileNameBlock,
   Spell,
   Align,
   Navic,
-  Space,
+  Align,
   SearchResults,
   LSPActive,
   Diagnostics,
@@ -498,7 +520,6 @@ local InactiveStatusline = {
   ViMode,
   Space,
   Git,
-  Space,
   FileNameBlock,
   Align,
   FileType,
@@ -529,14 +550,15 @@ local SpecialStatusline = {
 
 local Statusline = {
   fallthrough = false,
-  hl = { bg = 'bg' },
+  -- hl = { bg = 'bg2' },
+  hl = { bg = 'base02' },
   SpecialStatusline,
   InactiveStatusline,
   DefaultStatusline,
 }
 
 -- Tabline {{{
-local Workdir = {
+local WorkDir = {
   provider = function()
     local cwd = vim.loop.cwd()
     return cwd and vim.fn.fnamemodify(cwd, ':~')
@@ -544,54 +566,20 @@ local Workdir = {
   hl = { bold = true },
 }
 
-local GitDir = {
-  condition = conditions.is_git_repo,
-  hl = { fg = 'white', bold = true },
-  init = function(self)
-    cwd = vim.fn.getcwd()
-
-    local git_root = vim.b.gitsigns_status_dict.root
-    if #git_root > #cwd and vim.startswith(git_root, cwd) then
-      self.git_root = git_root:sub(#cwd + 1)
-      cwd = cwd:sub(1, #git_root + 1)
-    end
-    self.cwd = vim.fn.fnamemodify(cwd, ':~')
-  end,
-  provider = function(self)
-    return self.cwd
-  end,
-  {
-    condition = function(self)
-      return self.git_root ~= nil
-    end,
-    provider = function(self)
-      return self.git_root
-    end,
-    hl = { fg = 'blue', bold = true },
-  }
-}
-
-local Dir = {
-  fallthrough = false,
-  GitDir,
-  Workdir,
-}
-
 local Tabpage = {
   provider = function(self)
     return '%' .. self.tabnr .. 'T ' .. self.tabnr .. ' %T'
   end,
   hl = function(self)
-    return self.is_active and 'DiffText' or 'TabLineSel'
+    return self.is_active and { bg = 'blue', fg = 'one_bg' } or 'TabLineSel'
   end,
 }
 
 local Tabline = {
-  hl = { bg = 'bg' },
+  hl = { bg = 'base02' },
   utils.make_tablist(Tabpage),
   Align,
-  Space,
-  Dir,
+  WorkDir,
 }
 -- }}}
 
