@@ -90,6 +90,8 @@ heirline.load_colors(colors)
 local Space = { provider = ' ' }
 local Align = { provider = '%=' }
 
+local Sep = { provider = '|', hl = { fg = 'base04', bold = false } }
+
 -- Statusline
 
 -- Components {{{
@@ -194,13 +196,12 @@ local HelpFileName = {
   condition = function()
     return vim.bo.filetype == 'help'
   end,
-  { provider = ' ' },
+  Sep, Space,
   {
     provider = function()
       local fname = vim.api.nvim_buf_get_name(0)
-      return vim.fn.fnamemodify(fname, ':t:r')
+      return vim.fn.fnamemodify(fname, ':t')
     end,
-    hl = { fg = 'blue', force = true },
   },
 }
 -- }}}
@@ -221,8 +222,9 @@ local Git = {
   condition = conditions.is_git_repo,
   hl = { fg = 'white', bold = true },
   provider = function()
-    return ' ' .. vim.b.gitsigns_status_dict.head .. '  '
+    return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
   end,
+  Sep, Space,
 }
 -- }}}
 
@@ -231,7 +233,8 @@ local LSPActive = {
   condition = conditions.lsp_attached,
   update = { 'LspAttach', 'LspDetach' },
   hl = { fg = 'green', bold = true },
-  provider = '⦾ ',
+  provider = '⦾ ',
+  Sep,
 }
 -- }}}
 
@@ -339,7 +342,7 @@ local FileType = {
     end,
     hl = { bold = true },
   },
-  { provider = '' },
+  Sep,
 }
 -- }}}
 
@@ -348,7 +351,8 @@ local Ruler = {
   -- %l = current line number
   -- %L = number of lines in the buffer
   -- %c = column number
-  provider = ' %7(%l:%L%)%-2c ',
+  provider = ' %4l',
+  { provider = '/%L ', hl = { fg = 'light_grey2' } }
 }
 -- }}}
 
@@ -410,7 +414,7 @@ local Diagnostics = {
     end,
     hl = { fg = 'light_grey2' },
   },
-  { provider = '' },
+  Sep,
 }
 -- }}}
 
@@ -515,7 +519,6 @@ local InactiveStatusline = {
 
   ViMode,
   Space,
-  Git,
   FileNameBlock,
   Align,
   FileType,
@@ -541,6 +544,7 @@ local SpecialStatusline = {
   Align,
   SearchResults,
   Ruler,
+  ScrollBar,
 }
 -- }}}
 
