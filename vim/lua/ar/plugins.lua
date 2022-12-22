@@ -215,6 +215,8 @@ packer.startup(function(use)
     requires = 'neovim/nvim-lspconfig'
   })
 
+  use({ 'rktjmp/lush.nvim' })
+
   -- load plugins that I am testing
   pcall(function()
     require('ar.local.plugins')(use)

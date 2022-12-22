@@ -3,7 +3,8 @@
 " =======================================================================
 
 let g:hybrid_custom_term_colors = v:true
-silent! colorscheme hybrid
+" silent! colorscheme hybrid
+colorscheme gruvbox-material
 
 " Highlights:
 " -----------------------------------------------------------------------
