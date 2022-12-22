@@ -1,6 +1,6 @@
 " You probably always want to set this in your vim file
 set background=dark
-let g:colors_name="gruvbox-material"
+let g:colors_name="beatbox"
 
 " By setting our module to nil, we clear lua's cache,
 " which means the require ahead will *always* occur.
@@ -14,7 +14,7 @@ let g:colors_name="gruvbox-material"
 "
 " The performance impact of this call can be measured in the hundreds of
 " *nanoseconds* and such could be considered "production safe".
-lua package.loaded['lush_theme.gruvbox-material'] = nil
+lua package.loaded['lush_theme.beatbox'] = nil
 
 " include our theme file and pass it to lush to apply
-lua require('lush')(require('lush_theme.gruvbox-material'))
+lua require('lush')(require('lush_theme.beatbox'))

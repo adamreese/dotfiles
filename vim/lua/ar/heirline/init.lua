@@ -28,7 +28,7 @@ function exceptions.buffer_matches()
 end
 
 -- Colors {{{
-local colors = require('ar.colors.gruvbox-material')
+local colors = require('ar.colors.beatbox')
 
 vim.api.nvim_set_hl(0, 'Statusline', { bg = colors.base02 })
 vim.api.nvim_set_hl(0, 'WinBar', { bg = colors.base02 })

@@ -73,7 +73,7 @@ function util.darken(hex, amount, bg) return util.blend(hex, bg or util.bg, math
 
 function util.lighten(hex, amount, fg) return util.blend(hex, fg or util.fg, math.abs(amount)) end
 
-local c = require('ar.colors.gruvbox-material')
+local c = require('ar.colors.beatbox')
 
 local theme = lush(function()
   return {
