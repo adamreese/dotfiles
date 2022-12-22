@@ -6,6 +6,18 @@ vim.keymap.set('n', '<leader>Q', '<cmd>quitall!<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>quit!<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>write!<cr>')
 
+-- close quickfix/location window
+vim.keymap.set('n', '<leader>c', '<cmd>cclose<bar>lclose<cr>')
+
+-- remove search highlight
+vim.keymap.set('n', '<leader><cr>', '<cmd>nohlsearch<cr>')
+
+-- toggle spell checking
+vim.keymap.set('n', '<leader>ss', '<cmd>setlocal spell!<cr>')
+
+-- format buffer
+vim.keymap.set('n', '<leader>=', 'ggVG=<cr>')
+
 -- copy to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"*y')
 vim.keymap.set({ 'n', 'v' }, '<leader>Y', '"*Y')

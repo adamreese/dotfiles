@@ -2,24 +2,6 @@
 " plugin/mappings.vim
 " =======================================================================
 
-" Close quickfix/location window
-nnoremap <silent><leader>c :<C-u>cclose<bar>lclose<CR>
-
-" Format buffer
-nnoremap <leader>= ggVG=<CR>
-
-" Toggle spell checking
-nnoremap <silent><leader>ss :<C-u>setlocal spell!<CR>
-
-" Toggle wrapping
-nnoremap <leader>tw :<C-u>setlocal wrap! breakindent! wrap?<CR>
-
-" Sorting
-vnoremap <leader>srt :<C-u>sort<CR>
-
-" Remove search highlight
-nmap <silent><leader><CR> :<C-u>nohlsearch<CR>
-
 " -----------------------------------------------------------------------
 " Mapping: Terminal
 " -----------------------------------------------------------------------
