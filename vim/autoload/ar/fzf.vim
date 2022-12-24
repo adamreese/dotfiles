@@ -18,21 +18,6 @@ function! ar#fzf#Plugs(fullscreen) abort
         \ }, a:fullscreen))
 endfunction
 
-function! ar#fzf#Rg(query, fullscreen) abort
-  let l:cmd_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
-
-  let l:initial_cmd = printf(l:cmd_fmt, shellescape(a:query))
-  let l:reload_cmd = printf('change:reload:'.l:cmd_fmt, '{q}')
-
-  let l:spec = {'options': [
-        \ '--phony',
-        \ '--query', a:query,
-        \ '--bind', l:reload_cmd,
-        \ ]}
-
-  call fzf#vim#grep(l:initial_cmd, 1, ar#fzf#WithPreview(l:spec), a:fullscreen)
-endfunction
-
 function! ar#fzf#Files(dir, fullscreen) abort
   call fzf#vim#files(a:dir, ar#fzf#WithPreview(a:fullscreen), a:fullscreen)
 endfunction

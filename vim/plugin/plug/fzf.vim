@@ -15,8 +15,8 @@ let g:fzf_colors = {
       \ 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
       \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'fg+':     ['fg', 'Visual', 'CursorLine', 'Normal'],
+      \ 'bg+':     ['bg', 'Visual', 'CursorLine'],
       \ 'hl+':     ['fg', 'Statement'],
       \ 'info':    ['fg', 'PreProc'],
       \ 'border':  ['fg', 'Ignore'],
@@ -24,7 +24,8 @@ let g:fzf_colors = {
       \ 'pointer': ['fg', 'Exception'],
       \ 'marker':  ['fg', 'Keyword'],
       \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment']
+      \ 'header':  ['fg', 'Comment'],
+      \ 'gutter':  ['bg', 'Normal'],
       \ }
 
 " Mappings
@@ -37,33 +38,16 @@ nnoremap <silent>[FZF]:     :<C-U>History:<CR>
 nnoremap <silent>[FZF]T     :<C-U>Tags<CR>
 nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
 nnoremap <silent>[FZF]f     :<C-U>Files<CR>
-nnoremap <silent>[FZF]g     :<C-U>RG<Space>
 nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
 nnoremap <silent>[FZF]m     :<C-U>GFiles?<CR>
 nnoremap <silent>[FZF]p     :<C-U>Plugs<CR>
 nnoremap <silent>[FZF]r     :<C-U>History<CR>
 nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
 
-" -----------------------------------------------------------------------
-
-function! s:BuildQuickfixList(lines)
-  call setqflist(map(copy(a:lines), {_, v -> {'filename': v} }), 'a')
-  copen
-  cc
-endfunction
-
-function! s:BuildLocationList(lines)
-  call setloclist(0, map(copy(a:lines), {_, v -> {'filename': v} }), 'a')
-  lopen
-  ll
-endfunction
-
 let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit',
       \ 'ctrl-t': 'tabedit',
-      \ 'ctrl-q': function('s:BuildQuickfixList'),
-      \ 'ctrl-l': function('s:BuildLocationList'),
       \ }
 
 " Commands
@@ -71,17 +55,8 @@ let g:fzf_action = {
 command! -bang -nargs=0 Plugs
       \ call ar#fzf#Plugs(<bang>0)
 
-" command! -bang -nargs=* -complete=dir RG
-"       \ call ar#fzf#Rg(<q-args>, <bang>0)
-
 command! -bang -nargs=? -complete=dir Files
       \ call ar#fzf#Files(<q-args>, <bang>0)
-
-command! -bang -nargs=* RG           call ar#fzf#Rg(<q-args>, <bang>0)
-
-" -----------------------------------------------------------------------
-
-" au FileType fzf tunmap <Esc>
 
 let &cpoptions = s:cpo_save
 unlet s:cpo_save
