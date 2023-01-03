@@ -54,13 +54,7 @@ require('neo-tree').setup({
       align = 'right',
     },
   },
-
 })
 
-vim.keymap.set('n', '<leader>n', function()
-  vim.cmd([[Neotree toggle]])
-end)
-
-vim.keymap.set('n', '<leader>e', function()
-  vim.cmd([[Neotree focus]])
-end)
+vim.keymap.set('n', '<leader>n', [[<cmd>Neotree toggle<cr]])
+vim.keymap.set('n', '<leader>e', [[<cmd>Neotree reveal<cr>]])
