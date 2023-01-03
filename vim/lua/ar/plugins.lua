@@ -34,7 +34,19 @@ packer.startup(function(use)
   use('tpope/vim-scriptease')
   use('tpope/vim-surround')
   use('dstein64/vim-startuptime')
-  use('preservim/nerdtree')
+
+  use({ 'preservim/nerdtree', opt = true })
+
+  use({
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v2.x',
+    config = function() require('ar.neo-tree') end,
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'mrbjarksen/neo-tree-diagnostics.nvim',
+    },
+  })
   use('mileszs/ack.vim')
   use('ludovicchabant/vim-gutentags')
 
