@@ -2,45 +2,48 @@ local heirline = require('heirline')
 local conditions = require('heirline.conditions')
 local utils = require('heirline.utils')
 
-local exceptions = {
+local exception = setmetatable({
   filetype = {
     fugitiveblame = 'Blame',
-    fzf = 'FZF',
-    gitcommit = 'Commit Message',
-    godoc = 'GoDoc',
-    help = 'Help',
-    nerdtree = 'NERDTree',
-    qf = '☰ Quickfix',
-    tagbar = 'Tagbar',
-    list = 'List',
-    Outline = 'Outline',
-    packer = 'Packer',
-    ['neo-tree'] = 'Neotree'
+    fzf           = 'FZF',
+    gitcommit     = 'Commit Message',
+    godoc         = 'GoDoc',
+    help          = 'Help',
+    nerdtree      = 'NERDTree',
+    qf            = '☰ Quickfix',
+    tagbar        = 'Tagbar',
+    list          = 'List',
+    Outline       = 'Outline',
+    packer        = 'Packer',
+    ['neo-tree']  = 'Neotree'
   },
   buftype = { 'nofile' },
-}
-
-function exceptions.buffer_matches()
-  return conditions.buffer_matches({
-    filetype = vim.tbl_keys(exceptions.filetype),
-    buftype = exceptions.buftype,
-  })
-end
+}, {
+  __call = function(self)
+    return conditions.buffer_matches({
+      filetype = vim.tbl_keys(self.filetype),
+      buftype = self.buftype,
+    })
+  end
+})
 
 -- Colors {{{
-local colors = require('ar.colors.beatbox')
-
-vim.api.nvim_set_hl(0, 'Statusline', { bg = colors.base02 })
-vim.api.nvim_set_hl(0, 'WinBar', { bg = colors.base02 })
-vim.api.nvim_set_hl(0, 'WinBarNC', {})
+local colors = {}
+do
+  local config = vim.fn['gruvbox_material#get_configuration']()
+  local get_palette = vim.fn['gruvbox_material#get_palette']
+  local palette = get_palette(config.background, config.foreground, config.colors_override)
+  for key, color in pairs(palette) do
+    colors[key] = color[1]
+  end
+end
 
 heirline.load_colors(colors)
 -- }}}
 
 local Space = { provider = ' ' }
 local Align = { provider = '%=' }
-
-local Sep = { provider = '|', hl = { fg = 'base04', bold = false } }
+local Sep   = { provider = '|', hl = { fg = 'grey1', bold = false } }
 
 -- Statusline
 
@@ -79,7 +82,7 @@ local ViMode = {
       local mode = self.mode:sub(1, 1) -- get only the first mode character
       return { fg = self.mode_colors[mode] }
     else
-      return { fg = 'base05' }
+      return { fg = 'bg4' }
     end
   end,
   update = 'ModeChanged',
@@ -93,7 +96,7 @@ local FileName = {
     if not conditions.width_percent_below(#self.path, 0.4) then
       self.path = vim.fn.pathshorten(self.path)
     end
-    self.fname = vim.fn.fnamemodify(self.filename, ':t')
+    self.fname = vim.fs.basename(self.filename)
   end,
   hl = function()
     if vim.bo.modified then
@@ -108,16 +111,13 @@ local FileName = {
     provider = function(self)
       return self.path .. '/'
     end,
-    hl = { fg = 'base04' },
+    hl = { fg = 'grey1' },
   },
   {
     provider = function(self)
-      if self.filename == '' then
-        return '[No Name]'
-      end
-      return self.fname
+      return self.filename == '' and '[No Name]' or self.fname
     end,
-    hl = { bold = true },
+    hl = { fg = 'fg0', bold = true },
   },
 }
 -- }}}
@@ -128,7 +128,6 @@ local FileFlags = {
     provider = function()
       return vim.bo.modified and ' '
     end,
-    hl = { fg = 'green' },
   },
   {
     provider = function()
@@ -150,7 +149,7 @@ local HelpFileName = {
   {
     provider = function()
       local fname = vim.api.nvim_buf_get_name(0)
-      return vim.fn.fnamemodify(fname, ':t')
+      return vim.fs.basename(fname)
     end,
   },
 }
@@ -170,7 +169,7 @@ local FileNameBlock = {
 -- Git {{{
 local Git = {
   condition = conditions.is_git_repo,
-  hl = { fg = 'white', bold = true },
+  hl = { fg = 'fg0', bold = true },
   provider = function()
     return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
   end,
@@ -228,7 +227,6 @@ local Navic = {
       Operator = '@operator',
       TypeParameter = '@type',
     },
-    max_depth = 3,
   },
   flexible = 3,
   {
@@ -242,7 +240,7 @@ local Navic = {
           },
           {
             provider = d.name,
-            hl = { fg = 'base07' },
+            hl = { fg = 'grey2' },
           },
         }
 
@@ -250,7 +248,7 @@ local Navic = {
         if #self.data > 1 and i < #self.data then
           table.insert(child, {
             provider = ' > ',
-            hl = { fg = 'base05' },
+            hl = { fg = 'grey1' },
           })
         end
 
@@ -284,7 +282,7 @@ local Spell = {
 -- FileType {{{
 local FileType = {
   condition = function()
-    return not exceptions.buffer_matches()
+    return not exception()
   end,
   {
     provider = function()
@@ -302,7 +300,7 @@ local Ruler = {
   -- %L = number of lines in the buffer
   -- %c = column number
   provider = ' %4l',
-  { provider = '/%L ', hl = { fg = 'light_grey2' } }
+  { provider = '/%L ', hl = { fg = 'grey1' } }
 }
 -- }}}
 
@@ -356,13 +354,13 @@ local Diagnostics = {
     provider = function(self)
       return self.info > 0 and (self.info_icon .. self.info .. ' ')
     end,
-    hl = { fg = 'light_grey2' },
+    hl = { fg = 'grey0' },
   },
   {
     provider = function(self)
       return self.hints > 0 and (self.hint_icon .. self.hints .. ' ')
     end,
-    hl = { fg = 'light_grey2' },
+    hl = { fg = 'grey0' },
   },
   Sep,
 }
@@ -390,7 +388,6 @@ local SearchResults = {
     provider = function(self)
       return (' [%d/%d] '):format(self.count.current, self.count.total)
     end,
-    -- hl = { bg = '#626262' },
     hl = { bold = true },
   },
 }
@@ -408,8 +405,7 @@ local QuickfixTitle = {
   Space,
   {
     provider = function(self)
-      local title = vim.w.quickfix_title
-      return title:gsub(self.grepprg, 'grep')
+      return self.title:gsub(self.grepprg, 'grep')
     end,
   },
 }
@@ -421,7 +417,7 @@ local Neomake = {
     if vim.fn.exists('*neomake#Make') == 0 then
       return false
     end
-    return vim.fn['neomake#statusline#LoclistStatus']()
+    return vim.fn['neomake#statusline#LoclistStatus']() ~= ''
   end,
   provider = function()
     return vim.fn['neomake#statusline#get'](vim.api.nvim_get_current_buf(), {
@@ -429,13 +425,15 @@ local Neomake = {
       format_loclist_ok = '',
       format_loclist_unknown = '',
       format_quickfix_unknown = '',
-      format_loclist_type_E = ' ⨉ {{count}}',
-      format_loclist_type_W = '  {{count}}',
-      format_loclist_type_I = ' ℹ︎ {{count}}',
+      format_loclist_type_E = ' ⨉{{count}}',
+      format_loclist_type_W = ' ⚠{{count}}',
+      format_loclist_type_I = ' ℹ︎{{count}}',
     })
   end,
   update = { 'User', pattern = 'NeomakeJobFinished' },
-  hl = { fg = 'red' },
+  hl = { bg = 'bg0', force = true },
+  Space,
+  Sep,
 }
 -- }}}
 
@@ -466,6 +464,7 @@ local InactiveStatusline = {
   condition = function()
     return not conditions.is_active()
   end,
+  hl = { fg = 'grey2', force = true },
 
   ViMode,
   Space,
@@ -479,11 +478,11 @@ local InactiveStatusline = {
 
 -- SpecialStatusline {{{
 local SpecialStatusline = {
-  condition = exceptions.buffer_matches,
+  condition = exception,
   Space,
   {
     provider = function()
-      return exceptions.filetype[vim.bo.filetype]
+      return exception.filetype[vim.bo.filetype]
     end,
   },
   Space,
@@ -500,8 +499,7 @@ local SpecialStatusline = {
 
 local Statusline = {
   fallthrough = false,
-  -- hl = { bg = 'bg2' },
-  hl = { bg = 'base02' },
+  hl = { bg = 'bg_statusline2' },
   SpecialStatusline,
   InactiveStatusline,
   DefaultStatusline,
@@ -516,17 +514,18 @@ local WorkDir = {
   hl = { bold = true },
 }
 
+
 local Tabpage = {
   provider = function(self)
     return '%' .. self.tabnr .. 'T ' .. self.tabnr .. ' %T'
   end,
   hl = function(self)
-    return self.is_active and { bg = 'blue', fg = 'one_bg' } or 'TabLineSel'
+    return self.is_active and { bg = 'blue', fg = 'bg1' } or 'TabLineSel'
   end,
 }
 
 local Tabline = {
-  hl = { bg = 'base02' },
+  hl = { bg = 'bg_statusline2' },
   utils.make_tablist(Tabpage),
   Align,
   WorkDir,
@@ -534,5 +533,7 @@ local Tabline = {
 -- }}}
 
 heirline.setup(Statusline, nil, Tabline)
+
+vim.api.nvim_create_user_command('ReloadStatusline', function() R('ar.heirline') end, {})
 
 -- vim: foldmethod=marker
