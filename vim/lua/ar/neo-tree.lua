@@ -23,6 +23,7 @@ require('neo-tree').setup({
   window = {
     width = 35,
     mappings = {
+      ['<space>'] = false, -- borks fzf mappings
       ['i'] = 'open_split',
       ['v'] = 'open_vsplit',
       ['x'] = 'close_node',
