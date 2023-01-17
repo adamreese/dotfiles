@@ -532,7 +532,10 @@ local Tabline = {
 }
 -- }}}
 
-heirline.setup(Statusline, nil, Tabline)
+heirline.setup({
+  statusline = Statusline,
+  tabline    = Tabline,
+})
 
 vim.api.nvim_create_user_command('ReloadStatusline', function() R('ar.heirline') end, {})
 
