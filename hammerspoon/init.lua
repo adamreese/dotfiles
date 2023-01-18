@@ -76,6 +76,14 @@ Install:andUse('WindowHalfsAndThirds', {
   }
 })
 
+-- http://www.hammerspoon.org/Spoons/WindowScreenLeftAndRight.html
+Install:andUse("WindowScreenLeftAndRight", {
+  config = {
+    animationDuration = 0
+  },
+  hotkeys = 'default',
+})
+
 -- http://www.hammerspoon.org/Spoons/ReloadConfiguration.html
 Install:andUse('ReloadConfiguration', {
   start = true,
