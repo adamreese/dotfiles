@@ -216,7 +216,6 @@ packer.startup(function(use)
   use('f3fora/cmp-spell')
   use('hrsh7th/cmp-nvim-lua')
   use('saadparwaiz1/cmp_luasnip')
-  use('hrsh7th/cmp-cmdline')
   use({
     'petertriho/cmp-git',
     requires = { 'nvim-lua/plenary.nvim' },

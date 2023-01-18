@@ -96,25 +96,11 @@ cmp.setup({
         spell = '[spell]',
         luasnip = '[snip]',
         buffer = '[buf]',
-        cmdline = '[cmd]',
         cmp_git = '[git]',
       })[entry.source.name]
       return item
     end,
   },
-})
-
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
-cmp.setup.cmdline(':', {
-  sources = {
-    { name = 'path' },
-    { name = 'cmdline' },
-  }
 })
 
 -- [ nvim-autopairs ] ----------------------------------------------------------
