@@ -136,9 +136,9 @@ vim.keymap.set({ 's', 'i' }, '<c-k>', function()
   end
 end, { silent = true, desc = 'luasnip expand or jump' })
 
+require('luasnip.loaders.from_vscode').lazy_load()
 require('luasnip.loaders.from_vscode').lazy_load({
   paths = {
-    -- vim.g.plug_home .. '/friendly-snippets',
     './snippet',
   },
 })
