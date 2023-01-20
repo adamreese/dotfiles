@@ -88,3 +88,7 @@ zle -N bracketed-paste bracketed-paste-url-magic
 # automatically quote URLs
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
+
+autoload -Uz    fzf-history-widget
+zle      -N     fzf-history-widget
+bindkey  '^x^R' fzf-history-widget
