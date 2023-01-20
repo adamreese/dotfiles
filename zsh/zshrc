@@ -11,6 +11,7 @@ path=(
   /usr/local/opt/ruby/bin(N-/)
   ${GEM_HOME}/bin(N-/)
   ${HOMEBREW_PREFIX}/opt/ruby/bin(N-/)
+  ${CARGO_HOME}/bin(N-/)
   ${HOME}/.cargo/bin(N-/)
 
   ${HOME}/Library/Python/3.*/bin(Nn[-1]-/)
