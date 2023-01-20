@@ -13,5 +13,8 @@ function! profile#() abort
     profile start /tmp/profile.log
     profile func *
     profile file *
+
+    set verbose=9
+    set verbosefile=/tmp/verbose.log
   endif
 endfunction
