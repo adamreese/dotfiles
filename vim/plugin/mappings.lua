@@ -6,9 +6,6 @@ vim.keymap.set('n', '<leader>Q', '<cmd>quitall!<cr>')
 vim.keymap.set('n', '<leader>q', '<cmd>quit!<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>write!<cr>')
 
--- close quickfix/location window
-vim.keymap.set('n', '<leader>c', '<cmd>cclose<bar>lclose<cr>')
-
 -- remove search highlight
 vim.keymap.set('n', '<leader><cr>', '<cmd>nohlsearch<cr>')
 
