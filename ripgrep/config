@@ -3,10 +3,10 @@
 --no-messages
 
 --type-add
-vim:vimrc
+vim:*vimrc
 
 --type-add
-hcl:*.{hcl,nomad}
+hcl:*.{hcl,nomad,terraform,tf}
 
 --colors=line:fg:yellow
 --colors=line:style:bold

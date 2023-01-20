@@ -9,6 +9,9 @@ node_modules/
 tmp/
 vendor/
 
+**/target/debug
+**/target/release
+
 *.bundle.*
 *.cache
 *.cgi
