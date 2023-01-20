@@ -3,7 +3,7 @@
 -- =======================================================================
 
 if not pcall(require, 'impatient') then
-  print 'failed to load impatient.nvim'
+  print('failed to load impatient.nvim')
 end
 
 -- -----------------------------------------------------------------------

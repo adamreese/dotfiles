@@ -9,6 +9,10 @@ if pcall(require, 'plenary') then
   end
 end
 
-vim.api.nvim_create_user_command('ReloadModule', function(opts) R(opts.args) end, { nargs = 1 })
+vim.api.nvim_create_user_command('ReloadModule', function(opts)
+  R(opts.args)
+end, { nargs = 1 })
+
+vim.o.titlestring = '%{luaeval("require[[ar.title]]()")}'
 
 return M
