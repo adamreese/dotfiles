@@ -17,3 +17,6 @@ alias plistbuddy="/usr/libexec/PlistBuddy"
 
 # Airport CLI alias
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
+# https://github.com/arodik/macos-focus-mode
+alias dnd='macos-focus-mode'
