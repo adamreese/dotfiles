@@ -41,26 +41,48 @@ linters-settings:
 linters:
   enable-all: true
   disable:
-    - depguard
-    - dupl
-    - exhaustivestruct
-    - forbidigo
-    - funlen
+    # - depguard
+    # - dupl
+    - exhaustruct
+    # - forbidigo
+    # - funlen
     - gochecknoglobals
-    - gochecknoinits
-    - goconst
-    - gocyclo
-    - godot
-    - godox
-    - golint
-    - gomnd
-    - gosec
-    - interfacer
+    # - gochecknoinits
+    # - goconst
+    # - gocyclo
+    # - godot
+    # - godox
+    # - golint
+    # - gomnd
+    # - gosec
     - lll
-    - maligned
+    # - maligned
     - nlreturn
-    - paralleltest
+    # - paralleltest
     - rowserrcheck
-    - scopelint
-    - typecheck
+    # - typecheck
+    - varnamelen
     - wsl
+
+    # depreciated
+    - deadcode
+    - exhaustivestruct
+    - golint
+    - ifshort
+    - interfacer
+    - maligned
+    - nosnakecase
+    - scopelint
+    - structcheck
+    - varcheck
+
+    # disabled because of generics
+
+    # go 1.18 broke these
+    # - bodyclose
+    # - contextcheck
+    # - nilerr
+    # - noctx
+    - sqlclosecheck
+    # - tparallel
+    - wastedassign
