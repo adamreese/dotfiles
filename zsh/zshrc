@@ -27,6 +27,8 @@ bindkey -v
 # Zsh functions to load (man zshcontrib).
 autoload -Uz zmv
 
+export PROJECTS="${HOME}/p/src"
+
 # ------------------------------------------------------------------------------
 # zinit
 

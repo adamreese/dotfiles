@@ -1,8 +1,6 @@
 # zsh projects
 # -----------------------------------------------------------------------------
 
-export PROJECTS="${HOME}/p/src"
-
 # Helm
 # -----------------------------------------------------------------------------
 path[1,0]=${PROJECTS}/helm.sh/helm/bin
@@ -29,7 +27,7 @@ path[1,0]=${PROJECTS}/github.com/deislabs/wagi/target/release
 
 # Bindle
 # -----------------------------------------------------------------------------
-path[1,0]="${PROJECTS}/github.com/deislabs/bindle/target/debug"
+path[1,0]="${PROJECTS}/github.com/deislabs/bindle/target/release"
 
 export BINDLE_IP_ADDRESS_PORT='127.0.0.1:8080'
 export BINDLE_URL="http://${BINDLE_IP_ADDRESS_PORT}/v1"
