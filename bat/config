@@ -1,3 +1,4 @@
 --theme="base16"
---style=numbers
+--plain
+--italic-text=always
 --map-syntax '.ignore:Git Ignore'
