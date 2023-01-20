@@ -84,43 +84,22 @@ symlink_files() {
   symlink ruby/gemrc           .gemrc
   symlink ruby/rspec           .config/rspec/options
 
-  # git
   symlink git                  .config/git
-
-  # tmux
   symlink tmux/tmux.conf       .tmux.conf
-
-  # screen
   symlink screen               .config/screen
-
-  # hammerspoon
-  symlink hammerspoon          .hammerspoon
-
-  # shell
   symlink zsh/zshenv           .zshenv
-
-  # search
   symlink ripgrep/ignore       .ignore
-
-  # ctags
   symlink ctags                .config/ctags
-
-  # bin
   symlink bin                  .local/bin
-
-  # ranger
   symlink ranger               .config/ranger
-
-  # yamllint
   symlink yamllint             .config/yamllint
-
-  # bat
   symlink bat                  .config/bat
-
-  # stylua
   symlink stylua               .config/stylua
 
-  symlink karabiner            .config/karabiner
+  if [[ "${OSTYPE}" == darwin* ]]; then
+    symlink hammerspoon          .hammerspoon
+    symlink karabiner            .config/karabiner
+  fi
 
   print_success "Completed symlinks"
 }
