@@ -16,10 +16,6 @@ function! project#SourceConfig() abort
     let l:projectfile = findfile(l:file, expand('%:p').';')
     if filereadable(l:projectfile)
 
-      echohl ModeMsg
-      echomsg 'loading project file: '. l:projectfile
-      echohl None
-
       execute 'source ' . l:projectfile
     endif
   endfor
