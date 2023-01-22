@@ -23,7 +23,21 @@ packer.startup(function(use)
   use('lewis6991/impatient.nvim')
   use('nvim-lua/plenary.nvim')
 
-  use('norcalli/nvim-colorizer.lua')
+  use({ 'rrethy/vim-hexokinase',
+    cmd = 'HexokinaseToggle',
+    run = 'make hexokinase',
+    config = function()
+      vim.g.Hexokinase_optInPatterns = {
+        'full_hex',
+        'triple_hex',
+        'rgb',
+        'rgba',
+        'hsl',
+        'hsla',
+      }
+    end,
+  })
+
   use('junegunn/fzf')
   use('junegunn/fzf.vim')
   use('windwp/nvim-autopairs')
