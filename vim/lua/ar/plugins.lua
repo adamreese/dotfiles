@@ -95,11 +95,8 @@ packer.startup(function(use)
     run = ':TSUpdate',
     config = function() require('ar.treesitter') end,
   })
-  use({ 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' })
-  use({
-    'nvim-treesitter/playground',
-    requires = 'nvim-treesitter/nvim-treesitter',
-  })
+  use({ 'nvim-treesitter/nvim-treesitter-textobjects' })
+  use({ 'nvim-treesitter/playground' })
 
   use({
     'iamcco/markdown-preview.nvim',
@@ -259,4 +256,14 @@ end
 
 vim.cmd('cabbrev PS PackerSync')
 
-return M
+local augid = vim.api.nvim_create_augroup('ar_packer', { clear = true })
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'PackerCompileDone',
+  desc = 'Notify when packer has compiled',
+  callback = function()
+    vim.notify('Packer configuration recompiled')
+  end,
+  group = augid,
+})
+
+return setmetatable(M, { __index = packer })
