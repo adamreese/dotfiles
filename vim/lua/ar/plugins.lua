@@ -71,9 +71,7 @@ packer.startup(function(use)
       vim.g.matchup_matchparen_deferred_show_delay = 100
     end
   })
-  use({ 'benekastah/neomake',
-    cmd = 'Neomake',
-  })
+  use({ 'benekastah/neomake' })
   use({ 'chrisbra/unicode.vim',
     cmd = { 'UnicodeName', 'UnicodeTable' },
   })
