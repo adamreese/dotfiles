@@ -26,6 +26,6 @@ nnoremap <silent> <buffer> <Right> :<C-u>call qf#history#Newer()<CR>
 nnoremap <silent> <buffer> { :<C-u>call qf#filegroup#PreviousFile()<CR>
 nnoremap <silent> <buffer> } :<C-u>call qf#filegroup#NextFile()<CR>
 
-# toggle list window
+" toggle list window
 nnoremap <Leader>c :<C-u>call qf#toggle#ToggleQfWindow(v:false)<CR>
 nnoremap <Leader>l :<C-u>call qf#toggle#ToggleLocWindow(v:false)<CR>
