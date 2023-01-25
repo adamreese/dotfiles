@@ -15,8 +15,8 @@ setlocal nobuflisted
 " Don't use modelines in quickfix windows.
 setlocal nomodeline
 
-nnoremap <silent> <buffer> <leader>k  :Keep<space>
-nnoremap <silent> <buffer> <leader>r  :Reject<space>
+nnoremap <buffer> <leader>k  :Keep<space>
+nnoremap <buffer> <leader>r  :Reject<space>
 
 " navigate between older and newer lists
 nnoremap <silent> <buffer> <Left>  :<C-u>call qf#history#Older()<CR>
