@@ -14,10 +14,7 @@ vim.api.nvim_create_autocmd('VimEnter', {
 
 vim.api.nvim_create_autocmd('BufWritePre', {
   desc = 'Remove trailing whitespace automatically',
-  callback = function()
-    vim.fn['whitespace#TrimTrailingSpace']()
-    vim.fn['whitespace#RemoveTrailingLines']()
-  end,
+  callback = require('ar.whitespace').trim,
   group = augid,
 })
 
