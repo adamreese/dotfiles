@@ -3,10 +3,10 @@ vim.g.neo_tree_remove_legacy_commands = 1
 require('neo-tree').setup({
   sources = {
     'filesystem',
-    'buffers',
     'git_status',
     'diagnostics',
   },
+  enable_diagnostics = false,
   source_selector = {
     winbar = true,
     content_layout = 'center',
@@ -24,6 +24,7 @@ require('neo-tree').setup({
     width = 35,
     mappings = {
       ['<space>'] = false, -- borks fzf mappings
+      ['/'] = false,
       ['i'] = 'open_split',
       ['v'] = 'open_vsplit',
       ['x'] = 'close_node',
@@ -34,20 +35,25 @@ require('neo-tree').setup({
       folder_closed = '▸',
       folder_open = '▾',
       folder_empty = 'ﰊ',
+      default = '',
     },
-    name = { trailing_slash = true },
+    name = {
+      trailing_slash = true,
+      use_git_status_colors = false,
+    },
+
     indent = { padding = 0 },
     git_status = {
       symbols = {
         -- Change type
-        added     = '✚', -- NOTE: you can set any of these to an empty string to not show them
+        added     = '',
         deleted   = '✖',
         modified  = '',
         renamed   = '',
         -- Status type
-        untracked = '★',
+        untracked = '',
         ignored   = '',
-        unstaged  = '✗', -- '',
+        unstaged  = 'ϟ',
         staged    = '✓',
         conflict  = '',
       },
@@ -56,5 +62,13 @@ require('neo-tree').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>n', [[<cmd>Neotree toggle<cr]])
+vim.keymap.set('n', '<leader>n', [[<cmd>Neotree toggle<cr>]])
 vim.keymap.set('n', '<leader>e', [[<cmd>Neotree reveal<cr>]])
+
+local augid = vim.api.nvim_create_augroup('ar_neotree', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  desc = [[Don't list neo-tree buffer]],
+  pattern = 'neo-tree',
+  command = 'set nobuflisted',
+  group = augid,
+})
