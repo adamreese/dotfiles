@@ -28,22 +28,13 @@ local exception = setmetatable({
 })
 
 -- Colors {{{
-local colors = {}
-do
-  local config = vim.fn['gruvbox_material#get_configuration']()
-  local get_palette = vim.fn['gruvbox_material#get_palette']
-  local palette = get_palette(config.background, config.foreground, config.colors_override)
-  for key, color in pairs(palette) do
-    colors[key] = color[1]
-  end
-end
-
+local colors = vim.tbl_map( function(x) return x.hex end, R('ar.colors.gruvbones'))
 heirline.load_colors(colors)
 -- }}}
 
 local Space = { provider = ' ' }
 local Align = { provider = '%=' }
-local Sep   = { provider = '|', hl = { fg = 'grey1', bold = false } }
+local Sep   = { provider = '|', hl = { fg = 'fg5', bold = false } }
 
 -- Statusline
 
@@ -60,7 +51,6 @@ local ViMode = {
   end,
   static = {
     mode_colors = {
-      -- n = '#626262',
       n = 'blue',
       i = 'green',
       v = 'orange',
@@ -111,13 +101,13 @@ local FileName = {
     provider = function(self)
       return self.path .. '/'
     end,
-    hl = { fg = 'grey1' },
+    hl = { fg = 'fg5' },
   },
   {
     provider = function(self)
       return self.filename == '' and '[No Name]' or self.fname
     end,
-    hl = { fg = 'fg0', bold = true },
+    hl = { fg = 'fg', bold = true },
   },
 }
 -- }}}
@@ -169,7 +159,7 @@ local FileNameBlock = {
 -- Git {{{
 local Git = {
   condition = conditions.is_git_repo,
-  hl = { fg = 'fg0', bold = true },
+  hl = { fg = 'fg', bold = true },
   provider = function()
     return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
   end,
@@ -180,9 +170,9 @@ local Git = {
 -- LSPActive {{{
 local LSPActive = {
   condition = conditions.lsp_attached,
-  update = { 'LspAttach', 'LspDetach' },
-  hl = { fg = 'green', bold = true },
-  provider = '⦾ ',
+  update    = { 'LspAttach', 'LspDetach' },
+  hl        = { fg = 'green', bold = true },
+  provider  = ' ',
   Sep,
 }
 -- }}}
@@ -247,8 +237,8 @@ local Navic = {
         -- add a separator only if needed
         if #self.data > 1 and i < #self.data then
           table.insert(child, {
-            provider = ' > ',
-            hl = { fg = 'grey1' },
+            provider = '  ',
+            hl = { fg = 'fg5' },
           })
         end
 
@@ -273,9 +263,8 @@ local Spell = {
   condition = function()
     return vim.wo.spell
   end,
-  provider = ' s ',
+  provider = ' sᴘᴇʟʟ ',
   hl = { bold = true, fg = 'orange' },
-  Space,
 }
 -- }}}
 
@@ -284,12 +273,15 @@ local FileType = {
   condition = function()
     return not exception()
   end,
+  Space,
   {
     provider = function()
-      return ' ' .. vim.bo.filetype .. ' '
+      local ft = vim.bo.filetype
+      return ft == '' and 'ɴᴏᴏᴘ' or ft
     end,
     hl = { bold = true },
   },
+  Space,
   Sep,
 }
 -- }}}
@@ -299,8 +291,8 @@ local Ruler = {
   -- %l = current line number
   -- %L = number of lines in the buffer
   -- %c = column number
-  provider = ' %4l',
-  { provider = '/%L ', hl = { fg = 'grey1' } }
+  { provider = ' %4l' },
+  { provider = '/%L ', hl = { fg = 'fg5' } }
 }
 -- }}}
 
@@ -414,10 +406,8 @@ local QuickfixTitle = {
 -- Neomake {{{
 local Neomake = {
   condition = function()
-    if vim.fn.exists('*neomake#Make') == 0 then
-      return false
-    end
-    return vim.fn['neomake#statusline#LoclistStatus']() ~= ''
+    return vim.fn.exists('*neomake#Make') and
+        vim.fn['neomake#statusline#LoclistStatus']() ~= ''
   end,
   provider = function()
     return vim.fn['neomake#statusline#get'](vim.api.nvim_get_current_buf(), {
@@ -431,7 +421,6 @@ local Neomake = {
     })
   end,
   update = { 'User', pattern = 'NeomakeJobFinished' },
-  hl = { bg = 'bg0', force = true },
   Space,
   Sep,
 }
@@ -445,10 +434,10 @@ local DefaultStatusline = {
   Space,
   Git,
   FileNameBlock,
-  Spell,
   Align,
   Navic,
   Align,
+  Spell,
   SearchResults,
   LSPActive,
   Diagnostics,
@@ -499,7 +488,7 @@ local SpecialStatusline = {
 
 local Statusline = {
   fallthrough = false,
-  hl = { bg = 'bg_statusline2' },
+  hl = 'Statusline',
   SpecialStatusline,
   InactiveStatusline,
   DefaultStatusline,
@@ -525,7 +514,7 @@ local Tabpage = {
 }
 
 local Tabline = {
-  hl = { bg = 'bg_statusline2' },
+  hl = 'Tabline',
   utils.make_tablist(Tabpage),
   Align,
   WorkDir,

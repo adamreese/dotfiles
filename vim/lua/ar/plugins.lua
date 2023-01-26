@@ -235,7 +235,12 @@ packer.startup(function(use)
     requires = 'neovim/nvim-lspconfig'
   })
 
-  use({ 'rktjmp/lush.nvim' })
+  -- Colorscheme --------------------------------------------------------
+  use({ 'sainnhe/gruvbox-material' })
+  use({
+    'mcchrish/zenbones.nvim',
+    requires = 'rktjmp/lush.nvim'
+  })
 
   -- load plugins that I am testing
   pcall(function()

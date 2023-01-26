@@ -7,8 +7,6 @@ let g:hybrid_custom_term_colors = v:true
 
 " Highlights:
 " -----------------------------------------------------------------------
-highlight! clear QuickFixLine
-highlight! QuickFixLine cterm=underline gui=underline guibg=NONE
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -21,7 +19,6 @@ function! s:gruvbox_material() abort
 
   highlight! link NeoTreeNormal Normal
   highlight! clear NeoTreeEndOfBuffer
-
 endfunction
 
 let g:gruvbox_material_ui_contrast = 'high'
@@ -32,5 +29,13 @@ let g:gruvbox_material_colors_override = {
       \ 'yellow':         ['#d6b676', '214'],
       \ }
 
-autocmd! ColorScheme gruvbox-material call s:gruvbox_material()
-colorscheme gruvbox-material
+augroup ar_colorscheme
+  autocmd!
+  autocmd ColorScheme gruvbox-material call s:gruvbox_material()
+augroup END
+
+let g:zenbones_solid_line_nr = v:true
+let g:zenbones_lighten_noncurrent_window = v:true
+
+" colorscheme gruvbox-material
+colorscheme gruvbones
