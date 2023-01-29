@@ -209,7 +209,12 @@ packer.startup(function(use)
   use('vim-ruby/vim-ruby')
 
   -- LSP ----------------------------------------------------------------
-  use('neovim/nvim-lspconfig')
+  use({
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('ar.lsp')
+    end,
+  })
   use('L3MON4D3/LuaSnip')
   use('rafamadriz/friendly-snippets')
   use('simrat39/rust-tools.nvim')
@@ -218,7 +223,12 @@ packer.startup(function(use)
   use('mickael-menu/zk-nvim')
   use('saecki/crates.nvim')
 
-  use('hrsh7th/nvim-cmp')
+  use({
+    'hrsh7th/nvim-cmp',
+    config = function()
+      require('ar.cmp')
+    end,
+  })
   use('hrsh7th/cmp-nvim-lsp')
   use('hrsh7th/cmp-path')
   use('hrsh7th/cmp-buffer')
