@@ -242,11 +242,6 @@ local function setup_servers()
   })
 
   require('rust-tools').setup({
-    tools = {
-      inlay_hints = {
-        highlight = 'RustInlay',
-      },
-    },
     server = with_defaults({
       cmd = { vim.env.XDG_DATA_HOME .. '/rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer' },
       settings = {
