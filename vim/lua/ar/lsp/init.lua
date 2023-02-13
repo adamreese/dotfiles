@@ -177,12 +177,7 @@ local servers = {
       },
     },
   },
-  sumneko_lua = {
-    cmd = {
-      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/bin/lua-language-server',
-      '-E',
-      vim.fn.stdpath('data') .. '/lsp/sumneko_lua/main.lua',
-    },
+  lua_ls = {
     settings = {
       Lua = {
         completion = {
