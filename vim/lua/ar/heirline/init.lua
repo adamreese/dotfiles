@@ -96,7 +96,7 @@ local FileName = {
   end,
   {
     condition = function(self)
-      return self.path ~= '.' and self.path ~= '~'
+      return self.path ~= '.' and self.path ~= '~' and not self.filename == ''
     end,
     provider = function(self)
       return self.path .. '/'
@@ -190,31 +190,31 @@ local Navic = {
   static = {
     -- create a type highlight map
     type_hl = {
-      File = 'Directory',
-      Module = '@include',
-      Namespace = '@namespace',
-      Package = '@include',
-      Class = '@structure',
-      Method = '@method',
-      Property = '@property',
-      Field = '@field',
-      Constructor = '@constructor',
-      Enum = '@field',
-      Interface = '@type',
-      Function = '@function',
-      Variable = '@variable',
-      Constant = '@constant',
-      String = '@string',
-      Number = '@number',
-      Boolean = '@boolean',
-      Array = '@field',
-      Object = '@type',
-      Key = '@keyword',
-      Null = '@comment',
-      EnumMember = '@field',
-      Struct = '@structure',
-      Event = '@keyword',
-      Operator = '@operator',
+      File          = 'Directory',
+      Module        = '@include',
+      Namespace     = '@namespace',
+      Package       = '@include',
+      Class         = '@structure',
+      Method        = '@method',
+      Property      = '@property',
+      Field         = '@field',
+      Constructor   = '@constructor',
+      Enum          = '@field',
+      Interface     = '@type',
+      Function      = '@function',
+      Variable      = '@variable',
+      Constant      = '@constant',
+      String        = '@string',
+      Number        = '@number',
+      Boolean       = '@boolean',
+      Array         = '@field',
+      Object        = '@type',
+      Key           = '@keyword',
+      Null          = '@comment',
+      EnumMember    = '@field',
+      Struct        = '@structure',
+      Event         = '@keyword',
+      Operator      = '@operator',
       TypeParameter = '@type',
     },
   },
@@ -230,7 +230,7 @@ local Navic = {
           },
           {
             provider = d.name,
-            hl = { fg = 'grey2' },
+            hl = { fg = 'fg2' },
           },
         }
 
@@ -263,7 +263,7 @@ local Spell = {
   condition = function()
     return vim.wo.spell
   end,
-  provider = ' sᴘᴇʟʟ ',
+  provider = ' SPELL ',
   hl = { bold = true, fg = 'orange' },
 }
 -- }}}
@@ -454,7 +454,6 @@ local InactiveStatusline = {
     return not conditions.is_active()
   end,
   hl = { fg = 'grey2', force = true },
-
   ViMode,
   Space,
   FileNameBlock,
