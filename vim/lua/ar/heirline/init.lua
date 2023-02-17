@@ -96,7 +96,7 @@ local FileName = {
   end,
   {
     condition = function(self)
-      return self.path ~= '.' and self.path ~= '~' and not self.filename == ''
+      return self.path ~= '.' and self.path ~= '~' and self.filename ~= ''
     end,
     provider = function(self)
       return self.path .. '/'
