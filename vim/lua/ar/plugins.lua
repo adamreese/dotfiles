@@ -195,6 +195,39 @@ packer.startup(function(use)
     end,
   })
 
+  use({
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    keys = { '<space>f', '<space>F', '<space>b', '<space>h', '<space>m', '<space>d', '<space>S', '<space>s' },
+    module_pattern = 'telescope.*',
+    config = function() require('ar.telescope') end,
+    requires = {
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        after = 'telescope.nvim',
+        config = function() require('telescope').load_extension('fzf') end,
+      },
+      {
+        'nvim-telescope/telescope-smart-history.nvim',
+        after = 'telescope.nvim',
+        config = function() require('telescope').load_extension('smart_history') end,
+        requires = 'tami5/sqlite.lua',
+      },
+      {
+        'benfowler/telescope-luasnip.nvim',
+        after = 'telescope.nvim',
+        config = function() require('telescope').load_extension('luasnip') end,
+      },
+      {
+        'nvim-telescope/telescope-file-browser.nvim',
+        after = 'telescope.nvim',
+        config = function() require('telescope').load_extension('file_browser') end,
+      },
+    },
+  })
+
+
   -- Quickfix ----------------------------------------------------------
   use({
     'kevinhwang91/nvim-bqf',
