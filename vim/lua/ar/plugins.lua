@@ -23,7 +23,8 @@ packer.startup(function(use)
   use('lewis6991/impatient.nvim')
   use('nvim-lua/plenary.nvim')
 
-  use({ 'rrethy/vim-hexokinase',
+  use({
+    'rrethy/vim-hexokinase',
     cmd = 'HexokinaseToggle',
     run = 'make hexokinase',
     config = function()
@@ -64,7 +65,8 @@ packer.startup(function(use)
   use('mileszs/ack.vim')
   use('ludovicchabant/vim-gutentags')
 
-  use({ 'andymass/vim-matchup',
+  use({
+    'andymass/vim-matchup',
     config = function()
       vim.g.matchup_matchparen_deferred = 1
       vim.g.matchup_matchparen_status_offscreen = 0
@@ -72,22 +74,26 @@ packer.startup(function(use)
     end
   })
   use({ 'benekastah/neomake' })
-  use({ 'chrisbra/unicode.vim',
+  use({
+    'chrisbra/unicode.vim',
     cmd = { 'UnicodeName', 'UnicodeTable' },
   })
 
-  use({ 'christoomey/vim-tmux-navigator',
+  use({
+    'christoomey/vim-tmux-navigator',
     cond = function()
       return vim.env.TMUX ~= nil
     end,
   })
-  use({ 'editorconfig/editorconfig-vim',
+  use({
+    'editorconfig/editorconfig-vim',
     config = function()
       vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*' }
     end,
   })
   use('junegunn/vim-easy-align')
-  use({ 'sbdchd/neoformat',
+  use({
+    'sbdchd/neoformat',
     cmd = 'Neoformat',
   })
   use({
@@ -108,11 +114,13 @@ packer.startup(function(use)
     end,
   })
 
-  use({ 'majutsushi/tagbar',
+  use({
+    'majutsushi/tagbar',
     cmd = { 'TagbarToggle' },
   })
 
-  use({ 'AndrewRadev/bufferize.vim',
+  use({
+    'AndrewRadev/bufferize.vim',
     cmd = 'Bufferize',
     config = function()
       vim.g.bufferize_command = 'tabnew'
@@ -188,7 +196,8 @@ packer.startup(function(use)
   })
 
   -- Quickfix ----------------------------------------------------------
-  use({ 'kevinhwang91/nvim-bqf',
+  use({
+    'kevinhwang91/nvim-bqf',
     config = function() require('ar.bqf') end
   })
   use('romainl/vim-qf')
@@ -267,7 +276,6 @@ packer.startup(function(use)
   pcall(function()
     require('ar.local.plugins')(use)
   end)
-
 end)
 
 -- list plugin names
