@@ -151,6 +151,12 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     NotifyWARNBorder { Orange },
     NotifyWARNIcon { Orange },
     NotifyWARNTitle { Orange },
+
+    CodeBlock({ bg = p.bg }),
+    Headline({ bg = p.bg1, gui = 'bold,italic' }),
+    Headline1({ bg = p.bg3, gui = 'bold,italic' }),
+    Headline2({ bg = p.bg2, gui = 'bold,italic' }),
+    Headline3({ bg = p.bg1, gui = 'bold,italic' }),
     -- }}}
 
   }

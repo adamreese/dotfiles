@@ -176,6 +176,17 @@ packer.startup(function(use)
     end,
   })
 
+  use({
+    'lukas-reineke/headlines.nvim',
+    config = function()
+      require('headlines').setup({
+        markdown = {
+          headline_highlights = { 'Headline1', 'Headline2', 'Headline3' },
+        },
+      })
+    end,
+  })
+
   -- Quickfix ----------------------------------------------------------
   use({ 'kevinhwang91/nvim-bqf',
     config = function() require('ar.bqf') end
