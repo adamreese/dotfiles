@@ -14,7 +14,6 @@ require('neo-tree').setup({
   close_if_last_window = true,
   filesystem = {
     filtered_items = {
-      visible = true,
       hide_dotfiles = false,
       hide_gitignored = false,
       never_show = { '.DS_Store', '.git' },
@@ -53,7 +52,7 @@ require('neo-tree').setup({
         -- Status type
         untracked = '',
         ignored   = '',
-        unstaged  = 'ϟ',
+        unstaged  = '', -- 'ϟ',
         staged    = '✓',
         conflict  = '',
       },
@@ -64,11 +63,3 @@ require('neo-tree').setup({
 
 vim.keymap.set('n', '<leader>n', [[<cmd>Neotree toggle<cr>]])
 vim.keymap.set('n', '<leader>e', [[<cmd>Neotree reveal<cr>]])
-
-local augid = vim.api.nvim_create_augroup('ar_neotree', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  desc = [[Don't list neo-tree buffer]],
-  pattern = 'neo-tree',
-  command = 'set nobuflisted',
-  group = augid,
-})
