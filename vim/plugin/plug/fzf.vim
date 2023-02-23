@@ -4,13 +4,15 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
+finish
+
 " Settings
 " -----------------------------------------------------------------------
 let $FZF_DEFAULT_OPTS = ' --inline-info --bind esc:cancel,ctrl-a:select-all,ctrl-d:deselect-all'
 
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 let g:fzf_buffers_jump    = 1
-let g:fzf_history_dir     = g:state_dir . '/fzf-history'
+let g:fzf_history_dir     = stdpath('state') . '/fzf-history'
 let g:fzf_colors = {
       \ 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],

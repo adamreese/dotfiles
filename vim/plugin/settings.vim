@@ -59,17 +59,17 @@ endif
 if has('folding')
   set foldtext=folding#Text()
   set foldopen+=jump
-  set foldlevelstart=4
+  set foldlevelstart=99
 endif
 
 " Directories: {{{1
 " -----------------------------------------------------------------------
 
-execute 'set spellfile=' . stdpath('config')  . '/spell/en.utf-8.add'
-execute 'set directory=' . g:state_dir . '/swap//'
-execute 'set backupdir=' . g:state_dir . '/backup/'
+execute 'set spellfile=' . stdpath('config') . '/spell/en.utf-8.add'
+execute 'set directory=' . stdpath('state') . '/swap//'
+execute 'set backupdir=' . stdpath('state') . '/backup/'
 if has('mksession')
-  execute 'set viewdir=' . g:state_dir . '/view/'
+  execute 'set viewdir=' . stdpath('state') . '/view/'
   set viewoptions=cursor,folds " save/restore just these (with `:{mk,load}view`)
 endif
 
@@ -77,10 +77,10 @@ endif
 " Only works all the time.
 if has('persistent_undo')
   set undofile
-  execute 'set undodir=' . g:state_dir . '/undo/'
+  execute 'set undodir=' . stdpath('state') . '/undo/'
 endif
 
-exec 'set shada+=n' . g:state_dir . '/shada/main.shada'
+exec 'set shada+=n' . stdpath('state') . '/shada/main.shada'
 
 " Don't create root-owned files
 if exists('$SUDO_USER')

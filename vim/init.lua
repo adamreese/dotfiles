@@ -22,8 +22,6 @@ end
 -- Vim Configuration
 --------------------------------------------------------------------------
 
--- Create global config for directories
-vim.g.state_dir = vim.env.HOME .. '/.local/state/nvim'
 
 require('ar.plugins')
 
