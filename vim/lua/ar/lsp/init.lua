@@ -187,6 +187,14 @@ local servers = {
           globals = { 'hs', 'packer_plugins', 'spoon', 'vim' },
           disable = { 'missing-parameter' },
         },
+        format = {
+          enable = true,
+          defaultConfig = {
+            quote_style = 'single',
+            continuous_assign_statement_align_to_equal_sign = true,
+            continuous_assign_table_field_align_to_equal_sign = true,
+          }
+        },
         workspace = {
           maxPreload = 2000,
           preloadFileSize = 1000,
@@ -243,9 +251,10 @@ local function setup_servers()
 
   require('rust-tools').setup({
     server = with_defaults({
-      cmd = { vim.env.XDG_DATA_HOME .. '/rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer' },
       settings = {
-        ['rust-analyzer.cargo.allFeatures'] = true,
+        ['rust-analyzer'] = {
+          cargo = { allFeatures = true },
+        },
       },
     }),
   })
