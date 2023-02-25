@@ -47,7 +47,11 @@ packer.startup(function(use)
   use('tpope/vim-eunuch')
   use('tpope/vim-repeat')
   use('tpope/vim-scriptease')
-  use('tpope/vim-surround')
+  use({
+    'kylechui/nvim-surround',
+    config = function() require('nvim-surround').setup({ })
+    end
+  })
   use('dstein64/vim-startuptime')
 
   use({ 'preservim/nerdtree', opt = true })
