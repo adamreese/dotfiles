@@ -20,7 +20,6 @@ set smartcase                " ... but not it begins with upper case
 " Performance: {{{1
 " -----------------------------------------------------------------------
 
-set lazyredraw               " only redraw when needed
 set ttimeoutlen=10
 set timeoutlen=750
 set updatetime=300
@@ -120,6 +119,7 @@ set scrolljump=3
 set splitbelow                       " Split horizontal windows below to the current windows
 set splitright                       " Split vertical windows right to the current windows
 set virtualedit=block                " Allow virtual editing in Visual block mode
+set switchbuf=useopen,uselast
 
 set mouse=                           " Disable mouse support
 
@@ -151,7 +151,6 @@ set noshowmode                    " No to showing mode in bottom-left corner
 set number                        " Show line numbers
 set textwidth=78
 set title                         " Sets the terminal title nicely.
-set showtabline=2
 
 " Disable blinking cursor
 set guicursor&
