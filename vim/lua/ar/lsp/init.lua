@@ -5,10 +5,6 @@ local M = {
   format_on_save = true
 }
 
--- [ commands ] ----------------------------------------------------------------
-
-vim.api.nvim_create_user_command('MyLspInfo', require('ar.lsp.info').show_info, {})
-
 -- [ style ] -------------------------------------------------------------------
 
 vim.lsp.protocol.CompletionItemKind = {
