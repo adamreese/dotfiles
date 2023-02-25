@@ -28,7 +28,7 @@ local exception = setmetatable({
 })
 
 -- Colors {{{
-local colors = vim.tbl_map( function(x) return x.hex end, R('ar.colors.gruvbones'))
+local colors = vim.tbl_map(function(x) return x.hex end, require('ar.colors.gruvbones'))
 heirline.load_colors(colors)
 -- }}}
 
@@ -135,7 +135,8 @@ local HelpFileName = {
   condition = function()
     return vim.bo.filetype == 'help'
   end,
-  Sep, Space,
+  Sep,
+  Space,
   {
     provider = function()
       local fname = vim.api.nvim_buf_get_name(0)
@@ -163,7 +164,37 @@ local Git = {
   provider = function()
     return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
   end,
-  Sep, Space,
+  Sep,
+  Space,
+}
+
+local GitStatus = {
+  condition = conditions.is_git_repo,
+  init = function(self)
+    self.status_dict = vim.b.gitsigns_status_dict
+  end,
+  hl = { fg = 'fg' },
+  {
+    provider = function(self)
+      local count = self.status_dict.added or 0
+      return count > 0 and ("+" .. count)
+    end,
+  },
+  {
+    provider = function(self)
+      local count = self.status_dict.removed or 0
+      return count > 0 and ("-" .. count)
+    end,
+  },
+  {
+    provider = function(self)
+      local count = self.status_dict.changed or 0
+      return count > 0 and ("~" .. count)
+    end,
+  },
+  Space,
+  Sep,
+  Space,
 }
 -- }}}
 
@@ -173,6 +204,17 @@ local LSPActive = {
   update    = { 'LspAttach', 'LspDetach' },
   hl        = { fg = 'green', bold = true },
   provider  = ' ',
+  Sep,
+}
+-- }}}
+
+-- TSActive {{{
+local TSActive = {
+  condition = function()
+    return require('nvim-treesitter.parsers').has_parser()
+  end,
+  hl        = { fg = 'yellow' },
+  provider  = ' TS ',
   Sep,
 }
 -- }}}
@@ -321,7 +363,6 @@ local Diagnostics = {
     info_icon = ' ',
     hint_icon = ' ',
   },
-
   init = function(self)
     self.errors   = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
     self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -437,9 +478,11 @@ local DefaultStatusline = {
   Align,
   Navic,
   Align,
+  GitStatus,
   Spell,
   SearchResults,
   LSPActive,
+  TSActive,
   Diagnostics,
   Neomake,
   FileType,
