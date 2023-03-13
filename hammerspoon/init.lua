@@ -2,18 +2,15 @@
 
 local log = hs.logger.new('[init]', 'debug')
 
-log.i('----------------------------------------')
+require('console')
+
+log.i('─────────────────────────────────────────────')
 
 -- disable animations
 hs.window.animationDuration = 0
 
 -- lower logging level for hotkeys
 hs.hotkey.setLogLevel('warning')
-
--- console
-hs.console.toolbar(nil)
-hs.console.alpha(1)
-_G.i = hs.inspect
 
 --------------------------------------------------------------------------------
 -- Key Bindings
@@ -107,6 +104,6 @@ pcall(dofile, hs.configdir .. '/local.lua')
 
 hs.alert.show('Config loaded')
 
-log.i('----------------------------------------')
+log.i('─────────────────────────────────────────────')
 log.i('Config loaded')
-log.i('----------------------------------------')
+log.i('─────────────────────────────────────────────')
