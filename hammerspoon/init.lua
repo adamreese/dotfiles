@@ -42,12 +42,15 @@ end
 
 -- use key strokes for paste
 hs.hotkey.bind({ 'cmd', 'ctrl' }, 'V', function()
+  log.df('force paste len: %d', string.len(hs.pasteboard.getContents()))
   hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
 -- toggle dark mode
 hs.hotkey.bind(hyper, 'D', function()
-  hs.osascript.applescript('tell application "System Events" to tell appearance preferences to set dark mode to not dark mode')
+  log.i('setting dark mode')
+  hs.osascript.applescript(
+    'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode')
 end)
 
 --------------------------------------------------------------------------------
@@ -67,17 +70,17 @@ Install:andUse('WindowHalfsAndThirds', {
     max          = { hyper, '5' },
     max_toggle   = { hyper, 'f' },
 
-    left_half   = { { 'ctrl', 'cmd' }, 'Left' },
-    right_half  = { { 'ctrl', 'cmd' }, 'Right' },
-    top_half    = { { 'ctrl', 'cmd' }, 'Up' },
-    bottom_half = { { 'ctrl', 'cmd' }, 'Down' },
-    undo        = { { 'ctrl', 'cmd' }, 'z' },
-    center      = { { 'ctrl', 'cmd' }, 'c' },
+    left_half    = { { 'ctrl', 'cmd' }, 'Left' },
+    right_half   = { { 'ctrl', 'cmd' }, 'Right' },
+    top_half     = { { 'ctrl', 'cmd' }, 'Up' },
+    bottom_half  = { { 'ctrl', 'cmd' }, 'Down' },
+    undo         = { { 'ctrl', 'cmd' }, 'z' },
+    center       = { { 'ctrl', 'cmd' }, 'c' },
   }
 })
 
 -- http://www.hammerspoon.org/Spoons/WindowScreenLeftAndRight.html
-Install:andUse("WindowScreenLeftAndRight", {
+Install:andUse('WindowScreenLeftAndRight', {
   config = {
     animationDuration = 0
   },
