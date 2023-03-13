@@ -33,7 +33,8 @@ local focusKeys = {
   s      = 'com.tinyspeck.slackmacgap',
   z      = 'us.zoom.xos',
   d      = 'com.hnc.Discord',
-  Return = 'com.googlecode.iterm2',
+  -- Return = 'com.googlecode.iterm2',
+  Return = 'net.kovidgoyal.kitty',
 }
 
 for key, id in pairs(focusKeys) do
