@@ -1,14 +1,14 @@
 local M = {}
 
 local border = {
-  { '┏', 'FloatBorder' },
-  { '─', 'FloatBorder' },
-  { '┓', 'FloatBorder' },
-  { '│', 'FloatBorder' },
-  { '┛', 'FloatBorder' },
-  { '─', 'FloatBorder' },
-  { '┗', 'FloatBorder' },
-  { '│', 'FloatBorder' },
+  { '┏', 'Blue' },
+  { '━', 'Blue' },
+  { '┓', 'Blue' },
+  { '┃', 'Blue' },
+  { '┛', 'Blue' },
+  { '━', 'Blue' },
+  { '┗', 'Blue' },
+  { '┃', 'Blue' },
 }
 
 local function goto_definition(split_cmd)
