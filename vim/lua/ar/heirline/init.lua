@@ -536,36 +536,9 @@ local Statusline = {
   DefaultStatusline,
 }
 
--- Tabline {{{
-local WorkDir = {
-  provider = function()
-    local cwd = vim.loop.cwd()
-    return cwd and vim.fn.fnamemodify(cwd, ':~')
-  end,
-  hl = { bold = true },
-}
-
-
-local Tabpage = {
-  provider = function(self)
-    return '%' .. self.tabnr .. 'T ' .. self.tabnr .. ' %T'
-  end,
-  hl = function(self)
-    return self.is_active and { bg = 'blue', fg = 'bg1' } or 'TabLineSel'
-  end,
-}
-
-local Tabline = {
-  hl = 'Tabline',
-  utils.make_tablist(Tabpage),
-  Align,
-  WorkDir,
-}
--- }}}
-
 heirline.setup({
   statusline = Statusline,
-  tabline    = Tabline,
+  tabline    = require('ar.heirline.tabline')
 })
 
 vim.api.nvim_create_user_command('ReloadStatusline', function() R('ar.heirline') end, {})
