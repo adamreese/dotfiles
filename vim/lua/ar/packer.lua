@@ -311,7 +311,7 @@ packer.startup(function(use)
 
   -- load plugins that I am testing
   pcall(function()
-    require('ar.local.plugins')(use)
+    require('ar.local.packer')(use)
   end)
 end)
 

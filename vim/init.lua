@@ -22,7 +22,6 @@ end
 -- Vim Configuration
 --------------------------------------------------------------------------
 
-
-require('ar.plugins')
+require('ar.packer')
 
 _G['ar'] = require('ar')
