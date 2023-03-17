@@ -51,7 +51,7 @@ autoload -Uz _zinit
 BOOKMARKS_FILE=${ZDOTDIR}/bookmarks
 zinit load 'jocelynmallon/zshmarks'
 
-zinit lucid wait from'gh-r' as'program' mv'direnv* -> direnv' \
+zinit lucid from'gh-r' as'program' mv'direnv* -> direnv' \
   atclone'./direnv hook zsh >! zhook.zsh' atpull'%atclone' \
   pick'direnv' src='zhook.zsh' for \
   direnv/direnv
