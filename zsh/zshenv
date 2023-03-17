@@ -73,5 +73,9 @@ path=(
 # https://blog.packagecloud.io/eng/2017/02/21/set-environment-variable-save-thousands-of-system-calls/
 typeset -gx TZ=:/etc/localtime
 
+if [[ "${OSTYPE}" == darwin* ]]; then
+  ulimit -n 65536
+fi
+
 # ------------------------------------------------------------------------------
 # vi:ft=zsh
