@@ -39,11 +39,6 @@ if [[ ! -f ${ZINIT[HOME_DIR]}/bin/zinit.zsh ]]; then
   git clone https://github.com/zdharma-continuum/zinit.git ${ZINIT[HOME_DIR]}/bin
 fi
 
-if [[ -f "${ZINIT[HOME_DIR]}/bin/zmodules/Src/zdharma/zplugin.so" ]]; then
-  module_path+=( ${ZINIT[HOME_DIR]}/bin/zmodules/Src )
-  zmodload zdharma/zplugin
-fi
-
 source ${ZINIT[HOME_DIR]}/bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
