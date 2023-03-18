@@ -1,13 +1,9 @@
 autorest
-bash-language-server
 bower
 coffeelint
-dockerfile-language-server-nodejs
 generator-aspnet
 generator-wasm
 graphql
-graphql-language-service-cli
-javascript-typescript-langserver
 js-beautify
 jsctags
 jshint
@@ -28,11 +24,7 @@ ts-node
 tslint
 typescript
 typescript-formatter
-typescript-language-server
-vim-language-server
 vimlint
-vscode-json-languageserver
-vscode-langservers-extracted
 write-good
 yarn
 yo

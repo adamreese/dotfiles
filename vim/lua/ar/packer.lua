@@ -24,6 +24,29 @@ packer.startup(function(use)
   use('nvim-lua/plenary.nvim')
 
   use({
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup({
+        ui = {
+          border = 'single',
+          icons = {
+            package_installed = '✓',
+            package_pending = '➜',
+            package_uninstalled = '✗',
+          },
+        },
+      })
+    end,
+  })
+
+  use({
+    'williamboman/mason-lspconfig.nvim',
+    config = function()
+      require('mason-lspconfig').setup()
+    end,
+  })
+
+  use({
     'rrethy/vim-hexokinase',
     cmd = 'HexokinaseToggle',
     run = 'make hexokinase',
@@ -49,7 +72,8 @@ packer.startup(function(use)
   use('tpope/vim-scriptease')
   use({
     'kylechui/nvim-surround',
-    config = function() require('nvim-surround').setup({ })
+    config = function()
+      require('nvim-surround').setup()
     end
   })
   use('dstein64/vim-startuptime')
