@@ -42,7 +42,7 @@ packer.startup(function(use)
   use({
     'williamboman/mason-lspconfig.nvim',
     config = function()
-      require('mason-lspconfig').setup()
+      require('mason-lspconfig').setup({})
     end,
   })
 
@@ -74,7 +74,7 @@ packer.startup(function(use)
     'kylechui/nvim-surround',
     config = function()
       require('nvim-surround').setup()
-    end
+    end,
   })
   use('dstein64/vim-startuptime')
 
@@ -99,7 +99,7 @@ packer.startup(function(use)
       vim.g.matchup_matchparen_deferred = 1
       vim.g.matchup_matchparen_status_offscreen = 0
       vim.g.matchup_matchparen_deferred_show_delay = 100
-    end
+    end,
   })
   use({ 'benekastah/neomake' })
   use({
@@ -182,7 +182,9 @@ packer.startup(function(use)
   })
   use({
     'j-hui/fidget.nvim',
-    config = function() require('fidget').setup({}) end
+    config = function()
+      require('fidget').setup({})
+    end,
   })
 
   use('nanotee/luv-vimdocs')
@@ -191,7 +193,9 @@ packer.startup(function(use)
   -- Version Control ---------------------------------------------------
   use({
     'lewis6991/gitsigns.nvim',
-    config = function() require('ar.gitsigns') end,
+    config = function()
+      require('ar.gitsigns')
+    end,
     requires = { 'nvim-lua/plenary.nvim' },
   })
   use({
@@ -228,38 +232,49 @@ packer.startup(function(use)
     cmd = 'Telescope',
     keys = { '<space>f', '<space>F', '<space>b', '<space>h', '<space>m', '<space>d', '<space>S', '<space>s' },
     module_pattern = 'telescope.*',
-    config = function() require('ar.telescope') end,
+    config = function()
+      require('ar.telescope')
+    end,
     requires = {
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
         after = 'telescope.nvim',
-        config = function() require('telescope').load_extension('fzf') end,
+        config = function()
+          require('telescope').load_extension('fzf')
+        end,
       },
       {
         'nvim-telescope/telescope-smart-history.nvim',
         after = 'telescope.nvim',
-        config = function() require('telescope').load_extension('smart_history') end,
+        config = function()
+          require('telescope').load_extension('smart_history')
+        end,
         requires = 'tami5/sqlite.lua',
       },
       {
         'benfowler/telescope-luasnip.nvim',
         after = 'telescope.nvim',
-        config = function() require('telescope').load_extension('luasnip') end,
+        config = function()
+          require('telescope').load_extension('luasnip')
+        end,
       },
       {
         'nvim-telescope/telescope-file-browser.nvim',
         after = 'telescope.nvim',
-        config = function() require('telescope').load_extension('file_browser') end,
+        config = function()
+          require('telescope').load_extension('file_browser')
+        end,
       },
     },
   })
 
-
   -- Quickfix ----------------------------------------------------------
   use({
     'kevinhwang91/nvim-bqf',
-    config = function() require('ar.bqf') end
+    config = function()
+      require('ar.bqf')
+    end,
   })
   use('romainl/vim-qf')
 
@@ -323,14 +338,14 @@ packer.startup(function(use)
 
   use({
     'SmiteshP/nvim-navic',
-    requires = 'neovim/nvim-lspconfig'
+    requires = 'neovim/nvim-lspconfig',
   })
 
   -- Colorscheme --------------------------------------------------------
   use({ 'sainnhe/gruvbox-material' })
   use({
     'mcchrish/zenbones.nvim',
-    requires = 'rktjmp/lush.nvim'
+    requires = 'rktjmp/lush.nvim',
   })
 
   -- load plugins that I am testing

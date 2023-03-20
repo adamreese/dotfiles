@@ -40,7 +40,6 @@ require('neo-tree').setup({
       trailing_slash = true,
       use_git_status_colors = false,
     },
-
     indent = { padding = 0 },
     git_status = {
       symbols = {
