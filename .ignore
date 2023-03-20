@@ -1,11 +1,13 @@
+!/vim/
 !_scratch
+!vim/lua/ar/local
+!vim/lua/ar/plugins/local.lua
+!zsh/local
+!zsh/local.zsh
 *.zwc
 .git/
 hammerspoon/Spoons
 karabiner/automatic_backups
 tmux/plugins/
-vim/.netrwhist
-vim/autoload/plug.vim.old
-vim/vendor
 zsh/.zcompcache
 zsh/.zcompdump
