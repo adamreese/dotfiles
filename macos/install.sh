@@ -17,7 +17,3 @@ install_homebrew() {
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 }
-
-mkdir -p "${HOME}/Library/KeyBindings"
-
-ln -sf "${DOTFILES}/macos/DefaultKeybinding.dict" "${HOME}/Library/KeyBindings/DefaultKeybinding.dict"
