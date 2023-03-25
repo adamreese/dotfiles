@@ -346,9 +346,6 @@ local SearchResults = {
 
 -- Quickfix {{{
 local QuickfixTitle = {
-  static = {
-    grepprg = vim.opt.grepprg:get():gsub('([^%w])', '%%%1'),
-  },
   condition = function(self)
     self.title = vim.w.quickfix_title
     return self.title ~= nil
@@ -356,7 +353,8 @@ local QuickfixTitle = {
   Space,
   {
     provider = function(self)
-      return self.title:gsub(self.grepprg, 'grep')
+      local grepprg = vim.opt.grepprg:get():gsub('([^%w])', '%%%1')
+      return self.title:gsub(grepprg, 'grep')
     end,
   },
 }
