@@ -1,27 +1,37 @@
 -- =======================================================================
--- Neovim specific config
+-- Neovim config
 -- =======================================================================
 
-if not pcall(require, 'impatient') then
-  print('failed to load impatient.nvim')
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
+
+vim.opt.termguicolors = true
+
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    '--single-branch',
+    'https://github.com/folke/lazy.nvim.git',
+    lazypath,
+  })
 end
+vim.opt.runtimepath:prepend(lazypath)
 
--- -----------------------------------------------------------------------
--- Python Setup
--- -----------------------------------------------------------------------
-if vim.fn.executable('python3') then
-  vim.g.python3_host_skip_check = true
-  vim.g.python3_host_prog = vim.fn.exepath('python3')
-end
+---------------------------------------------------------------------------
 
-if vim.fn.executable('neovim-ruby-host') then
-  vim.g.ruby_host_prog = vim.fn.exepath('neovim-ruby-host')
-end
-
---------------------------------------------------------------------------
--- Vim Configuration
---------------------------------------------------------------------------
-
-require('ar.packer')
+require('lazy').setup('ar.plugins', {
+  change_detection = { notify = false },
+  checker = { enabled = true, notify = false },
+  performance = {
+    rtp = {
+      disabled_plugins = { 'netrw', 'netrwPlugin', 'tarPlugin', 'tutor', 'tohtml', 'logipat' },
+    },
+  },
+  ui = { border = 'single' },
+  lockfile = vim.fn.stdpath('data') .. '/lazy-lock.json',
+})
 
 _G['ar'] = require('ar')
