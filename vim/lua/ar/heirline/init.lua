@@ -383,18 +383,6 @@ local Neomake = {
 }
 -- }}}
 
--- Lazy {{{
-local Lazy = {
-  condition = require('lazy.status').has_updates,
-  update = { 'User', pattern = 'LazyUpdate' },
-  provider = function()
-    return require('lazy.status').updates()
-  end,
-  Space,
-  Sep,
-}
--- }}}
-
 -- }}}
 
 -- DefaultStatusline {{{
@@ -406,7 +394,6 @@ local DefaultStatusline = {
   Align,
   require('ar.heirline.navic'),
   Align,
-  Lazy,
   GitStatus,
   Spell,
   SearchResults,
