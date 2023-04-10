@@ -59,8 +59,8 @@ return {
     event = 'BufReadPost',
     config = function()
       vim.g.matchup_matchparen_deferred = 1
-      vim.g.matchup_matchparen_status_offscreen = 0
       vim.g.matchup_matchparen_deferred_show_delay = 100
+      vim.g.matchup_matchparen_offscreen = { method = 'status_manual' }
     end,
   },
   { 'benekastah/neomake' },
@@ -170,32 +170,6 @@ return {
     },
   },
   'romainl/vim-qf',
-
-  -- Languages ----------------------------------------------------------
-  'PotatoesMaster/i3-vim-syntax',
-  'adamclerk/vim-razor',
-  'cespare/vim-toml',
-  'chrisbra/vim-sh-indent',
-  'chrisbra/vim-zsh',
-  'elzr/vim-json',
-  'fatih/vim-go',
-  'fladson/vim-kitty',
-  'hashivim/vim-terraform',
-  'jparise/vim-graphql',
-  'keith/swift.vim',
-  'leafgarland/typescript-vim',
-  'mityu/vim-applescript',
-  'neoclide/jsonc.vim',
-  'othree/es.next.syntax.vim',
-  'othree/yajs.vim',
-  'plasticboy/vim-markdown',
-  'rhysd/vim-wasm',
-  'rust-lang/rust.vim',
-  'teal-language/vim-teal',
-  'tmux-plugins/vim-tmux',
-  'towolf/vim-helm',
-  'uarun/vim-protobuf',
-  'vim-ruby/vim-ruby',
 
   -- LSP ----------------------------------------------------------------
   { 'L3MON4D3/LuaSnip' },
