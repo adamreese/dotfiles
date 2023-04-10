@@ -4,7 +4,10 @@ return {
   build = ':TSUpdate',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/playground',
+    {
+      'nvim-treesitter/playground',
+      keys = { { '<leader>H', '<cmd>TSHighlightCapturesUnderCursor<cr>' } },
+    },
   },
   config = function()
     require('nvim-treesitter.configs').setup({
