@@ -14,7 +14,7 @@ local exception = setmetatable({
     list          = 'List',
     Outline       = 'Outline',
     packer        = 'Packer',
-    ['neo-tree']  = 'Neotree'
+    ['neo-tree']  = 'Neotree',
   },
   buftype = { 'nofile' },
 }, {
@@ -23,7 +23,7 @@ local exception = setmetatable({
       filetype = vim.tbl_keys(self.filetype),
       buftype = self.buftype,
     })
-  end
+  end,
 })
 
 -- Colors {{{
@@ -33,20 +33,12 @@ heirline.load_colors(colors)
 
 local Space = { provider = ' ' }
 local Align = { provider = '%=' }
-local Sep   = { provider = '|', hl = { fg = 'fg5', bold = false } }
-
--- Statusline
-
--- Components {{{
+local Sep = { provider = '|', hl = { fg = 'fg5', bold = false } }
 
 -- ViMode {{{
 local ViMode = {
   init = function(self)
     self.mode = vim.fn.mode(1)
-    if not self.once then
-      vim.api.nvim_create_autocmd('ModeChanged', { pattern = '*:*o', command = 'redrawstatus' })
-      self.once = true
-    end
   end,
   static = {
     mode_colors = {
@@ -74,7 +66,13 @@ local ViMode = {
       return { fg = 'bg4' }
     end
   end,
-  update = 'ModeChanged',
+  update = {
+    'ModeChanged',
+    pattern = '*:*',
+    callback = vim.schedule_wrap(function()
+      vim.cmd.redrawstatus()
+    end),
+  },
 }
 -- }}}
 
@@ -238,7 +236,7 @@ local Ruler = {
   -- %L = number of lines in the buffer
   -- %c = column number
   { provider = ' %4l' },
-  { provider = '/%L ', hl = { fg = 'fg5' } }
+  { provider = '/%L ', hl = { fg = 'fg5' } },
 }
 -- }}}
 
@@ -263,9 +261,9 @@ local Diagnostics = {
   condition = conditions.has_diagnostics,
   static = {
     error_icon = ' ',
-    warn_icon = '⚠ ',
-    info_icon = ' ',
-    hint_icon = ' ',
+    warn_icon  = '⚠ ',
+    info_icon  = ' ',
+    hint_icon  = ' ',
   },
   init = function(self)
     self.errors   = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -391,6 +389,7 @@ local DefaultStatusline = {
   Ruler,
   ScrollBar,
 }
+
 -- }}}
 
 -- InactiveStatusline {{{
@@ -412,6 +411,8 @@ local InactiveStatusline = {
 -- SpecialStatusline {{{
 local SpecialStatusline = {
   condition = exception,
+  hl = { fg = 'grey2', force = true },
+  ViMode,
   Space,
   {
     provider = function()
