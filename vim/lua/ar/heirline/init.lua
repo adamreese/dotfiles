@@ -168,27 +168,13 @@ local Git = {
 }
 
 local GitStatus = {
-  condition = conditions.is_git_repo,
-  init = function(self)
-    self.status_dict = vim.b.gitsigns_status_dict
+  condition = function()
+    return vim.b.gitsigns_status ~= ''
   end,
-  hl = { fg = 'fg' },
+  hl = { fg = 'grey2' },
   {
-    provider = function(self)
-      local count = self.status_dict.added or 0
-      return count > 0 and ("+" .. count)
-    end,
-  },
-  {
-    provider = function(self)
-      local count = self.status_dict.removed or 0
-      return count > 0 and ("-" .. count)
-    end,
-  },
-  {
-    provider = function(self)
-      local count = self.status_dict.changed or 0
-      return count > 0 and ("~" .. count)
+    provider = function()
+      return vim.b.gitsigns_status
     end,
   },
   Space,
