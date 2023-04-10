@@ -439,9 +439,17 @@ local Statusline = {
   DefaultStatusline,
 }
 
+local Statuscolumn = {
+  condition = function()
+    return not exception()
+  end,
+  require('ar.heirline.statuscolumn'),
+}
+
 heirline.setup({
-  statusline = Statusline,
-  tabline    = require('ar.heirline.tabline')
+  statusline   = Statusline,
+  tabline      = require('ar.heirline.tabline'),
+  statuscolumn = Statuscolumn,
 })
 
 vim.api.nvim_create_user_command('ReloadStatusline', function() R('ar.heirline') end, {})
