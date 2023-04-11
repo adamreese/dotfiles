@@ -11,16 +11,19 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
   local sym = injected_functions.sym
 
   return {
-    None { fg = 'NONE' },
+    Normal { bg = p.bg, fg = p.fg },
 
-    Fg({ fg = p.fg }),
-    Blue({ fg = p.water }),
-    Cyan({ fg = p.sky }),
-    Green({ fg = p.leaf }),
+    Underlined { gui = 'underline' },
+    Bold { gui = 'bold' },
+    Italic { gui = 'italic' },
+
+    Blue({ fg = p.blue }),
+    Cyan({ fg = p.cyan }),
+    Green({ fg = p.green }),
     Orange({ fg = p.orange }),
-    Purple({ fg = p.blossom }),
-    Red({ fg = p.rose }),
-    Yellow({ fg = p.wood }),
+    Purple({ fg = p.purple }),
+    Red({ fg = p.red }),
+    Yellow({ fg = p.yellow }),
     Grey({ fg = p.bg.lighten(46) }),
 
     BlueItalic({ Blue, gui = 'italic' }),
@@ -31,6 +34,7 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     RedItalic({ Red, gui = 'italic' }),
     YellowItalic({ Yellow, gui = 'italic' }),
 
+    NormalBold({ Normal, gui = 'bold' }),
     BlueBold({ Blue, gui = 'bold' }),
     CyanBold({ Cyan, gui = 'bold' }),
     GreenBold({ Green, gui = 'bold' }),
@@ -39,23 +43,53 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     RedBold({ Red, gui = 'bold' }),
     YellowBold({ Yellow, gui = 'bold' }),
 
-    -- Statement { Green },
-    -- PreProc { fg = p.sky },
-    -- Type { fg = p.water },
-
-    Keyword { fg = p.rose.de(12), gui = 'bold' },
+    CursorLineNr { YellowBold },
+    Keyword { fg = p.red.de(12), gui = 'bold' },
+    Number { zenbones.Number, fg = p.yellow.de(30) },
+    PreProc { fg = p.cyan },
     Special { Yellow },
-    Number { zenbones.Number, fg = p.wood.de(30) },
-    String { zenbones.Constant, fg = p.water.de(20).li(10) },
+    Statement { GreenBold },
+    String { zenbones.Constant, fg = p.blue.de(20).li(10) },
+    Type { fg = p.blue },
+    -- Type { fg = p.yellow },
+    Function { fg = p.fg2 },
 
-    sym '@operator' { zenbones.Normal },
+    sym '@operator' { Normal },
+    sym '@text.link' { Blue },
+    sym '@text.literal.markdown' { Grey },
+    sym '@text.title.markdown' { Yellow },
+    sym '@text.uri' { Blue },
+
+    sym '@punctuation.special.markdown' { Orange },
+    sym '@punctuation.special.markdown' { Special },
+    sym '@string.escape.markdown' { zenbones.SpecialKey },
+    sym '@text.reference.markdown' { zenbones.Identifier, gui = 'underline' },
+    sym '@text.emphasis.markdown' { zenbones.Italic },
+    sym '@text.title.markdown' { Statement },
+    sym '@text.literal.markdown' { Type },
+    sym '@text.uri.markdown' { zenbones.SpecialComment },
+
+
+    PanelBackground({ fg = p.fg.darken(10), bg = p.bg.darken(8) }),
+    PanelBorder({ fg = PanelBackground.bg.darken(10), bg = PanelBackground.bg }),
+    PanelHeading({ PanelBackground, gui = 'bold' }),
+    PanelVertSplit({ zenbones.VertSplit, bg = p.bg.darken(8) }),
+    PanelStNC({ PanelVertSplit }),
+
+    rustModPath { fg = p.fg3, gui = 'italic' },
+    -- rustAttribute { fg = p.fg3, gui = 'italic' },
+    -- rustAttribute { fg = p.grey2 },
+    rustDerive { fg = p.grey2 },
+    rustAwait { fg = p.fg },
 
     StatusLineNC { bg = zenbones.StatusLine.bg },
 
-    SpellBad { zenbones.SpellBad, gui = 'underdouble' },
-    SpellCap({ fg = p.water, gui = 'undercurl', sp = p.water }),
-    SpellLocal({ fg = p.sky, bg = 'NONE', gui = 'undercurl', sp = p.sky }),
-    SpellRare({ fg = p.blossom, bg = 'NONE', gui = 'undercurl', sp = p.blossom }),
+    SpellBad { sp = zenbones.SpellBad.fg, gui = 'underdouble' },
+    SpellCap({ sp = p.blue, gui = 'undercurl' }),
+    SpellLocal({ sp = p.cyan, bg = 'NONE', gui = 'undercurl' }),
+    SpellRare({ sp = p.purple, bg = 'NONE', gui = 'undercurl' }),
+
+    NormalFloat { Normal },
 
     -- Special { Blue },
     -- Type { YellowItalic },
@@ -64,31 +98,26 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
 
     QuickFixLine { underline = true },
 
-    zshCommands { Blue },
-    zshConditional { Blue },
-    zshDeref { Green },
-    zshFunction { GreenBold },
+    mkdLink { Yellow },
+    mkdHeading { Blue },
+
+    zshDeref { Blue },
     zshOptStart { PurpleItalic },
     zshOption { Blue },
-    zshString { Yellow },
-    zshSubst { None },
-    zshSubstQuoted { zshString },
-    zshSubstDelim { None },
-    -- zshTypes { Yellow },
-    zshVariableDef { None },
-
-    -- zshSubst { Yellow },
-    -- zshDeref { Blue },
+    zshSubst { Yellow },
+    zshTypes { Orange },
+    zshVariableDef { Blue },
     zshTypes { Orange },
 
     -- Plugins {{{
+    -- cmp {{{
     CmpItemAbbrMatch { Green, gui = 'bold' },
     CmpItemAbbrMatchFuzzy { Green, gui = 'bold' },
-    CmpItemAbbr { Fg },
+    CmpItemAbbr { fg = p.fg },
     CmpItemAbbrDeprecated { Grey },
-    CmpItemMenu { Fg },
+    CmpItemMenu { fg = p.fg },
     CmpItemKind { Yellow },
-    CmpItemKindText { Fg },
+    CmpItemKindText { fg = p.fg },
     CmpItemKindMethod { Green },
     CmpItemKindFunction { Green },
     CmpItemKindConstructor { Green },
@@ -121,6 +150,7 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     -- CmpItemKindMethod { Purple },
     -- CmpItemKindText { Blue },
     -- CmpItemKindVariable { Blue },
+    -- }}}
 
     GitSignsAddNr { Green },
     GitSignsChangeNr { Blue },
@@ -129,11 +159,10 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     GitSignsChangeLn { base.DiffChange },
     GitSignsDeleteLn { base.DiffDelete },
 
-    NeoTreeNormal { zenbones.Normal },
+    NeoTreeNormal({ PanelBackground }),
+    NeoTreeNormalNC({ PanelBackground }),
     NeoTreeDirectoryIcon { Blue },
     NeoTreeDirectoryName { Blue },
-    NeoTreeRootName { zenbones.Comment },
-
     NeoTreeGitAdded { Orange },
     NeoTreeGitConflict { Orange },
     NeoTreeGitIgnored { fg = p.fg1 },
@@ -152,11 +181,20 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     NotifyWARNIcon { Orange },
     NotifyWARNTitle { Orange },
 
+    NotifyERRORBody { Red },
+    NotifyERRORBorder { Red },
+    NotifyERRORIcon { Red },
+    NotifyERRORTitle { Red },
+
     CodeBlock({ bg = p.bg }),
     Headline({ bg = p.bg1, gui = 'bold,italic' }),
     Headline1({ bg = p.bg3, gui = 'bold,italic' }),
     Headline2({ bg = p.bg2, gui = 'bold,italic' }),
     Headline3({ bg = p.bg1, gui = 'bold,italic' }),
+    BqfPreviewFloat({ PanelBackground }),               -- or WinSeparator
+    BqfPreviewBorder({ PanelBackground, fg = p.blue }), -- or WinSeparator
+    qfPosition({ zenbones.Todo }),
+
     -- }}}
 
   }
