@@ -12,7 +12,6 @@ python-lsp-server[pyflakes]
 python-lsp-server[rope]
 python-lsp-server[yapf]
 rope
-rope
 vim-vint
 yamllint
 yapf
