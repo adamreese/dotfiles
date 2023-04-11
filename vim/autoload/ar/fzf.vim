@@ -4,20 +4,6 @@
 if exists('g:loaded_ar_fzf') | finish | endif
 let g:loaded_ar_fzf = 1
 
-function! ar#fzf#Plugs(fullscreen) abort
-  function! s:plugopen(e) abort
-    let l:path = v:lua.require('ar.plugins').path(a:e)
-    execute 'tabedit' l:path
-    execute 'tcd' l:path
-  endfunction
-
-  call fzf#run(fzf#wrap('Plugs', {
-        \ 'source':  luaeval('require("ar.plugins").list()'),
-        \ 'sink':    function('s:plugopen'),
-        \ 'options': '--prompt='.shellescape('plugs> '),
-        \ }, a:fullscreen))
-endfunction
-
 function! ar#fzf#Files(dir, fullscreen) abort
   call fzf#vim#files(a:dir, ar#fzf#WithPreview(a:fullscreen), a:fullscreen)
 endfunction

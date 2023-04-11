@@ -4,8 +4,6 @@
 let s:cpo_save = &cpoptions
 set cpoptions&vim
 
-finish
-
 " Settings
 " -----------------------------------------------------------------------
 let $FZF_DEFAULT_OPTS = ' --inline-info --bind esc:cancel,ctrl-a:select-all,ctrl-d:deselect-all'
@@ -42,7 +40,6 @@ nnoremap <silent>[FZF]b     :<C-U>Buffers<CR>
 nnoremap <silent>[FZF]f     :<C-U>Files<CR>
 nnoremap <silent>[FZF]h     :<C-U>Helptags<CR>
 nnoremap <silent>[FZF]m     :<C-U>GFiles?<CR>
-nnoremap <silent>[FZF]p     :<C-U>Plugs<CR>
 nnoremap <silent>[FZF]r     :<C-U>History<CR>
 nnoremap <silent>[FZF]t     :<C-U>BTags<CR>
 
