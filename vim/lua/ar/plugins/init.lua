@@ -183,7 +183,6 @@ return {
   { 'simrat39/rust-tools.nvim' },
   { 'folke/neodev.nvim' },
   { 'b0o/SchemaStore.nvim' },
-  { 'mickael-menu/zk-nvim' },
   { 'saecki/crates.nvim' },
   {
     'hrsh7th/nvim-cmp',
