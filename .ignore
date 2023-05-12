@@ -1,5 +1,7 @@
 !/vim/
 !_scratch
+!hammerspoon/local.lua
+!hammerspoon/local/
 !vim/lua/ar/local
 !vim/lua/ar/plugins/local.lua
 !zsh/local
