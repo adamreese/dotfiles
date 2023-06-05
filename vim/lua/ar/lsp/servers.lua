@@ -70,5 +70,5 @@ return {
   taplo = {},
   marksman = {},
   prosemd_lsp = {},
-  -- omnisharp = {},
+  bufls = {},
 }
