@@ -15,3 +15,7 @@ nmap ]q <Plug>(qf_qf_next)
 
 nmap [e <Plug>(qf_loc_previous)
 nmap ]e <Plug>(qf_loc_next)
+
+" toggle list window
+nnoremap <silent> <Leader>c :<C-u>call qf#toggle#ToggleQfWindow(v:false)<CR>
+nnoremap <silent> <Leader>l :<C-u>call qf#toggle#ToggleLocWindow(v:false)<CR>
