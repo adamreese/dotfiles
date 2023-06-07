@@ -171,6 +171,22 @@ return {
   },
   'romainl/vim-qf',
 
+  {
+    'folke/trouble.nvim',
+    cmd = { 'TroubleToggle', 'Trouble' },
+    opts = {
+      icons = false,
+      indent_lines = false,
+      padding = false,
+    },
+    keys = {
+      { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>',  desc = 'Document Diagnostics (Trouble)' },
+      { '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
+      { '<leader>xl', '<cmd>TroubleToggle loclist<cr>',               desc = 'Location List (Trouble)' },
+      { '<leader>xq', '<cmd>TroubleToggle quickfix<cr>',              desc = 'Quickfix List (Trouble)' },
+    },
+  },
+
   -- LSP ----------------------------------------------------------------
   { 'L3MON4D3/LuaSnip' },
   {

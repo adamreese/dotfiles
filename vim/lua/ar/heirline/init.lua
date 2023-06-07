@@ -15,6 +15,7 @@ local exception = setmetatable({
     Outline       = 'Outline',
     packer        = 'Packer',
     ['neo-tree']  = 'Neotree',
+    Trouble       = 'Trouble',
   },
   buftype = { 'nofile' },
 }, {
