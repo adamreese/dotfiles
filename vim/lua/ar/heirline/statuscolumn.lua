@@ -1,3 +1,15 @@
+function fix_gitsign_name(name)
+  local names = {
+    GitSignsAddAdd = 'GitSignsAdd',
+    GitSignsChangeChange = 'GitSignsChange',
+    GitSignsDeleteDelete = 'GitSignsDelete',
+    GitSignsTopDeleteTopDelete = 'GitSignsTopDelete',
+    GitSignsChangeDeleteChangeDelete = 'GitSignsChangeDelete',
+    GitSignsUntrackedUntracked = 'GitSignsUntracked',
+  }
+  return names[name] or name
+end
+
 local gitsigns = {
   init = function(self)
     local signs = vim.fn.sign_getplaced(vim.api.nvim_get_current_buf(), {
@@ -15,7 +27,7 @@ local gitsigns = {
   provider = ' ▏',
   hl = function(self)
     if self.sign ~= nil then
-      return self.sign.name
+      return fix_gitsign_name(self.sign.name)
     end
 
     return { fg = 'bg3' }
