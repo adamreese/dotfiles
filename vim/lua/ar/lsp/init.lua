@@ -7,39 +7,6 @@ local M = {
 
 -- [ style ] -------------------------------------------------------------------
 
-vim.lsp.protocol.CompletionItemKind = {
-  ' [text]',
-  ' [method]',
-  ' [function]',
-  ' [constructor]',
-  'ﰠ [field]',
-  ' [variable]',
-  ' [class]',
-  ' [interface]',
-  ' [module]',
-  ' [property]',
-  ' [unit]',
-  ' [value]',
-  ' [enum]',
-  ' [key]',
-  '﬌ [snippet]',
-  ' [color]',
-  ' [file]',
-  ' [reference]',
-  ' [folder]',
-  ' [enum member]',
-  ' [constant]',
-  ' [struct]',
-  '⌘ [event]',
-  ' [operator]',
-  '♛ [type]',
-}
-
-vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError', numhl = 'DiagnosticSignError' })
-vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint', numhl = 'DiagnosticSignHint' })
-vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo', numhl = 'DiagnosticSignInfo' })
-vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn', numhl = 'DiagnosticSignWarn' })
-
 vim.diagnostic.config({
   underline = true,
   virtual_text = false,

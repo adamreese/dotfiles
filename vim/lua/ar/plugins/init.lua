@@ -16,9 +16,7 @@ return {
   {
     'williamboman/mason-lspconfig.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
-    config = function()
-      require('mason-lspconfig').setup()
-    end,
+    config = true,
   },
   {
     'rrethy/vim-hexokinase',
@@ -47,9 +45,7 @@ return {
     'kylechui/nvim-surround',
     event = 'BufReadPost',
     dependencies = { 'hrsh7th/nvim-cmp' },
-    config = function()
-      require('nvim-surround').setup()
-    end
+    config = true,
   },
   { 'dstein64/vim-startuptime', cmd = 'StartupTime' },
   { 'mileszs/ack.vim',          cmd = 'Ack' },
@@ -110,6 +106,7 @@ return {
     config = function()
       local notify = require('notify')
       notify.setup({
+        background_colour = '#2d2c2b',
         top_down = false,
         timeout = 3000,
         max_width = function()
@@ -135,18 +132,18 @@ return {
   },
   {
     'j-hui/fidget.nvim',
-    config = function()
-      require('fidget').setup()
-    end,
+    tag = 'legacy',
+    config = true,
   },
   'nanotee/luv-vimdocs',
   'milisims/nvim-luaref',
   {
     'lukas-reineke/headlines.nvim',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
     config = function()
       require('headlines').setup({
         markdown = {
-          headline_highlights = { 'Headline1', 'Headline2', 'Headline3' },
+          headline_highlights = { 'Headline1', 'Headline2', 'Headline3', 'Headline4', 'Headline5', 'Headline6' },
         },
       })
     end,
