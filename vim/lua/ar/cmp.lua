@@ -104,7 +104,7 @@ cmp.setup({
   },
   formatting = {
     format = function(entry, item)
-      item.kind = kind_icons[item.kind]
+      item.kind = kind_icons[item.kind] or item.kind
       item.menu = ({
         nvim_lsp = '[lsp]',
         nvim_lua = '[lua]',
@@ -113,7 +113,7 @@ cmp.setup({
         luasnip = '[snip]',
         buffer = '[buf]',
         cmp_git = '[git]',
-      })[entry.source.name]
+      })[entry.source.name] or entry.source.name
       return item
     end,
   },
