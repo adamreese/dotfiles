@@ -22,6 +22,7 @@ return {
       winbar = true,
       content_layout = 'center',
     },
+    open_files_do_not_replace_types = { 'terminal', 'trouble', 'qf', 'tagbar' },
     close_if_last_window = true,
     filesystem = {
       filtered_items = {
