@@ -37,6 +37,7 @@ return {
         'make',
         'markdown',
         'ninja',
+        'proto',
         'python',
         'query',
         'regex',
@@ -54,7 +55,7 @@ return {
       highlight = {
         enable = true,
         -- disable = { 'bash', 'go', 'rust', 'vim', 'help', 'markdown' },
-        disable = { 'help', 'rust' },
+        disable = { 'go', 'help', 'markdown' },
       },
       textobjects = {
         select = {
