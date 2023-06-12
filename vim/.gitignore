@@ -1,3 +1,4 @@
 .netrwhist
 local.vim
 lua/ar/local/
+lua/ar/plugins/local.lua
