@@ -221,6 +221,13 @@ return {
     lazy = true,
     dependencies = { 'neovim/nvim-lspconfig' },
   },
+  {
+    'aznhe21/actions-preview.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      vim.keymap.set({ 'v', 'n' }, '<leader>ca', require('actions-preview').code_actions)
+    end,
+  },
 
   -- Colorscheme --------------------------------------------------------
   { 'sainnhe/gruvbox-material' },

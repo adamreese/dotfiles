@@ -47,7 +47,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'diagnostic: next',
 local function setup_mappings(client, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'LspDefinition', vim.lsp.buf.definition, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspDeclaration', vim.lsp.buf.definition, {})
-  vim.api.nvim_buf_create_user_command(bufnr, 'LspCodeAction', vim.lsp.buf.code_action, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspHover', vim.lsp.buf.hover, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspRename', vim.lsp.buf.rename, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspReferences', vim.lsp.buf.references, {})
@@ -73,10 +72,6 @@ local function setup_mappings(client, bufnr)
 
   vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, opts('lsp: document symbol'))
   vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol, opts('lsp: workspace symbol'))
-
-  vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts('lsp: code action'))
-  vim.keymap.set('v', '<leader>la', vim.lsp.buf.code_action, opts('lsp: code action'))
-
 
   if vim.o.filetype ~= 'vim' then
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts('lsp: hover'))
