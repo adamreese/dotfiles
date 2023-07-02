@@ -290,13 +290,13 @@ local Diagnostics = {
     provider = function(self)
       return self.info > 0 and (self.info_icon .. self.info .. ' ')
     end,
-    hl = { fg = 'grey0' },
+    hl = { fg = 'blue' },
   },
   {
     provider = function(self)
       return self.hints > 0 and (self.hint_icon .. self.hints .. ' ')
     end,
-    hl = { fg = 'grey0' },
+    hl = { fg = 'purple' },
   },
   Sep,
 }
@@ -366,8 +366,6 @@ local Neomake = {
   Space,
   Sep,
 }
--- }}}
-
 -- }}}
 
 -- DefaultStatusline {{{
