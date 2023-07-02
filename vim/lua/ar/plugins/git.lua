@@ -5,12 +5,6 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       debug_mode = true,
-      keymaps = {
-        noremap = true,
-        buffer = true,
-        ['o ih'] = ':<C-U>Gitsigns select_hunk()<CR>',
-        ['x ih'] = ':<C-U>Gitsigns select_hunk()<CR>',
-      },
       on_attach = function()
         vim.keymap.set('n', ']c', function()
           if vim.wo.diff then return ']c' end
@@ -23,6 +17,14 @@ return {
           vim.schedule(function() require('gitsigns').prev_hunk() end)
           return '<Ignore>'
         end, { expr = true, desc = 'jump to prev hunk ' })
+
+        vim.keymap.set({ 'o', 'x' }, 'ih', function()
+          require('gitsigns.actions').select_hunk()
+        end, { desc = 'in hunk' })
+
+        vim.keymap.set({ 'o', 'x' }, 'ah', function()
+          require('gitsigns.actions').select_hunk()
+        end, { desc = 'around hunk' })
       end,
     }
   },
