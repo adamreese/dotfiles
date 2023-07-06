@@ -198,25 +198,6 @@ return {
   { 'b0o/SchemaStore.nvim' },
   { 'saecki/crates.nvim' },
   {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    config = function()
-      require('ar.cmp')
-    end,
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-buffer',
-      'f3fora/cmp-spell',
-      'hrsh7th/cmp-nvim-lua',
-      'saadparwaiz1/cmp_luasnip',
-      {
-        'petertriho/cmp-git',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-      },
-    }
-  },
-  {
     'SmiteshP/nvim-navic',
     lazy = true,
     dependencies = { 'neovim/nvim-lspconfig' },
