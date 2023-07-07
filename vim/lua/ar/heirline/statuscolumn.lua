@@ -45,7 +45,7 @@ local diagnostics = {
   end,
 }
 
-function fix_gitsign_name(name)
+local function fix_gitsign_name(name)
   local names = {
     GitSignsAddAdd = 'GitSignsAdd',
     GitSignsChangeChange = 'GitSignsChange',
@@ -71,7 +71,7 @@ local gitsigns = {
       self.sign = signs[1].signs[1]
     end
   end,
-  provider = ' ┃',
+  provider = ' ▏',
   hl = function(self)
     if self.sign ~= nil then
       return fix_gitsign_name(self.sign.name)
