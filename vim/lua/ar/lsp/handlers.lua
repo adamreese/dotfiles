@@ -44,19 +44,4 @@ function M.signature_help()
   return vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 end
 
--- https://github.com/neovim/nvim-lspconfig/wiki/User-contributed-tips#use-nvim-notify-to-display-lsp-messages
-function M.show_message()
-  return function(_, result, ctx)
-    local client = vim.lsp.get_client_by_id(ctx.client_id)
-    local lvl = ({ 'ERROR', 'WARN', 'INFO', 'DEBUG' })[result.type]
-    vim.notify(result.message, lvl, {
-      title = 'LSP | ' .. client.name,
-      timeout = 10000,
-      keep = function()
-        return lvl == 'ERROR' or lvl == 'WARN'
-      end,
-    })
-  end
-end
-
 return M

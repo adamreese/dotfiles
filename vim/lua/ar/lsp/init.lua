@@ -25,7 +25,6 @@ vim.diagnostic.config({
 
 vim.lsp.handlers['textDocument/hover'] = handlers.hover()
 vim.lsp.handlers['textDocument/signatureHelp'] = handlers.signature_help()
-vim.lsp.handlers['window/showMessage'] = handlers.show_message()
 
 -- [ format on save ] ----------------------------------------------------------
 
