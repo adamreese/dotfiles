@@ -165,21 +165,6 @@ local Git = {
   Sep,
   Space,
 }
-
-local GitStatus = {
-  condition = function()
-    return vim.b.gitsigns_status ~= ''
-  end,
-  hl = { fg = 'grey2' },
-  {
-    provider = function()
-      return vim.b.gitsigns_status
-    end,
-  },
-  Space,
-  Sep,
-  Space,
-}
 -- }}}
 
 -- LSPActive {{{
@@ -312,13 +297,8 @@ local SearchResults = {
       return false
     end
 
-    local search_count = vim.fn.searchcount({ recompute = 1, maxcount = -1 })
-    if search_count.total < 1 then
-      return false
-    end
-
-    self.count = search_count
-    return true
+    self.count = vim.fn.searchcount({ recompute = 1, maxcount = -1 })
+    return self.count.total > 0
   end,
   {
     provider = function(self)
@@ -377,7 +357,6 @@ local DefaultStatusline = {
   Align,
   require('ar.heirline.navic'),
   Align,
-  GitStatus,
   Spell,
   SearchResults,
   LSPActive,
