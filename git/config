@@ -139,3 +139,7 @@
 
 [include]
   path = "~/.config/git/config.local"
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+  insteadOf = git://github.com/
