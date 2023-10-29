@@ -30,6 +30,7 @@ vim.lsp.handlers['textDocument/signatureHelp'] = handlers.signature_help()
 
 function M.format_toggle()
   M.format_on_save = not M.format_on_save
+  vim.g.whitespace_enable = M.format_on_save
   vim.notify('auto format set to ' .. tostring(M.format_on_save))
 end
 
@@ -87,9 +88,9 @@ local function setup_mappings(client, bufnr)
 
     vim.keymap.set('n', '<leader>tf', function() require('ar.lsp').format_toggle() end, opts('lsp: auto format toggle'))
 
-    local augid = vim.api.nvim_create_augroup('ar_lsp_format', { clear = true })
+    local augid = vim.api.nvim_create_augroup('LspFormatting', { clear = true })
     vim.api.nvim_create_autocmd('BufWritePre', {
-      desc = 'Auto format before save',
+      desc = 'LSP: Format on save',
       buffer = bufnr,
       callback = function() M.format() end,
       group = augid,
