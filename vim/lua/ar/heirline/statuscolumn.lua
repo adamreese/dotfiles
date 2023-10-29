@@ -45,39 +45,25 @@ local diagnostics = {
   end,
 }
 
-local function fix_gitsign_name(name)
-  local names = {
-    GitSignsAddAdd = 'GitSignsAdd',
-    GitSignsChangeChange = 'GitSignsChange',
-    GitSignsDeleteDelete = 'GitSignsDelete',
-    GitSignsTopDeleteTopDelete = 'GitSignsTopDelete',
-    GitSignsChangeDeleteChangeDelete = 'GitSignsChangeDelete',
-    GitSignsUntrackedUntracked = 'GitSignsUntracked',
-  }
-  return names[name] or name
-end
-
 local gitsigns = {
   init = function(self)
-    local signs = vim.fn.sign_getplaced(vim.api.nvim_get_current_buf(), {
-      group = 'gitsigns_vimfn_signs_',
-      id = vim.v.lnum,
-      lnum = vim.v.lnum,
-    })
+    local ns_id = vim.api.nvim_get_namespaces()['gitsigns_extmark_signs_']
 
-    if #signs == 0 or signs[1].signs == nil or #signs[1].signs == 0 or signs[1].signs[1].name == nil then
-      self.sign = nil
-    else
-      self.sign = signs[1].signs[1]
+    if ns_id then
+      local mark = vim.api.nvim_buf_get_extmarks(
+        0,
+        ns_id,
+        { vim.v.lnum - 1, 0 },
+        { vim.v.lnum, 0 },
+        { limit = 1, details = true }
+      )[1]
+
+      self.sign = mark and mark[4]['sign_hl_group']
     end
   end,
   provider = ' ▏',
   hl = function(self)
-    if self.sign ~= nil then
-      return fix_gitsign_name(self.sign.name)
-    end
-
-    return { fg = 'bg3' }
+    return self.sign or { fg = 'bg3' }
   end,
 }
 
