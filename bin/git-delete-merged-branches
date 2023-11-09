@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-git fetch --all --tags --prune
+git fetch --all --prune
 
 mapfile -t merged < <(git branch --no-color --merged | grep -vE '^(\+|\*|\s*(main|master)\s*$)' | tr -d ' ')
 
