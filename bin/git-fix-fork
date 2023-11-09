@@ -11,6 +11,11 @@ if git remote show upstream >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! gh api "repos/${USERNAME}/{repo}" --jq '.fork' >/dev/null 2>&1; then
+  echo "you dont have a fork of this repo" 1>&2
+  exit 1
+fi
+
 if [[ -n "$(git status --porcelain --ignore-submodules -unormal)" ]]; then
   echo "uncommitted changes" 1>&2
   exit 1
