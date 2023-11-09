@@ -1,0 +1,17 @@
+{
+  "if err != nil": {
+    "prefix": "ife",
+    "body": "if err != nil {\n\t${1:return ${2:nil, }${3:err}}\n}",
+    "description": "Snippet for if err != nil"
+  },
+  "test function": {
+    "prefix": "tf",
+    "body": "func Test$1(t *testing.T) {\n\t$0\n}",
+    "description": "Snippet for Test function"
+  },
+  "fmt.Printf": {
+    "prefix": "ff",
+    "body": "fmt.Printf(\"$1\", ${2:var})",
+    "description": "Snippet for fmt.Printf()"
+  }
+}

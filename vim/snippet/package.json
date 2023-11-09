@@ -24,6 +24,18 @@
           "make"
         ],
         "path": "./make.json"
+      },
+      {
+        "language": [
+          "go"
+        ],
+        "path": "./go.json"
+      },
+      {
+        "language": [
+          "gitcommit"
+        ],
+        "path": "./gitcommit.json"
       }
     ]
   }
