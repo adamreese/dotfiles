@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Uses shortcut from https://github.com/arodik/macos-focus-mode
+#
+#   npm install --global macos-focus-mode
+#   macos-focus-mode install
+
+on() {
+  shortcuts run macos-focus-mode <<< "on"
+
+  killall Messages
+  killall Calendar
+  killall 1Password
+}
+
+off() {
+  shortcuts run macos-focus-mode <<< "off"
+}
+
+status() {
+  if [[ "$(defaults read com.apple.controlcenter "NSStatusItem Visible FocusModes")" == 1 ]]; then
+    echo "on"
+  else
+    echo "off"
+  fi
+}
+
+case "${1:-}" in
+  on) on ;;
+  off) off ;;
+  *) status ;;
+esac
