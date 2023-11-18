@@ -10,11 +10,6 @@ local M = {
       config = function() require('telescope').load_extension('fzf') end,
     },
     {
-      'nvim-telescope/telescope-smart-history.nvim',
-      config = function() require('telescope').load_extension('smart_history') end,
-      dependencies = 'tami5/sqlite.lua',
-    },
-    {
       'benfowler/telescope-luasnip.nvim',
       config = function() require('telescope').load_extension('luasnip') end,
     },
@@ -22,6 +17,10 @@ local M = {
       'nvim-telescope/telescope-file-browser.nvim',
       config = function() require('telescope').load_extension('file_browser') end,
     },
+    {
+      'debugloop/telescope-undo.nvim',
+      config = function() require('telescope').load_extension('undo') end,
+    }
   },
 }
 
