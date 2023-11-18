@@ -20,7 +20,8 @@ alias -- -='cd -'
 alias sudo='sudo '
 
 # Perform case insensitive matching
-alias grep='grep -i --color=auto'
+(( $+commands[ggrep] )) || alias ggrep='ls'
+alias grep='ggrep -i --color=auto'
 
 # fd
 alias fd="fd --hidden --ignore-file=${DOTFILES}/ripgrep/ignore "
