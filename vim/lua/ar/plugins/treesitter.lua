@@ -36,6 +36,7 @@ return {
         'lua',
         'make',
         'markdown',
+        'markdown_inline',
         'ninja',
         'proto',
         'python',
@@ -54,8 +55,7 @@ return {
       },
       highlight = {
         enable = true,
-        -- disable = { 'bash', 'go', 'rust', 'vim', 'help', 'markdown' },
-        disable = { 'go', 'help', 'markdown' },
+        disable = { 'help' },
       },
       textobjects = {
         select = {
