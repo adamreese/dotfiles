@@ -23,10 +23,9 @@ rule() {
 }
 
 options=(--formatOutput --includeCals "${calendars}")
-options+=(--includeEventProps 'title,location,datetime')
 
 # Today's meatings
-icalbuddy "${options[@]}" --includeOnlyEventsFromNowOn eventsToday
+icalbuddy "${options[@]}" --includeEventProps 'title,location,datetime' --includeOnlyEventsFromNowOn eventsToday
 
 # Current meating
 now=$(icalbuddy "${options[@]}" eventsNow)
