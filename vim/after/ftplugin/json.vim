@@ -3,4 +3,3 @@
 " =======================================================================
 
 setlocal conceallevel=0
-setlocal foldmethod=syntax

@@ -5,9 +5,6 @@ let s:cpo_save = &cpoptions
 set cpoptions&vim
 " -----------------------------------------------------------------------
 
-setlocal nofoldenable
-setlocal foldmethod=syntax
-
 let g:tagbar_type_typescript = {
       \   'ctagstype': 'typescript',
       \   'kinds': [
