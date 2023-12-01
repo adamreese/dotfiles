@@ -126,6 +126,7 @@ return {
   },
   {
     'rebelot/heirline.nvim',
+    event = 'BufEnter',
     config = function()
       require('ar.heirline')
     end,
@@ -185,14 +186,17 @@ return {
   },
 
   -- LSP ----------------------------------------------------------------
-  { 'L3MON4D3/LuaSnip' },
+  {
+    'L3MON4D3/LuaSnip',
+    event = 'InsertEnter',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+  },
   {
     'neovim/nvim-lspconfig',
     config = function()
       require('ar.lsp')
     end,
   },
-  { 'rafamadriz/friendly-snippets' },
   { 'simrat39/rust-tools.nvim' },
   { 'folke/neodev.nvim' },
   { 'b0o/SchemaStore.nvim' },
