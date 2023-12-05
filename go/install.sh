@@ -14,6 +14,7 @@ while read -r pkg; do
   GO111MODULE=on go install -v "$pkg"
 done <"${DOTFILES}/go/default-packages"
 
+echo :: github.com/mickael-menu/zk
 cd "${GOPATH}/src/github.com/mickael-menu/zk"
 git pull
 make install
