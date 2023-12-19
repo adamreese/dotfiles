@@ -29,7 +29,6 @@ return {
         'gowork',
         'graphql',
         'hcl',
-        'help',
         'html',
         'javascript',
         'jsdoc',
@@ -58,7 +57,6 @@ return {
       },
       highlight = {
         enable = true,
-        disable = { 'help' },
       },
       textobjects = {
         select = {
