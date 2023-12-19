@@ -2,7 +2,6 @@ local M = {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
   keys = { '<space>f', '<space>F', '<space>b', '<space>h', '<space>m', '<space>d', '<space>S', '<space>s' },
-  module_pattern = 'telescope.*',
   dependencies = {
     {
       'nvim-telescope/telescope-fzf-native.nvim',
