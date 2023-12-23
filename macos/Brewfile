@@ -12,7 +12,6 @@ tap "michaeleisel/zld"
 tap "osx-cross/arm"
 tap "osx-cross/avr"
 tap "qmk/qmk"
-tap "shipyard-run/repo"
 tap "tinygo-org/tools"
 tap "tursodatabase/tap"
 tap "universal-ctags/universal-ctags"
@@ -47,8 +46,6 @@ brew "awscli"
 brew "azure-cli"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
-# Bash shell debugger
-brew "bashdb"
 # C library implementing the SSH2 protocol
 brew "libssh2"
 # Regular expressions library
@@ -75,7 +72,7 @@ brew "chart-testing"
 brew "circleci"
 # Portable Foreign Function Interface library
 brew "libffi"
-# Emulator for x86 and PowerPC
+# Generic machine emulator and virtualizer
 brew "qemu"
 # Linux virtual machines
 brew "lima"
@@ -83,10 +80,6 @@ brew "lima"
 brew "colima"
 # Color-highlighted diff(1) output
 brew "colordiff"
-# Tool for service discovery, monitoring and configuration
-brew "consul"
-# Generic template rendering and notifications with Consul
-brew "consul-template"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get, unpack, build, and install modules from CPAN
@@ -117,8 +110,6 @@ brew "dylibbundler"
 brew "editorconfig"
 # Run arbitrary commands when files change
 brew "entr"
-# Zero-conf load balancing HTTP(S) router
-brew "fabio"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # Collection of GNU find, xargs, and locate
@@ -209,10 +200,14 @@ brew "k3d"
 brew "kind"
 # Network authentication protocol
 brew "krb5"
+# SDK for building Kubernetes APIs using CRDs
+brew "kubebuilder"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Tool that can switch between kubectl contexts easily and create aliases
 brew "kubectx"
+# Template-free customization of Kubernetes YAML manifests
+brew "kustomize"
 # Let's Encrypt client and ACME library
 brew "lego"
 # Pager program similar to more
@@ -231,8 +226,6 @@ brew "libyubikey"
 brew "libzip"
 # Small memory footprint, flexible web-server
 brew "lighttpd"
-# Language Server for the Lua language
-brew "lua-language-server"
 # Powerful, lightweight programming language
 brew "lua@5.3"
 # Package manager for the Lua programming language
@@ -269,16 +262,12 @@ brew "nginx"
 brew "ninja"
 # Port scanning utility for large networks
 brew "nmap"
-# Distributed, Highly Available, Datacenter-Aware Scheduler
-brew "nomad"
 # OCaml package manager
 brew "opam"
 # Generate clients, server & docs from an OpenAPI spec (v2, v3)
 brew "openapi-generator"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
-# Tool for creating identical machine images for multiple platforms
-brew "packer"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # PostgreSQL syntax beautifier
@@ -297,8 +286,6 @@ brew "postgresql@14"
 brew "postgresql@16"
 # Modern replacement for ps written by Rust
 brew "procs"
-# Protocol buffers (Google's data interchange format)
-brew "protobuf", link: false
 # Show ps output as a tree
 brew "pstree"
 # Monitor data's progress through a pipe
@@ -321,8 +308,6 @@ brew "ripgrep"
 brew "rsync"
 # Powerful, clean, object-oriented scripting language
 brew "ruby"
-# Experimental Rust compiler front-end for IDEs
-brew "rust-analyzer"
 # Modern Day Portscanner
 brew "rustscan"
 # Rust toolchain installer
@@ -369,8 +354,6 @@ brew "uncrustify"
 brew "universal-ctags"
 # Google's JavaScript engine
 brew "v8"
-# Secures, stores, and tightly controls access to secrets
-brew "vault"
 # Vi 'workalike' with many additional features
 brew "vim"
 # Web Assembly Binary Toolkit
@@ -393,12 +376,20 @@ brew "zig"
 brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
-# A new way of working with Protocol Buffers.
+# The best way of working with Protocol Buffers.
 brew "bufbuild/buf/buf"
+# Consul
+brew "hashicorp/tap/consul"
+# Consul Template
+brew "hashicorp/tap/consul-template"
 # Levant
 brew "hashicorp/tap/levant"
+# Nomad
+brew "hashicorp/tap/nomad"
 # Nomad Pack
 brew "hashicorp/tap/nomad-pack"
+# Vault
+brew "hashicorp/tap/vault"
 # aarch64 Linux GNU Toolchain
 brew "messense/macos-cross-toolchains/aarch64-unknown-linux-gnu"
 # x86_64 Linux GNU Toolchain
@@ -409,7 +400,6 @@ brew "michaeleisel/zld/zld"
 brew "qmk/qmk/mdloader"
 # Quantum Mechanical Keyboard (QMK) Firmware
 brew "qmk/qmk/qmk"
-brew "shipyard-run/repo/shipyard"
 # TinyGo is a Go compiler for small places. Microcontrollers, WebAssembly, and command-line tools. Based on LLVM.
 brew "tinygo-org/tools/tinygo"
 brew "tursodatabase/tap/turso"
