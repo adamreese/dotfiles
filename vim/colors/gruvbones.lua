@@ -44,7 +44,7 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     YellowBold({ Yellow, gui = 'bold' }),
 
     CursorLineNr { YellowBold },
-    Keyword { fg = p.red.de(12), gui = 'bold' },
+    Keyword { fg = p.red.de(12) },
     Number { zenbones.Number, fg = p.yellow.de(30) },
     PreProc { fg = p.cyan },
     Special { Yellow },
@@ -56,19 +56,13 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
 
     sym '@operator' { Normal },
     sym '@text.link' { Blue },
-    sym '@text.literal.markdown' { Grey },
-    sym '@text.title.markdown' { Yellow },
     sym '@text.uri' { Blue },
+    -- sym '@text.title' { gui = 'underline' },
 
-    sym '@punctuation.special.markdown' { Orange },
-    sym '@punctuation.special.markdown' { Special },
-    sym '@string.escape.markdown' { zenbones.SpecialKey },
-    sym '@text.reference.markdown' { zenbones.Identifier, gui = 'underline' },
-    sym '@text.emphasis.markdown' { zenbones.Italic },
-    sym '@text.title.markdown' { Statement },
-    sym '@text.literal.markdown' { Type },
-    sym '@text.uri.markdown' { zenbones.SpecialComment },
+    sym '@string.bash' { Cyan },
 
+    sym '@namespace.rust' { zenbones.Identifier },
+    sym '@variable.type.rust' { zenbones.Identifier },
 
     PanelBackground({ fg = p.fg.darken(10), bg = p.bg.darken(8) }),
     PanelBorder({ fg = PanelBackground.bg.darken(10), bg = PanelBackground.bg }),
@@ -115,7 +109,7 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     CmpItemAbbrMatchFuzzy { Green, gui = 'bold' },
     CmpItemAbbr { fg = p.fg },
     CmpItemAbbrDeprecated { Grey },
-    CmpItemMenu { fg = p.fg },
+    CmpItemMenu { fg = p.fg3 },
     CmpItemKind { Yellow },
     CmpItemKindText { fg = p.fg },
     CmpItemKindMethod { Green },
@@ -130,7 +124,7 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     CmpItemKindUnit { Purple },
     CmpItemKindValue { Purple },
     CmpItemKindEnum { Yellow },
-    CmpItemKindKeyword { Red },
+    CmpItemKindKeyword { Purple },
     CmpItemKindSnippet { Cyan },
     CmpItemKindColor { Cyan },
     CmpItemKindFile { Cyan },
@@ -152,12 +146,15 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     -- CmpItemKindVariable { Blue },
     -- }}}
 
-    GitSignsAddNr { Green },
-    GitSignsChangeNr { Blue },
-    GitSignsDeleteNr { Red },
+    GitSignsAdd { Green },
     GitSignsAddLn { base.DiffAdd },
+    GitSignsAddNr { Green },
+    GitSignsChange { Blue },
     GitSignsChangeLn { base.DiffChange },
+    GitSignsChangeNr { Blue },
+    GitSignsDelete { Red },
     GitSignsDeleteLn { base.DiffDelete },
+    GitSignsDeleteNr { Red },
 
     NeoTreeNormal({ PanelBackground }),
     NeoTreeNormalNC({ PanelBackground }),
@@ -187,16 +184,19 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     NotifyERRORTitle { Red },
 
     CodeBlock({ bg = p.bg }),
-    Headline({ bg = p.bg1, gui = 'bold,italic' }),
-    Headline1({ bg = p.bg3, gui = 'bold,italic' }),
-    Headline2({ bg = p.bg2, gui = 'bold,italic' }),
-    Headline3({ bg = p.bg1, gui = 'bold,italic' }),
-    BqfPreviewFloat({ PanelBackground }),               -- or WinSeparator
-    BqfPreviewBorder({ PanelBackground, fg = p.blue }), -- or WinSeparator
+    Headline1({ zenbones.DiagnosticVirtualTextOk }),
+    Headline2({ zenbones.DiagnosticVirtualTextInfo }),
+    Headline3({ zenbones.DiagnosticVirtualTextWarn }),
+    BqfPreviewFloat({ PanelBackground }),
+    BqfPreviewBorder({ PanelBackground, fg = p.blue }),
     qfPosition({ zenbones.Todo }),
 
-    -- }}}
+    MatchWord({ bg = c.bg2, gui = 'underline' }),
 
+    TelescopeResultsDiffChange { Blue },
+    TelescopeResultsDiffUntracked { Orange },
+
+    -- }}}
   }
 end)
 
