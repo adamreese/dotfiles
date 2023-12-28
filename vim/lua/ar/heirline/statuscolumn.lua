@@ -1,12 +1,4 @@
-local diagnostics = {
-  static = {
-    texts = {
-      DiagnosticSignError = ' ',
-      DiagnosticSignWarn  = '⚠ ',
-      DiagnosticSignInfo  = ' ',
-      DiagnosticSignHint  = ' ',
-    },
-  },
+local signs = {
   init = function(self)
     local signs = vim.fn.sign_getplaced(vim.api.nvim_get_current_buf(), {
       group = '*',
@@ -19,9 +11,7 @@ local diagnostics = {
       return
     end
 
-    signs = vim.tbl_filter(function(sign)
-      return vim.startswith(sign.group, 'vim.diagnostic')
-    end, signs[1].signs)
+    signs = signs[1].signs
 
     if #signs == 0 then
       self.sign = nil
@@ -33,14 +23,15 @@ local diagnostics = {
   end,
   provider = function(self)
     if self.has_sign then
-      return self.texts[self.sign.name]
+      return vim.fn.sign_getdefined(self.sign.name)[1].text
     end
 
     return '  '
   end,
   hl = function(self)
     if self.has_sign then
-      return self.sign.name
+      -- return self.sign.name
+      return vim.fn.sign_getdefined(self.sign.name)[1].texthl
     end
   end,
 }
@@ -78,7 +69,8 @@ local line_numbers = {
 }
 
 return {
-  diagnostics,
+  signs,
+  -- { provider = '%s' },
   { provider = '%=' },
   line_numbers,
   gitsigns,
