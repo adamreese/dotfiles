@@ -145,7 +145,6 @@ set concealcursor=niv
 set conceallevel=2
 set list                          " Display tabs and trailing spaces visually
 set nocursorcolumn                " speed up syntax highlighting
-set nocursorline
 set noshowcmd                     " No to showing command in bottom-right corner
 set noshowmode                    " No to showing mode in bottom-left corner
 set number                        " Show line numbers
