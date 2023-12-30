@@ -14,7 +14,6 @@ return {
     },
   },
   config = function()
-    -- require('ar.cmp')
     local cmp = require('cmp')
     local luasnip = require('luasnip')
 
@@ -63,6 +62,11 @@ return {
           winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
           col_offset = -3,
         },
+        documentation = {
+          border = 'single',
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+          col_offset = -3,
+        },
       },
       preselect = 'None',
       mapping = {
@@ -71,6 +75,7 @@ return {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
