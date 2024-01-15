@@ -42,4 +42,10 @@ return {
     cmd = 'DiffviewOpen',
     config = true,
   },
+  {
+    'akinsho/git-conflict.nvim',
+    version = '*',
+    config = true,
+    event = 'VeryLazy',
+  },
 }
