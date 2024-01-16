@@ -1,77 +1,76 @@
+local align = { provider = '%=' }
+
+local function get_extmarks_signs(bufnr, lnum, filter)
+  local signs = {}
+  local extmarks = vim.api.nvim_buf_get_extmarks(
+    0,
+    bufnr,
+    { lnum - 1, 0 },
+    { lnum - 1, -1 },
+    { details = true, type = 'sign' }
+  )
+  for _, extmark in pairs(extmarks) do
+    if filter(extmark[4]) then
+      signs[#signs + 1] = {
+        name = extmark[4].sign_hl_group or '',
+        text = extmark[4].sign_text,
+        sign_hl_group = extmark[4].sign_hl_group,
+        priority = extmark[4].priority,
+      }
+    end
+  end
+  table.sort(signs, function(a, b)
+    return (a.priority or 0) < (b.priority or 0)
+  end)
+  return signs
+end
+
 local signs = {
   init = function(self)
-    local signs = vim.fn.sign_getplaced(vim.api.nvim_get_current_buf(), {
-      group = '*',
-      lnum = vim.v.lnum,
-    })
-
-    if #signs == 0 or signs[1].signs == nil then
-      self.sign = nil
-      self.has_sign = false
-      return
-    end
-
-    signs = signs[1].signs
-
-    if #signs == 0 then
-      self.sign = nil
-    else
-      self.sign = signs[1]
-    end
-
-    self.has_sign = self.sign ~= nil
+    self.signs = get_extmarks_signs(-1, vim.v.lnum, function(extmark)
+      return not extmark.sign_hl_group:match('^GitSigns')
+    end)[1]
   end,
   provider = function(self)
-    if self.has_sign then
-      return vim.fn.sign_getdefined(self.sign.name)[1].text
-    end
-
-    return '  '
+    return self.sign and self.sign.text or '  '
   end,
   hl = function(self)
-    if self.has_sign then
-      -- return self.sign.name
-      return vim.fn.sign_getdefined(self.sign.name)[1].texthl
-    end
-  end,
-}
-
-local gitsigns = {
-  init = function(self)
-    local ns_id = vim.api.nvim_get_namespaces()['gitsigns_extmark_signs_']
-
-    if ns_id then
-      local mark = vim.api.nvim_buf_get_extmarks(
-        0,
-        ns_id,
-        { vim.v.lnum - 1, 0 },
-        { vim.v.lnum, 0 },
-        { limit = 1, details = true }
-      )[1]
-
-      self.sign = mark and mark[4]['sign_hl_group']
-    end
-  end,
-  provider = ' ▏',
-  hl = function(self)
-    return self.sign or { fg = 'bg3' }
+    return self.sign and self.sign.sign_hl_group
   end,
 }
 
 local line_numbers = {
   provider = function()
-    if vim.v.virtnum > 0 then
+    if vim.bo.filetype == 'qf' or vim.v.virtnum ~= 0 then
       return ''
     end
-
     return ('%02d'):format(vim.v.lnum)
   end,
 }
 
+local gits = {
+  condition = function()
+    return vim.v.virtnum == 0
+  end,
+  init = function(self)
+    self.sign = get_extmarks_signs(-1, vim.v.lnum, function(extmark)
+      return extmark.sign_hl_group:match('^GitSigns')
+    end)[1]
+  end,
+  provider = function(self)
+    return self.sign and self.sign.text or ' ▏'
+  end,
+  hl = function(self)
+    return self.sign and self.sign.sign_hl_group or { fg = 'bg3' }
+  end,
+}
+
 return {
+  init = function(self)
+    self.signs = {}
+  end,
   signs,
-  -- { provider = '%s' },
-  { provider = '%=' },
+  align,
   line_numbers,
-  gitsigns,
+  gits,
 }
