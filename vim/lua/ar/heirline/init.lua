@@ -325,29 +325,6 @@ local QuickfixTitle = {
 }
 -- }}}
 
--- Neomake {{{
-local Neomake = {
-  condition = function()
-    return vim.fn.exists('*neomake#Make') and
-        vim.fn['neomake#statusline#LoclistStatus']() ~= ''
-  end,
-  provider = function()
-    return vim.fn['neomake#statusline#get'](vim.api.nvim_get_current_buf(), {
-      format_running = '…',
-      format_loclist_ok = '',
-      format_loclist_unknown = '',
-      format_quickfix_unknown = '',
-      format_loclist_type_E = ' ⨉{{count}}',
-      format_loclist_type_W = ' ⚠{{count}}',
-      format_loclist_type_I = ' ℹ︎{{count}}',
-    })
-  end,
-  update = { 'User', pattern = 'NeomakeJobFinished' },
-  Space,
-  Sep,
-}
--- }}}
-
 -- DefaultStatusline {{{
 local DefaultStatusline = {
   ViMode,
@@ -362,7 +339,6 @@ local DefaultStatusline = {
   LSPActive,
   TSActive,
   Diagnostics,
-  Neomake,
   FileType,
   Ruler,
   ScrollBar,

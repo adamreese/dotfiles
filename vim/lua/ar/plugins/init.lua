@@ -59,7 +59,6 @@ return {
       vim.g.matchup_matchparen_offscreen = { method = 'status_manual' }
     end,
   },
-  { 'benekastah/neomake' },
   {
     'chrisbra/unicode.vim',
     cmd = { 'UnicodeName', 'UnicodeTable' },
