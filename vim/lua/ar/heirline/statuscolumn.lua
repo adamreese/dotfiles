@@ -27,7 +27,7 @@ end
 
 local signs = {
   init = function(self)
-    self.signs = get_extmarks_signs(-1, vim.v.lnum, function(extmark)
+    self.sign = get_extmarks_signs(-1, vim.v.lnum, function(extmark)
       return not extmark.sign_hl_group:match('^GitSigns')
     end)[1]
   end,
