@@ -130,6 +130,11 @@
   added        = green
   changed      = yellow
   untracked    = blue
+  header = bold
+
+[color "branch"]
+  current  = yellow
+  remote   = green
 
 [filter "lfs"]
   process = git-lfs filter-process
