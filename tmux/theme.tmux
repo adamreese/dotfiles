@@ -41,7 +41,15 @@ set-option -g status-left-length '100'
 set-option -g status-right-length '100'
 set-window-option -g window-status-separator ' '
 
-set-option -g status-right '#[fg=colour3]#S#[fg=default] [ #[fg=colour243]#I:#P#[fg=default] ]'
+set -g @prefix_highlight_output_prefix ''
+set -g @prefix_highlight_output_suffix ' '
+set -g @prefix_highlight_fg 'black' # default is 'colour231'
+set -g @prefix_highlight_bg 'green'  # default is 'colour04'
+set -g @prefix_highlight_prefix_prompt 'Wait'
+set -g @prefix_highlight_copy_prompt 'Copy'
+set -g @prefix_highlight_sync_prompt 'Sync'
+
+set-option -g status-right '#{prefix_highlight} #[fg=colour3]#S#[fg=default] [ #[fg=colour243]#I:#P#[fg=default] ]'
 
 # -----------------------------------------------------------------------------
 # vim:ft=tmux
