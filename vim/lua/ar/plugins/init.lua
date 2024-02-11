@@ -138,15 +138,14 @@ return {
   'nanotee/luv-vimdocs',
   'milisims/nvim-luaref',
   {
-    'lukas-reineke/headlines.nvim',
-    dependencies = 'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('headlines').setup({
-        markdown = {
-          headline_highlights = { 'Headline1', 'Headline2', 'Headline3', 'Headline4', 'Headline5', 'Headline6' },
-        },
-      })
-    end,
+    'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
+    opts = {
+      plugins = {
+        kitty = { enabled = true },
+        tmux = { enabled = true },
+      },
+    },
   },
 
   -- Quickfix ----------------------------------------------------------
