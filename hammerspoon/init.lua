@@ -98,6 +98,7 @@ Install:andUse('Caffeine', {
   start = true
 })
 
+pcall(dofile, hs.configdir .. '/readline.lua')
 pcall(dofile, hs.configdir .. '/local.lua')
 
 --------------------------------------------------------------------------------
