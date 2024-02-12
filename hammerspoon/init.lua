@@ -74,6 +74,8 @@ Install:andUse('WindowHalfsAndThirds', {
     bottom_half  = { { 'ctrl', 'cmd' }, 'Down' },
     undo         = { { 'ctrl', 'cmd' }, 'z' },
     center       = { { 'ctrl', 'cmd' }, 'c' },
+    larger       = { { 'alt', 'cmd', 'shift' }, 'Right' },
+    smaller      = { { 'alt', 'cmd', 'shift' }, 'Left' },
   }
 })
 

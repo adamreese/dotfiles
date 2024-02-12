@@ -1,5 +1,37 @@
 require('hs.ipc')
 
+local function unique_history(raw)
+  local hashed, history = {}, {}
+  for i = #raw, 1, -1 do
+    local key = hs.hash.MD5(raw[i])
+    if not hashed[key] then
+      table.insert(history, 1, raw[i])
+      hashed[key] = true
+    end
+  end
+  return history
+end
+
+local save_label = 'console_history'
+local max_length = 100
+
+local function save_history()
+  local hist, save = hs.console.getHistory(), {}
+  if #hist > max_length then
+    table.move(hist, #hist - max_length, #hist, 1, save)
+  else
+    save = hist
+  end
+  -- save only the unique lines
+  hs.settings.set(save_label, unique_history(save))
+end
+
+-- persist console history across launches
+hs.shutdownCallback = function()
+  save_history()
+end
+hs.console.setHistory(hs.settings.get(save_label) or {})
+
 hs.console.toolbar(nil)
 
 _G.windows = function()
