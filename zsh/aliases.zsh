@@ -58,6 +58,9 @@ alias wtf='echo -n "❨╯°□°❩╯︵┻━┻"'
 alias wat='echo -n "⚆_⚆"'
 alias wftpanda='echo -n "ʕノ•ᴥ•ʔノ ︵"'
 
+# view images in kitty
+alias icat='kitten icat'
+
 # Global Aliases
 # -----------------------------------------------------------------------------
 
