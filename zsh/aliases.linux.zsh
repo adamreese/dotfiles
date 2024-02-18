@@ -1,7 +1,7 @@
 # zsh aliases
 # -----------------------------------------------------------------------------
 
-# masOS specific command aliases
+# linux specific command aliases
 [[ "${OSTYPE}" == linux* ]] || return
 
 alias     stop='sudo systemctl stop'
