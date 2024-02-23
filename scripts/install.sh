@@ -85,7 +85,7 @@ symlink_files() {
   symlink ruby/rspec           .config/rspec/options
 
   symlink git                  .config/git
-  symlink tmux/tmux.conf       .tmux.conf
+  symlink tmux                 .config/tmux
   symlink screen               .config/screen
   symlink zsh/zshenv           .zshenv
   symlink ripgrep/ignore       .ignore
