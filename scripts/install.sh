@@ -9,6 +9,11 @@ DOTFILES=${DOTFILES:-${HOME}/.dotfiles}
   exit 1
 }
 
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
+
 # die
 # -----------------------------------------------------------------------------
 die() {
@@ -109,6 +114,14 @@ install_macos() {
   "${DOTFILES}/macos/defaults.sh"
 }
 
+preflight() {
+  # ensure xdg directories
+  mkdir -p "${XDG_CACHE_HOME}"
+  mkdir -p "${XDG_CONFIG_HOME}"
+  mkdir -p "${XDG_DATA_HOME}"
+  mkdir -p "${XDG_STATE_HOME}"
+}
+
 usage() {
   echo "${0} macos|symlink"
 }
@@ -125,6 +138,8 @@ main() {
     usage
     exit 1
   fi
+
+  preflight
 
   while (($# > 0)); do
     case "$1" in
