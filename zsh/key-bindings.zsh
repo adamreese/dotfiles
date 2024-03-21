@@ -10,8 +10,10 @@ export KEYTIMEOUT=1
 
 zmodload -i zsh/complist
 
-bindkey '^b' backward-word
-bindkey '^f' forward-word
+bindkey '^b'  backward-word
+bindkey '\eb' backward-word
+bindkey '^f'  forward-word
+bindkey '\ef' forward-word
 
 # [Ctrl-A] and [Ctrl-E] Move to beginning/end of line
 bindkey '^A' beginning-of-line
