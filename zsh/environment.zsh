@@ -54,10 +54,6 @@ export LESS='iFKMRX'
 export LESSHISTFILE=${XDG_STATE_HOME}/less_history
 export LESSKEYIN=${DOTFILES}/less/lesskey
 
-if (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
 export PAGER=less
 
 # Editor
