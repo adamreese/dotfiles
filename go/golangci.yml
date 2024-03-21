@@ -39,50 +39,118 @@ linters-settings:
     check-exported: false
 
 linters:
-  enable-all: true
-  disable:
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - cyclop
+    - decorder
     # - depguard
-    # - dupl
-    - exhaustruct
+    - dogsled
+    - dupl
+    - dupword
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - execinquery
+    - exhaustive
+    # - exhaustruct
+    - exportloopref
     # - forbidigo
-    # - funlen
-    - gochecknoglobals
+    - forcetypeassert
+    - funlen
+    - gci
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    # - gochecknoglobals
     # - gochecknoinits
-    # - goconst
-    # - gocyclo
-    # - godot
-    # - godox
-    # - golint
-    # - gomnd
-    # - gosec
-    - lll
-    # - maligned
-    - nlreturn
+    - gochecksumtype
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - godox
+    - goerr113
+    - gofmt
+    - gofumpt
+    - goheader
+    - goimports
+    - gomnd
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - gosmopolitan
+    - govet
+    - grouper
+    - importas
+    - inamedparam
+    - ineffassign
+    - interfacebloat
+    - ireturn
+    # - lll
+    - loggercheck
+    - maintidx
+    - makezero
+    - mirror
+    - misspell
+    - musttag
+    - nakedret
+    - nestif
+    - nilerr
+    - nilnil
+    # - nlreturn
+    - noctx
+    - nolintlint
+    - nonamedreturns
+    - nosprintfhostport
     # - paralleltest
-    - rowserrcheck
-    # - typecheck
-    - varnamelen
-    - wsl
+    - perfsprint
+    - prealloc
+    - predeclared
+    - promlinter
+    - protogetter
+    - reassign
+    - revive
+    # - rowserrcheck
+    - sloglint
+    # - sqlclosecheck
+    - staticcheck
+    - stylecheck
+    - tagalign
+    # - tagliatelle
+    - tenv
+    - testableexamples
+    - testifylint
+    # - testpackage
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    # - varnamelen
+    # - wastedassign
+    - whitespace
+    - wrapcheck
+    # - wsl
+    - zerologlint
 
-    # depreciated
-    - deadcode
-    - exhaustivestruct
-    - golint
-    - ifshort
-    - interfacer
-    - maligned
-    - nosnakecase
-    - scopelint
-    - structcheck
-    - varcheck
-
-    # disabled because of generics
-
-    # go 1.18 broke these
-    # - bodyclose
-    # - contextcheck
-    # - nilerr
-    # - noctx
-    - sqlclosecheck
-    # - tparallel
-    - wastedassign
+    # deprecated
+    # - deadcode
+    # - exhaustivestruct
+    # - golint
+    # - ifshort
+    # - interfacer
+    # - maligned
+    # - nosnakecase
+    # - scopelint
+    # - structcheck
+    # - varcheck
