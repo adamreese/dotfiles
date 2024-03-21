@@ -20,7 +20,7 @@ alias -- -='cd -'
 alias sudo='sudo '
 
 # Perform case insensitive matching
-(( $+commands[ggrep] )) || alias ggrep='ls'
+(( $+commands[ggrep] )) || alias ggrep='grep'
 alias grep='ggrep -i --color=auto'
 
 # fd
