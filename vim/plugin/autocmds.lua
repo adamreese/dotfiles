@@ -32,14 +32,12 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 
 vim.api.nvim_create_autocmd('InsertLeave', {
   desc = 'update diff',
-  pattern = '*',
   command = 'if &l:diff | diffupdate | endif',
   group = augid,
 })
 
 local autoread = vim.api.nvim_create_augroup('ar_autoread', { clear = true })
 vim.api.nvim_create_autocmd('FileChangedShellPost', {
-  pattern = '*',
   group = autoread,
   callback = function()
     vim.notify('File changed on disk. Buffer reloaded.')
@@ -47,7 +45,7 @@ vim.api.nvim_create_autocmd('FileChangedShellPost', {
 })
 
 vim.api.nvim_create_autocmd({ 'FocusGained', 'CursorHold' }, {
-  pattern = '*',
+  desc = 'Check for changes outside of vim',
   group = autoread,
   callback = function()
     if vim.fn.getcmdwintype() == '' then
@@ -59,7 +57,6 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'CursorHold' }, {
 vim.api.nvim_create_augroup('Highlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    -- vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 100 })
     vim.highlight.on_yank()
   end,
 })

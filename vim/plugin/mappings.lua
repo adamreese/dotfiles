@@ -81,6 +81,8 @@ vim.keymap.set('n', '<C-g>', '2<C-g>')
 -- reselect last-pasted text
 vim.keymap.set('n', 'gp', '`[v`]')
 
+vim.keymap.set('n', '<leader>H', '<cmd>Inspect<cr>')
+
 -- command mode emacs style bindings
 vim.keymap.set('c', '<C-a>', '<Home>')
 vim.keymap.set('c', '<C-b>', '<Left>')

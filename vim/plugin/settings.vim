@@ -10,6 +10,7 @@ set autowrite                " Automatically save before :next, :make etc.
 set dictionary+=/usr/share/dict/words
 set history=1000
 set spellsuggest=best,10 " Limit suggestions to 10
+execute 'set spellfile=' . stdpath('config') . '/spell/en.utf-8.add'
 
 " Search: {{{1
 " -----------------------------------------------------------------------
@@ -33,6 +34,7 @@ set maxmempattern=2000000
 " Indent: {{{1
 " -----------------------------------------------------------------------
 
+set breakindent
 set smartindent
 set shiftwidth=2             " 2 spaces per tab
 set softtabstop=2
@@ -42,44 +44,23 @@ set expandtab                " Use spaces instead of tabs
 " Wildmenu: {{{1
 " -----------------------------------------------------------------------
 
-if has('wildmenu')
-  set wildmenu
-  set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png   " images
-  set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-  set wildignore+=*.DS_Store                       " macOS
-  set wildignorecase
+set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png   " images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.DS_Store                       " macOS
+set wildignorecase
 
-  set wildmode=longest:full,full        " Complete files using a menu AND list
-endif
+set wildmode=longest:full,full        " Complete files using a menu AND list
 
 " Folding: {{{1
 " -----------------------------------------------------------------------
 
-if has('folding')
-  set foldtext=folding#Text()
-  set foldopen+=jump
-  set foldlevelstart=99
-endif
-
-" Directories: {{{1
-" -----------------------------------------------------------------------
-
-execute 'set spellfile=' . stdpath('config') . '/spell/en.utf-8.add'
-execute 'set directory=' . stdpath('state') . '/swap//'
-execute 'set backupdir=' . stdpath('state') . '/backup/'
-if has('mksession')
-  execute 'set viewdir=' . stdpath('state') . '/view/'
-  set viewoptions=cursor,folds " save/restore just these (with `:{mk,load}view`)
-endif
+" set foldtext=folding#Text()
+set foldopen+=jump
+set foldlevelstart=99
 
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo')
-  set undofile
-  execute 'set undodir=' . stdpath('state') . '/undo/'
-endif
-
-exec 'set shada+=n' . stdpath('state') . '/shada/main.shada'
+set undofile
 
 " Don't create root-owned files
 if exists('$SUDO_USER')
@@ -90,15 +71,10 @@ if exists('$SUDO_USER')
   set shada=
 endif
 
-for s:dir in [&backupdir, &directory, &undodir, &viewdir]
-  silent call mkdir(s:dir, 'p')
-endfor
-
 " Behavior: {{{1
 " -----------------------------------------------------------------------
 
 " default: .,w,b,u,t
-set complete-=i                      " Don't scan included files
 set complete-=t                      " Avoid tag completion by default
 
 " default: 'menu,preview'
@@ -157,22 +133,18 @@ set guicursor=n-v-c:block-blinkon0,i-ci-ve:ver25-blinkon0,r-cr:hor20,o:hor50
 
 set shortmess+=A                  " ignore annoying swapfile messages
 set shortmess+=I                  " no splash screen
-set shortmess+=O                  " file-read message overwrites previous
-set shortmess+=T                  " truncate non-file messages in middle
 set shortmess+=W                  " don't echo "[w]"/"[written]" when writing
 set shortmess+=a                  " use abbreviations in messages eg. `[RO]` instead of `[readonly]`
 set shortmess+=c                  " Disable 'Pattern not found' messages
-set shortmess+=o                  " overwrite file-written messages
-set shortmess+=t                  " truncate file messages at start
 set shortmess+=S                  " don't show search count message when searching
 
 set signcolumn=yes
 
-if has('linebreak')
-  set linebreak
-endif
+set linebreak
 
-if exists('+termguicolors')
+if has('nvim-0.10')
+  set smoothscroll
+else
   set termguicolors " enable true color
 endif
 

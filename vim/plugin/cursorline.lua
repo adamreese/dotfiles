@@ -54,7 +54,7 @@ local function timer_start()
 end
 
 vim.wo.cursorline = true
-vim.api.nvim_create_autocmd('WinEnter', {
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'WinEnter', 'BufEnter' }, {
   desc = 'cursorline',
   callback = function()
     if not is_ignored() then
@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd('WinEnter', {
     end
   end,
 })
-vim.api.nvim_create_autocmd('WinLeave', {
+vim.api.nvim_create_autocmd({ 'BufLeave', 'WinLeave' }, {
   desc = 'cursorline',
   callback = function()
     if not is_ignored() then
@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd('WinLeave', {
     end
   end,
 })
-vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+vim.api.nvim_create_autocmd({ 'InsertEnter', 'CursorMoved' }, {
   desc = 'cursorline',
   callback = function()
     if not is_ignored() then
