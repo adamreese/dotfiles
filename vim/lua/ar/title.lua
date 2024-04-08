@@ -17,5 +17,6 @@ return function()
   local path = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
   local ft = vim.api.nvim_buf_get_option(0, 'filetype')
   local name = exceptions[ft] or vim.fs.basename(vim.api.nvim_buf_get_name(0))
-  return string.format(' %s (%s)', name, path)
+  local modified = vim.bo.modified and '★' or ''
+  return string.format(' %s%s (%s)', name, modified, path)
 end
