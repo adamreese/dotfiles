@@ -52,7 +52,6 @@ setopt   COMBINING_CHARS       # Combine zero-length punctuation characters (acc
 #            │││││┌─ X: suppress alternate screen
 export LESS='iFKMRX'
 export LESSHISTFILE=${XDG_STATE_HOME}/less_history
-export LESSKEYIN=${DOTFILES}/less/lesskey
 
 export PAGER=less
 
