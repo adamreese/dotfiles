@@ -35,7 +35,10 @@ return {
   },
   'junegunn/fzf',
   'junegunn/fzf.vim',
-  'windwp/nvim-autopairs',
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+  },
   'tpope/vim-abolish',
   'tpope/vim-commentary',
   'tpope/vim-eunuch',
