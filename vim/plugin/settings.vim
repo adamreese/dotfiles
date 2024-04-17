@@ -54,7 +54,7 @@ set wildmode=longest:full,full        " Complete files using a menu AND list
 " Folding: {{{1
 " -----------------------------------------------------------------------
 
-" set foldtext=folding#Text()
+set foldtext=folding#Text()
 set foldopen+=jump
 set foldlevelstart=99
 
