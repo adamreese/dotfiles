@@ -9,7 +9,7 @@ run:
 
 output:
   print-issued-lines: false
-  format: line-number
+  formats: line-number
 
 linters-settings:
   errcheck:
