@@ -5,7 +5,6 @@ return {
   'chrisbra/vim-sh-indent',
   'chrisbra/vim-zsh',
   'elzr/vim-json',
-  'fatih/vim-go',
   'fladson/vim-kitty',
   'hashivim/vim-terraform',
   'jparise/vim-graphql',
@@ -23,4 +22,33 @@ return {
   'towolf/vim-helm',
   'uarun/vim-protobuf',
   'vim-ruby/vim-ruby',
+  {
+    'ray-x/go.nvim',
+    dependencies = {
+      'ray-x/guihua.lua',
+      'neovim/nvim-lspconfig',
+      'nvim-treesitter/nvim-treesitter',
+    },
+    config = function()
+      require('go').setup({
+        diagnostic = false,
+        luasnip = true,
+        -- gocoverage_sign = '┃',
+      })
+      local auid = vim.api.nvim_create_augroup('GoImport', {})
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = '*.go',
+        callback = function()
+          require('go.format').goimport()
+        end,
+        group = auid,
+      })
+      vim.api.nvim_create_user_command('GoLintFull',
+        [[setl makeprg=golangci-lint\ run\ --config=$HOME/.dotfiles/go/golangci.yml\ --print-issued-lines=false\ --exclude-use-default=false | :GoMake]],
+        {})
+    end,
+    event = { 'CmdlineEnter' },
+    ft = { 'go', 'gomod' },
+    -- build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  }
 }
