@@ -9,13 +9,11 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
-    'mrbjarksen/neo-tree-diagnostics.nvim',
   },
   opts = {
     sources = {
       'filesystem',
       'git_status',
-      'diagnostics',
     },
     enable_diagnostics = false,
     source_selector = {
