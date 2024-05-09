@@ -111,13 +111,16 @@ return {
           name = 'buffer',
           keyword_length = 3,
           max_item_count = 5,
-          options = {
+          option = {
             get_bufnrs = function()
-              local bufs = {}
-              for _, win in ipairs(vim.api.nvim_list_wins()) do
-                bufs[vim.api.nvim_win_get_buf(win)] = true
-              end
-              return vim.tbl_keys(bufs)
+              -- only return listed buffers under a megabyte
+              return vim.tbl_filter(
+                function(bufnr)
+                  local byte_size = vim.api.nvim_buf_get_offset(bufnr, vim.api.nvim_buf_line_count(bufnr))
+                  return byte_size < 1024 * 1024 and vim.bo[bufnr].buflisted
+                end,
+                vim.tbl_map(vim.api.nvim_win_get_buf, vim.api.nvim_list_wins())
+              )
             end,
           },
         },
