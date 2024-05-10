@@ -13,20 +13,6 @@ setlocal formatoptions+=r
 
 " -----------------------------------------------------------------------
 
-nmap <silent><buffer>gK                  <Plug>(go-doc-browser)
-
-nmap <silent><buffer><localleader>tc     <Plug>(go-coverage-toggle)
-nmap <silent><buffer><localleader>tf     <Plug>(go-test-function)
-nmap <silent><buffer><localleader>i      <Plug>(go-info)
-
-" -----------------------------------------------------------------------
-
-command! -buffer -bang A  call go#alternate#Switch(<bang>0, 'edit')
-command! -buffer -bang AS call go#alternate#Switch(<bang>0, 'split')
-command! -buffer -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-
-" -----------------------------------------------------------------------
-
 let g:tagbar_type_go = {
       \ 'ctagstype' : 'go',
       \ 'kinds'     : [
