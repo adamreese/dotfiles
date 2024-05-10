@@ -96,6 +96,8 @@ function M.config()
   vim.keymap.set('n', '<space>d', '<cmd>Telescope diagnostics<cr>', mapopts('telescope: diagnostics'))
   vim.keymap.set('n', '<space>t', '<cmd>Telescope current_buffer_tags<cr>', mapopts('telescope: current buffer tags'))
   vim.keymap.set('n', '<space>T', '<cmd>Telescope tags<cr>', mapopts('telescope: tags'))
+  vim.keymap.set('n', '<space>:', '<cmd>Telescope command_history<cr>', mapopts('telescope: command history'))
+  vim.keymap.set('n', '<space>:', '<cmd>Telescope search_history<cr>', mapopts('telescope: search history'))
 end
 
 return M

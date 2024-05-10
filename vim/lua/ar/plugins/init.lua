@@ -33,8 +33,6 @@ return {
       }
     end,
   },
-  'junegunn/fzf',
-  'junegunn/fzf.vim',
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
