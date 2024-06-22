@@ -1,13 +1,14 @@
-$(go env GOROOT)/src|gosrc
-$GOPATH/src/github.com/brigadecore/brigade|brigade
-$GOPATH/src/github.com/deislabs/bindle|bindle
-$GOPATH/src/github.com/deislabs/hippo-cli|hippo-cli
-$GOPATH/src/github.com/deislabs/hippo|hippo
-$GOPATH/src/github.com/deislabs/wagi|wagi
-$GOPATH/src/github.com/fermyon/spin|spin
-$GOPATH/src/github.com|go
-$GOPATH/src/helm.sh/helm|helm
-$GOPATH/src/k8s.io/helm|helm2
-$GOPATH/src/k8s.io/kubernetes|kube
 $HOME/.dotfiles|dotfiles
+$HOME/p/src/github.com/brigadecore/brigade|brigade
+$HOME/p/src/github.com/deislabs/bindle|bindle
+$HOME/p/src/github.com/deislabs/wagi|wagi
+$HOME/p/src/github.com/fermyon/finicky-whiskers|finicky-whiskers
+$HOME/p/src/github.com/fermyon/spin|spin
+$HOME/p/src/github.com/spinkube/spin-operator|sk
+$HOME/p/src/github.com|go
+$HOME/p/src/helm.sh/helm|helm
+$HOME/p/src/k8s.io/helm|helm2
+$HOME/p/src/k8s.io/kubernetes|kube
+$HOME/p/src|gosrc
 $HOMEBREW_PREFIX/Cellar|cellar
+$XDG_DATA_HOME/nvim/lazy|lazy
