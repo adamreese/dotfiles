@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "Lua.diagnostics.globals": [
+    "hs",
+    "packer_plugins",
+    "spoon",
+    "vim"
+  ],
+  "Lua.diagnostics.disable": [
+    "missing-parameter"
+  ],
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.format.enable": true,
+  "Lua.format.defaultConfig": {
+    "quote_style": "single"
+  }
+}
