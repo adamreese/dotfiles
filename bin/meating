@@ -9,12 +9,13 @@ set -euo pipefail
 #     Fermyon: 967F5599-DA1B-4990-A93C-5AE758F57C9F
 #     iCloud:  1A89C98B-4408-4A76-8B82-AF0BD0B8664F
 
-calendars='30B85FD0-6646-40FD-B5EC-14B1C19CF523,1A89C98B-4408-4A76-8B82-AF0BD0B8664F,967F5599-DA1B-4990-A93C-5AE758F57C9F,'
+# calendar ids to exclude
+calendars=''
 
 if ! hash icalbuddy &>/dev/null; then
-    >&2 echo 'error: icalbuddy not found.  Install using brew...'
-    >&2 echo '  brew install icalbuddy'
-    exit 1
+  >&2 echo 'error: icalbuddy not found.  Install using brew...'
+  >&2 echo '  brew install icalbuddy'
+  exit 1
 fi
 
 rule() {
@@ -22,7 +23,7 @@ rule() {
   printf '%*s\n' "${cols}" '' | tr ' ' "${char}"
 }
 
-options=(--formatOutput --includeCals "${calendars}")
+options=(--formatOutput --excludeCals "${calendars}")
 
 # Today's meatings
 icalbuddy "${options[@]}" --includeEventProps 'title,location,datetime' --includeOnlyEventsFromNowOn eventsToday
