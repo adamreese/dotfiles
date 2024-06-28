@@ -197,13 +197,25 @@ return {
     end,
   },
   { 'simrat39/rust-tools.nvim' },
-  { 'folke/neodev.nvim' },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {},
+  },
+
   { 'b0o/SchemaStore.nvim' },
   { 'saecki/crates.nvim' },
   {
     'SmiteshP/nvim-navic',
     lazy = true,
     dependencies = { 'neovim/nvim-lspconfig' },
+    init = function()
+      require('ar.lsp.utils').on_attach(function(client, buffer)
+        if client.supports_method("textDocument/documentSymbol") then
+          require("nvim-navic").attach(client, buffer)
+        end
+      end)
+    end,
   },
   {
     'aznhe21/actions-preview.nvim',

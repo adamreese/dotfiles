@@ -106,12 +106,6 @@ end
 local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  pcall(function()
-    if client.server_capabilities.documentSymbolProvider then
-      require('nvim-navic').attach(client, bufnr)
-    end
-  end)
-
   vim.schedule(function()
     setup_mappings(client, bufnr)
   end)
@@ -144,8 +138,6 @@ local function setup_servers()
     }),
   })
 end
-
-require('neodev').setup({})
 
 setup_servers()
 
