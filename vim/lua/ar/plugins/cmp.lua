@@ -8,6 +8,7 @@ return {
     'f3fora/cmp-spell',
     'hrsh7th/cmp-nvim-lua',
     'saadparwaiz1/cmp_luasnip',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     {
       'petertriho/cmp-git',
       dependencies = { 'nvim-lua/plenary.nvim' },
@@ -127,6 +128,7 @@ return {
         },
         { name = 'git' },
         { name = 'spell' },
+        { name = 'nvim_lsp_signature_help' },
       },
       formatting = {
         format = function(entry, item)
@@ -139,6 +141,7 @@ return {
             luasnip = '[snip]',
             buffer = '[buf]',
             cmp_git = '[git]',
+            nvim_lsp_signature_help = '[sig]',
           })[entry.source.name] or entry.source.name
           return item
         end,
