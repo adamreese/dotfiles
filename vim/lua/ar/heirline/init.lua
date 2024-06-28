@@ -180,7 +180,8 @@ local LSPActive = {
 -- TSActive {{{
 local TSActive = {
   condition = function()
-    return require('nvim-treesitter.parsers').has_parser()
+    return package.loaded['nvim-treesitter']
+      and require('nvim-treesitter.parsers').has_parser()
   end,
   hl        = { fg = 'yellow' },
   provider  = ' TS ',
