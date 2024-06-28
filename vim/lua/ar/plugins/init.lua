@@ -200,8 +200,13 @@ return {
   {
     'folke/lazydev.nvim',
     ft = 'lua',
-    opts = {},
+    opts = {
+      library = {
+        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+      },
+    },
   },
+  { 'Bilal2453/luvit-meta', lazy = true },
 
   { 'b0o/SchemaStore.nvim' },
   { 'saecki/crates.nvim' },
@@ -211,8 +216,8 @@ return {
     dependencies = { 'neovim/nvim-lspconfig' },
     init = function()
       require('ar.lsp.utils').on_attach(function(client, buffer)
-        if client.supports_method("textDocument/documentSymbol") then
-          require("nvim-navic").attach(client, buffer)
+        if client.supports_method('textDocument/documentSymbol') then
+          require('nvim-navic').attach(client, buffer)
         end
       end)
     end,
