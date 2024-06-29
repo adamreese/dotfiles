@@ -193,7 +193,7 @@ return {
   {
     'neovim/nvim-lspconfig',
     config = function()
-      require('ar.lsp')
+      require('ar.lsp').setup()
     end,
   },
   { 'simrat39/rust-tools.nvim' },

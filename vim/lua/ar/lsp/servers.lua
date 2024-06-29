@@ -1,22 +1,40 @@
+local function get_current_gomod()
+  local file = io.open('go.mod', 'r')
+  if file == nil then return nil end
+
+  local mod_name = file:read():gsub('module ', '')
+  file:close()
+  return mod_name
+end
+
 return {
   bashls = {
     filetypes = { 'bash', 'sh', 'zsh' },
   },
-  csharp_ls = {},
+  -- csharp_ls = {},
+  omnisharp = {
+    cmd = { 'dotnet', vim.fn.stdpath('data') .. '/mason/packages/omnisharp/libexec/Omnisharp.dll' },
+    enable_editorconfig_support = true,
+  },
   dockerls = {},
   gopls = {
+    cmd = { 'gopls', '-remote.debug=:0' },
     settings = {
       gopls = {
         analyses = {
-          unusedvariable = true,
-          unusedparams = true,
+          fieldalignment = false,
           shadow = true,
-          nilness = true,
-          unusedwrite = true,
+          unusedvariable = true,
           useany = true,
         },
-        staticcheck = true,
+        ['local'] = get_current_gomod(),
+        buildFlags = { '-tags', 'integration' },
+        completeUnimported = true,
+        diagnosticsDelay = '500ms',
+        matcher = 'Fuzzy',
         semanticTokens = true,
+        staticcheck = true,
+        symbolMatcher = 'fuzzy',
         usePlaceholders = true,
       },
     },
@@ -37,7 +55,7 @@ return {
           keywordSnippet = 'Disable',
         },
         diagnostics = {
-          globals = { 'hs', 'packer_plugins', 'spoon', 'vim' },
+          globals = { 'hs', 'spoon', 'vim' },
           disable = { 'missing-parameter' },
         },
         format = {
@@ -53,6 +71,9 @@ return {
           maxPreload = 2000,
           preloadFileSize = 1000,
           checkThirdParty = false,
+        },
+        semantic = {
+          enable = false,
         },
       },
     },

@@ -1,8 +1,6 @@
 " =======================================================================
 " plugin/plug/rg.vim
 " =======================================================================
-if !executable('rg') | finish | end
-
 let &grepprg = 'rg --no-heading --column --line-number --hidden'
 let g:ackprg = &grepprg
 

@@ -14,15 +14,14 @@ vim.diagnostic.config({
   float = {
     focusable = false,
     style = 'minimal',
-    border = 'rounded',
-    source = 'always',
+    border = 'single',
+    source = true,
     header = '',
-    prefix = '',
   },
 })
 
 vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
-vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '󰔷', texthl = 'DiagnosticSignWarn' })
 vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
 vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
@@ -64,6 +63,11 @@ local function setup_mappings(client, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'LspDocumentSymbol', vim.lsp.buf.document_symbol, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspWorkspaceSymbol', vim.lsp.buf.workspace_symbol, {})
 
+  vim.api.nvim_buf_create_user_command(bufnr, 'LspToggleInlayHints', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    vim.notify('Inlay hints set to ' .. tostring(vim.lsp.inlay_hint.is_enabled()))
+  end, {})
+
   -- Mappings.
   local function opts(desc)
     return { desc = desc, silent = true, buffer = bufnr }
@@ -81,12 +85,8 @@ local function setup_mappings(client, bufnr)
   vim.keymap.set('n', '<leader>ls', vim.lsp.buf.document_symbol, opts('lsp: document symbol'))
   vim.keymap.set('n', '<leader>lS', vim.lsp.buf.workspace_symbol, opts('lsp: workspace symbol'))
 
-  if vim.o.filetype ~= 'vim' then
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts('lsp: hover'))
-  end
-
   -- Set some keybinds conditional on server capabilities
-  if client.server_capabilities.documentFormattingProvider then
+  if client.server_capabilities.documentFormattingProvider and client.name ~= 'gopls' then
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts('lsp: format'))
 
     vim.keymap.set('n', '<leader>tf', function() require('ar.lsp').format_toggle() end, opts('lsp: auto format toggle'))
@@ -101,6 +101,22 @@ local function setup_mappings(client, bufnr)
   elseif client.server_capabilities.documentRangeFormatting then
     vim.keymap.set('x', '<leader>f', vim.lsp.buf.format, opts('lsp: format'))
   end
+
+  if client.server_capabilities.documentHighlightProvider then
+    local augid = vim.api.nvim_create_augroup('LspReferences', { clear = true })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      desc = 'LSP: References',
+      buffer = bufnr,
+      group = augid,
+      callback = function() vim.lsp.buf.document_highlight() end,
+    })
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'WinLeave' }, {
+      callback = function() vim.lsp.buf.clear_references() end,
+      desc = 'LSP: References Clear',
+      buffer = bufnr,
+      group = augid,
+    })
+  end
 end
 
 local function on_attach(client, bufnr)
@@ -111,9 +127,19 @@ local function on_attach(client, bufnr)
   end)
 end
 
-local function setup_servers()
+-- Disable yamlls for helm templates
+require('ar.lsp.utils').on_attach(function(client, buffer)
+  if vim.bo[buffer].filetype == 'helm' then
+    vim.schedule(function()
+      vim.cmd('LspStop ++force yamlls')
+    end)
+  end
+end, 'yamlls')
+
+function M.setup()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   local function with_defaults(opts)
     opts = opts or {}
@@ -130,6 +156,7 @@ local function setup_servers()
 
   require('rust-tools').setup({
     server = with_defaults({
+      standalone = false,
       settings = {
         ['rust-analyzer'] = {
           cargo = { allFeatures = true },
@@ -138,7 +165,5 @@ local function setup_servers()
     }),
   })
 end
-
-setup_servers()
 
 return M

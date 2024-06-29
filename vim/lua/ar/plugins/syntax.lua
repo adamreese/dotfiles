@@ -33,7 +33,7 @@ return {
       require('go').setup({
         diagnostic = false,
         luasnip = true,
-        -- gocoverage_sign = '┃',
+        lsp_codelens = false,
       })
       local auid = vim.api.nvim_create_augroup('GoImport', {})
       vim.api.nvim_create_autocmd('BufWritePre', {
@@ -46,9 +46,11 @@ return {
       vim.api.nvim_create_user_command('GoLintFull',
         [[setl makeprg=golangci-lint\ run\ --config=$HOME/.dotfiles/go/golangci.yml\ --print-issued-lines=false\ --exclude-use-default=false | :GoMake]],
         {})
+
+      vim.keymap.set('n', '<leader>tc', '<cmd>GoCoverage -t <cr>',
+        { desc = 'Toggle GoCoverage', noremap = true, silent = true })
     end,
     event = { 'CmdlineEnter' },
     ft = { 'go', 'gomod' },
-    -- build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   }
 }
