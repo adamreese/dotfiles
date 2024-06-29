@@ -132,9 +132,17 @@ return {
       },
       formatting = {
         format = function(entry, item)
+          if entry.source.name == 'nvim_lsp_signature_help' then
+            local parts = vim.split(item.abbr, ' ', {})
+            item.abbr = parts[1]:gsub(':$', '')
+
+            local type = table.concat(parts, ' ', 2)
+            if type ~= nil and type ~= '' then item.kind = type end
+            item.kind_hl_group = 'Type'
+          end
+
           item.kind = kind_icons[item.kind] or item.kind
           item.menu = ({
-            nvim_lsp = '[lsp]',
             nvim_lua = '[lua]',
             path = '[path]',
             spell = '[spell]',
@@ -143,8 +151,19 @@ return {
             cmp_git = '[git]',
             nvim_lsp_signature_help = '[sig]',
           })[entry.source.name] or entry.source.name
+
+          -- use lsp client name
+          if entry.source.name == 'nvim_lsp' then
+            item.menu = string.format('[%s]', entry.source.source.client.name)
+          end
+
           return item
         end,
+      },
+      experimental = {
+        ghost_text = {
+          hl_group = 'Comment',
+        },
       },
     })
 
