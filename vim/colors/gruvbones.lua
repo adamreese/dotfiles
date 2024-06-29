@@ -43,6 +43,8 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     RedBold({ Red, gui = 'bold' }),
     YellowBold({ Yellow, gui = 'bold' }),
 
+    -- lighten comments
+    Comment { fg = p.bg.li(48).de(14), gui = 'italic' },
     CursorLineNr { YellowBold },
     Keyword { fg = p.red.de(12) },
     Number { zenbones.Number, fg = p.yellow.de(30) },
@@ -63,6 +65,8 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
 
     sym '@namespace.rust' { zenbones.Identifier },
     sym '@variable.type.rust' { zenbones.Identifier },
+
+    sym '@property.json' { Green },
 
     PanelBackground({ fg = p.fg.darken(10), bg = p.bg.darken(8) }),
     PanelBorder({ fg = PanelBackground.bg.darken(10), bg = PanelBackground.bg }),
@@ -88,7 +92,7 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
     -- Special { Blue },
     -- Type { YellowItalic },
     -- Constant { Cyan },
-    -- CursorLine { bg = p.bg.li(6) },
+    CursorLine { bg = p.bg.li(8) },
 
     QuickFixLine { underline = true },
 
@@ -195,6 +199,8 @@ local specs = lush.extends({ zenbones }).with(function(injected_functions)
 
     TelescopeResultsDiffChange { Blue },
     TelescopeResultsDiffUntracked { Orange },
+
+    goCoverageCovered({ Green }),
 
     -- }}}
   }
