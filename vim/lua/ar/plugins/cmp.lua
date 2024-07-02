@@ -167,15 +167,6 @@ return {
       },
     })
 
-    -- [ nvim-autopairs ] ----------------------------------------------------------
-
-    require('nvim-autopairs').setup({
-      check_ts = true
-    })
-
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-
     require('cmp_git').setup()
 
     -- [ LuaSnip ] -----------------------------------------------------------------
