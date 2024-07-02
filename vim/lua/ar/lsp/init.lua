@@ -120,16 +120,14 @@ local function setup_mappings(client, bufnr)
 end
 
 local function on_attach(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
   vim.schedule(function()
     setup_mappings(client, bufnr)
   end)
 end
 
 -- Disable yamlls for helm templates
-require('ar.lsp.utils').on_attach(function(client, buffer)
-  if vim.bo[buffer].filetype == 'helm' then
+require('ar.lsp.utils').on_attach(function(_, bufnr)
+  if vim.bo[bufnr].filetype == 'helm' then
     vim.schedule(function()
       vim.cmd('LspStop ++force yamlls')
     end)
