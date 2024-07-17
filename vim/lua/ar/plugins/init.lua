@@ -198,8 +198,7 @@ return {
   -- LSP ----------------------------------------------------------------
   {
     'L3MON4D3/LuaSnip',
-    event = 'InsertEnter',
-    dependencies = { 'rafamadriz/friendly-snippets' },
+    lazy = true,
   },
   {
     'neovim/nvim-lspconfig',

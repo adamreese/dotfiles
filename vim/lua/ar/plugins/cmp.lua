@@ -177,11 +177,6 @@ return {
       end
     end, { silent = true, desc = 'luasnip expand or jump' })
 
-    -- require('luasnip.loaders.from_vscode').lazy_load()
-    require('luasnip.loaders.from_vscode').lazy_load({
-      paths = {
-        './snippet',
-      },
-    })
+    require('luasnip.loaders.from_vscode').lazy_load({ paths = './snippet' })
   end,
 }
