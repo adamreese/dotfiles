@@ -1,0 +1,38 @@
+# Example:
+# aws-session 1234567
+
+if [[ -z "${1:-}" ]]; then
+  echo "Usage: aws-session <valid token from account MFA device>"
+  return 1
+fi
+
+unset AWS_ACCESS_KEY_ID AWS_SESSION_TOKEN AWS_SECRET_ACCESS_KEY
+
+if [[ "${1}" = "clear" ]]; then
+  echo "cleared aws environment variables for shell session"
+  return 1
+fi
+
+serial_number="$(aws iam list-mfa-devices --query 'MFADevices[].SerialNumber | [0]' --output text)"
+credentials="$(aws sts get-session-token --query 'Credentials' --token-code $1 --serial-number ${serial_number})"
+
+if [[ -z "${credentials}" ]]; then
+  echo "failed to get credentials"
+  return 1
+fi
+
+export AWS_ACCESS_KEY_ID="$(jq -j '.AccessKeyId' <<<${credentials})"
+export AWS_SECRET_ACCESS_KEY="$(jq -j '.SecretAccessKey' <<<${credentials})"
+export AWS_SESSION_TOKEN="$(jq -j '.SessionToken' <<<${credentials})"
+
+cat <<EOF >"${HOME}/.aws/env"
+export AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}"
+export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}"
+export AWS_SESSION_TOKEN="${AWS_SESSION_TOKEN}"
+EOF
+
+# aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+# aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+# aws configure set aws_session_token "${AWS_SESSION_TOKEN}"
+
+# vim:ft=zsh
