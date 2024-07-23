@@ -46,9 +46,6 @@ vim.api.nvim_create_user_command('FormatToggle', function()
   M.format_toggle()
 end, {})
 
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'diagnostic: previous', silent = true })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'diagnostic: next', silent = true })
-
 -- [ onattach ] ----------------------------------------------------------------
 
 local function setup_mappings(client, bufnr)
