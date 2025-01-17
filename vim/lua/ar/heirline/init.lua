@@ -160,8 +160,9 @@ local Git = {
   condition = conditions.is_git_repo,
   hl = { fg = 'fg', bold = true },
   provider = function()
-    return ' ' .. vim.b.gitsigns_status_dict.head .. ' '
+    return ' ' .. vim.b.gitsigns_status_dict.head
   end,
+  Space,
   Sep,
   Space,
 }
@@ -172,7 +173,7 @@ local LSPActive = {
   condition = conditions.lsp_attached,
   update    = { 'LspAttach', 'LspDetach' },
   hl        = { fg = 'green', bold = true },
-  provider  = ' ',
+  provider  = '  ',
   Sep,
 }
 -- }}}
@@ -181,7 +182,7 @@ local LSPActive = {
 local TSActive = {
   condition = function()
     return package.loaded['nvim-treesitter']
-      and require('nvim-treesitter.parsers').has_parser()
+        and require('nvim-treesitter.parsers').has_parser()
   end,
   hl        = { fg = 'yellow' },
   provider  = ' TS ',
@@ -320,7 +321,7 @@ local QuickfixTitle = {
   {
     provider = function(self)
       local grepprg = vim.opt.grepprg:get():gsub('([^%w])', '%%%1')
-      return self.title:gsub(grepprg, 'grep')
+      return self.title:gsub(grepprg, 'grep ')
     end,
   },
 }
