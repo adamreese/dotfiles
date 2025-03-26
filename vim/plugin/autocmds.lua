@@ -57,6 +57,6 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'CursorHold' }, {
 vim.api.nvim_create_augroup('Highlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
 })
