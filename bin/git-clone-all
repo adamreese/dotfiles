@@ -29,7 +29,7 @@ else
       echo "-- Skipping ${repo}"
     else
       echo ":: Cloning ${org}/${repo}"
-      gh clone "${org}/$repo"
+      gh repo clone "${org}/$repo"
     fi
   done
 fi
