@@ -11,6 +11,7 @@ vim.diagnostic.config({
   signs = true,
   update_in_insert = false,
   severity_sort = true,
+  jump = { float = true },
   float = {
     focusable = false,
     style = 'minimal',
@@ -45,14 +46,6 @@ end
 vim.api.nvim_create_user_command('FormatToggle', function()
   M.format_toggle()
 end, {})
-
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.jump({ count = -1 })
-end, { desc = 'diagnostic: previous', silent = true })
-
-vim.keymap.set('n', ']d', function()
-  vim.diagnostic.jump({ count = 1 })
-end, { desc = 'diagnostic: previous', silent = true })
 
 -- [ onattach ] ----------------------------------------------------------------
 
