@@ -124,12 +124,6 @@ local function setup_mappings(client, bufnr)
   end
 end
 
-local function on_attach(client, bufnr)
-  vim.schedule(function()
-    setup_mappings(client, bufnr)
-  end)
-end
-
 -- Disable yamlls for helm templates
 require('ar.lsp.utils').on_attach(function(_, bufnr)
   if vim.bo[bufnr].filetype == 'helm' then
@@ -148,7 +142,6 @@ function M.setup()
     opts = opts or {}
     return vim.tbl_deep_extend('keep', opts, {
       flags = { debounce_text_changes = 500 },
-      on_attach = on_attach,
       capabilities = capabilities,
     })
   end
@@ -168,5 +161,16 @@ function M.setup()
     }),
   })
 end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('LspConfig', {}),
+  callback = function(args)
+    local bufnr = args.buf
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    vim.schedule(function()
+      setup_mappings(client, bufnr)
+    end)
+  end
+})
 
 return M
