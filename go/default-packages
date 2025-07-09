@@ -15,6 +15,7 @@ github.com/klauspost/asmfmt/cmd/asmfmt@latest
 github.com/koron/iferr@master
 github.com/mgechev/revive@latest
 github.com/rogpeppe/godef@latest
+github.com/twpayne/go-jsonstruct/v3/cmd/gojsonstruct@latest
 github.com/zmb3/gogetdoc@master
 golang.org/x/lint/golint@master
 golang.org/x/tools/cmd/goimports@latest
@@ -22,6 +23,5 @@ golang.org/x/tools/cmd/gorename@latest
 golang.org/x/tools/cmd/guru@latest
 golang.org/x/tools/gopls@latest
 golang.org/x/vuln/cmd/govulncheck@master
-honnef.co/go/tools/cmd/keyify@latest
 honnef.co/go/tools/cmd/staticcheck@latest
 mvdan.cc/sh/v3/cmd/shfmt@latest
