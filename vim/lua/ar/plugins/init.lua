@@ -241,7 +241,7 @@ return {
     dependencies = { 'neovim/nvim-lspconfig' },
     init = function()
       require('ar.lsp.utils').on_attach(function(client, buffer)
-        if client.supports_method('textDocument/documentSymbol') then
+        if client.server_capabilities.documentSymbolProvider then
           require('nvim-navic').attach(client, buffer)
         end
       end)
