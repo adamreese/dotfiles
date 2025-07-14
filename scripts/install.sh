@@ -100,10 +100,11 @@ symlink_files() {
   symlink yamllint             .config/yamllint
   symlink bat                  .config/bat
   symlink stylua               .config/stylua
+  symlink lf                   .config/lf
 
   if [[ "${OSTYPE}" == darwin* ]]; then
-    symlink hammerspoon          .hammerspoon
-    symlink karabiner            .config/karabiner
+    symlink hammerspoon        .hammerspoon
+    symlink karabiner          .config/karabiner
   fi
 
   print_success "Completed symlinks"
