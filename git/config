@@ -130,7 +130,7 @@
   added        = green
   changed      = yellow
   untracked    = blue
-  header = bold
+  header       = bold
 
 [color "branch"]
   current  = yellow
