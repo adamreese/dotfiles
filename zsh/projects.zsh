@@ -43,4 +43,4 @@ path[1,0]=${PROJECTS}/github.com/deislabs/hippo-cli/target/debug
 
 # Spin
 # -----------------------------------------------------------------------------
-path[1,0]=${PROJECTS}/github.com/fermyon/spin/target/release
+path[1,0]=${PROJECTS}/github.com/spinframework/spin/target/release
