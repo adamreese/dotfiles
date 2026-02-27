@@ -2,6 +2,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   event = { 'BufReadPost', 'BufNewFile' },
   build = ':TSUpdate',
+  branch = 'master',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
@@ -50,9 +51,11 @@ return {
         'teal',
         'toml',
         'tsx',
+        'terraform',
         'typescript',
         'vim',
         'vue',
+        'wit',
         'yaml',
       },
       highlight = {
