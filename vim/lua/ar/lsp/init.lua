@@ -1,4 +1,3 @@
-local lspconfig = require('lspconfig')
 local handlers = require('ar.lsp.handlers')
 
 local M = {
@@ -119,7 +118,7 @@ function M.setup()
   end
 
   for server, config in pairs(require('ar.lsp.servers')) do
-    lspconfig[server].setup(with_defaults(config))
+    vim.lsp.config(server, with_defaults(config))
   end
 
   require('rust-tools').setup({
