@@ -46,7 +46,7 @@ vim.keymap.set('v', '.', '<cmd>norm.<cr>')
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 
--- remap H and L (top, bottom of screen to left and right end of line).
+-- remap H and L (left and right end of line).
 vim.keymap.set('n', 'H', 'g^')
 vim.keymap.set('v', 'H', 'g^')
 vim.keymap.set('n', 'L', 'g$')
