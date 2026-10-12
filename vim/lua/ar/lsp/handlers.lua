@@ -46,11 +46,11 @@ function M.definition(split_cmd)
 end
 
 function M.hover()
-  return vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+  vim.lsp.buf.hover({ border = border })
 end
 
 function M.signature_help()
-  return vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+  vim.lsp.buf.signature_help({ border = border })
 end
 
 return M

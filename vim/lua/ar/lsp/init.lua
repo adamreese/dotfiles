@@ -4,9 +4,6 @@ local M = {
   format_on_save = true
 }
 
-vim.lsp.handlers['textDocument/hover'] = handlers.hover()
-vim.lsp.handlers['textDocument/signatureHelp'] = handlers.signature_help()
-
 -- [ format on save ] ----------------------------------------------------------
 
 function M.format_toggle()
@@ -30,12 +27,12 @@ end, {})
 local function setup_mappings(client, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'LspDefinition', vim.lsp.buf.definition, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspDeclaration', vim.lsp.buf.definition, {})
-  vim.api.nvim_buf_create_user_command(bufnr, 'LspHover', vim.lsp.buf.hover, {})
+  vim.api.nvim_buf_create_user_command(bufnr, 'LspHover', handlers.hover, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspRename', vim.lsp.buf.rename, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspReferences', vim.lsp.buf.references, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspTypeDefinition', vim.lsp.buf.type_definition, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspImplementation', vim.lsp.buf.implementation, {})
-  vim.api.nvim_buf_create_user_command(bufnr, 'LspSignatureHelp', vim.lsp.buf.signature_help, {})
+  vim.api.nvim_buf_create_user_command(bufnr, 'LspSignatureHelp', handlers.signature_help, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspDocumentSymbol', vim.lsp.buf.document_symbol, {})
   vim.api.nvim_buf_create_user_command(bufnr, 'LspWorkspaceSymbol', vim.lsp.buf.workspace_symbol, {})
 
@@ -53,7 +50,8 @@ local function setup_mappings(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts('lsp: definition'))
   vim.keymap.set('n', 'gs', function() require('ar.lsp.handlers').definition('split') end, opts('lsp: definition split'))
   vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts('lsp: implementation'))
-  vim.keymap.set('n', '<leader>k', vim.lsp.buf.signature_help, opts('lsp: signature help'))
+  vim.keymap.set('n', 'K', handlers.hover, opts('lsp: hover'))
+  vim.keymap.set('n', '<leader>k', handlers.signature_help, opts('lsp: signature help'))
   vim.keymap.set('n', '<leader>gd', vim.lsp.buf.type_definition, opts('lsp: type declaration'))
   vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts('lsp: references'))
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts('lsp: rename'))
