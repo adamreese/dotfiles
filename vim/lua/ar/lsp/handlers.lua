@@ -24,7 +24,16 @@ local function goto_definition(split_cmd)
       vim.cmd(split_cmd)
     end
 
-    return vim.lsp.handlers['textDocument/definition'](_, result, ctx, _)
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    local offset_encoding = client and client.offset_encoding or 'utf-16'
+
+    -- result may be a single Location/LocationLink or a list of them
+    local location = result
+    if vim.islist(result) or (result[1] ~= nil) then
+      location = result[1]
+    end
+
+    vim.lsp.util.show_document(location, offset_encoding, { focus = true })
   end
 end
 
@@ -32,7 +41,7 @@ end
 --- Jumps to the definition of the symbol under the cursor.
 ---
 function M.definition(split_cmd)
-  local params = vim.lsp.util.make_position_params()
+  local params = vim.lsp.util.make_position_params(0, 'utf-16')
   return vim.lsp.buf_request(0, 'textDocument/definition', params, goto_definition(split_cmd))
 end
 
