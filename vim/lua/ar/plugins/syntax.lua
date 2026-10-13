@@ -34,6 +34,8 @@ return {
         diagnostic = false,
         luasnip = true,
         lsp_codelens = false,
+        dap_debug = false,
+        iferr_less_highlight = false,
       })
       local auid = vim.api.nvim_create_augroup('GoImport', {})
       vim.api.nvim_create_autocmd('BufWritePre', {
