@@ -3,7 +3,7 @@ local hsluv = lush.hsluv
 local util = require('zenbones.util')
 
 local bg = hsluv('#282828').lighten(2)
-local bg = hsluv('#32302f').darken(10)
+-- local bg = hsluv('#32302f').darken(10)
 local fg = hsluv('#ebdbb2')
 
 local p = util.palette_extend({
