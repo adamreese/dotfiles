@@ -3,7 +3,11 @@ vim.diagnostic.config({
   virtual_text = false,
   update_in_insert = false,
   severity_sort = true,
-  jump = { float = true },
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({ bufnr = bufnr, scope = 'cursor', focus = false })
+    end,
+  },
   float = {
     focusable = false,
     style = 'minimal',

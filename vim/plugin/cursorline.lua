@@ -24,7 +24,7 @@ local buftype_exclusions = {
 }
 
 local delay = vim.o.updatetime
-local timer = vim.loop.new_timer()
+local timer = vim.uv.new_timer()
 
 local function is_floating_win()
   return vim.fn.win_gettype() == 'popup'

@@ -2,7 +2,7 @@ local utils = require('heirline.utils')
 
 local WorkDir = {
   provider = function()
-    local cwd = vim.loop.cwd()
+    local cwd = vim.uv.cwd()
     return cwd and vim.fn.fnamemodify(cwd, ':~')
   end,
   hl = { bold = true },

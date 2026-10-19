@@ -181,8 +181,7 @@ local LSPActive = {
 -- TSActive {{{
 local TSActive = {
   condition = function()
-    return package.loaded['nvim-treesitter']
-        and require('nvim-treesitter.parsers').has_parser()
+    return vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil
   end,
   hl        = { fg = 'yellow' },
   provider  = ' TS ',
