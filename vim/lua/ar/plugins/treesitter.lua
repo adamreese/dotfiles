@@ -32,7 +32,6 @@ return {
       'jsdoc',
       'json',
       'json5',
-      'jsonc',
       'lua',
       'make',
       'markdown',
@@ -77,7 +76,7 @@ return {
         local ft = vim.bo[buf].filetype
         local lang = vim.treesitter.language.get_lang(ft)
         if not lang or not vim.tbl_contains(
-          require('nvim-treesitter.config').get_installed('parsers'), lang) then
+              require('nvim-treesitter.config').get_installed('parsers'), lang) then
           return
         end
         pcall(vim.treesitter.start, buf)
